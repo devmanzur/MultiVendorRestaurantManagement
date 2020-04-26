@@ -2,7 +2,7 @@
 using System.Linq;
 using MultiVendorRestaurantManagement.Domain.Base;
 
-namespace MultiVendorRestaurantManagement.Domain
+namespace MultiVendorRestaurantManagement.Domain.City
 {
     public class City : AggregateRoot
     {

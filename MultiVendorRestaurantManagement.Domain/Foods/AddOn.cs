@@ -12,7 +12,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             NameEng = nameEng;
             Description = description;
             DescriptionEng = descriptionEng;
-            Price = MoneyValue.Of(price, SupportedCurrency.Euro);
+            Price = MoneyValue.Of(price);
         }
 
         public string Name { get; protected set; }
@@ -20,5 +20,6 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public string Description { get; protected set; }
         public string DescriptionEng { get; protected set; }
         public MoneyValue Price { get; set; }
+        public Food Food { get; private set; }
     }
 }

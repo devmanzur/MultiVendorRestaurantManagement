@@ -21,8 +21,9 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
             this.Currency = currency;
         }
 
-        public static MoneyValue Of(decimal value, SupportedCurrency currency)
+        public static MoneyValue Of(decimal value)
         {
+            var currency = SupportedCurrency.Euro;
             CheckRule(new MoneyValueMustHaveCurrencyRule(currency.ToDescriptionString()));
 
             return new MoneyValue(value, currency.ToDescriptionString());
