@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "0qlOzsIf9cOoJwa1UJp1e59rxmFRB7bYJtge6SwxxWGtBqXRHgu9QIn4fvIRd2eeVxQcFzKVVhOJLDMXL8njIw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\devma\\.nuget\\packages\\csharpfunctionalextensions\\2.7.1\\csharpfunctionalextensions.2.7.1.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\fluentvalidation\\9.0.0-preview4\\fluentvalidation.9.0.0-preview4.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.0.0-preview4\\fluentvalidation.aspnetcore.9.0.0-preview4.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\9.0.0-preview4\\fluentvalidation.dependencyinjectionextensions.9.0.0-preview4.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\mediatr\\8.0.1\\mediatr.8.0.1.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

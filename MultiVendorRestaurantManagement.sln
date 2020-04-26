@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiVendorRestaurantManagement", "MultiVendorRestaurantManagement\MultiVendorRestaurantManagement.csproj", "{DD1C90EC-4246-49CE-9085-0697C6B54BEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{97D3964A-7873-4B4A-92DE-ACB36277B08D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiVendorRestaurantManagement.Domain", "MultiVendorRestaurantManagement.Domain\MultiVendorRestaurantManagement.Domain.csproj", "{D950C487-2130-4C91-B499-59D408751850}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD1C90EC-4246-49CE-9085-0697C6B54BEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD1C90EC-4246-49CE-9085-0697C6B54BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD1C90EC-4246-49CE-9085-0697C6B54BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD1C90EC-4246-49CE-9085-0697C6B54BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97D3964A-7873-4B4A-92DE-ACB36277B08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97D3964A-7873-4B4A-92DE-ACB36277B08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97D3964A-7873-4B4A-92DE-ACB36277B08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97D3964A-7873-4B4A-92DE-ACB36277B08D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D950C487-2130-4C91-B499-59D408751850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D950C487-2130-4C91-B499-59D408751850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D950C487-2130-4C91-B499-59D408751850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D950C487-2130-4C91-B499-59D408751850}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal

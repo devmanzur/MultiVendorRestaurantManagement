@@ -1,0 +1,9 @@
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\obj\Debug\netcoreapp3.1\Common.csprojAssemblyReference.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\obj\Debug\netcoreapp3.1\Common.csproj.CoreCompileInputs.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfoInputs.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\obj\Debug\netcoreapp3.1\Common.AssemblyInfo.cs
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\bin\Debug\netcoreapp3.1\Common.deps.json
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\bin\Debug\netcoreapp3.1\Common.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\bin\Debug\netcoreapp3.1\Common.pdb
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\obj\Debug\netcoreapp3.1\Common.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Common\obj\Debug\netcoreapp3.1\Common.pdb
