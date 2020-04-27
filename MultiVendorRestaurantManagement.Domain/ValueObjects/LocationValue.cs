@@ -1,11 +1,17 @@
-﻿namespace MultiVendorRestaurantManagement.Domain.ValueObjects
+﻿using System;
+using System.Linq;
+using MultiVendorRestaurantManagement.Domain.Rules;
+
+namespace MultiVendorRestaurantManagement.Domain.ValueObjects
 {
     public class LocationValue : ValueObject
     {
-        public LocationValue(double longitude, double latitude)
+        public LocationValue(string latLng)
         {
-            Longitude = longitude;
-            Latitude = latitude;
+            CheckRule(new LocationStringMustBeValidRule(latLng));
+            var items = latLng.Split(",");
+            Longitude = Convert.ToDouble(items[1]);
+            Latitude =  Convert.ToDouble(items[2]);
         }
 
         public double Latitude { get; private set; }

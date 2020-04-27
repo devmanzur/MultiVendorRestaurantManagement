@@ -12,14 +12,14 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             NameEng = nameEng;
             Description = description;
             DescriptionEng = descriptionEng;
-            Price = MoneyValue.Of(price);
+            Price = price;
         }
 
         public string Name { get; protected set; }
         public string NameEng { get; protected set; }
         public string Description { get; protected set; }
         public string DescriptionEng { get; protected set; }
-        public MoneyValue Price { get; set; }
-        public Food Food { get; private set; }
+        public decimal Price { get; set; }
+        public virtual Food Food { get; private set; }
     }
 }

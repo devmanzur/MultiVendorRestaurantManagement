@@ -16,7 +16,7 @@ namespace MultiVendorRestaurantManagement.Restaurant.RegisterRestaurant
         public string Name { get; }
         public string PhoneNumber { get; }
         public string AreaCode { get; }
-        public IReadOnlyList<string?> RestaurantCategories { get; }
+        public IReadOnlyList<string> RestaurantCategories { get; }
         public DateTime OpeningHour { get; }
         public DateTime ClosingHour { get; }
         public SubscriptionType SubscriptionType { get; }

@@ -15,8 +15,9 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
     public class Restaurant : AggregateRoot
     {
         public string Name { get; protected set; }
-        public string PhoneNumber { get; protected set; }
-        public Area Area { get; protected set; }
+        public PhoneNumberValue PhoneNumberNumber { get; protected set; }
+        public long AreaId { get; protected set; }
+        public  Locality Locality { get; protected set; }
         public RestaurantState State { get; protected set; }
         public int OpeningHour { get; protected set; }
         public int ClosingHour { get; protected set; }
@@ -25,35 +26,36 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public PricingPolicy PricingPolicy { get; protected set; }
         public DateTime ExpirationDate { get; protected set; }
 
-        private ICollection<Category> _categories;
-        public IReadOnlyList<Category> Categories => _categories.ToList();
+        private List<RestaurantCategory> _categories = new List<RestaurantCategory>();
+        public IReadOnlyList<RestaurantCategory> Categories => _categories.ToList();
 
-        private ICollection<Food> _foods = new List<Food>();
-        public IReadOnlyList<Food> FoodList => _foods.ToList();
+        private List<Food> _foods = new List<Food>();
+        public IReadOnlyList<Food> Foods => _foods.ToList();
 
-        private ICollection<Menu> _menus;
-        public IReadOnlyList<Menu> MenuList => _menus.ToList();
+        private List<Menu> _menus = new List<Menu>();
+        public IReadOnlyList<Menu> Menus => _menus.ToList();
 
-        private ICollection<Order> _orders;
-
+        private List<Order> _orders = new List<Order>();
         public IReadOnlyList<Order> Orders { get; protected set; }
-        
-        private ICollection<string> _imageUrls;
-        public IReadOnlyList<string> ImageUrls => _imageUrls.ToList();
 
-        public Restaurant(string name, string phone, Area area, int openingHour, int closingHour,
-            SubscriptionType subscriptionType, ContractStatus contractStatus, ICollection<Category> categories)
+        public string ImageUrl { get; private set; }
+
+        public double Rating  { get; private set; }
+
+        public int TotalRatingsCount  { get; private set; }
+        
+        public Restaurant(string name, int openingHour, int closingHour,
+            SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumberNumber, string imageUrl)
         {
+            ImageUrl = imageUrl;
             Name = name;
-            Area = area;
             OpeningHour = openingHour;
             ClosingHour = closingHour;
             SubscriptionType = subscriptionType;
             ContractStatus = contractStatus;
-            _categories = categories;
             State = RestaurantState.Closed;
-            PhoneNumber = PhoneNumberValue.Of(SupportedCountryCode.Italy, phone).GetCompletePhoneNumber();
             ExpirationDate = GenerateExpirationDateFromSubscriptionType(subscriptionType);
+            PhoneNumberNumber = phoneNumberNumber;
         }
 
         private DateTime GenerateExpirationDateFromSubscriptionType(SubscriptionType subscriptionType)
@@ -62,7 +64,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             {
                 case SubscriptionType.Monthly:
                     return DateTime.Now.AddMonths(1);
-                    
+
                 case SubscriptionType.Yearly:
                     return DateTime.Now.AddMonths(12);
 
@@ -81,6 +83,14 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public void AddFood(Food food)
         {
             _foods.Add(food);
+        }
+
+        public void AddRating(int remark)
+        {
+            var temp = TotalRatingsCount * Rating;
+            TotalRatingsCount++;
+            temp += remark;
+            Rating = temp / TotalRatingsCount;
         }
     }
 }
