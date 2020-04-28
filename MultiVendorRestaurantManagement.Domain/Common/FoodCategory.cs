@@ -1,21 +1,12 @@
-﻿using Common.Invariants;
-using MultiVendorRestaurantManagement.Domain.Base;
-using MultiVendorRestaurantManagement.Domain.Foods;
+﻿using MultiVendorRestaurantManagement.Domain.Foods;
 
 namespace MultiVendorRestaurantManagement.Domain.Common
 {
-    public class FoodCategory : AggregateRoot
+    public class FoodCategory
     {
-        public FoodCategory(string name, string nameEng, string imageUrl)
-        {
-            Name = name;
-            NameEng = nameEng;
-            ImageUrl = imageUrl;
-        }
-
-        public string ImageUrl { get; protected set; }
-        public string Name { get; private set; }
-        public string NameEng { get; private set; }
-
+        public long FoodId { get; private set; }
+        public Food Food { get; private set; }
+        public Category Category { get; private set; }
+        public long CategoryId { get; private set; }
     }
 }

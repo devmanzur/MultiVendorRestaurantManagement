@@ -17,7 +17,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public string Name { get; protected set; }
         public PhoneNumberValue PhoneNumberNumber { get; protected set; }
         public long AreaId { get; protected set; }
-        public  Locality Locality { get; protected set; }
+        public Locality Locality { get; protected set; }
+        public Manager Manager { get; private set; }
         public RestaurantState State { get; protected set; }
         public int OpeningHour { get; protected set; }
         public int ClosingHour { get; protected set; }
@@ -25,9 +26,6 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public ContractStatus ContractStatus { get; protected set; }
         public PricingPolicy PricingPolicy { get; protected set; }
         public DateTime ExpirationDate { get; protected set; }
-
-        private List<RestaurantCategory> _categories = new List<RestaurantCategory>();
-        public IReadOnlyList<RestaurantCategory> Categories => _categories.ToList();
 
         private List<Food> _foods = new List<Food>();
         public IReadOnlyList<Food> Foods => _foods.ToList();
@@ -40,12 +38,13 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public string ImageUrl { get; private set; }
 
-        public double Rating  { get; private set; }
+        public double Rating { get; private set; }
 
-        public int TotalRatingsCount  { get; private set; }
-        
+        public int TotalRatingsCount { get; private set; }
+
         public Restaurant(string name, int openingHour, int closingHour,
-            SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumberNumber, string imageUrl)
+            SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumberNumber,
+            string imageUrl)
         {
             ImageUrl = imageUrl;
             Name = name;

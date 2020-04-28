@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiVendorRestaurantManagement.Infrastructure;
 
 namespace MultiVendorRestaurantManagement.Migrations
 {
     [DbContext(typeof(RestaurantContext))]
-    partial class RestaurantContextModelSnapshot : ModelSnapshot
+    [Migration("20200428181850_ReferencedmanagerFromRestaurant")]
+    partial class ReferencedmanagerFromRestaurant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,12 +73,15 @@ namespace MultiVendorRestaurantManagement.Migrations
                     b.ToTable("Locality");
                 });
 
-            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.Category", b =>
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.FoodCategory", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long>("FoodId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -92,22 +97,9 @@ namespace MultiVendorRestaurantManagement.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.FoodCategory", b =>
-                {
-                    b.Property<long>("CategoryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("FoodId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("CategoryId", "FoodId");
-
                     b.HasIndex("FoodId");
 
-                    b.ToTable("FoodCategory");
+                    b.ToTable("FoodCategories");
                 });
 
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.Promotion", b =>
@@ -140,6 +132,35 @@ namespace MultiVendorRestaurantManagement.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Promotions");
+                });
+
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.RestaurantCategory", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEng")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("RestaurantId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RestaurantId");
+
+                    b.ToTable("RestaurantCategories");
                 });
 
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.Review", b =>
@@ -498,7 +519,7 @@ namespace MultiVendorRestaurantManagement.Migrations
                     b.HasIndex("RestaurantId")
                         .IsUnique();
 
-                    b.ToTable("Managers");
+                    b.ToTable("Manager");
                 });
 
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Restaurants.Menu", b =>
@@ -625,15 +646,18 @@ namespace MultiVendorRestaurantManagement.Migrations
 
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.FoodCategory", b =>
                 {
-                    b.HasOne("MultiVendorRestaurantManagement.Domain.Common.Category", "Category")
-                        .WithMany("Foods")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MultiVendorRestaurantManagement.Domain.Foods.Food", "Food")
+                    b.HasOne("MultiVendorRestaurantManagement.Domain.Foods.Food", null)
                         .WithMany("Categories")
                         .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.RestaurantCategory", b =>
+                {
+                    b.HasOne("MultiVendorRestaurantManagement.Domain.Restaurants.Restaurant", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("RestaurantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

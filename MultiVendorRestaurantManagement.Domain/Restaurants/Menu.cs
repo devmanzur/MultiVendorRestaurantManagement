@@ -10,7 +10,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public virtual Restaurant Restaurant { get; protected set; }
         public string Name { get; protected set; }
         public string NameEng { get; protected set; }
-        private ICollection<Food> _items = new List<Food>();
+        private IList<Food> _items = new List<Food>();
         public IReadOnlyList<Food> Items => _items.ToList();
 
 
