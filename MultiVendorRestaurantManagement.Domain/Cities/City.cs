@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MultiVendorRestaurantManagement.Domain.Base;
+using MultiVendorRestaurantManagement.Domain.City;
 
-namespace MultiVendorRestaurantManagement.Domain.City
+namespace MultiVendorRestaurantManagement.Domain.Cities
 {
     public class City : AggregateRoot
     {

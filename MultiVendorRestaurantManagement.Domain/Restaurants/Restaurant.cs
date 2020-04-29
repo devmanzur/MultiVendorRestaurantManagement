@@ -8,6 +8,7 @@ using MultiVendorRestaurantManagement.Domain.City;
 using MultiVendorRestaurantManagement.Domain.Common;
 using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.Orders;
+using MultiVendorRestaurantManagement.Domain.Rules;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Domain.Restaurants
@@ -16,9 +17,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
     {
         public string Name { get; protected set; }
         public PhoneNumberValue PhoneNumberNumber { get; protected set; }
-        public long AreaId { get; protected set; }
         public Locality Locality { get; protected set; }
-        public Manager Manager { get; private set; }
+        public long ManagerId { get; private set; }
         public RestaurantState State { get; protected set; }
         public int OpeningHour { get; protected set; }
         public int ClosingHour { get; protected set; }
@@ -36,6 +36,9 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         private List<Order> _orders = new List<Order>();
         public IReadOnlyList<Order> Orders { get; protected set; }
 
+        private List<RestaurantCategory> _categories = new List<RestaurantCategory>();
+        public IReadOnlyList<RestaurantCategory> Categories => _categories.ToList();
+
         public string ImageUrl { get; private set; }
 
         public double Rating { get; private set; }
@@ -46,6 +49,14 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumberNumber,
             string imageUrl)
         {
+            CheckRule(new OpeningAndClosingHoursAreValid(openingHour, closingHour));
+            CheckRule(new ConditionMustBeTrue(subscriptionType != SubscriptionType.Invalid,
+                "subscription must be valid"));
+            CheckRule(new ConditionMustBeTrue(contractStatus != ContractStatus.Invalid, 
+                "contract must be valid"));
+            CheckRule(new ConditionMustBeTrue(phoneNumberNumber != null, 
+                "contract must be valid"));
+
             ImageUrl = imageUrl;
             Name = name;
             OpeningHour = openingHour;
@@ -59,19 +70,13 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         private DateTime GenerateExpirationDateFromSubscriptionType(SubscriptionType subscriptionType)
         {
-            switch (subscriptionType)
+            return subscriptionType switch
             {
-                case SubscriptionType.Monthly:
-                    return DateTime.Now.AddMonths(1);
-
-                case SubscriptionType.Yearly:
-                    return DateTime.Now.AddMonths(12);
-
-                case SubscriptionType.BiYearly:
-                    return DateTime.Now.AddMonths(6);
-                default:
-                    return DateTime.Now;
-            }
+                SubscriptionType.Monthly => DateTime.Now.AddMonths(1),
+                SubscriptionType.Yearly => DateTime.Now.AddMonths(12),
+                SubscriptionType.BiYearly => DateTime.Now.AddMonths(6),
+                _ => DateTime.Now
+            };
         }
 
         public void SetPricingPolicy(PricingPolicy policy)
@@ -90,6 +95,16 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             TotalRatingsCount++;
             temp += remark;
             Rating = temp / TotalRatingsCount;
+        }
+
+        public void SetLocality(Locality locality)
+        {
+            Locality = locality;
+        }
+
+        public void AssignManager(long managerId)
+        {
+            ManagerId = managerId;
         }
     }
 }

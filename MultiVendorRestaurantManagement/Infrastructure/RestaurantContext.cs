@@ -1,6 +1,7 @@
 ﻿using Common.Invariants;
 using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
+using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Domain.City;
 using MultiVendorRestaurantManagement.Domain.Common;
 using MultiVendorRestaurantManagement.Domain.Foods;
@@ -17,7 +18,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure
         public DbSet<City> Cities { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Review> Reviews { get; set; }
-        public DbSet<Manager> Managers { get; set; }
 
         public RestaurantContext(DbContextOptions<RestaurantContext> options)
             : base(options)
@@ -33,7 +33,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure
                     builder.Property(x => x.IsNonVeg).IsRequired();
                     builder.Property(x => x.IsGlutenFree).IsRequired();
                     builder.Property(x => x.ImageUrl).IsRequired();
-                    
+
                     builder.Property(p => p.UnitPrice)
                         .IsRequired()
                         .HasConversion(p => p.Value, p => MoneyValue.Of(p));
@@ -129,7 +129,14 @@ namespace MultiVendorRestaurantManagement.Infrastructure
                     .IsRequired();
                 builder.Property(x => x.Code)
                     .IsRequired();
-                
+
+                builder.HasIndex(u => u.Name)
+                    .IsUnique();
+                builder.HasIndex(u => u.NameEng)
+                    .IsUnique();
+                builder.HasIndex(u => u.Code)
+                    .IsUnique();
+
                 builder.HasMany(x => x.Localities)
                     .WithOne(x => x.City)
                     .OnDelete(DeleteBehavior.Cascade)
@@ -150,16 +157,22 @@ namespace MultiVendorRestaurantManagement.Infrastructure
             {
                 builder.Property(x => x.Name)
                     .IsRequired();
-                
+
                 builder.Property(x => x.NameEng)
                     .IsRequired();
 
                 builder.Property(x => x.Code)
                     .IsRequired();
 
+                builder.HasIndex(u => u.Name)
+                    .IsUnique();
+                builder.HasIndex(u => u.NameEng)
+                    .IsUnique();
+                builder.HasIndex(u => u.Code)
+                    .IsUnique();
             });
 
-            modelBuilder.Entity<Domain.Restaurants.Restaurant>(builder =>
+            modelBuilder.Entity<Restaurant>(builder =>
                 {
                     builder.Property(x => x.Name)
                         .IsRequired();
@@ -170,7 +183,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure
                     builder.HasOne(x => x.Locality)
                         .WithMany()
                         .IsRequired();
-                    builder.HasOne(x => x.Manager);
                     builder.Property(x => x.OpeningHour)
                         .IsRequired();
                     builder.Property(x => x.ClosingHour)
@@ -185,6 +197,15 @@ namespace MultiVendorRestaurantManagement.Infrastructure
                     builder.Property(x => x.ContractStatus)
                         .IsRequired()
                         .HasConversion<string>();
+                    
+                    builder.HasMany(x => x.Categories)
+                        .WithOne()
+                        .IsRequired()
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    builder.Metadata
+                        .FindNavigation("Categories")
+                        .SetPropertyAccessMode(PropertyAccessMode.Field);
 
                     builder.HasOne(x => x.PricingPolicy);
 
@@ -211,10 +232,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure
                 }
             );
 
-            modelBuilder.Entity<Menu>(buider =>
-            {
-                buider.Property(x => x.Name).IsRequired();
-            });
+            modelBuilder.Entity<Menu>(buider => { buider.Property(x => x.Name).IsRequired(); });
             modelBuilder.Entity<Promotion>(builder =>
             {
                 builder.Property(x => x.StartDate)
@@ -230,7 +248,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure
                     .OnDelete(DeleteBehavior.NoAction)
                     .IsRequired()
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
-                
             });
 
             modelBuilder.Entity<Review>(builder =>
@@ -250,10 +267,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure
             {
                 builder.Property(x => x.Name)
                     .IsRequired();
-                
+
                 builder.Property(x => x.Description)
                     .IsRequired();
-                
+
                 builder.Property(p => p.Price)
                     .IsRequired()
                     .HasColumnType("decimal(18,4)");
@@ -290,10 +307,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure
             {
                 builder.Property(x => x.Name)
                     .IsRequired();
-                
+
                 builder.Property(x => x.NameEng)
                     .IsRequired();
-                
             });
 
             modelBuilder.Entity<FoodCategory>(builder =>
@@ -301,11 +317,21 @@ namespace MultiVendorRestaurantManagement.Infrastructure
                 builder.HasKey(x => new {x.CategoryId, x.FoodId});
                 builder.HasOne(x => x.Food)
                     .WithMany(x => x.Categories)
-                    .HasForeignKey(x=>x.FoodId);
+                    .HasForeignKey(x => x.FoodId);
                 builder.HasOne(x => x.Category)
                     .WithMany(x => x.Foods)
-                    .HasForeignKey(x=>x.CategoryId);
-                
+                    .HasForeignKey(x => x.CategoryId);
+            });
+
+            modelBuilder.Entity<RestaurantCategory>(builder =>
+            {
+                builder.HasKey(x => new {x.CategoryId, x.RestaurantId});
+                builder.HasOne(x => x.Restaurant)
+                    .WithMany(x => x.Categories)
+                    .HasForeignKey(x => x.RestaurantId);
+                builder.HasOne(x => x.Category)
+                    .WithMany(x => x.RestaurantCategories)
+                    .HasForeignKey(x => x.CategoryId);
             });
 
             base.OnModelCreating(modelBuilder);

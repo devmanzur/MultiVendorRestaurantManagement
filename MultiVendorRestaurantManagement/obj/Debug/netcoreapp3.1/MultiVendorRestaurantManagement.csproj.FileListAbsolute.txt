@@ -62,3 +62,7 @@ C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaura
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\obj\Debug\netcoreapp3.1\MultiVendorRestaurantManagement.dll
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\obj\Debug\netcoreapp3.1\MultiVendorRestaurantManagement.pdb
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\obj\Debug\netcoreapp3.1\MultiVendorRestaurantManagement.genruntimeconfig.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll

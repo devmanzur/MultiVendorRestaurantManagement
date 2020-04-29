@@ -18,6 +18,7 @@ namespace MultiVendorRestaurantManagement.Domain.Common
         public string NameEng { get; private set; }
 
         public List<FoodCategory> Foods { get; private set; }
+        public List<RestaurantCategory> RestaurantCategories { get; private set; }
 
     }
 }

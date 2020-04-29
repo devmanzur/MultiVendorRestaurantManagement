@@ -11,7 +11,7 @@ namespace MultiVendorRestaurantManagement.Domain.City
             NameEng = nameEng;
         }
 
-        public virtual City City { get; protected set; }
+        public virtual Cities.City City { get; protected set; }
         public int Code { get; protected set; }
         public string Name { get; protected set; }
         public string NameEng { get; protected set; }

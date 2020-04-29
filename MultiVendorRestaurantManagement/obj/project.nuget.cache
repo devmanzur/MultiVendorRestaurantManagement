@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1e4tfgLvXmtRD0G/5ouZuCkK3JGF5XmPM4Y+tYvR8RqoGAUs0JMUnaAWlPPtojW7G+Y+0Y57aJTioZ4dMkJFtg==",
+  "dgSpecHash": "b9uOkb2S8yMvAJbJtagbISZdP3TMu2XZnpF1EBzU/MSV+RDNiNIq3vQsJeidKZ4yP8773kELFr0GI3mMPFqIVg==",
   "success": true,
   "projectFilePath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.csproj",
   "expectedPackageFiles": [
@@ -34,6 +34,7 @@
     "C:\\Users\\devma\\.nuget\\packages\\microsoft.identity.client\\3.0.8\\microsoft.identity.client.3.0.8.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\microsoft.openapi\\1.1.4\\microsoft.openapi.1.1.4.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
@@ -41,6 +42,9 @@
     "C:\\Users\\devma\\.nuget\\packages\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.4.0\\swashbuckle.aspnetcore.swagger.5.4.0.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.4.0\\swashbuckle.aspnetcore.swaggergen.5.4.0.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.4.0\\swashbuckle.aspnetcore.swaggerui.5.4.0.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\devma\\.nuget\\packages\\system.collections.immutable\\1.7.0\\system.collections.immutable.1.7.0.nupkg.sha512",

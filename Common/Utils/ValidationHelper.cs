@@ -6,10 +6,10 @@ namespace Common.Utils
 {
     public static class ValidationHelper
     {
-        public static Func<IReadOnlyList<string>, bool> ContainValidItem()
+        public static Func<IReadOnlyList<long>, bool> ContainValidItem()
         {
             return collection => collection == null || collection.Any(
-                item => item != null);
+                item => item != 0);
         }
     }
 }
