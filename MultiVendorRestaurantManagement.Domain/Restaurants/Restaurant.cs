@@ -52,10 +52,10 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             CheckRule(new OpeningAndClosingHoursAreValid(openingHour, closingHour));
             CheckRule(new ConditionMustBeTrue(subscriptionType != SubscriptionType.Invalid,
                 "subscription must be valid"));
-            CheckRule(new ConditionMustBeTrue(contractStatus != ContractStatus.Invalid, 
+            CheckRule(new ConditionMustBeTrue(contractStatus != ContractStatus.Invalid,
                 "contract must be valid"));
-            CheckRule(new ConditionMustBeTrue(phoneNumberNumber != null, 
-                "contract must be valid"));
+            CheckRule(new ConditionMustBeTrue(phoneNumberNumber != null,
+                "phone number be valid"));
 
             ImageUrl = imageUrl;
             Name = name;
@@ -105,6 +105,15 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public void AssignManager(long managerId)
         {
             ManagerId = managerId;
+        }
+
+        public void AddMenu(Menu menu)
+        {
+            CheckRule(new ConditionMustBeTrue(
+                _menus.FirstOrDefault(
+                    x => string.Equals(x.Name, menu.Name, StringComparison.InvariantCultureIgnoreCase)) == null,
+                "restaurant must not contain menu with same name"));
+            _menus.Add(menu);
         }
     }
 }

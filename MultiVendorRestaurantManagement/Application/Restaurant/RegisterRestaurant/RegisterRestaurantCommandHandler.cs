@@ -26,7 +26,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 .Include(x => x.Localities)
                 .SingleOrDefaultAsync(x => x.Id == request.CityId, cancellationToken);
             if (city == null) return Result.Failure<string>("Invalid city");
-            
+
             var locality = city.Localities.FirstOrDefault(x => x.Id == request.LocalityId);
             if (locality == null) return Result.Failure<string>("Invalid locality");
 
@@ -41,19 +41,12 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             );
             restaurant.SetLocality(locality);
 
-            try
-            {
-                await _context.Restaurants.AddAsync(restaurant, cancellationToken);
-                var result = await _context.SaveChangesAsync(cancellationToken);
+            await _context.Restaurants.AddAsync(restaurant, cancellationToken);
+            var result = await _context.SaveChangesAsync(cancellationToken);
 
-                return result > 0
-                    ? Result.Ok("Restaurant registered successfully")
-                    : Result.Failure<string>("Failed to register restaurant");
-            }
-            catch (Exception e)
-            {
-                return Result.Failure<string>(e.Message);
-            }
+            return result > 0
+                ? Result.Ok("Restaurant registered successfully")
+                : Result.Failure<string>("Failed to register restaurant");
         }
     }
 }

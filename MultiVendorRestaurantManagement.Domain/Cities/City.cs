@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.City;
+using MultiVendorRestaurantManagement.Domain.Rules;
+using static System.String;
 
 namespace MultiVendorRestaurantManagement.Domain.Cities
 {
@@ -21,9 +24,13 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
         private List<Locality> _localities = new List<Locality>();
         public virtual IReadOnlyList<Locality> Localities => _localities.ToList();
 
-        public void AddLocality(Locality area)
+        public void AddLocality(Locality locality)
         {
-            _localities.Add(area);
+            CheckRule(new ConditionMustBeTrue(
+                _localities.FirstOrDefault(x =>
+                    string.Equals(x.Name, locality.Name, StringComparison.InvariantCultureIgnoreCase)) == null,
+                "city must not contain locality with same name"));
+            _localities.Add(locality);
         }
     }
 }

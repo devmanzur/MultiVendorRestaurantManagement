@@ -13,7 +13,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure
 {
     public class RestaurantContext : DbContext
     {
-        public DbSet<Domain.Restaurants.Restaurant> Restaurants { get; set; }
+        public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Promotion> Promotions { get; set; }

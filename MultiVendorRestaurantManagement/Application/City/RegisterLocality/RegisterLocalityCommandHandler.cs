@@ -20,22 +20,16 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
 
         public async Task<Result> Handle(RegisterLocalityCommand request, CancellationToken cancellationToken)
         {
-            var city = await _context.Cities.SingleOrDefaultAsync(x => x.Id == request.CityId,
+            var city = await _context.Cities.Include(x => x.Localities).SingleOrDefaultAsync(
+                x => x.Id == request.CityId,
                 cancellationToken: cancellationToken);
             if (city == null) return Result.Failure("City with given id not found");
 
-            try
-            {
-                city.AddLocality(new Locality(request.Name, request.Code, request.NameEng));
-                var result = await _context.SaveChangesAsync(cancellationToken);
-                return result > 0
-                    ? Result.Ok("Locality registered successfully")
-                    : Result.Failure("Failed to register locality");
-            }
-            catch (Exception e)
-            {
-                return Result.Failure(e.Message);
-            }
+            city.AddLocality(new Locality(request.Name, request.Code, request.NameEng));
+            var result = await _context.SaveChangesAsync(cancellationToken);
+            return result > 0
+                ? Result.Ok("Locality registered successfully")
+                : Result.Failure("Failed to register locality");
         }
     }
 }

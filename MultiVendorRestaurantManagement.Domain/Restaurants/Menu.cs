@@ -2,6 +2,7 @@
 using System.Linq;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Foods;
+using MultiVendorRestaurantManagement.Domain.Rules;
 
 namespace MultiVendorRestaurantManagement.Domain.Restaurants
 {
@@ -16,8 +17,14 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public Menu(string name, string nameEng)
         {
+            CheckRule(new ConditionMustBeTrue(!string.IsNullOrEmpty(name),"name must be valid"));
             Name = name;
             NameEng = nameEng;
+        }
+
+        public void AddItem(Food food)
+        {
+            _items.Add(food);
         }
     }
 }
