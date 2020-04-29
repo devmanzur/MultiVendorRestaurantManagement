@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MultiVendorRestaurantManagement.Infrastructure;
+using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 using MultiVendorRestaurantManagement.PipelineBehaviour;
 
 namespace MultiVendorRestaurantManagement

@@ -1,5 +1,4 @@
 ﻿using Common.Invariants;
-using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Domain.City;
@@ -9,7 +8,7 @@ using MultiVendorRestaurantManagement.Domain.Orders;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
-namespace MultiVendorRestaurantManagement.Infrastructure
+namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 {
     public class RestaurantContext : DbContext
     {
