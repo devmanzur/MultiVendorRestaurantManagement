@@ -7,18 +7,21 @@ using Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
-using MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework;
+using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant
 {
     public class RegisterRestaurantCommandHandler : IRequestHandler<RegisterRestaurantCommand, Result<string>>
     {
-        private readonly IContext _context;
+        private readonly RestaurantContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterRestaurantCommandHandler(IContext context)
+        public RegisterRestaurantCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Result<string>> Handle(RegisterRestaurantCommand request, CancellationToken cancellationToken)
@@ -43,7 +46,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             restaurant.SetLocality(locality);
 
             await _context.Restaurants.AddAsync(restaurant, cancellationToken);
-            var result = await _context.SaveChangesAsync(cancellationToken);
+            var result = await _unitOfWork.CommitAsync(cancellationToken);
 
             return result > 0
                 ? Result.Ok("Restaurant registered successfully")

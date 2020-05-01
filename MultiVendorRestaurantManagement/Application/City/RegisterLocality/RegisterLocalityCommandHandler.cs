@@ -5,18 +5,21 @@ using Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using MultiVendorRestaurantManagement.Domain.City;
-using MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework;
+using MultiVendorRestaurantManagement.Domain;
+using MultiVendorRestaurantManagement.Domain.Cities;
+using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
 {
     public class RegisterLocalityCommandHandler : IRequestHandler<RegisterLocalityCommand, Result>
     {
-        private readonly IContext _context;
+        private readonly RestaurantContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterLocalityCommandHandler(IContext context)
+        public RegisterLocalityCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<Result> Handle(RegisterLocalityCommand request, CancellationToken cancellationToken)
@@ -27,7 +30,7 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
             if (city.HasNoValue()) return Result.Failure("City with given id not found");
 
             city.AddLocality(new Locality(request.Name, request.Code, request.NameEng));
-            var result = await _context.SaveChangesAsync(cancellationToken);
+            var result = await _unitOfWork.CommitAsync(cancellationToken);
             return result > 0
                 ? Result.Ok("Locality registered successfully")
                 : Result.Failure("Failed to register locality");

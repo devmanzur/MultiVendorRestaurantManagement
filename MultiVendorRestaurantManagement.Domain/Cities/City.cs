@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.Domain.Base;
-using MultiVendorRestaurantManagement.Domain.City;
 using MultiVendorRestaurantManagement.Domain.Rules;
 using static System.String;
 
@@ -10,11 +10,17 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
 {
     public class City : AggregateRoot
     {
+        
         public City(string name, string nameEng, string code)
         {
             Name = name;
             NameEng = nameEng;
             Code = code;
+        }
+
+        public void Create()
+        {
+            AddDomainEvent(new CityRegisteredEvent(Name));
         }
 
         public string Name { get; protected set; }
@@ -31,6 +37,7 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
                     string.Equals(x.Name, locality.Name, StringComparison.InvariantCultureIgnoreCase)) == null,
                 "city must not contain locality with same name"));
             _localities.Add(locality);
+            AddDomainEvent(new LocalityAddedEvent(Id, locality.Name));
         }
     }
 }

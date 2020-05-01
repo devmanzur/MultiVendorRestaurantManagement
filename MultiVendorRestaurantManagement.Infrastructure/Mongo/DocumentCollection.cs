@@ -8,25 +8,25 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
     {
         Restaurants,
         Cities,
-        RestaurantCategories
+        Categories
     }
     
-    public class DocumentContext
+    public class DocumentCollection
     {
         private readonly IMongoDatabase _documents;
 
-        public DocumentContext(IConfiguration configuration)
+        public DocumentCollection(IConfiguration configuration)
         {
-            var connectivity = configuration.GetValue<MongoConnectivityConfiguration>("MongoConnection");
+            var connectivity = configuration.GetSection("MongoConnection").Get<MongoConnectivityConfiguration>();
             var client = new MongoClient(connectivity.ConnectionString);
             _documents = client.GetDatabase(connectivity.Database);
         }
         
-        public IMongoCollection<RestaurantDocument> Restaurants 
+        public IMongoCollection<RestaurantDocument> RestaurantCollection 
             => _documents.GetCollection<RestaurantDocument>(Collections.Restaurants.ToString());
-        public IMongoCollection<CityDocument> Cities 
+        public IMongoCollection<CityDocument> CityCollection 
             => _documents.GetCollection<CityDocument>(Collections.Cities.ToString());
-        public IMongoCollection<RestaurantCategoryDocument> RestaurantCategories 
-            => _documents.GetCollection<RestaurantCategoryDocument>(Collections.RestaurantCategories.ToString());
+        public IMongoCollection<RestaurantCategoryDocument> CategoryCollection
+            => _documents.GetCollection<RestaurantCategoryDocument>(Collections.Categories.ToString());
     }
 }

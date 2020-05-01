@@ -6,7 +6,7 @@ namespace MultiVendorRestaurantManagement.Domain.Base
     {
         [DefaultOrderBy]
         public long Id { get; protected set; }
-
+        
         protected static void CheckRule(IBusinessRule rule)
         {
             if (rule.IsBroken())

@@ -77,3 +77,4 @@ C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaura
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\MultiVendorRestaurantManagement.Infrastructure.dll
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\MultiVendorRestaurantManagement.Infrastructure.pdb
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Dapper.dll

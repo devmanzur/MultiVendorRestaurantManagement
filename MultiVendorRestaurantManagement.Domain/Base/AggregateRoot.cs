@@ -13,7 +13,7 @@ namespace MultiVendorRestaurantManagement.Domain.Base
         protected void AddDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents ??= new List<IDomainEvent>();
-            this._domainEvents.Add(domainEvent);
+            _domainEvents.Add(domainEvent);
         }
         
         public void ClearDomainEvents()

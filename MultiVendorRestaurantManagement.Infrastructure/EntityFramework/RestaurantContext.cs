@@ -1,16 +1,15 @@
 ﻿using Common.Invariants;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain.Cities;
-using MultiVendorRestaurantManagement.Domain.City;
 using MultiVendorRestaurantManagement.Domain.Common;
 using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.Orders;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
-namespace MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework
+namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 {
-    public class RestaurantContext : DbContext, IContext
+    public class RestaurantContext : DbContext
     {
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Category> Categories { get; set; }

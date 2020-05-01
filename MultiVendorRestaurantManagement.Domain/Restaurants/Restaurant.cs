@@ -4,7 +4,7 @@ using System.Linq;
 using Common.Invariants;
 using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Domain.Base;
-using MultiVendorRestaurantManagement.Domain.City;
+using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Domain.Common;
 using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.Orders;
