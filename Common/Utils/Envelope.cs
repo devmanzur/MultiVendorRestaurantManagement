@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CrossCutting.Utils
+namespace Common.Utils
 {
     public class Envelope<T>
     {
@@ -8,21 +8,22 @@ namespace CrossCutting.Utils
         public string ErrorMessage { get; }
         public DateTime TimeGenerated { get; }
 
-        public bool IsSuccess { get; set; }
+        public bool IsSuccess { get; }
 
+        // ReSharper disable once MemberCanBeProtected.Global
         protected internal Envelope(T body, string errorMessage)
         {
             Body = body;
             ErrorMessage = errorMessage;
             TimeGenerated = DateTime.UtcNow;
-            IsSuccess = errorMessage == null;
+            IsSuccess = errorMessage.HasNoValue();
         }
     }
 
     public class Envelope : Envelope<string>
     {
-        protected Envelope(string errorMessage)
-            : base(null, errorMessage)
+        private Envelope(string errorMessage)
+            : base(errorMessage.HasValue() ? null : "success", errorMessage)
         {
         }
 

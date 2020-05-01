@@ -36,9 +36,8 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
         private List<AddOn> _addOns = new List<AddOn>();
         public List<AddOn> AddOns => _addOns.ToList();
-        
-        private List<FoodCategory> _categories = new List<FoodCategory>();
-        public IReadOnlyList<FoodCategory> Categories => _categories.ToList();
+
+        public Category Category { get; private set; }
 
         public bool IsOnPromotion { get; protected set; } = false;
         public Promotion Promotion { get; protected set; }

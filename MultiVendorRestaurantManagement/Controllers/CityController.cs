@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Common.Utils;
 using CrossCutting.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

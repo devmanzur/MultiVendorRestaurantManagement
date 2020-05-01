@@ -46,15 +46,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                         .IsRequired()
                         .HasConversion<string>();
 
-                    builder.HasMany(x => x.Categories)
-                        .WithOne()
-                        .IsRequired()
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    builder.Metadata
-                        .FindNavigation("Categories")
-                        .SetPropertyAccessMode(PropertyAccessMode.Field);
-
                     builder.HasMany(x => x.Variants)
                         .WithOne(v => v.Food)
                         .OnDelete(DeleteBehavior.Cascade);
@@ -142,16 +133,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
             });
 
-            modelBuilder.Entity<Category>(builder =>
-            {
-                builder.Property(x => x.Name)
-                    .IsRequired();
-                builder.Property(x => x.NameEng)
-                    .IsRequired();
-                builder.Property(x => x.ImageUrl)
-                    .IsRequired();
-            });
-
             modelBuilder.Entity<Locality>(builder =>
             {
                 builder.Property(x => x.Name)
@@ -196,15 +177,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     builder.Property(x => x.ContractStatus)
                         .IsRequired()
                         .HasConversion<string>();
-                    
-                    builder.HasMany(x => x.Categories)
-                        .WithOne()
-                        .IsRequired()
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    builder.Metadata
-                        .FindNavigation("Categories")
-                        .SetPropertyAccessMode(PropertyAccessMode.Field);
 
                     builder.HasOne(x => x.PricingPolicy);
 
@@ -311,26 +283,28 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .IsRequired();
             });
 
-            modelBuilder.Entity<FoodCategory>(builder =>
+            modelBuilder.Entity<Category>(builder =>
             {
-                builder.HasKey(x => new {x.CategoryId, x.FoodId});
-                builder.HasOne(x => x.Food)
-                    .WithMany(x => x.Categories)
-                    .HasForeignKey(x => x.FoodId);
-                builder.HasOne(x => x.Category)
-                    .WithMany(x => x.Foods)
-                    .HasForeignKey(x => x.CategoryId);
-            });
+                builder.Property(x => x.Name)
+                    .IsRequired();
+                builder.Property(x => x.NameEng)
+                    .IsRequired();
+                builder.Property(x => x.ImageUrl)
+                    .IsRequired();
+                builder.Property(x => x.Categorize)
+                    .IsRequired()
+                    .HasConversion<string>();
 
-            modelBuilder.Entity<RestaurantCategory>(builder =>
-            {
-                builder.HasKey(x => new {x.CategoryId, x.RestaurantId});
-                builder.HasOne(x => x.Restaurant)
-                    .WithMany(x => x.Categories)
-                    .HasForeignKey(x => x.RestaurantId);
-                builder.HasOne(x => x.Category)
-                    .WithMany(x => x.RestaurantCategories)
-                    .HasForeignKey(x => x.CategoryId);
+                builder.HasMany(x => x.Foods)
+                    .WithOne(x => x.Category)
+                    .OnDelete(DeleteBehavior.NoAction)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+                
+                builder.HasMany(x => x.Restaurants)
+                    .WithOne(x => x.Category)
+                    .OnDelete(DeleteBehavior.NoAction)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+                
             });
 
             base.OnModelCreating(modelBuilder);

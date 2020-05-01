@@ -4,10 +4,11 @@ using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;
 
 namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
 {
-
-    enum Collections
+    internal enum Collections
     {
-        Restaurants
+        Restaurants,
+        Cities,
+        RestaurantCategories
     }
     
     public class DocumentContext
@@ -21,7 +22,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
             _documents = client.GetDatabase(connectivity.Database);
         }
         
-        public IMongoCollection<RestaurantDocument> ActiveInformation 
+        public IMongoCollection<RestaurantDocument> Restaurants 
             => _documents.GetCollection<RestaurantDocument>(Collections.Restaurants.ToString());
+        public IMongoCollection<CityDocument> Cities 
+            => _documents.GetCollection<CityDocument>(Collections.Cities.ToString());
+        public IMongoCollection<RestaurantCategoryDocument> RestaurantCategories 
+            => _documents.GetCollection<RestaurantCategoryDocument>(Collections.RestaurantCategories.ToString());
     }
 }

@@ -36,8 +36,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         private List<Order> _orders = new List<Order>();
         public IReadOnlyList<Order> Orders { get; protected set; }
 
-        private List<RestaurantCategory> _categories = new List<RestaurantCategory>();
-        public IReadOnlyList<RestaurantCategory> Categories => _categories.ToList();
+        public Category Category { get; private set; }
 
         public string ImageUrl { get; private set; }
 

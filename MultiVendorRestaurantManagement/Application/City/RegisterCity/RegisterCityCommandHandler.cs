@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Infrastructure;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
@@ -19,6 +21,9 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
 
         public async Task<Result> Handle(RegisterCityCommand request, CancellationToken cancellationToken)
         {
+            var item = await _context.Cities.FirstOrDefaultAsync(x => x.Name == request.Name, cancellationToken);
+            if (item.HasValue()) Result.Failure("city with same name already exists");
+            
             var city = new Domain.Cities.City(request.Name, request.NameEng, request.Code);
 
             await _context.Cities.AddAsync(city, cancellationToken);

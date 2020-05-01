@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
             var city = await _context.Cities.Include(x => x.Localities).SingleOrDefaultAsync(
                 x => x.Id == request.CityId,
                 cancellationToken: cancellationToken);
-            if (city == null) return Result.Failure("City with given id not found");
+            if (city.HasNoValue()) return Result.Failure("City with given id not found");
 
             city.AddLocality(new Locality(request.Name, request.Code, request.NameEng));
             var result = await _context.SaveChangesAsync(cancellationToken);

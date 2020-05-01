@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Invariants;
+using Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -26,10 +27,10 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             var city = await _context.Cities
                 .Include(x => x.Localities)
                 .SingleOrDefaultAsync(x => x.Id == request.CityId, cancellationToken);
-            if (city == null) return Result.Failure<string>("Invalid city");
+            if (city.HasNoValue()) return Result.Failure<string>("Invalid city");
 
             var locality = city.Localities.FirstOrDefault(x => x.Id == request.LocalityId);
-            if (locality == null) return Result.Failure<string>("Invalid locality");
+            if (locality.HasNoValue()) return Result.Failure<string>("Invalid locality");
 
             var restaurant = new Domain.Restaurants.Restaurant(
                 request.Name,
