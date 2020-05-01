@@ -6,16 +6,15 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
-using MultiVendorRestaurantManagement.Infrastructure;
-using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
+using MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
 {
     public class AddMenuCommandHandler : IRequestHandler<AddMenuCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly IContext _context;
 
-        public AddMenuCommandHandler(RestaurantContext context)
+        public AddMenuCommandHandler(IContext context)
         {
             _context = context;
         }

@@ -8,9 +8,9 @@ using MultiVendorRestaurantManagement.Domain.Orders;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
-namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
+namespace MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework
 {
-    public class RestaurantContext : DbContext
+    public class RestaurantContext : DbContext, IContext
     {
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Category> Categories { get; set; }

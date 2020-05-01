@@ -187,7 +187,7 @@
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {}
         },
         "build": {
-          "build/netcoreapp2.0/Microsoft.EntityFrameworkCore.Design.props": {}
+          "build/netcoreapp2.0/_._": {}
         }
       },
       "Microsoft.EntityFrameworkCore.Relational/3.1.3": {
@@ -2200,6 +2200,26 @@
         },
         "runtime": {
           "bin/placeholder/MultiVendorRestaurantManagement.Domain.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "MultiVendorRestaurantManagement.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "3.1.3",
+          "Microsoft.EntityFrameworkCore.Design": "3.1.3",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.3",
+          "MongoDB.Driver": "2.11.0-beta1",
+          "MultiVendorRestaurantManagement.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MultiVendorRestaurantManagement.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MultiVendorRestaurantManagement.Infrastructure.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -7352,6 +7372,11 @@
       "type": "project",
       "path": "../MultiVendorRestaurantManagement.Domain/MultiVendorRestaurantManagement.Domain.csproj",
       "msbuildProject": "../MultiVendorRestaurantManagement.Domain/MultiVendorRestaurantManagement.Domain.csproj"
+    },
+    "MultiVendorRestaurantManagement.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../MultiVendorRestaurantManagement.Infrastructure/MultiVendorRestaurantManagement.Infrastructure.csproj",
+      "msbuildProject": "../MultiVendorRestaurantManagement.Infrastructure/MultiVendorRestaurantManagement.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7359,10 +7384,8 @@
       "Common >= 1.0.0",
       "MediatR >= 8.0.1",
       "MediatR.Extensions.Microsoft.DependencyInjection >= 8.0.0",
-      "Microsoft.EntityFrameworkCore.Design >= 3.1.3",
-      "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.3",
-      "MongoDB.Driver >= 2.11.0-beta1",
       "MultiVendorRestaurantManagement.Domain >= 1.0.0",
+      "MultiVendorRestaurantManagement.Infrastructure >= 1.0.0",
       "Swashbuckle.AspNetCore.Swagger >= 5.4.0",
       "Swashbuckle.AspNetCore.SwaggerGen >= 5.4.0",
       "Swashbuckle.AspNetCore.SwaggerUI >= 5.4.0"
@@ -7399,6 +7422,9 @@
             },
             "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj": {
               "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj"
+            },
+            "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Infrastructure\\MultiVendorRestaurantManagement.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Infrastructure\\MultiVendorRestaurantManagement.Infrastructure.csproj"
             }
           }
         }
@@ -7419,18 +7445,6 @@
           "MediatR.Extensions.Microsoft.DependencyInjection": {
             "target": "Package",
             "version": "[8.0.0, )"
-          },
-          "Microsoft.EntityFrameworkCore.Design": {
-            "target": "Package",
-            "version": "[3.1.3, )"
-          },
-          "Microsoft.EntityFrameworkCore.SqlServer": {
-            "target": "Package",
-            "version": "[3.1.3, )"
-          },
-          "MongoDB.Driver": {
-            "target": "Package",
-            "version": "[2.11.0-beta1, )"
           },
           "Swashbuckle.AspNetCore.Swagger": {
             "target": "Package",

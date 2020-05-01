@@ -6,16 +6,15 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain.City;
-using MultiVendorRestaurantManagement.Infrastructure;
-using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
+using MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
 {
     public class RegisterLocalityCommandHandler : IRequestHandler<RegisterLocalityCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly IContext _context;
 
-        public RegisterLocalityCommandHandler(RestaurantContext context)
+        public RegisterLocalityCommandHandler(IContext context)
         {
             _context = context;
         }

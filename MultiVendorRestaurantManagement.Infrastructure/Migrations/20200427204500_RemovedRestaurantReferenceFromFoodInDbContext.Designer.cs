@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiVendorRestaurantManagement.Infrastructure;
-using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
+using MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Migrations
 {

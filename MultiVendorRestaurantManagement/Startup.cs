@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MultiVendorRestaurantManagement.Infrastructure;
-using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 using MultiVendorRestaurantManagement.PipelineBehaviour;
 
 namespace MultiVendorRestaurantManagement
@@ -26,12 +25,8 @@ namespace MultiVendorRestaurantManagement
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<RestaurantContext>(options =>
-            {
-                // Configure the context to use Microsoft SQL Server.
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
-
+            
+            services.SetupInfrastructure(Configuration.GetConnectionString("DefaultConnection"));
             SwaggerSetup(services);
             services.AddControllers();
             services.AddMediatR(typeof(Startup)); //command query handlers

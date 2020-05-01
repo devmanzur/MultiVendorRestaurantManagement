@@ -8,9 +8,6 @@
     <ItemGroup>
       <PackageReference Include="MediatR" Version="8.0.1" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.3" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
-      <PackageReference Include="MongoDB.Driver" Version="2.11.0-beta1" />
       <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.4.0" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.4.0" />
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.4.0" />
@@ -18,12 +15,12 @@
 
     <ItemGroup>
       <Folder Include="ApiContract" />
-      <Folder Include="Migrations" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Common\Common.csproj" />
       <ProjectReference Include="..\MultiVendorRestaurantManagement.Domain\MultiVendorRestaurantManagement.Domain.csproj" />
+      <ProjectReference Include="..\MultiVendorRestaurantManagement.Infrastructure\MultiVendorRestaurantManagement.Infrastructure.csproj" />
     </ItemGroup>
 
 

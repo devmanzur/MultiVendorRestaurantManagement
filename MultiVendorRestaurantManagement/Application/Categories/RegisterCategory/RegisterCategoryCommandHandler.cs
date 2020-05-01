@@ -7,15 +7,15 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain.Common;
-using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
+using MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.Categories.RegisterCategory
 {
     public class RegisterCategoryCommandHandler : IRequestHandler<RegisterCategoryCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly IContext _context;
 
-        public RegisterCategoryCommandHandler(RestaurantContext context)
+        public RegisterCategoryCommandHandler(IContext context)
         {
             _context = context;
         }

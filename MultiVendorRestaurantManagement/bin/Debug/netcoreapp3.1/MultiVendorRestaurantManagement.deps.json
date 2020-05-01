@@ -27,10 +27,8 @@
           "Common": "1.0.0",
           "MediatR": "8.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "8.0.0",
-          "Microsoft.EntityFrameworkCore.Design": "3.1.3",
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.3",
-          "MongoDB.Driver": "2.11.0-beta1",
           "MultiVendorRestaurantManagement.Domain": "1.0.0",
+          "MultiVendorRestaurantManagement.Infrastructure": "1.0.0",
           "Swashbuckle.AspNetCore.Swagger": "5.4.0",
           "Swashbuckle.AspNetCore.SwaggerGen": "5.4.0",
           "Swashbuckle.AspNetCore.SwaggerUI": "5.4.0",
@@ -1832,6 +1830,21 @@
         },
         "compile": {
           "MultiVendorRestaurantManagement.Domain.dll": {}
+        }
+      },
+      "MultiVendorRestaurantManagement.Infrastructure/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "3.1.3",
+          "Microsoft.EntityFrameworkCore.Design": "3.1.3",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.3",
+          "MongoDB.Driver": "2.11.0-beta1",
+          "MultiVendorRestaurantManagement.Domain": "1.0.0"
+        },
+        "runtime": {
+          "MultiVendorRestaurantManagement.Infrastructure.dll": {}
+        },
+        "compile": {
+          "MultiVendorRestaurantManagement.Infrastructure.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -4454,6 +4467,11 @@
       "sha512": ""
     },
     "MultiVendorRestaurantManagement.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MultiVendorRestaurantManagement.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

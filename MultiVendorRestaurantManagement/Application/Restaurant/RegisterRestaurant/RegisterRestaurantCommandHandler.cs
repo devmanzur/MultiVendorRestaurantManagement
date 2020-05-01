@@ -8,16 +8,15 @@ using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
-using MultiVendorRestaurantManagement.Infrastructure;
-using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
+using MultiVendorRestaurantManagement.Infrastructure.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant
 {
     public class RegisterRestaurantCommandHandler : IRequestHandler<RegisterRestaurantCommand, Result<string>>
     {
-        private readonly RestaurantContext _context;
+        private readonly IContext _context;
 
-        public RegisterRestaurantCommandHandler(RestaurantContext context)
+        public RegisterRestaurantCommandHandler(IContext context)
         {
             _context = context;
         }
