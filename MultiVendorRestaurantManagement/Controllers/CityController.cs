@@ -3,6 +3,7 @@ using Common.Utils;
 using CrossCutting.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.City.AddLocality;
@@ -10,6 +11,7 @@ using MultiVendorRestaurantManagement.Application.City.RegisterCity;
 using MultiVendorRestaurantManagement.Application.City.RegisterLocality;
 using MultiVendorRestaurantManagement.Application.City.RemoveCity;
 using MultiVendorRestaurantManagement.Application.City.RemoveLocality;
+using MultiVendorRestaurantManagement.Infrastructure.ImageManager;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {
@@ -17,8 +19,11 @@ namespace MultiVendorRestaurantManagement.Controllers
     [Route("api/cities")]
     public class CityController : BaseController
     {
-        public CityController(IMediator mediator) : base(mediator)
+        private readonly IImageService _imageService;
+
+        public CityController(IMediator mediator, IImageService imageService) : base(mediator)
         {
+            _imageService = imageService;
         }
 
         [HttpPost]
@@ -47,6 +52,14 @@ namespace MultiVendorRestaurantManagement.Controllers
         {
             var command = new RemoveLocalityCommand(city, locality);
             return await HandleActionResultFor(command);
+        }
+
+        [HttpPost("image-check")]
+        public async Task<IActionResult> UploadImage([FromForm] ImageUploadRequest request)
+        {
+            var (isSuccess, _, value, error) = await _imageService.UploadImageAsync(request.File);
+            if (isSuccess) return Ok(value);
+            return BadRequest(error);
         }
     }
 }

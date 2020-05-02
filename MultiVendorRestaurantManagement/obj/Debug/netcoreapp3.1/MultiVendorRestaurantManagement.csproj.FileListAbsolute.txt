@@ -78,3 +78,8 @@ C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaura
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\MultiVendorRestaurantManagement.Infrastructure.dll
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\MultiVendorRestaurantManagement.Infrastructure.pdb
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Dapper.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Crc32.NET.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Minio.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\RestSharp.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\System.Reactive.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\System.Reactive.Linq.dll

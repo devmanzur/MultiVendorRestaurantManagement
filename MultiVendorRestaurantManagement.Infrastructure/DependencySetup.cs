@@ -4,6 +4,7 @@ using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper;
 using MultiVendorRestaurantManagement.Infrastructure.Domain;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
+using MultiVendorRestaurantManagement.Infrastructure.ImageManager;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 
 namespace MultiVendorRestaurantManagement.Infrastructure
@@ -19,6 +20,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDomainEventsDispatcher, DomainEventDispatcher>();
+            services.AddScoped<IImageService, MinioImageUploadService>();
             services.AddScoped<ITableDataProvider, TableDataProvider>();
             services.AddScoped<DocumentCollection>();
 
