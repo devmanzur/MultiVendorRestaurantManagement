@@ -7,7 +7,7 @@ using MediatR;
 
 namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant
 {
-    public class RegisterRestaurantCommand : IRequest<Result<string>>
+    public class RegisterRestaurantCommand : IRequest<Result>
     {
         public string Name { get; }
         public string PhoneNumber { get; }

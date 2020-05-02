@@ -2,16 +2,16 @@
 using FluentValidation;
 using MediatR;
 
-namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
+namespace MultiVendorRestaurantManagement.Application.City.AddLocality
 {
-    public class RegisterLocalityCommand : IRequest<Result>
+    public class AddLocalityCommand : IRequest<Result>
     {
         public string Name { get; }
         public string NameEng { get; }
         public int Code { get; }
         public long CityId { get; }
 
-        public RegisterLocalityCommand(string name, string nameEng, int code, long cityId)
+        public AddLocalityCommand(string name, string nameEng, int code, long cityId)
         {
             Name = name;
             NameEng = nameEng;
@@ -20,7 +20,7 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
         }
     }
 
-    public class RegisterLocalityCommandValidator : AbstractValidator<RegisterLocalityCommand>
+    public class RegisterLocalityCommandValidator : AbstractValidator<AddLocalityCommand>
     {
         public RegisterLocalityCommandValidator()
         {

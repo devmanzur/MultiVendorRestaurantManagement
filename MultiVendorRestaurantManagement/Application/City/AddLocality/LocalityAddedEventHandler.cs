@@ -1,21 +1,14 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Common.Utils;
-using Dapper;
 using MediatR;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper;
-using MultiVendorRestaurantManagement.Infrastructure.Dapper.DbView;
-using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;
 
-namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
+namespace MultiVendorRestaurantManagement.Application.City.AddLocality
 {
     public class LocalityAddedEventHandler : INotificationHandler<LocalityAddedEvent>
     {

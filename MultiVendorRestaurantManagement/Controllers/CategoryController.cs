@@ -9,25 +9,18 @@ namespace MultiVendorRestaurantManagement.Controllers
 {
     [ApiController]
     [Route("api/categories")]
-    public class CategoryController : ControllerBase
+    public class CategoryController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public CategoryController(IMediator mediator)
+        public CategoryController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
+
         [HttpPost]
         public async Task<IActionResult> AddCategory([FromForm] RegisterCategoryRequest request)
         {
-            var command = new RegisterCategoryCommand(request.NameEng, request.Name,request.Categorize,request.ImageUrl);
-            var result = await _mediator.Send(command);
-            if (result.IsSuccess)
-            {
-                return Ok(Envelope.Ok());
-            }
-
-            return BadRequest(Envelope.Error(result.Error));
+            var command =
+                new RegisterCategoryCommand(request.NameEng, request.Name, request.Categorize, request.ImageUrl);
+            return await HandleActionResultFor(command);
         }
     }
 }

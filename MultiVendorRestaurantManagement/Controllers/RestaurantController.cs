@@ -11,13 +11,11 @@ namespace MultiVendorRestaurantManagement.Controllers
 {
     [ApiController]
     [Route("api/restaurants")]
-    public class RestaurantController : ControllerBase
+    public class RestaurantController : BaseController
     {
-        private readonly IMediator _mediator;
 
-        public RestaurantController(IMediator mediator)
+        public RestaurantController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
 
         [HttpPost]
@@ -26,26 +24,14 @@ namespace MultiVendorRestaurantManagement.Controllers
             var command = new RegisterRestaurantCommand(request.Name, request.PhoneNumber, request.LocalityId,
                 request.OpeningHour, request.ClosingHour, request.SubscriptionType, request.ContractStatus,
                 request.ImageUrl, request.CityId);
-            var result = await _mediator.Send(command);
-            if (result.IsSuccess)
-            {
-                return Ok(Envelope.Ok(result.Value));
-            }
-
-            return BadRequest(Envelope.Error(result.Error));
+            return await HandleActionResultFor(command);
         }
 
         [HttpPost("{id}/menus")]
         public async Task<IActionResult> AddMenu(long id, [FromForm] AddMenuRequest request)
         {
             var command = new AddMenuCommand(request.NameEng, request.Name, id);
-            var result = await _mediator.Send(command);
-            if (result.IsSuccess)
-            {
-                return Ok(Envelope.Ok());
-            }
-
-            return BadRequest(Envelope.Error(result.Error));
+            return await HandleActionResultFor(command);
         }
     }
 }

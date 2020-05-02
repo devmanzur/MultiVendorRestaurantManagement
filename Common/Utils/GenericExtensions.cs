@@ -1,4 +1,7 @@
-﻿#nullable enable
+﻿using CSharpFunctionalExtensions;
+using Microsoft.AspNetCore.Mvc;
+
+#nullable enable
 namespace Common.Utils
 {
     public static class GenericExtensions

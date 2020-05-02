@@ -5,24 +5,25 @@ using Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MultiVendorRestaurantManagement.Application.City.AddLocality;
 using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
 {
-    public class RegisterLocalityCommandHandler : IRequestHandler<RegisterLocalityCommand, Result>
+    public class AddLocalityCommandHandler : IRequestHandler<AddLocalityCommand, Result>
     {
         private readonly RestaurantContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterLocalityCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public AddLocalityCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result> Handle(RegisterLocalityCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(AddLocalityCommand request, CancellationToken cancellationToken)
         {
             var city = await _context.Cities.Include(x => x.Localities).SingleOrDefaultAsync(
                 x => x.Id == request.CityId,

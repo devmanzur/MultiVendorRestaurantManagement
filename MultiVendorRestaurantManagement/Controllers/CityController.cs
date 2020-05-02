@@ -1,50 +1,48 @@
 ﻿using System.Threading.Tasks;
 using Common.Utils;
 using CrossCutting.Utils;
+using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
+using MultiVendorRestaurantManagement.Application.City.AddLocality;
 using MultiVendorRestaurantManagement.Application.City.RegisterCity;
 using MultiVendorRestaurantManagement.Application.City.RegisterLocality;
+using MultiVendorRestaurantManagement.Application.City.RemoveLocality;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {
     [ApiController]
     [Route("api/cities")]
-    public class CityController : ControllerBase
+    public class CityController : BaseController
     {
-        private readonly IMediator _mediator;
-
-        public CityController(IMediator mediator)
+        public CityController(IMediator mediator) : base(mediator)
         {
-            _mediator = mediator;
         }
 
         [HttpPost]
         public async Task<IActionResult> RegisterCity([FromForm] RegisterCityRequest request)
         {
             var command = new RegisterCityCommand(request.Code, request.NameEng, request.Name);
-            var result = await _mediator.Send(command);
-            if (result.IsSuccess)
-            {
-                return Ok(Envelope.Ok());
-            }
-
-            return BadRequest(Envelope.Error(result.Error));
+            return await HandleActionResultFor(command);
         }
 
 
         [HttpPost("{city}/localities")]
         public async Task<IActionResult> RegisterLocality(long city, [FromForm] RegisterLocalityRequest request)
         {
-            var command = new RegisterLocalityCommand(request.Name, request.NameEng, request.Code, city);
-            var result = await _mediator.Send(command);
-            if (result.IsSuccess)
-            {
-                return Ok(Envelope.Ok());
-            }
-
-            return BadRequest(Envelope.Error(result.Error));
+            var command = new AddLocalityCommand(request.Name, request.NameEng, request.Code, city);
+            return await HandleActionResultFor(command);
         }
+
+        [HttpDelete("{city}/localities/{locality}")]
+        public async Task<IActionResult> RemoveLocality(long city, long locality)
+        {
+            var command = new RemoveLocalityCommand(city, locality);
+            return await HandleActionResultFor(command);
+        }
+
+
+       
     }
 }

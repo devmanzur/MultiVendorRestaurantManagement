@@ -10,7 +10,6 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
 {
     public class City : AggregateRoot
     {
-        
         public City(string name, string nameEng, string code)
         {
             Name = name;
@@ -38,6 +37,15 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
                 "city must not contain locality with same name"));
             _localities.Add(locality);
             AddDomainEvent(new LocalityAddedEvent(Id, locality.Name));
+        }
+
+        public void RemoveLocality(Locality locality)
+        {
+            CheckRule(new ConditionMustBeTrue(
+                _localities.FirstOrDefault(x => x.Id == locality.Id) != null,
+                "locality not found"));
+            _localities.Remove(locality);
+            AddDomainEvent(new LocalityRemovedEvent(Id,locality.Id));
         }
     }
 }

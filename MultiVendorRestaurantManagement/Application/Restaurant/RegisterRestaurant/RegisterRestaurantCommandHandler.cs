@@ -13,7 +13,7 @@ using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant
 {
-    public class RegisterRestaurantCommandHandler : IRequestHandler<RegisterRestaurantCommand, Result<string>>
+    public class RegisterRestaurantCommandHandler : IRequestHandler<RegisterRestaurantCommand, Result>
     {
         private readonly RestaurantContext _context;
         private readonly IUnitOfWork _unitOfWork;
@@ -24,7 +24,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<string>> Handle(RegisterRestaurantCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(RegisterRestaurantCommand request, CancellationToken cancellationToken)
         {
             var city = await _context.Cities
                 .Include(x => x.Localities)
@@ -50,7 +50,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
 
             return result > 0
                 ? Result.Ok("Restaurant registered successfully")
-                : Result.Failure<string>("Failed to register restaurant");
+                : Result.Failure("Failed to register restaurant");
         }
     }
 }
