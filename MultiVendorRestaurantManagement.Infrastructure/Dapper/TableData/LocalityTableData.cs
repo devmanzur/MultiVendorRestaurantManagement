@@ -1,6 +1,6 @@
-﻿namespace MultiVendorRestaurantManagement.DapperModel
+﻿namespace MultiVendorRestaurantManagement.Infrastructure.Dapper.DbView
 {
-    public class LocalityTableView
+    public class LocalityTableData
     {
         public long Id { get;  set; }
         public long CityId { get;  set; }

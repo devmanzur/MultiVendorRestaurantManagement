@@ -8,8 +8,9 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using MultiVendorRestaurantManagement.DapperModel;
 using MultiVendorRestaurantManagement.Domain.Cities;
+using MultiVendorRestaurantManagement.Infrastructure.Dapper;
+using MultiVendorRestaurantManagement.Infrastructure.Dapper.DbView;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;
@@ -18,40 +19,32 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
 {
     public class LocalityAddedEventHandler : INotificationHandler<LocalityAddedEvent>
     {
-        private readonly string _connectionString;
+        private readonly ITableDataProvider _tableDataProvider;
         private readonly DocumentCollection _collection;
 
-        public LocalityAddedEventHandler(IConfiguration configuration, DocumentCollection collection)
+        public LocalityAddedEventHandler(ITableDataProvider tableDataProvider, DocumentCollection collection)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _tableDataProvider = tableDataProvider;
             _collection = collection;
         }
 
         public async Task Handle(LocalityAddedEvent notification, CancellationToken cancellationToken)
         {
-            var locality = await GetLocalityData(notification);
+            var locality = await _tableDataProvider.GetLocalityDataAsync(notification.CityId, notification.LocalityName);
 
             if (locality.HasValue())
             {
-                var record = await _collection.CityCollection.Find(x => x.CityId == notification.CityId)
+                var record = await _collection.CitiesCollection.Find(x => x.CityId == notification.CityId)
                     .FirstOrDefaultAsync(cancellationToken);
 
                 // ReSharper disable once PossibleNullReferenceException
                 record.Localities.Add(new LocalityRecord(locality.Id, locality.Code, locality.Name, locality.NameEng));
 
-                await _collection.CityCollection.ReplaceOneAsync(x => x.Id == record.Id, record,
+                await _collection.CitiesCollection.ReplaceOneAsync(x => x.Id == record.Id, record,
                     cancellationToken: cancellationToken);
             }
         }
 
-        private async Task<LocalityTableView> GetLocalityData(LocalityAddedEvent notification)
-        {
-            var sql = "SELECT * FROM Locality WHERE (Name = @Name AND CityId = @CityId)";
-            await using var connection = new SqlConnection(_connectionString);
-            var locality =
-                await connection.QueryFirstOrDefaultAsync<LocalityTableView>(sql,
-                    new {Name = notification.LocalityName, CityId = notification.CityId});
-            return locality;
-        }
+       
     }
 }

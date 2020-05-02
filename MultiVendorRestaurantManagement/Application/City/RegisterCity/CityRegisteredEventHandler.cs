@@ -4,6 +4,7 @@ using Common.Utils;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain.Cities;
+using MultiVendorRestaurantManagement.Infrastructure.Dapper;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;
@@ -13,22 +14,21 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
     public class CityRegisteredEventHandler : INotificationHandler<CityRegisteredEvent>
     {
         private readonly DocumentCollection _collection;
-        private readonly RestaurantContext _context;
+        private readonly ITableDataProvider _tableDataProvider;
 
-        public CityRegisteredEventHandler(DocumentCollection collection, RestaurantContext context)
+        public CityRegisteredEventHandler(DocumentCollection collection, ITableDataProvider tableDataProvider)
         {
             _collection = collection;
-            _context = context;
+            _tableDataProvider = tableDataProvider;
         }
 
         public async Task Handle(CityRegisteredEvent notification, CancellationToken cancellationToken)
         {
-            var city = await _context.Cities.AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Name == notification.Name, cancellationToken);
+            var city = await _tableDataProvider.GetCityDataAsync(notification.Name);
 
             if (city.HasValue())
             {
-                await _collection.CityCollection.InsertOneAsync(
+                await _collection.CitiesCollection.InsertOneAsync(
                     new CityDocument(city.Id, city.Code, city.Name, city.NameEng),
                     cancellationToken);
             }

@@ -22,11 +22,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
             _documents = client.GetDatabase(connectivity.Database);
         }
         
-        public IMongoCollection<RestaurantDocument> RestaurantCollection 
+        public IMongoCollection<RestaurantDocument> RestaurantsCollection 
             => _documents.GetCollection<RestaurantDocument>(Collections.Restaurants.ToString());
-        public IMongoCollection<CityDocument> CityCollection 
+        public IMongoCollection<CityDocument> CitiesCollection 
             => _documents.GetCollection<CityDocument>(Collections.Cities.ToString());
-        public IMongoCollection<RestaurantCategoryDocument> CategoryCollection
+        public IMongoCollection<RestaurantCategoryDocument> CategoriesCollection
             => _documents.GetCollection<RestaurantCategoryDocument>(Collections.Categories.ToString());
     }
 }

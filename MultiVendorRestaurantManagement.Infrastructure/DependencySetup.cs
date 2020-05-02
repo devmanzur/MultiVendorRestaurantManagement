@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MultiVendorRestaurantManagement.Domain;
+using MultiVendorRestaurantManagement.Infrastructure.Dapper;
 using MultiVendorRestaurantManagement.Infrastructure.Domain;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
@@ -18,6 +19,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDomainEventsDispatcher, DomainEventDispatcher>();
+            services.AddScoped<ITableDataProvider, TableDataProvider>();
             services.AddScoped<DocumentCollection>();
 
         }
