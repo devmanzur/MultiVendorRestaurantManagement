@@ -1,15 +1,24 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using MongoDB.Driver;
 using MultiVendorRestaurantManagement.Domain.Cities;
+using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 
 namespace MultiVendorRestaurantManagement.Application.City.RemoveCity
 {
     public class CityRemovedEventHandler : INotificationHandler<CityRemovedEvent>
     {
-        public Task Handle(CityRemovedEvent notification, CancellationToken cancellationToken)
+        private readonly DocumentCollection _collection;
+
+        public CityRemovedEventHandler(DocumentCollection collection)
         {
-            throw new System.NotImplementedException();
+            _collection = collection;
+        }
+
+        public async Task Handle(CityRemovedEvent notification, CancellationToken cancellationToken)
+        {
+            await _collection.CitiesCollection.DeleteOneAsync(x => x.CityId == notification.CityId, cancellationToken);
         }
     }
 }

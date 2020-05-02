@@ -8,6 +8,7 @@ using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.City.AddLocality;
 using MultiVendorRestaurantManagement.Application.City.RegisterCity;
 using MultiVendorRestaurantManagement.Application.City.RegisterLocality;
+using MultiVendorRestaurantManagement.Application.City.RemoveCity;
 using MultiVendorRestaurantManagement.Application.City.RemoveLocality;
 
 namespace MultiVendorRestaurantManagement.Controllers
@@ -27,6 +28,12 @@ namespace MultiVendorRestaurantManagement.Controllers
             return await HandleActionResultFor(command);
         }
 
+        [HttpDelete("{city}")]
+        public async Task<IActionResult> RemoveCity(long city)
+        {
+            var command = new RemoveCityCommand(city);
+            return await HandleActionResultFor(command);
+        }
 
         [HttpPost("{city}/localities")]
         public async Task<IActionResult> RegisterLocality(long city, [FromForm] RegisterLocalityRequest request)
@@ -41,8 +48,5 @@ namespace MultiVendorRestaurantManagement.Controllers
             var command = new RemoveLocalityCommand(city, locality);
             return await HandleActionResultFor(command);
         }
-
-
-       
     }
 }

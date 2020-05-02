@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using FluentValidation;
 using MediatR;
 
 namespace MultiVendorRestaurantManagement.Application.City.RemoveCity
@@ -10,6 +11,14 @@ namespace MultiVendorRestaurantManagement.Application.City.RemoveCity
         public RemoveCityCommand(long cityId)
         {
             CityId = cityId;
+        }
+    }
+
+    public class RemoveCityCommandValidator : AbstractValidator<RemoveCityCommand>
+    {
+        public RemoveCityCommandValidator()
+        {
+            RuleFor(x => x.CityId).NotNull().NotEmpty();
         }
     }
 }
