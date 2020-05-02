@@ -23,6 +23,16 @@ namespace MultiVendorRestaurantManagement.Domain.Common
         public Categorize Categorize { get; private set; }
         public List<Food> Foods { get; private set; }
         public List<Restaurant> Restaurants { get; private set; }
+        
+        public override IDomainEvent GetAddedDomainEvent()
+        {
+            return new CategoryCreatedEvent();
+        }
+
+        public override IDomainEvent GetRemovedDomainEvent()
+        {
+            return new CategoryRemovedEvent();
+        }
 
     }
 }

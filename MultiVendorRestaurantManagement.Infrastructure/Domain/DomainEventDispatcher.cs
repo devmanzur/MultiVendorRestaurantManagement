@@ -20,12 +20,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Domain
             _mediator = mediator;
         }
 
-        public async Task DispatchEventsAsync()
+        public async Task DispatchEventsFor(List<EntityEntry<AggregateRoot>> changes)
         {
-            var changes = _context.ChangeTracker
-                .Entries<AggregateRoot>()
-                .Where(x => x.Entity.DomainEvents != null && x.Entity.DomainEvents.Any()).ToList();
-
             var domainEvents = changes
                 .SelectMany(x => x.Entity.DomainEvents)
                 .ToList();

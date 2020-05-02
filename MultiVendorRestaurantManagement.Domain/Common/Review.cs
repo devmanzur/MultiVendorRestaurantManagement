@@ -18,5 +18,15 @@ namespace MultiVendorRestaurantManagement.Domain.Common
         public PhoneNumberValue UserPhoneNumber { get; private set; }
         public int StarRate { get; private set; }
         public string Comment { get; set; }
+        
+        public override IDomainEvent GetAddedDomainEvent()
+        {
+            return new ReviewAddedEvent();
+        }
+
+        public override IDomainEvent GetRemovedDomainEvent()
+        {
+            return new ReviewDeletedEvent();;
+        }
     }
 }

@@ -7,6 +7,6 @@
 {
     public interface IDomainEventsDispatcher
     {
-        Task DispatchEventsAsync();
+        Task DispatchEventsFor(List<EntityEntry<AggregateRoot>> changes);
     }
 }

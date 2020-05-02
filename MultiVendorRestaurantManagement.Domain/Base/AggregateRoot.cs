@@ -2,7 +2,7 @@
 
 namespace MultiVendorRestaurantManagement.Domain.Base
 {
-    public class AggregateRoot : Entity
+    public abstract class AggregateRoot : Entity
     {
         private List<IDomainEvent> _domainEvents;
 
@@ -10,7 +10,7 @@ namespace MultiVendorRestaurantManagement.Domain.Base
         public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents?.AsReadOnly();
 
         
-        protected void AddDomainEvent(IDomainEvent domainEvent)
+        public void AddDomainEvent(IDomainEvent domainEvent)
         {
             _domainEvents ??= new List<IDomainEvent>();
             _domainEvents.Add(domainEvent);
@@ -20,5 +20,8 @@ namespace MultiVendorRestaurantManagement.Domain.Base
         {
             _domainEvents?.Clear();
         }
+
+        public abstract IDomainEvent GetAddedDomainEvent();
+        public abstract IDomainEvent GetRemovedDomainEvent();
     }
 }

@@ -27,5 +27,15 @@ namespace MultiVendorRestaurantManagement.Domain.Common
         public string DescriptionEng { get; protected set; }
         public string ImageUrl { get; protected set; }
         public bool IsExclusive { get; protected set; } //if set true this will be available to only the 
+        
+        public override IDomainEvent GetAddedDomainEvent()
+        {
+            return new PromotionCreatedEvent();
+        }
+
+        public override IDomainEvent GetRemovedDomainEvent()
+        {
+            return new PromotionRemovedEvent();
+        }
     }
 }

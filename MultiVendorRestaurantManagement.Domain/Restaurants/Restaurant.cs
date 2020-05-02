@@ -114,5 +114,15 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                 "restaurant must not contain menu with same name"));
             _menus.Add(menu);
         }
+        
+        public override IDomainEvent GetAddedDomainEvent()
+        {
+            return new RestaurantRegisteredEvent();
+        }
+
+        public override IDomainEvent GetRemovedDomainEvent()
+        {
+            return new RestaurantRemovedEvent();
+        }
     }
 }

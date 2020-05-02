@@ -27,7 +27,6 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
             if (item.HasValue()) Result.Failure("city with same name already exists");
             
             var city = new Domain.Cities.City(request.Name, request.NameEng, request.Code);
-            city.Create();
 
             await _context.Cities.AddAsync(city, cancellationToken);
             var result = await _unitOfWork.CommitAsync(cancellationToken);

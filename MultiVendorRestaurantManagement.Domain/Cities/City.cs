@@ -17,11 +17,6 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
             Code = code;
         }
 
-        public void Create()
-        {
-            AddDomainEvent(new CityRegisteredEvent(Name));
-        }
-
         public string Name { get; protected set; }
         public string NameEng { get; protected set; }
         public string Code { get; protected set; }
@@ -46,6 +41,16 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
                 "locality not found"));
             _localities.Remove(locality);
             AddDomainEvent(new LocalityRemovedEvent(Id,locality.Id));
+        }
+
+        public override IDomainEvent GetAddedDomainEvent()
+        {
+            return new CityRegisteredEvent(Name);
+        }
+
+        public override IDomainEvent GetRemovedDomainEvent()
+        {
+            return new CityRemovedEvent(Id);
         }
     }
 }
