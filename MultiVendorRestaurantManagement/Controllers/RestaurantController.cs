@@ -23,7 +23,7 @@ namespace MultiVendorRestaurantManagement.Controllers
         {
             var command = new RegisterRestaurantCommand(request.Name, request.PhoneNumber, request.LocalityId,
                 request.OpeningHour, request.ClosingHour, request.SubscriptionType, request.ContractStatus,
-                request.ImageUrl, request.CityId);
+                request.ImageUrl, request.CityId, request.CategoryId);
             return await HandleActionResultFor(command);
         }
 

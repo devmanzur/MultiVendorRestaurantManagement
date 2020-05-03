@@ -117,12 +117,17 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         
         public override IDomainEvent GetAddedDomainEvent()
         {
-            return new RestaurantRegisteredEvent();
+            return new RestaurantRegisteredEvent(PhoneNumber.GetCompletePhoneNumber());
         }
 
         public override IDomainEvent GetRemovedDomainEvent()
         {
             return new RestaurantRemovedEvent();
+        }
+
+        public void SetCategory(Category category)
+        {
+            Category = category;
         }
     }
 }

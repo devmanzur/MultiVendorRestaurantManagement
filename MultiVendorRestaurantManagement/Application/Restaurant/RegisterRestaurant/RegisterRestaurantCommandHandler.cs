@@ -29,10 +29,14 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             var city = await _context.Cities
                 .Include(x => x.Localities)
                 .SingleOrDefaultAsync(x => x.Id == request.CityId, cancellationToken);
-            if (city.HasNoValue()) return Result.Failure<string>("Invalid city");
+            if (city.HasNoValue()) return Result.Failure("invalid city");
 
             var locality = city.Localities.FirstOrDefault(x => x.Id == request.LocalityId);
-            if (locality.HasNoValue()) return Result.Failure<string>("Invalid locality");
+            if (locality.HasNoValue()) return Result.Failure("invalid locality");
+
+            var category = await _context.Categories.AsNoTracking()
+                .SingleOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken: cancellationToken);
+            if (category.HasNoValue()) return Result.Failure("invalid category");
 
             var restaurant = new Domain.Restaurants.Restaurant(
                 request.Name,
@@ -44,13 +48,14 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 request.ImageUrl
             );
             restaurant.SetLocality(locality);
+            restaurant.SetCategory(category);
 
-            await _context.Restaurants.AddAsync(restaurant, cancellationToken);
+            _context.Restaurants.Attach(restaurant);
             var result = await _unitOfWork.CommitAsync(cancellationToken);
 
             return result > 0
-                ? Result.Ok("Restaurant registered successfully")
-                : Result.Failure("Failed to register restaurant");
+                ? Result.Ok("restaurant registered successfully")
+                : Result.Failure("failed to register restaurant");
         }
     }
 }

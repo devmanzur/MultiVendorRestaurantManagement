@@ -8,7 +8,7 @@ namespace MultiVendorRestaurantManagement.ApiContract.Request
         public string PhoneNumber { get; set; }
         public long LocalityId { get; set; }
         public long CityId { get; set; }
-        // public List<long> RestaurantCategories { get; set; }
+        public long CategoryId { get; set; }
         public int OpeningHour { get; set; }
         public int ClosingHour { get; set; }
         public string SubscriptionType { get; set; }

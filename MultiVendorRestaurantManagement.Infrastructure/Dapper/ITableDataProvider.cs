@@ -9,5 +9,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
         Task<LocalityTableData> GetLocalityAsync(long notificationCityId, string notificationLocalityName);
         Task<CityTableData> GetCityAsync(string name);
         Task<CategoryTableData> GetCategoryAsync(string name);
+        Task<RestaurantTableData> GetRestaurantAsync(string phone);
     }
 }

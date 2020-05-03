@@ -18,9 +18,10 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
         public int ClosingHour { get; }
         public SubscriptionType SubscriptionType { get; }
         public ContractStatus ContractStatus { get; }
+        public long CategoryId { get; private set; }
 
         public RegisterRestaurantCommand(string name, string phoneNumber, long localityId, int openingHour, int closingHour,
-            string subscriptionType, string contractStatus, string imageUrl, long cityId)
+            string subscriptionType, string contractStatus, string imageUrl, long cityId, long categoryId)
         {
             Name = name;
             PhoneNumber = phoneNumber;
@@ -29,6 +30,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             ClosingHour = closingHour;
             ImageUrl = imageUrl;
             CityId = cityId;
+            CategoryId = categoryId;
             SubscriptionType = SubscriptionHelper.ConvertToSubscription(subscriptionType);
             ContractStatus = ContractStatusHelper.ConvertToContractStatus(contractStatus);
         }
@@ -42,6 +44,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             RuleFor(x => x.PhoneNumber).NotNull().NotEmpty();
             RuleFor(x => x.LocalityId).NotNull().NotEmpty();
             RuleFor(x => x.CityId).NotNull().NotEmpty();
+            RuleFor(x => x.CategoryId).NotNull().NotEmpty();
             RuleFor(x => x.ImageUrl).NotNull().NotEmpty();
             RuleFor(x => x.OpeningHour).NotNull().NotEmpty().Must(Valid24HourFormat);
             RuleFor(x => x.ClosingHour).NotNull().NotEmpty().Must(Valid24HourFormat)
