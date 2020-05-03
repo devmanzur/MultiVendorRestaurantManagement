@@ -24,7 +24,7 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
 
         public async Task Handle(CityRegisteredEvent notification, CancellationToken cancellationToken)
         {
-            var city = await _tableDataProvider.GetCityDataAsync(notification.Name);
+            var city = await _tableDataProvider.GetCityAsync(notification.Name);
 
             if (city.HasValue())
             {

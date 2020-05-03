@@ -18,7 +18,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public double Rating { get; private set; }
         public int TotalRatingsCount { get; private set; }
         public List<MenuRecord> Menus { get; private set; }
-        public List<RestaurantCategoryDocument> Categories { get; private set; }
+        public List<CategoryDocument> Categories { get; private set; }
         
     }
 

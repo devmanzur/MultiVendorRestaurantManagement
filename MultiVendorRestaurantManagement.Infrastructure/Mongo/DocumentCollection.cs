@@ -26,7 +26,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
             => _documents.GetCollection<RestaurantDocument>(Collections.Restaurants.ToString());
         public IMongoCollection<CityDocument> CitiesCollection 
             => _documents.GetCollection<CityDocument>(Collections.Cities.ToString());
-        public IMongoCollection<RestaurantCategoryDocument> CategoriesCollection
-            => _documents.GetCollection<RestaurantCategoryDocument>(Collections.Categories.ToString());
+        public IMongoCollection<CategoryDocument> CategoriesCollection
+            => _documents.GetCollection<CategoryDocument>(Collections.Categories.ToString());
     }
 }

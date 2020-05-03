@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Categories.RegisterCategory;
+using MultiVendorRestaurantManagement.Application.Categories.UpdateCategory;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {
@@ -22,5 +23,15 @@ namespace MultiVendorRestaurantManagement.Controllers
                 new RegisterCategoryCommand(request.NameEng, request.Name, request.Categorize, request.ImageUrl);
             return await HandleActionResultFor(command);
         }
+        
+        [HttpPut("{category}")]
+        public async Task<IActionResult> UpdateCategory(long category, [FromForm] UpdateCategoryRequest request)
+        {
+            var command =
+                new UpdateCategoryCommand(request.Name, request.NameEng, category,request.ImageUrl);
+            return await HandleActionResultFor(command);
+        }
+        
+        
     }
 }

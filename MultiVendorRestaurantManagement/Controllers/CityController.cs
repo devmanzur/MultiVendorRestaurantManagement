@@ -19,11 +19,8 @@ namespace MultiVendorRestaurantManagement.Controllers
     [Route("api/cities")]
     public class CityController : BaseController
     {
-        private readonly IImageService _imageService;
-
-        public CityController(IMediator mediator, IImageService imageService) : base(mediator)
+        public CityController(IMediator mediator) : base(mediator)
         {
-            _imageService = imageService;
         }
 
         [HttpPost]
@@ -52,14 +49,6 @@ namespace MultiVendorRestaurantManagement.Controllers
         {
             var command = new RemoveLocalityCommand(city, locality);
             return await HandleActionResultFor(command);
-        }
-
-        [HttpPost("image-check")]
-        public async Task<IActionResult> UploadImage([FromForm] ImageUploadRequest request)
-        {
-            var (isSuccess, _, value, error) = await _imageService.UploadImageAsync(request.File);
-            if (isSuccess) return Ok(value);
-            return BadRequest(error);
         }
     }
 }

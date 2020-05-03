@@ -8,10 +8,13 @@ namespace Common.Utils
     {
         public static bool HasNoValue(this object? item)
         {
+            if (item is string s) return string.IsNullOrEmpty(s);
             return item == null;
         }
+
         public static bool HasValue(this object? item)
         {
+            if (item is string s) return !string.IsNullOrEmpty(s);
             return item != null;
         }
     }
