@@ -13,7 +13,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure
     {
         public static void SetupInfrastructure(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<RestaurantContext>(options =>
+            services.AddDbContext<RestaurantManagementContext>(options =>
             {
                 // Configure the context to use Microsoft SQL Server.
                 options.UseSqlServer(connectionString);

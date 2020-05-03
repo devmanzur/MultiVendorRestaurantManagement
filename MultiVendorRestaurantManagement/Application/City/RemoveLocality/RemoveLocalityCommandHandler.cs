@@ -12,10 +12,10 @@ namespace MultiVendorRestaurantManagement.Application.City.RemoveLocality
 {
     public class RemoveLocalityCommandHandler : IRequestHandler<RemoveLocalityCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RemoveLocalityCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public RemoveLocalityCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;

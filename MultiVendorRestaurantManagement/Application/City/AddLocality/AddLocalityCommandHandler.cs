@@ -14,10 +14,10 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
 {
     public class AddLocalityCommandHandler : IRequestHandler<AddLocalityCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddLocalityCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public AddLocalityCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;

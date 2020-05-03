@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
-namespace MultiVendorRestaurantManagement.Migrations
+namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
 {
-    [DbContext(typeof(RestaurantContext))]
-    partial class RestaurantContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(RestaurantManagementContext))]
+    [Migration("20200503191916_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,7 +54,7 @@ namespace MultiVendorRestaurantManagement.Migrations
                     b.ToTable("Cities");
                 });
 
-            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.City.Locality", b =>
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Cities.Locality", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -242,7 +244,7 @@ namespace MultiVendorRestaurantManagement.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("OldUnitPrice")
                         .HasColumnType("decimal(18,2)");
@@ -275,6 +277,9 @@ namespace MultiVendorRestaurantManagement.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("MenuId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.HasIndex("PromotionId");
 
@@ -528,14 +533,14 @@ namespace MultiVendorRestaurantManagement.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("OpeningHour")
                         .HasColumnType("int");
 
-                    b.Property<string>("PhoneNumberNumber")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<long?>("PricingPolicyId")
                         .HasColumnType("bigint");
@@ -560,12 +565,18 @@ namespace MultiVendorRestaurantManagement.Migrations
 
                     b.HasIndex("LocalityId");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique();
+
                     b.HasIndex("PricingPolicyId");
 
                     b.ToTable("Restaurants");
                 });
 
-            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.City.Locality", b =>
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Cities.Locality", b =>
                 {
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Cities.City", "City")
                         .WithMany("Localities")
@@ -654,7 +665,7 @@ namespace MultiVendorRestaurantManagement.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("MultiVendorRestaurantManagement.Domain.City.Locality", "Locality")
+                    b.HasOne("MultiVendorRestaurantManagement.Domain.Cities.Locality", "Locality")
                         .WithMany()
                         .HasForeignKey("LocalityId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -13,10 +13,10 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
 {
     public class AddMenuCommandHandler : IRequestHandler<AddMenuCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddMenuCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public AddMenuCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;

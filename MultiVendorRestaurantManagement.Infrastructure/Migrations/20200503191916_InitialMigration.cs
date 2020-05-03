@@ -1,21 +1,37 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace MultiVendorRestaurantManagement.Migrations
+namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageUrl = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    NameEng = table.Column<string>(nullable: false),
+                    Categorize = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    NameEng = table.Column<string>(nullable: true),
-                    Code = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false),
+                    NameEng = table.Column<string>(nullable: false),
+                    Code = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,12 +44,12 @@ namespace MultiVendorRestaurantManagement.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Address = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: false),
                     Flat = table.Column<string>(nullable: true),
                     HouseNo = table.Column<string>(nullable: true),
-                    DeliveryLocation = table.Column<string>(nullable: true),
-                    ContactNumber = table.Column<string>(nullable: true),
-                    CustomerName = table.Column<string>(nullable: true)
+                    DeliveryLocation = table.Column<string>(nullable: false),
+                    ContactNumber = table.Column<string>(nullable: false),
+                    CustomerName = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,11 +62,11 @@ namespace MultiVendorRestaurantManagement.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MinimumCharge = table.Column<decimal>(nullable: false),
-                    MaximumCharge = table.Column<decimal>(nullable: false),
-                    FixedCharge = table.Column<decimal>(nullable: false),
+                    MinimumCharge = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    MaximumCharge = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    FixedCharge = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     MaxItemCountInFixedPrice = table.Column<int>(nullable: false),
-                    AdditionalPrice = table.Column<decimal>(nullable: false)
+                    AdditionalPrice = table.Column<decimal>(type: "decimal(18,4)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,14 +81,30 @@ namespace MultiVendorRestaurantManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: false),
                     DescriptionEng = table.Column<string>(nullable: true),
-                    ImageUrl = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: false),
                     IsExclusive = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Promotions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemId = table.Column<long>(nullable: false),
+                    UserPhoneNumber = table.Column<string>(nullable: false),
+                    StarRate = table.Column<int>(nullable: false),
+                    Comment = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -83,7 +115,8 @@ namespace MultiVendorRestaurantManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CityId = table.Column<long>(nullable: true),
                     Code = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(nullable: false),
+                    NameEng = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,20 +136,29 @@ namespace MultiVendorRestaurantManagement.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: false),
-                    PhoneNumberNumber = table.Column<string>(nullable: false),
-                    AreaId = table.Column<long>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: false),
                     LocalityId = table.Column<long>(nullable: false),
+                    ManagerId = table.Column<long>(nullable: false),
                     State = table.Column<string>(nullable: false),
                     OpeningHour = table.Column<int>(nullable: false),
                     ClosingHour = table.Column<int>(nullable: false),
                     SubscriptionType = table.Column<string>(nullable: false),
                     ContractStatus = table.Column<string>(nullable: false),
                     PricingPolicyId = table.Column<long>(nullable: true),
-                    ExpirationDate = table.Column<DateTime>(nullable: false)
+                    ExpirationDate = table.Column<DateTime>(nullable: false),
+                    CategoryId = table.Column<long>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Rating = table.Column<double>(nullable: false),
+                    TotalRatingsCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Restaurants", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Restaurants_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Restaurants_Locality_LocalityId",
                         column: x => x.LocalityId,
@@ -138,7 +180,7 @@ namespace MultiVendorRestaurantManagement.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RestaurantId = table.Column<long>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     NameEng = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -163,8 +205,8 @@ namespace MultiVendorRestaurantManagement.Migrations
                     DetailId = table.Column<long>(nullable: true),
                     State = table.Column<string>(nullable: false),
                     Type = table.Column<string>(nullable: false),
-                    TotalAmount = table.Column<decimal>(nullable: true),
-                    PayableAmount = table.Column<decimal>(nullable: true),
+                    TotalAmount = table.Column<decimal>(nullable: false),
+                    PayableAmount = table.Column<decimal>(nullable: false),
                     PaymentType = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -178,28 +220,6 @@ namespace MultiVendorRestaurantManagement.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Order_Restaurants_RestaurantId",
-                        column: x => x.RestaurantId,
-                        principalTable: "Restaurants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RestaurantCategory",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    NameEng = table.Column<string>(nullable: true),
-                    RestaurantId = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RestaurantCategory", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_RestaurantCategory_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
@@ -221,15 +241,23 @@ namespace MultiVendorRestaurantManagement.Migrations
                     IsVeg = table.Column<bool>(nullable: false),
                     IsNonVeg = table.Column<bool>(nullable: false),
                     Status = table.Column<string>(nullable: false),
+                    CategoryId = table.Column<long>(nullable: true),
                     IsOnPromotion = table.Column<bool>(nullable: false),
                     PromotionId = table.Column<long>(nullable: false),
                     Discount = table.Column<string>(nullable: true),
-                    MenuId = table.Column<long>(nullable: true),
-                    RestaurantId1 = table.Column<long>(nullable: true)
+                    ImageUrl = table.Column<string>(nullable: false),
+                    Rating = table.Column<double>(nullable: false),
+                    TotalRatingsCount = table.Column<int>(nullable: false),
+                    MenuId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Food", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Food_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Food_Menu_MenuId",
                         column: x => x.MenuId,
@@ -240,20 +268,13 @@ namespace MultiVendorRestaurantManagement.Migrations
                         name: "FK_Food_Promotions_PromotionId",
                         column: x => x.PromotionId,
                         principalTable: "Promotions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Food_Restaurants_RestaurantId",
                         column: x => x.RestaurantId,
                         principalTable: "Restaurants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Food_Restaurants_RestaurantId1",
-                        column: x => x.RestaurantId1,
-                        principalTable: "Restaurants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -264,10 +285,10 @@ namespace MultiVendorRestaurantManagement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<long>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
-                    Total = table.Column<decimal>(nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     FoodId = table.Column<long>(nullable: false),
-                    FoodName = table.Column<string>(nullable: true),
-                    Discount = table.Column<decimal>(nullable: false)
+                    FoodName = table.Column<string>(nullable: false),
+                    Discount = table.Column<decimal>(type: "decimal(18,4)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -286,11 +307,11 @@ namespace MultiVendorRestaurantManagement.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
                     NameEng = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: false),
                     DescriptionEng = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     FoodId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
@@ -305,35 +326,13 @@ namespace MultiVendorRestaurantManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    NameEng = table.Column<string>(nullable: true),
-                    FoodId = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Categories_Food_FoodId",
-                        column: x => x.FoodId,
-                        principalTable: "Food",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tag",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    NameEng = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    NameEng = table.Column<string>(nullable: false),
                     FoodId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
@@ -353,9 +352,9 @@ namespace MultiVendorRestaurantManagement.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    NameEng = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: true),
+                    Name = table.Column<string>(nullable: false),
+                    NameEng = table.Column<string>(nullable: false),
+                    Price = table.Column<decimal>(nullable: false),
                     FoodId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
@@ -375,14 +374,38 @@ namespace MultiVendorRestaurantManagement.Migrations
                 column: "FoodId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_FoodId",
-                table: "Categories",
-                column: "FoodId");
+                name: "IX_Cities_Code",
+                table: "Cities",
+                column: "Code",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cities_Name",
+                table: "Cities",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cities_NameEng",
+                table: "Cities",
+                column: "NameEng",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Food_CategoryId",
+                table: "Food",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Food_MenuId",
                 table: "Food",
                 column: "MenuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Food_Name",
+                table: "Food",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Food_PromotionId",
@@ -395,14 +418,27 @@ namespace MultiVendorRestaurantManagement.Migrations
                 column: "RestaurantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_RestaurantId1",
-                table: "Food",
-                column: "RestaurantId1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Locality_CityId",
                 table: "Locality",
                 column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Locality_Code",
+                table: "Locality",
+                column: "Code",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Locality_Name",
+                table: "Locality",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Locality_NameEng",
+                table: "Locality",
+                column: "NameEng",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Menu_RestaurantId",
@@ -425,14 +461,26 @@ namespace MultiVendorRestaurantManagement.Migrations
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RestaurantCategory_RestaurantId",
-                table: "RestaurantCategory",
-                column: "RestaurantId");
+                name: "IX_Restaurants_CategoryId",
+                table: "Restaurants",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Restaurants_LocalityId",
                 table: "Restaurants",
                 column: "LocalityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Restaurants_Name",
+                table: "Restaurants",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Restaurants_PhoneNumber",
+                table: "Restaurants",
+                column: "PhoneNumber",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Restaurants_PricingPolicyId",
@@ -456,13 +504,10 @@ namespace MultiVendorRestaurantManagement.Migrations
                 name: "AddOn");
 
             migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
                 name: "OrderItem");
 
             migrationBuilder.DropTable(
-                name: "RestaurantCategory");
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "Tag");
@@ -487,6 +532,9 @@ namespace MultiVendorRestaurantManagement.Migrations
 
             migrationBuilder.DropTable(
                 name: "Restaurants");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Locality");

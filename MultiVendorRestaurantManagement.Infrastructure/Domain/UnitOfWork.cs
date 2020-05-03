@@ -14,11 +14,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Domain
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IDomainEventsDispatcher _domainEventsDispatcher;
 
         public UnitOfWork(
-            IDomainEventsDispatcher domainEventsDispatcher, RestaurantContext context)
+            IDomainEventsDispatcher domainEventsDispatcher, RestaurantManagementContext context)
         {
             _domainEventsDispatcher = domainEventsDispatcher;
             _context = context;

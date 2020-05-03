@@ -15,10 +15,10 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
 {
     public class RegisterRestaurantCommandHandler : IRequestHandler<RegisterRestaurantCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterRestaurantCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public RegisterRestaurantCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;

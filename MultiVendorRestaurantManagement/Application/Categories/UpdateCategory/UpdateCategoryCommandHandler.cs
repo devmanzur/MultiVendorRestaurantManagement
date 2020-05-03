@@ -11,10 +11,10 @@ namespace MultiVendorRestaurantManagement.Application.Categories.UpdateCategory
 {
     public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UpdateCategoryCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public UpdateCategoryCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;

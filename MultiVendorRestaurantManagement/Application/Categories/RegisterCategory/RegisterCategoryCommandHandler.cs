@@ -14,10 +14,10 @@ namespace MultiVendorRestaurantManagement.Application.Categories.RegisterCategor
 {
     public class RegisterCategoryCommandHandler : IRequestHandler<RegisterCategoryCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterCategoryCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public RegisterCategoryCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;

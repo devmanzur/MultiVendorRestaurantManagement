@@ -9,7 +9,7 @@ using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 {
-    public class RestaurantContext : DbContext
+    public class RestaurantManagementContext: DbContext
     {
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -17,7 +17,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
-        public RestaurantContext(DbContextOptions<RestaurantContext> options)
+        public RestaurantManagementContext(DbContextOptions<RestaurantManagementContext> options)
             : base(options)
         {
         }
@@ -31,7 +31,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     builder.Property(x => x.IsNonVeg).IsRequired();
                     builder.Property(x => x.IsGlutenFree).IsRequired();
                     builder.Property(x => x.ImageUrl).IsRequired();
-
+                    
+                    builder.HasIndex(u => u.Name)
+                        .IsUnique();
+                    
                     builder.Property(p => p.UnitPrice)
                         .IsRequired()
                         .HasConversion(p => p.Value, p => MoneyValue.Of(p));
@@ -153,9 +156,13 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 
             modelBuilder.Entity<Restaurant>(builder =>
                 {
+                    builder.HasIndex(u => u.Name)
+                        .IsUnique();
+                    builder.HasIndex(u => u.PhoneNumber)
+                        .IsUnique();
                     builder.Property(x => x.Name)
                         .IsRequired();
-                    builder.Property(x => x.PhoneNumberNumber)
+                    builder.Property(x => x.PhoneNumber)
                         .IsRequired()
                         .HasConversion(x => x.GetCompletePhoneNumber(),
                             p => PhoneNumberValue.Of(SupportedCountryCode.Italy, p));

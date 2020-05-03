@@ -11,10 +11,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Domain
 {
     public class DomainEventDispatcher : IDomainEventsDispatcher
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IMediator _mediator;
 
-        public DomainEventDispatcher(RestaurantContext context, IMediator mediator)
+        public DomainEventDispatcher(RestaurantManagementContext context, IMediator mediator)
         {
             _context = context;
             _mediator = mediator;

@@ -11,10 +11,10 @@ namespace MultiVendorRestaurantManagement.Application.City.RemoveCity
 {
     public class RemoveCityCommandHandler  : IRequestHandler<RemoveCityCommand,Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RemoveCityCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public RemoveCityCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;

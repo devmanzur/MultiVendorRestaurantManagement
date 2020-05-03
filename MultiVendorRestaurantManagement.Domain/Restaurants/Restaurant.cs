@@ -16,7 +16,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
     public class Restaurant : AggregateRoot
     {
         public string Name { get; protected set; }
-        public PhoneNumberValue PhoneNumberNumber { get; protected set; }
+        public PhoneNumberValue PhoneNumber { get; protected set; }
         public Locality Locality { get; protected set; }
         public long ManagerId { get; private set; }
         public RestaurantState State { get; protected set; }
@@ -45,7 +45,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public int TotalRatingsCount { get; private set; }
 
         public Restaurant(string name, int openingHour, int closingHour,
-            SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumberNumber,
+            SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumber,
             string imageUrl)
         {
             CheckRule(new OpeningAndClosingHoursAreValid(openingHour, closingHour));
@@ -53,7 +53,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                 "subscription must be valid"));
             CheckRule(new ConditionMustBeTrue(contractStatus != ContractStatus.Invalid,
                 "contract must be valid"));
-            CheckRule(new ConditionMustBeTrue(phoneNumberNumber != null,
+            CheckRule(new ConditionMustBeTrue(phoneNumber != null,
                 "phone number be valid"));
 
             ImageUrl = imageUrl;
@@ -64,7 +64,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             ContractStatus = contractStatus;
             State = RestaurantState.Closed;
             ExpirationDate = GenerateExpirationDateFromSubscriptionType(subscriptionType);
-            PhoneNumberNumber = phoneNumberNumber;
+            PhoneNumber = phoneNumber;
         }
 
         private DateTime GenerateExpirationDateFromSubscriptionType(SubscriptionType subscriptionType)

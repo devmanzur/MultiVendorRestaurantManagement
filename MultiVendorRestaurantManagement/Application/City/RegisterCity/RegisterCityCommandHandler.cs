@@ -12,10 +12,10 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
 {
     public class RegisterCityCommandHandler : IRequestHandler<RegisterCityCommand, Result>
     {
-        private readonly RestaurantContext _context;
+        private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterCityCommandHandler(RestaurantContext context, IUnitOfWork unitOfWork)
+        public RegisterCityCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;
