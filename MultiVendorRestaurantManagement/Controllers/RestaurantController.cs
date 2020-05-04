@@ -7,6 +7,7 @@ using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdateHours;
+using MultiVendorRestaurantManagement.Application.Restaurant.UpdatePricingPolicy;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdateSubscription;
 
 namespace MultiVendorRestaurantManagement.Controllers
@@ -15,7 +16,6 @@ namespace MultiVendorRestaurantManagement.Controllers
     [Route("api/restaurants")]
     public class RestaurantController : BaseController
     {
-
         public RestaurantController(IMediator mediator) : base(mediator)
         {
         }
@@ -42,14 +42,22 @@ namespace MultiVendorRestaurantManagement.Controllers
             var command = new UpdateRestaurantHoursCommand(restaurant, request.OpeningHour, request.ClosingHour);
             return await HandleActionResultFor(command);
         }
-        
+
         [HttpPut("{restaurant}/subscription")]
-        public async Task<IActionResult> UpdateSubscription(long restaurant, [FromForm] UpdateSubscriptionRequest request)
+        public async Task<IActionResult> UpdateSubscription(long restaurant,
+            [FromForm] UpdateSubscriptionRequest request)
         {
             var command = new UpdateSubscriptionCommand(restaurant, request.Subscription);
             return await HandleActionResultFor(command);
         }
-        
-        
+
+        [HttpPut("{restaurant}/pricing")]
+        public async Task<IActionResult> UpdatePricingPolicy(long restaurant,
+            [FromForm] UpdatePricingPolicyRequest request)
+        {
+            var command = new UpdatePricingPolicyCommand(restaurant, request.MinimumCharge, request.MaximumCharge,
+                request.FixedCharge, request.MaxItemCountInFixedPrice, request.AdditionalPricePerUnit);
+            return await HandleActionResultFor(command);
+        }
     }
 }

@@ -19,5 +19,14 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             MaxItemCountInFixedPrice = maxItemCountInFixedPrice;
             AdditionalPrice = additionalPrice;
         }
+
+        public void UpdateBy(PricingPolicy policy)
+        {
+            MinimumCharge = policy.MinimumCharge;
+            MaximumCharge = policy.MaximumCharge;
+            FixedCharge = policy.FixedCharge;
+            AdditionalPrice = policy.AdditionalPrice;
+            MaxItemCountInFixedPrice = policy.MaxItemCountInFixedPrice;
+        }
     }
 }

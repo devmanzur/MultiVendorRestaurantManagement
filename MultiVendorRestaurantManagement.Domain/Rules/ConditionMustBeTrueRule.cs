@@ -2,12 +2,12 @@
 
 namespace MultiVendorRestaurantManagement.Domain.Rules
 {
-    public class ConditionMustBeTrue  : IBusinessRule
+    public class ConditionMustBeTrueRule  : IBusinessRule
     {
         private readonly bool _condition;
         private readonly string _message;
 
-        public ConditionMustBeTrue(bool condition, string message)
+        public ConditionMustBeTrueRule(bool condition, string message)
         {
             _condition = condition;
             _message = message;

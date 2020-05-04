@@ -49,11 +49,11 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             string imageUrl)
         {
             CheckRule(new OpeningAndClosingHoursAreValid(openingHour, closingHour));
-            CheckRule(new ConditionMustBeTrue(subscriptionType != SubscriptionType.Invalid,
+            CheckRule(new ConditionMustBeTrueRule(subscriptionType != SubscriptionType.Invalid,
                 "subscription must be valid"));
-            CheckRule(new ConditionMustBeTrue(contractStatus != ContractStatus.Invalid,
+            CheckRule(new ConditionMustBeTrueRule(contractStatus != ContractStatus.Invalid,
                 "contract must be valid"));
-            CheckRule(new ConditionMustBeTrue(phoneNumber != null,
+            CheckRule(new ConditionMustBeTrueRule(phoneNumber != null,
                 "phone number be valid"));
 
             ImageUrl = imageUrl;
@@ -80,7 +80,16 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public void SetPricingPolicy(PricingPolicy policy)
         {
-            PricingPolicy = policy;
+            CheckRule(new PricingPolicyMustBeValidRule(policy));
+
+            if (PricingPolicy == null)
+            {
+                PricingPolicy = policy;
+            }
+            else
+            {
+                PricingPolicy.UpdateBy(policy);
+            }
         }
 
         public void AddFood(Food food)
@@ -108,7 +117,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public void AddMenu(Menu menu)
         {
-            CheckRule(new ConditionMustBeTrue(
+            CheckRule(new ConditionMustBeTrueRule(
                 _menus.FirstOrDefault(
                     x => string.Equals(x.Name, menu.Name, StringComparison.InvariantCultureIgnoreCase)) == null,
                 "restaurant must not contain menu with same name"));
@@ -132,7 +141,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public void UpdateHours(int openingHour, int closingHour)
         {
-            CheckRule(new ConditionMustBeTrue(openingHour != closingHour && closingHour > openingHour,
+            CheckRule(new ConditionMustBeTrueRule(openingHour != closingHour && closingHour > openingHour,
                 "invalid opening and closing hour"));
             OpeningHour = openingHour;
             ClosingHour = closingHour;
@@ -141,9 +150,10 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public void UpdateSubscription(SubscriptionType subscriptionType)
         {
-            CheckRule(new ConditionMustBeTrue(subscriptionType != SubscriptionType.Invalid, "invalid subscription"));
+            CheckRule(new ConditionMustBeTrueRule(subscriptionType != SubscriptionType.Invalid,
+                "invalid subscription"));
             SubscriptionType = subscriptionType;
-            AddDomainEvent(new SubscriptionUpdatedEvent(Id,subscriptionType));
+            AddDomainEvent(new SubscriptionUpdatedEvent(Id, subscriptionType));
         }
     }
 }

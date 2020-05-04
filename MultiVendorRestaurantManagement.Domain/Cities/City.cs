@@ -26,7 +26,7 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
 
         public void AddLocality(Locality locality)
         {
-            CheckRule(new ConditionMustBeTrue(
+            CheckRule(new ConditionMustBeTrueRule(
                 _localities.FirstOrDefault(x =>
                     string.Equals(x.Name, locality.Name, StringComparison.InvariantCultureIgnoreCase)) == null,
                 "city must not contain locality with same name"));
@@ -36,7 +36,7 @@ namespace MultiVendorRestaurantManagement.Domain.Cities
 
         public void RemoveLocality(Locality locality)
         {
-            CheckRule(new ConditionMustBeTrue(
+            CheckRule(new ConditionMustBeTrueRule(
                 _localities.FirstOrDefault(x => x.Id == locality.Id) != null,
                 "locality not found"));
             _localities.Remove(locality);

@@ -38,7 +38,7 @@ namespace MultiVendorRestaurantManagement.Domain.Common
 
         public void Update(string name, string nameEng, string imageUrl)
         {
-            CheckRule(new ConditionMustBeTrue(name != Name && nameEng != NameEng, "no changes made"));
+            CheckRule(new ConditionMustBeTrueRule(name != Name && nameEng != NameEng, "no changes made"));
             Name = name;
             NameEng = nameEng;
             if (imageUrl.HasValue()) ImageUrl = imageUrl;

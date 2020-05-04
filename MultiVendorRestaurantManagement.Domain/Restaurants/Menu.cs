@@ -17,7 +17,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public Menu(string name, string nameEng)
         {
-            CheckRule(new ConditionMustBeTrue(!string.IsNullOrEmpty(name),"name must be valid"));
+            CheckRule(new ConditionMustBeTrueRule(!string.IsNullOrEmpty(name),"name must be valid"));
             Name = name;
             NameEng = nameEng;
         }
