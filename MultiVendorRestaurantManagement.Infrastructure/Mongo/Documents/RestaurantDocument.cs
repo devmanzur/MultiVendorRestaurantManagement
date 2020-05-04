@@ -62,6 +62,13 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
     public class MenuRecord
     {
+        public MenuRecord(long menuId, string name, string nameEng)
+        {
+            MenuId = menuId;
+            Name = name;
+            NameEng = nameEng;
+        }
+
         public long MenuId { get; private set; }
         public string Name { get; private set; }
         public string NameEng { get; protected set; }

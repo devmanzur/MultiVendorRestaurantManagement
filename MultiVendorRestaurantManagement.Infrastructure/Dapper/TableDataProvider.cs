@@ -41,10 +41,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
         {
             const string sql = "select * from Categories where Name = @Name";
             await using var connection = new SqlConnection(_connectionString);
-            var category =
+            var item =
                 await connection.QueryFirstOrDefaultAsync<CategoryTableData>(sql,
                     new {Name = name});
-            return category;
+            return item;
         }
 
         public async Task<RestaurantTableData> GetRestaurantAsync(string phone)
@@ -54,6 +54,16 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             var item =
                 await connection.QueryFirstOrDefaultAsync<RestaurantTableData>(sql,
                     new {PhoneNumber = phone});
+            return item;
+        }
+
+        public async Task<MenuTableData2> GetMenuAsync(string menuName)
+        {
+            const string sql = "select * from Menu where Name = @Name";
+            await using var connection = new SqlConnection(_connectionString);
+            var item =
+                await connection.QueryFirstOrDefaultAsync<MenuTableData2>(sql,
+                    new {Name = menuName});
             return item;
         }
     }

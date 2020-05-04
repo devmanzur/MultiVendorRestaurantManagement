@@ -118,10 +118,18 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public void AddMenu(Menu menu)
         {
             CheckRule(new ConditionMustBeTrueRule(
-                _menus.FirstOrDefault(
-                    x => string.Equals(x.Name, menu.Name, StringComparison.InvariantCultureIgnoreCase)) == null,
+                MustNotContainMenuWIthSameName(menu),
                 "restaurant must not contain menu with same name"));
             _menus.Add(menu);
+            AddDomainEvent(new MenuAddedEvent(Id,menu.Name,menu.NameEng));
+        }
+
+        private bool MustNotContainMenuWIthSameName(Menu menu)
+        {
+            return _menus.FirstOrDefault(
+                       x => string.Equals(x.Name, menu.Name, StringComparison.InvariantCultureIgnoreCase)
+                            || string.Equals(x.NameEng, menu.NameEng, StringComparison.InvariantCultureIgnoreCase)) ==
+                   null;
         }
 
         public override IDomainEvent GetAddedDomainEvent()

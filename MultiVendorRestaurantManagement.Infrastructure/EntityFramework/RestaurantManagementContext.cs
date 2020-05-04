@@ -209,7 +209,15 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                 }
             );
 
-            modelBuilder.Entity<Menu>(buider => { buider.Property(x => x.Name).IsRequired(); });
+            modelBuilder.Entity<Menu>(builder =>
+            {
+                builder.Property(x => x.Name).IsRequired();
+                builder.HasIndex(u => u.Name)
+                    .IsUnique();
+                builder.HasIndex(u => u.NameEng)
+                    .IsUnique();
+                
+            });
             modelBuilder.Entity<Promotion>(builder =>
             {
                 builder.Property(x => x.StartDate)
