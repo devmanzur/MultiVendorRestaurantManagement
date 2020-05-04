@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Common.Invariants;
+using Common.Utils;
 using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Cities;
@@ -63,20 +64,11 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             SubscriptionType = subscriptionType;
             ContractStatus = contractStatus;
             State = RestaurantState.Open;
-            ExpirationDate = GenerateExpirationDateFromSubscriptionType(subscriptionType);
+            ExpirationDate = subscriptionType.GetExpirationTime();
             PhoneNumber = phoneNumber;
         }
 
-        private DateTime GenerateExpirationDateFromSubscriptionType(SubscriptionType subscriptionType)
-        {
-            return subscriptionType switch
-            {
-                SubscriptionType.Monthly => DateTime.Now.AddMonths(1),
-                SubscriptionType.Yearly => DateTime.Now.AddMonths(12),
-                SubscriptionType.BiYearly => DateTime.Now.AddMonths(6),
-                _ => DateTime.Now
-            };
-        }
+       
 
         public void SetPricingPolicy(PricingPolicy policy)
         {
@@ -117,11 +109,11 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public void AddMenu(Menu menu)
         {
-            CheckRule(new ConditionMustBeTrueRule(
+            CheckRule(new ConditionMustBeTrueRule(menu.HasValue() && 
                 MustNotContainMenuWIthSameName(menu),
                 "restaurant must not contain menu with same name"));
             _menus.Add(menu);
-            AddDomainEvent(new MenuAddedEvent(Id,menu.Name,menu.NameEng));
+            AddDomainEvent(new MenuAddedEvent(Id, menu.Name, menu.NameEng));
         }
 
         private bool MustNotContainMenuWIthSameName(Menu menu)
@@ -144,6 +136,9 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public void SetCategory(Category category)
         {
+            CheckRule(new ConditionMustBeTrueRule(category.HasValue() && category.Categorize == Categorize.Restaurant,
+                "only a category of type restaurant must be assigned"));
+            if (Category.HasValue()) AddDomainEvent(new RestaurantCategoryUpdatedEvent(Id, category.Id));
             Category = category;
         }
 
@@ -161,6 +156,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             CheckRule(new ConditionMustBeTrueRule(subscriptionType != SubscriptionType.Invalid,
                 "invalid subscription"));
             SubscriptionType = subscriptionType;
+            ExpirationDate = subscriptionType.GetExpirationTime();
             AddDomainEvent(new SubscriptionUpdatedEvent(Id, subscriptionType));
         }
     }

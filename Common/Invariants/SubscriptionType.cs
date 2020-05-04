@@ -1,4 +1,6 @@
-﻿namespace Common.Invariants
+﻿using System;
+
+namespace Common.Invariants
 {
     public enum SubscriptionType
     {
@@ -9,7 +11,7 @@
         Invalid
     }
 
-    public class SubscriptionHelper
+    public static class SubscriptionHelper
     {
         public static SubscriptionType ConvertToSubscription(string item)
         {
@@ -23,6 +25,19 @@
                 "salescomission" => SubscriptionType.SalesCommission,
                 _ => SubscriptionType.Invalid
             };
+        }
+
+        public static DateTime GetExpirationTime(this SubscriptionType type)
+        {
+           
+            return type switch
+            {
+                SubscriptionType.Monthly => DateTime.Now.AddMonths(1),
+                SubscriptionType.Yearly => DateTime.Now.AddMonths(12),
+                SubscriptionType.BiYearly => DateTime.Now.AddMonths(6),
+                _ => DateTime.Now
+            };
+            
         }
     }
 }

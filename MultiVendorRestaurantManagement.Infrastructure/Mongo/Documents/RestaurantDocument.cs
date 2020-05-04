@@ -43,10 +43,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public List<MenuRecord> Menus { get; private set; }
         public long ManagerId { get; set; }
         public long PricingPolicyId { get; set; }
-        public long CategoryId { get; set; }
+        public long CategoryId { get; private set; }
 
-        [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-        public DateTime ExpirationDate { get; set; }
+        [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
+        public DateTime ExpirationDate { get; private set; }
 
         public void UpdateHours(in int openingHour, in int closingHour)
         {
@@ -57,6 +57,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public void UpdateSubscription(SubscriptionType subscription)
         {
             SubscriptionType = subscription.ToString();
+            ExpirationDate = subscription.GetExpirationTime();
+        }
+
+        public void UpdateCategory(in long categoryId)
+        {
+            CategoryId = categoryId;
         }
     }
 

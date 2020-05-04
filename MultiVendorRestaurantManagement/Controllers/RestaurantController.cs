@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant;
+using MultiVendorRestaurantManagement.Application.Restaurant.UpdateCategory;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdateHours;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdatePricingPolicy;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdateSubscription;
@@ -57,6 +58,14 @@ namespace MultiVendorRestaurantManagement.Controllers
         {
             var command = new UpdatePricingPolicyCommand(restaurant, request.MinimumCharge, request.MaximumCharge,
                 request.FixedCharge, request.MaxItemCountInFixedPrice, request.AdditionalPricePerUnit);
+            return await HandleActionResultFor(command);
+        }
+
+        [HttpPut("{restaurant}/category")]
+        public async Task<IActionResult> UpdateCategory(long restaurant,
+            [FromForm] UpdateRestaurantCategoryRequest request)
+        {
+            var command = new UpdateRestaurantCategoryCommand(restaurant, request.CategoryId);
             return await HandleActionResultFor(command);
         }
     }
