@@ -53,6 +53,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             OpeningHour = openingHour;
             ClosingHour = closingHour;
         }
+
+        public void UpdateSubscription(SubscriptionType subscription)
+        {
+            SubscriptionType = subscription.ToString();
+        }
     }
 
     public class MenuRecord

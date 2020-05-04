@@ -7,6 +7,7 @@ using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdateHours;
+using MultiVendorRestaurantManagement.Application.Restaurant.UpdateSubscription;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {
@@ -41,5 +42,14 @@ namespace MultiVendorRestaurantManagement.Controllers
             var command = new UpdateRestaurantHoursCommand(restaurant, request.OpeningHour, request.ClosingHour);
             return await HandleActionResultFor(command);
         }
+        
+        [HttpPut("{restaurant}/subscription")]
+        public async Task<IActionResult> UpdateSubscription(long restaurant, [FromForm] UpdateSubscriptionRequest request)
+        {
+            var command = new UpdateSubscriptionCommand(restaurant, request.Subscription);
+            return await HandleActionResultFor(command);
+        }
+        
+        
     }
 }

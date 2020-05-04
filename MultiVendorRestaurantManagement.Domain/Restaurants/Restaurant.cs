@@ -62,7 +62,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             ClosingHour = closingHour;
             SubscriptionType = subscriptionType;
             ContractStatus = contractStatus;
-            State = RestaurantState.Closed;
+            State = RestaurantState.Open;
             ExpirationDate = GenerateExpirationDateFromSubscriptionType(subscriptionType);
             PhoneNumber = phoneNumber;
         }
@@ -137,6 +137,13 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             OpeningHour = openingHour;
             ClosingHour = closingHour;
             AddDomainEvent(new RestaurantHoursUpdatedEvent(Id, openingHour, closingHour));
+        }
+
+        public void UpdateSubscription(SubscriptionType subscriptionType)
+        {
+            CheckRule(new ConditionMustBeTrue(subscriptionType != SubscriptionType.Invalid, "invalid subscription"));
+            SubscriptionType = subscriptionType;
+            AddDomainEvent(new SubscriptionUpdatedEvent(Id,subscriptionType));
         }
     }
 }
