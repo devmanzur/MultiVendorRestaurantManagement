@@ -11,5 +11,12 @@ namespace Common.Utils
             DateTime baseDate = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
             return BaseUrl + (long) (date.ToUniversalTime() - baseDate).TotalMilliseconds;
         }
+        
+        public static bool Valid24HourFormat(int hour)
+        {
+            return hour <= 24 && hour >= 0;
+        }
     }
+    
+    
 }

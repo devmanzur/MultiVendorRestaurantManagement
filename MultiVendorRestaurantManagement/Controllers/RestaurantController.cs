@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant;
+using MultiVendorRestaurantManagement.Application.Restaurant.UpdateHours;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {
@@ -27,10 +28,17 @@ namespace MultiVendorRestaurantManagement.Controllers
             return await HandleActionResultFor(command);
         }
 
-        [HttpPost("{id}/menus")]
-        public async Task<IActionResult> AddMenu(long id, [FromForm] AddMenuRequest request)
+        [HttpPost("{restaurant}/menus")]
+        public async Task<IActionResult> AddMenu(long restaurant, [FromForm] AddMenuRequest request)
         {
-            var command = new AddMenuCommand(request.NameEng, request.Name, id);
+            var command = new AddMenuCommand(request.NameEng, request.Name, restaurant);
+            return await HandleActionResultFor(command);
+        }
+
+        [HttpPut("{restaurant}/hours")]
+        public async Task<IActionResult> UpdateHours(long restaurant, [FromForm] UpdateRestaurantHoursRequest request)
+        {
+            var command = new UpdateRestaurantHoursCommand(restaurant, request.OpeningHour, request.ClosingHour);
             return await HandleActionResultFor(command);
         }
     }

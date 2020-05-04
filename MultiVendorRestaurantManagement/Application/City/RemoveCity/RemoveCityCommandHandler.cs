@@ -4,12 +4,13 @@ using Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.City.RemoveCity
 {
-    public class RemoveCityCommandHandler  : IRequestHandler<RemoveCityCommand,Result>
+    public class RemoveCityCommandHandler  : ICommandHandler<RemoveCityCommand>
     {
         private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;

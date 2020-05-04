@@ -47,6 +47,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime ExpirationDate { get; set; }
+
+        public void UpdateHours(in int openingHour, in int closingHour)
+        {
+            OpeningHour = openingHour;
+            ClosingHour = closingHour;
+        }
     }
 
     public class MenuRecord

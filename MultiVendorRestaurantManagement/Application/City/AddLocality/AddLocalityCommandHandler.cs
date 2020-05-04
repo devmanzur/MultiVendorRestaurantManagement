@@ -1,18 +1,16 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-using MultiVendorRestaurantManagement.Application.City.AddLocality;
+using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
-namespace MultiVendorRestaurantManagement.Application.City.RegisterLocality
+namespace MultiVendorRestaurantManagement.Application.City.AddLocality
 {
-    public class AddLocalityCommandHandler : IRequestHandler<AddLocalityCommand, Result>
+    public class AddLocalityCommandHandler : ICommandHandler<AddLocalityCommand>
     {
         private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;

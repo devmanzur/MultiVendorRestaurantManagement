@@ -114,7 +114,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                 "restaurant must not contain menu with same name"));
             _menus.Add(menu);
         }
-        
+
         public override IDomainEvent GetAddedDomainEvent()
         {
             return new RestaurantRegisteredEvent(PhoneNumber.GetCompletePhoneNumber());
@@ -128,6 +128,15 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public void SetCategory(Category category)
         {
             Category = category;
+        }
+
+        public void UpdateHours(int openingHour, int closingHour)
+        {
+            CheckRule(new ConditionMustBeTrue(openingHour != closingHour && closingHour > openingHour,
+                "invalid opening and closing hour"));
+            OpeningHour = openingHour;
+            ClosingHour = closingHour;
+            AddDomainEvent(new RestaurantHoursUpdatedEvent(Id, openingHour, closingHour));
         }
     }
 }

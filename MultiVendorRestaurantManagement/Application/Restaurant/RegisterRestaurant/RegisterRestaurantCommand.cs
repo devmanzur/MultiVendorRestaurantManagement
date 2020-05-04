@@ -46,8 +46,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             RuleFor(x => x.CityId).NotNull().NotEmpty();
             RuleFor(x => x.CategoryId).NotNull().NotEmpty();
             RuleFor(x => x.ImageUrl).NotNull().NotEmpty();
-            RuleFor(x => x.OpeningHour).NotNull().NotEmpty().Must(Valid24HourFormat);
-            RuleFor(x => x.ClosingHour).NotNull().NotEmpty().Must(Valid24HourFormat)
+            RuleFor(x => x.OpeningHour).NotNull().NotEmpty().Must(HelperFunctions.Valid24HourFormat);
+            RuleFor(x => x.ClosingHour).NotNull().NotEmpty().Must(HelperFunctions.Valid24HourFormat)
                 .NotEqual(x => x.OpeningHour);
             RuleFor(x => x.SubscriptionType)
                 .NotEqual(SubscriptionType.Invalid);
@@ -55,9 +55,6 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 .NotEqual(ContractStatus.Invalid);
         }
 
-        private static bool Valid24HourFormat(int hour)
-        {
-            return hour <= 24 && hour >= 0;
-        }
+        
     }
 }

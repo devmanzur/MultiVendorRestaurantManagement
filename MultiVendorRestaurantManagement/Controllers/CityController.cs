@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.City.AddLocality;
 using MultiVendorRestaurantManagement.Application.City.RegisterCity;
-using MultiVendorRestaurantManagement.Application.City.RegisterLocality;
 using MultiVendorRestaurantManagement.Application.City.RemoveCity;
 using MultiVendorRestaurantManagement.Application.City.RemoveLocality;
 using MultiVendorRestaurantManagement.Infrastructure.ImageManager;
