@@ -68,7 +68,6 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             PhoneNumber = phoneNumber;
         }
 
-       
 
         public void SetPricingPolicy(PricingPolicy policy)
         {
@@ -86,7 +85,10 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public void AddFood(Food food)
         {
+            CheckRule(new ConditionMustBeTrueRule(food.HasValue() && MustNotContainFoodWithSameName(food),
+                "food with same name already exists"));
             _foods.Add(food);
+            AddDomainEvent(new FoodRegisteredEvent(Id, food.Name));
         }
 
         public void AddRating(int remark)
@@ -109,9 +111,9 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public void AddMenu(Menu menu)
         {
-            CheckRule(new ConditionMustBeTrueRule(menu.HasValue() && 
-                MustNotContainMenuWIthSameName(menu),
-                "restaurant must not contain menu with same name"));
+            CheckRule(new ConditionMustBeTrueRule(menu.HasValue() &&
+                                                  MustNotContainMenuWIthSameName(menu),
+                "menu with same name already exists"));
             _menus.Add(menu);
             AddDomainEvent(new MenuAddedEvent(Id, menu.Name, menu.NameEng));
         }
@@ -122,6 +124,12 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                        x => string.Equals(x.Name, menu.Name, StringComparison.InvariantCultureIgnoreCase)
                             || string.Equals(x.NameEng, menu.NameEng, StringComparison.InvariantCultureIgnoreCase)) ==
                    null;
+        }
+
+        private bool MustNotContainFoodWithSameName(Food food)
+        {
+            return _foods.FirstOrDefault(
+                x => string.Equals(x.Name, food.Name, StringComparison.InvariantCultureIgnoreCase)) == null;
         }
 
         public override IDomainEvent GetAddedDomainEvent()

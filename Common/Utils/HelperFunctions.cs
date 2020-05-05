@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Common.Utils
 {
-    public class HelperFunctions
+    public static class HelperFunctions
     {
         private const string BaseUrl = "ya9bq8jd";
 
@@ -26,6 +28,13 @@ namespace Common.Utils
         public static bool ValidCount(int count)
         {
             return count >= 0;
+        }
+
+        public static bool ContainOneValidItem<T>(this IEnumerable<T> items)
+        {
+            var enumerable = items as T[] ?? items.ToArray();
+            return items.HasValue() && enumerable.Count() > 1 && enumerable.Any() == false &&
+                   enumerable.FirstOrDefault() != null;
         }
     }
 }

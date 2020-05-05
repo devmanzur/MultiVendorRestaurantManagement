@@ -4,6 +4,7 @@ using Common.Invariants;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Common;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
+using MultiVendorRestaurantManagement.Domain.Rules;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Domain.Foods
@@ -25,21 +26,19 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         //adds an extra tag to the list of tags when set true
         public bool IsNonVeg { get; protected set; }
 
-        public FoodStatus Status { get; protected set; } = FoodStatus.Available;
+        public FoodStatus Status { get; protected set; }
 
         //default, single, double, large, extra-large
         private List<Variant> _variants = new List<Variant>();
         public IReadOnlyList<Variant> Variants { get; protected set; }
 
-        private List<Tag> _tags = new List<Tag>();
-        public List<Tag> Tags { get; set; }
+        private List<FoodTag> _tags = new List<FoodTag>();
+        public List<FoodTag> Tags  => _tags.ToList();
 
         private List<AddOn> _addOns = new List<AddOn>();
         public List<AddOn> AddOns => _addOns.ToList();
-
         public Category Category { get; private set; }
-
-        public bool IsOnPromotion { get; protected set; } = false;
+        public bool IsOnPromotion { get; protected set; }
         public Promotion Promotion { get; protected set; }
 
         public string Discount { get; private set; }
@@ -62,20 +61,11 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             IsVeg = !isNonVeg && isVeg;
             IsNonVeg = !isVeg && isNonVeg;
             OldUnitPrice = unitPrice;
-            GenerateAdditionalTags();
+            Status  = FoodStatus.Available;
+            Rating = 0;
+            TotalRatingsCount = 0;
         }
 
-        private void GenerateAdditionalTags()
-        {
-            if (IsGlutenFree)
-                _tags.Add(new Tag("gluten-free", "senza glutine"));
-            if (IsNonVeg)
-                _tags.Add(new Tag("non-veg", "non-veg"));
-            if (IsVeg)
-                _tags.Add(new Tag("veg", "veg"));
-            
-        }
-        
         public void AddRating(int remark)
         {
             var temp = TotalRatingsCount * Rating;
@@ -90,6 +80,23 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             IsOnPromotion = true;
             UnitPrice = MoneyValue.Of(promotionPrice);
             Discount = discount;
+        }
+
+        public void AddVariant(Variant variant)
+        {
+            _variants.Add(variant);
+        }
+
+        public void SetCategory(Category category)
+        {
+            CheckRule(new ConditionMustBeTrueRule(category!=null && category.Categorize == Categorize.Food,"invalid category"));
+            Category = category;
+        }
+
+        public void NewAddOn(AddOn addOn)
+        {
+            CheckRule(new ConditionMustBeTrueRule(_addOns.All(x => x.Name != addOn.Name),"add on with same name already eixsts"));
+            _addOns.Add(addOn);
         }
     }
 }

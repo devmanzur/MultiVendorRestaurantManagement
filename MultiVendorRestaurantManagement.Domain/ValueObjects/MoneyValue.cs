@@ -15,9 +15,10 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
 
         public string PriceTag => Currency + " " + Value;
 
-        private MoneyValue(decimal value, string currency)
+        private MoneyValue(decimal amount, string currency)
         {
-            this.Value = value;
+            CheckRule(new ConditionMustBeTrueRule(amount.HasValue() && HelperFunctions.ValidAmount(amount),"invalid "));
+            this.Value = amount;
             this.Currency = currency;
         }
 

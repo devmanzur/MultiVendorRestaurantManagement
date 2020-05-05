@@ -8,7 +8,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
     {
         Restaurants,
         Cities,
-        Categories
+        Categories,
+        Foods
     }
     
     public class DocumentCollection
@@ -24,6 +25,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
         
         public IMongoCollection<RestaurantDocument> RestaurantsCollection 
             => _documents.GetCollection<RestaurantDocument>(Collections.Restaurants.ToString());
+        
+        public IMongoCollection<FoodDocument> FoodCollection 
+            => _documents.GetCollection<FoodDocument>(Collections.Foods.ToString());
         public IMongoCollection<CityDocument> CitiesCollection 
             => _documents.GetCollection<CityDocument>(Collections.Cities.ToString());
         public IMongoCollection<CategoryDocument> CategoriesCollection
