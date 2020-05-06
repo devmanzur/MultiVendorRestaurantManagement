@@ -38,7 +38,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                     item.IsVeg,
                     item.IsNonVeg
                 );
-                food.AddVariant(new VariantDocument("Normale", nameEng: "Regular", price: food.UnitPrice));
+                food.AddVariant(new VariantDocument("Normale", nameEng: "Regular", price: food.UnitPrice,"",""));
 
                 await _documentCollection.FoodCollection.InsertOneAsync(food, cancellationToken);
             }

@@ -32,7 +32,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.UpdateCategory
                     cancellationToken: cancellationToken);
                 if (category.HasValue())
                 {
-                    restaurant.SetCategory(category);
+                    restaurant.UpdateCategory(category);
                     var result = await _unitOfWork.CommitAsync(cancellationToken);
                     return result > 0 ? Result.Ok() : Result.Failure("failed to update category");
                 }

@@ -27,10 +27,10 @@ namespace MultiVendorRestaurantManagement.Application.Food.AddVariation
             if (food.HasValue())
             {
                 food.AddVariant(new VariantDocument(notification.VariantName, notification.VariantNameEng,
-                    notification.Price));
+                    notification.Price, notification.VariantDescription, notification.VariantDescriptionEng));
 
-                await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food, cancellationToken: cancellationToken);
-
+                await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
+                    cancellationToken: cancellationToken);
             }
         }
 

@@ -46,10 +46,10 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 request.SubscriptionType,
                 request.ContractStatus,
                 PhoneNumberValue.Of(SupportedCountryCode.Italy, request.PhoneNumber),
-                request.ImageUrl
+                request.ImageUrl,
+                category,
+                locality
             );
-            restaurant.SetLocality(locality);
-            restaurant.SetCategory(category);
 
             _context.Restaurants.Attach(restaurant);
             var result = await _unitOfWork.CommitAsync(cancellationToken);

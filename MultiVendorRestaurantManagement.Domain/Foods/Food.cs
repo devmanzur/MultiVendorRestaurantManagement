@@ -52,10 +52,16 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public int TotalRatingsCount { get; private set; }
 
 
+        protected Food()
+        {
+            
+        }
+        
         public Food(string name, MoneyValue unitPrice, FoodItemType type,
-            bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl)
+            bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Category category)
         {
             ImageUrl = imageUrl;
+            Category = category;
             Name = name;
             UnitPrice = unitPrice;
             Type = type;
@@ -97,7 +103,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
                 string.Equals(x.Name, variant.Name, StringComparison.InvariantCultureIgnoreCase)) == null;
         }
 
-        public void SetCategory(Category category)
+        public void UpdateCategory(Category category)
         {
             CheckRule(new ConditionMustBeTrueRule(category != null && category.Categorize == Categorize.Food,
                 "invalid category"));

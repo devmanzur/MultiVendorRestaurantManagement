@@ -40,15 +40,15 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                         isGlutenFree: request.IsGlutenFree,
                         isVeg: request.IsVeg,
                         isNonVeg: request.IsNonVeg,
-                        imageUrl: request.ImageUrl
+                        imageUrl: request.ImageUrl,
+                        category: category
                     );
 
-                    food.SetCategory(category);
                     SetDefaultVariant(food);
                     restaurant.AddFood(food);
                     var result = await _unitOfWork.CommitAsync(cancellationToken);
-                    
-                    
+
+
                     return result > 0 ? Result.Ok() : Result.Failure("failed to add food");
                 }
 
@@ -60,7 +60,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
 
         private void SetDefaultVariant(Domain.Foods.Food food)
         {
-            food.AddVariant(new Variant("Normale", nameEng: "Regular", price: food.UnitPrice) );
+            food.AddVariant(new Variant("Normale", nameEng: "Regular", price: food.UnitPrice, "", ""));
         }
     }
 }

@@ -45,9 +45,14 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public int TotalRatingsCount { get; private set; }
 
+
+        protected Restaurant()
+        {
+        }
+
         public Restaurant(string name, int openingHour, int closingHour,
             SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumber,
-            string imageUrl)
+            string imageUrl, Category category, Locality locality)
         {
             CheckRule(new OpeningAndClosingHoursAreValid(openingHour, closingHour));
             CheckRule(new ConditionMustBeTrueRule(subscriptionType != SubscriptionType.Invalid,
@@ -58,6 +63,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                 "phone number be valid"));
 
             ImageUrl = imageUrl;
+            Category = category;
+            Locality = locality;
             Name = name;
             OpeningHour = openingHour;
             ClosingHour = closingHour;
@@ -99,7 +106,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             Rating = temp / TotalRatingsCount;
         }
 
-        public void SetLocality(Locality locality)
+        public void UpdateLocality(Locality locality)
         {
             Locality = locality;
         }
@@ -142,7 +149,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             return new RestaurantRemovedEvent();
         }
 
-        public void SetCategory(Category category)
+        public void UpdateCategory(Category category)
         {
             CheckRule(new ConditionMustBeTrueRule(category.HasValue() && category.Categorize == Categorize.Restaurant,
                 "only a category of type restaurant must be assigned"));
@@ -171,7 +178,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public void AddNewVariantFor(Food food, Variant variant)
         {
             food.AddVariant(variant);
-            AddDomainEvent(new NewVariantAddedEvent(Id, food.Id, variant.Name,variant.NameEng,variant.Price.Value));
+            AddDomainEvent(new NewVariantAddedEvent(Id, food.Id, variant.Name, variant.NameEng, variant.Price.Value,
+                variant.Description, variant.DescriptionEng));
         }
     }
 }

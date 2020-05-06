@@ -7,18 +7,22 @@ namespace MultiVendorRestaurantManagement.Application.Food.AddVariation
 {
     public class AddVariantCommand : IRequest<Result>
     {
-        public AddVariantCommand(long restaurantId, long foodId, string name, string nameEng, decimal price)
+        public AddVariantCommand(long restaurantId, long foodId, string name, string nameEng, decimal price, string description, string descriptionEng)
         {
             RestaurantId = restaurantId;
             FoodId = foodId;
             Name = name;
             NameEng = nameEng;
+            Description = description;
+            DescriptionEng = descriptionEng;
             Price = MoneyValue.Of(price);
         }
 
         public long RestaurantId { get; private set; }
         public long FoodId { get; private set; }
         public string Name { get; private set; }
+        public string Description { get; private set; }
+        public string DescriptionEng { get; private set; }
         public string NameEng { get; private set; }
         public MoneyValue Price { get; private set; }
     }

@@ -74,6 +74,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .IsRequired();
                 builder.Property(x => x.NameEng)
                     .IsRequired();
+                builder.Property(x => x.Description)
+                    .IsRequired();
+                builder.Property(x => x.DescriptionEng)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<Order>(builder =>
@@ -293,21 +297,19 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 
                 builder.Property(x => x.NameEng)
                     .IsRequired();
-                
             });
 
             modelBuilder.Entity<FoodTag>(builder =>
             {
                 builder.HasKey(x => new {x.FoodId, x.TagId});
-                
+
                 builder.HasOne(x => x.Food)
                     .WithMany(f => f.Tags)
                     .HasForeignKey(x => x.FoodId);
-                
+
                 builder.HasOne(x => x.Tag)
                     .WithMany(f => f.Foods)
                     .HasForeignKey(x => x.TagId);
-
             });
 
             modelBuilder.Entity<Category>(builder =>

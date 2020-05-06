@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Common.Utils;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
@@ -25,6 +26,7 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
         public async Task Handle(CityRegisteredEvent notification, CancellationToken cancellationToken)
         {
             var city = await _tableDataProvider.GetCityAsync(notification.Name);
+
 
             if (city.HasValue())
             {

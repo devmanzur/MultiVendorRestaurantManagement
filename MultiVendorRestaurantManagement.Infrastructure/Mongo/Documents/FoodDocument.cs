@@ -65,15 +65,19 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
     public class VariantDocument
     {
-        public VariantDocument(string name, string nameEng, decimal price)
+        public VariantDocument(string name, string nameEng, decimal price, string description, string descriptionEng)
         {
             Name = name;
             NameEng = nameEng;
             Price = price;
+            Description = description;
+            DescriptionEng = descriptionEng;
         }
 
         public string Name { get; private set; }
         public string NameEng { get; private set; }
+        public string Description { get; private set; }
+        public string DescriptionEng { get; private set; }
         public decimal Price { get; private set; }
     }
 

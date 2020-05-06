@@ -25,10 +25,10 @@ namespace MultiVendorRestaurantManagement.Controllers
             return await HandleActionResultFor(command);
         }
 
-        [HttpPut("{restaurant}/foods/{food}")]
+        [HttpPut("{restaurant}/foods/{food}/variants")]
         public async Task<IActionResult> AddVariant(long restaurant, long food, [FromForm] AddVariantRequest request)
         {
-            var command = new AddVariantCommand(restaurant,food,request.Name,request.NameEng,request.Price);
+            var command = new AddVariantCommand(restaurant,food,request.Name,request.NameEng,request.Price, request.Description,request.DescriptionEng);
             return await HandleActionResultFor(command);
         }
         

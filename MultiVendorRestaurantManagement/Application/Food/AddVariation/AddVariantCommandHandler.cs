@@ -31,7 +31,9 @@ namespace MultiVendorRestaurantManagement.Application.Food.AddVariation
                 var food = restaurant.Foods.FirstOrDefault(x => x.Id == request.FoodId);
                 if (food.HasValue())
                 {
-                    restaurant.AddNewVariantFor(food, new Variant(request.Name, request.NameEng, request.Price));
+                    restaurant.AddNewVariantFor(food,
+                        new Variant(request.Name, request.NameEng, request.Price, request.Description,
+                            request.DescriptionEng));
 
                     var result = await _unitOfWork.CommitAsync(cancellationToken);
                     return result > 0 ? Result.Ok() : Result.Failure("failed to add variant");
