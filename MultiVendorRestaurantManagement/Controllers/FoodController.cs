@@ -5,6 +5,7 @@ using MultiVendorRestaurantManagement.ApiContract;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Food.AddVariation;
 using MultiVendorRestaurantManagement.Application.Food.RegisterFood;
+using MultiVendorRestaurantManagement.Application.Food.RemoveVariant;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {
@@ -29,6 +30,13 @@ namespace MultiVendorRestaurantManagement.Controllers
         public async Task<IActionResult> AddVariant(long restaurant, long food, [FromForm] AddVariantRequest request)
         {
             var command = new AddVariantCommand(restaurant,food,request.Name,request.NameEng,request.Price, request.Description,request.DescriptionEng);
+            return await HandleActionResultFor(command);
+        }
+        
+        [HttpDelete("{restaurant}/foods/{food}/variants")]
+        public async Task<IActionResult> AddVariant(long restaurant, long food, [FromForm] RemoveVariantRequest request)
+        {
+            var command = new RemoveVariantCommand(restaurant,food,request.VariantName);
             return await HandleActionResultFor(command);
         }
         

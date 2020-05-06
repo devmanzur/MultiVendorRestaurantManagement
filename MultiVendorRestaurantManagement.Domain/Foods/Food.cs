@@ -113,8 +113,15 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public void NewAddOn(AddOn addOn)
         {
             CheckRule(new ConditionMustBeTrueRule(_addOns.All(x => x.Name != addOn.Name),
-                "add on with same name already eixists"));
+                "add on with same name already exists"));
             _addOns.Add(addOn);
+        }
+
+        public void RemoveVariant(Variant variant)
+        {
+            CheckRule(new ConditionMustBeTrueRule(_variants.Contains(variant),"variant not found"));
+            CheckRule(new ConditionMustBeTrueRule(_variants.Count>1,"food must have at least one variant"));
+            _variants.Remove(variant);
         }
     }
 }

@@ -181,5 +181,11 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             AddDomainEvent(new NewVariantAddedEvent(Id, food.Id, variant.Name, variant.NameEng, variant.Price.Value,
                 variant.Description, variant.DescriptionEng));
         }
+
+        public void RemoveVariantFor(Food food, Variant variant)
+        {
+            food.RemoveVariant(variant);
+            AddDomainEvent(new VariantRemovedEvent(Id, food.Id, variant.Name));
+        }
     }
 }

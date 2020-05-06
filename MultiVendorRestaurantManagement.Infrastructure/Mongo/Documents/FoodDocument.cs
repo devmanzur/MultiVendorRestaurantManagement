@@ -28,15 +28,17 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         {
             if (IsGlutenFree)
             {
-                FoodTags.Add(new FoodTagDocument( "Senza glutine", "Gluten free"));
+                FoodTags.Add(new FoodTagDocument("Senza glutine", "Gluten free"));
             }
+
             if (!IsVeg && IsNonVeg)
             {
-                FoodTags.Add(new FoodTagDocument( "Cibo non vegano","Non-Veg"));
+                FoodTags.Add(new FoodTagDocument("Cibo non vegano", "Non-Veg"));
             }
+
             if (!IsNonVeg && IsVeg)
             {
-                FoodTags.Add(new FoodTagDocument( "Cibo vegano", "Vegan"));
+                FoodTags.Add(new FoodTagDocument("Cibo vegano", "Vegan"));
             }
         }
 
@@ -53,13 +55,19 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public bool IsGlutenFree { get; private set; } //adds an extra tag to the list of tags when set true
         public bool IsVeg { get; private set; } //adds an extra tag to the list of tags when set true
         public bool IsNonVeg { get; private set; } //adds an extra tag to the list of tags when set true
-        public List<VariantDocument> Variants { get; set; } = new List<VariantDocument>();
+        public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
         public int OrderCount { get; set; }
         public string PriceTag { get; set; }
 
         public void AddVariant(VariantDocument variant)
         {
             Variants.Add(variant);
+        }
+
+        public void RemoveVariant(string variantName)
+        {
+            var variant = Variants.Find(x => x.Name == variantName);
+            Variants.Remove(variant);
         }
     }
 
