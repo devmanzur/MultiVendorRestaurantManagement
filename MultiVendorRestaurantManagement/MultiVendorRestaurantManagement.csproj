@@ -14,10 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ApiContract" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Common\Common.csproj" />
       <ProjectReference Include="..\MultiVendorRestaurantManagement.Domain\MultiVendorRestaurantManagement.Domain.csproj" />
       <ProjectReference Include="..\MultiVendorRestaurantManagement.Infrastructure\MultiVendorRestaurantManagement.Infrastructure.csproj" />

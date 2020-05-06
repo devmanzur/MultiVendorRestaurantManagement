@@ -167,5 +167,11 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             ExpirationDate = subscriptionType.GetExpirationTime();
             AddDomainEvent(new SubscriptionUpdatedEvent(Id, subscriptionType));
         }
+
+        public void AddNewVariantFor(Food food, Variant variant)
+        {
+            food.AddVariant(variant);
+            AddDomainEvent(new NewVariantAddedEvent(Id, food.Id, variant.Name,variant.NameEng,variant.Price.Value));
+        }
     }
 }

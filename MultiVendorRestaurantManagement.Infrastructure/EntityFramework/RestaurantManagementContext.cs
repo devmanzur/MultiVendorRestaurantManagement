@@ -58,6 +58,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                         .OnDelete(DeleteBehavior.Cascade)
                         .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
 
+
                     builder.Metadata
                         .FindNavigation("Tags")
                         .SetPropertyAccessMode(PropertyAccessMode.Field);

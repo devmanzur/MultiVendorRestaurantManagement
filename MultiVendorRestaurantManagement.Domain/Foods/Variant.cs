@@ -12,9 +12,13 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             Price = price;
         }
 
+        protected Variant()
+        {
+            
+        }
         public string Name { get; private set; }
         public string NameEng { get; private set; }
         public MoneyValue Price { get; private set; }
-        public virtual Food Food { get; protected set; }
+        public  Food Food { get; private set; }
     }
 }

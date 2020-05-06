@@ -44,6 +44,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                     );
 
                     food.SetCategory(category);
+                    SetDefaultVariant(food);
                     restaurant.AddFood(food);
                     var result = await _unitOfWork.CommitAsync(cancellationToken);
                     
@@ -57,5 +58,9 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
             return Result.Failure("restaurant not found");
         }
 
+        private void SetDefaultVariant(Domain.Foods.Food food)
+        {
+            food.AddVariant(new Variant("Normale", nameEng: "Regular", price: food.UnitPrice) );
+        }
     }
 }
