@@ -31,7 +31,15 @@ namespace MultiVendorRestaurantManagement.Application.GenericEvents
                     food.UpdateMenu(notification.MenuId);
                 }
 
-                await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food, cancellationToken: cancellationToken);
+                if (notification.PriceUpdated())
+                {
+                    notification.VariantPriceUpdates.ForEach(x => food.UpdateVariantPrice(x));
+                    await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
+                        cancellationToken: cancellationToken);
+                }
+
+                await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
+                    cancellationToken: cancellationToken);
             }
         }
 

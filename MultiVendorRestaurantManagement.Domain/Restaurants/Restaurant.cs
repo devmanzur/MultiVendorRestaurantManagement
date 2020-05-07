@@ -224,7 +224,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             {
                 return Result.Failure(process.Error);
             }
-            AddDomainEvent(new FoodVariantPriceUpdatedEvent(food.Id, variantPriceUpdates));
+
+            AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, variantPriceUpdates));
             return Result.Ok();
         }
     }

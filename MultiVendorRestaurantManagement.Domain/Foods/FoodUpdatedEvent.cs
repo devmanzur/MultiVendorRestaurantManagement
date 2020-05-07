@@ -1,4 +1,7 @@
-﻿using MultiVendorRestaurantManagement.Domain.Base;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Common.Utils;
+using MultiVendorRestaurantManagement.Domain.Base;
 
 namespace MultiVendorRestaurantManagement.Domain.Foods
 {
@@ -7,6 +10,15 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public long RestaurantId { get; }
         public long FoodId { get; }
         public long MenuId { get; }
+
+        public List<VariantPriceUpdateModel> VariantPriceUpdates { get; }
+
+        public FoodUpdatedEvent(long restaurantId, long foodId, List<VariantPriceUpdateModel> variantPriceUpdates)
+        {
+            RestaurantId = restaurantId;
+            FoodId = foodId;
+            VariantPriceUpdates = variantPriceUpdates;
+        }
 
         public FoodUpdatedEvent(long restaurantId, long foodId, long menuId)
         {
@@ -18,6 +30,11 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public bool MenuUpdated()
         {
             return MenuId != 0;
+        }
+
+        public bool PriceUpdated()
+        {
+            return VariantPriceUpdates.HasValue() && VariantPriceUpdates.Any();
         }
     }
 }
