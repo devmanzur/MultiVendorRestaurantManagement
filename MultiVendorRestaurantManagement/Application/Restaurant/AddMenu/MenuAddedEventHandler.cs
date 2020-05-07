@@ -33,7 +33,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
                     .FirstOrDefaultAsync(cancellationToken);
                 if (restaurant.HasValue())
                 {
-                    restaurant.Menus.Add(new MenuRecord(menuData.Id, menuData.Name, menuData.NameEng));
+                    restaurant.Menus.Add(
+                        new MenuRecord(menuData.Id, menuData.Name, menuData.NameEng, menuData.ImageUrl));
                 }
 
                 await _collection.RestaurantsCollection.ReplaceOneAsync(Filter(notification), restaurant,

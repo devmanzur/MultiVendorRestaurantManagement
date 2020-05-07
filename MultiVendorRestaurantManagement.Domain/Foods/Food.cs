@@ -54,9 +54,8 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
         protected Food()
         {
-            
         }
-        
+
         public Food(string name, MoneyValue unitPrice, FoodItemType type,
             bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Category category)
         {
@@ -119,9 +118,15 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
         public void RemoveVariant(Variant variant)
         {
-            CheckRule(new ConditionMustBeTrueRule(_variants.Contains(variant),"variant not found"));
-            CheckRule(new ConditionMustBeTrueRule(_variants.Count>1,"food must have at least one variant"));
+            CheckRule(new ConditionMustBeTrueRule(_variants.Contains(variant), "variant not found"));
+            CheckRule(new ConditionMustBeTrueRule(_variants.Count > 1, "food must have at least one variant"));
             _variants.Remove(variant);
+        }
+
+        public void RemoveAddOn(AddOn addOn)
+        {
+            CheckRule(new ConditionMustBeTrueRule(_addOns.Contains(addOn), "add-on not found"));
+            _addOns.Remove(addOn);
         }
     }
 }

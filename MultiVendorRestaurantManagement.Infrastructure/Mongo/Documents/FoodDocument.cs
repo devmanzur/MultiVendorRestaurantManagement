@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using MultiVendorRestaurantManagement.Domain.Foods;
+using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 {
@@ -46,8 +49,13 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public long FoodId { get; private set; }
         public string ImageUrl { get; private set; }
         public string Name { get; private set; }
+
+        [BsonRepresentation(BsonType.Decimal128)]
         public decimal UnitPrice { get; private set; }
+
+        [BsonRepresentation(BsonType.Decimal128)]
         public decimal OldUnitPrice { get; private set; }
+
         public string Type { get; private set; }
         public long CategoryId { get; private set; }
         public List<FoodTagDocument> FoodTags { get; private set; } = new List<FoodTagDocument>();
@@ -56,8 +64,17 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public bool IsVeg { get; private set; } //adds an extra tag to the list of tags when set true
         public bool IsNonVeg { get; private set; } //adds an extra tag to the list of tags when set true
         public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
-        public int OrderCount { get; set; }
-        public string PriceTag { get; set; }
+        public List<AddOnDocument> AddOns { get; protected set; } = new List<AddOnDocument>();
+        public int OrderCount { get; private set; }
+        public string PriceTag => MoneyValue.Of(UnitPrice).PriceTag;
+
+        public long PromotionId { get; private set; }
+        public long MenuId { get; private set; }
+        public bool IsOnPromotion { get; private set; }
+        public string Discount { get; private set; }
+
+        public double Rating { get; private set; } = 0;
+        public int TotalRatingCount { get; private set; } = 0;
 
         public void AddVariant(VariantDocument variant)
         {
@@ -69,11 +86,45 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             var variant = Variants.Find(x => x.Name == variantName);
             Variants.Remove(variant);
         }
+
+        public void NewAddOn(AddOnDocument variant)
+        {
+            AddOns.Add(variant);
+        }
+
+        public void RemoveAddOn(string addOnName)
+        {
+            var addOn = AddOns.Find(x => x.Name == addOnName);
+            AddOns.Remove(addOn);
+        }
+
+        public void UpdateMenu(in long menuId)
+        {
+            MenuId = menuId;
+        }
     }
 
     public class VariantDocument
     {
         public VariantDocument(string name, string nameEng, decimal price, string description, string descriptionEng)
+        {
+            Name = name;
+            NameEng = nameEng;
+            Price = price;
+            Description = description;
+            DescriptionEng = descriptionEng;
+        }
+
+        public string Name { get; private set; }
+        public string NameEng { get; private set; }
+        public string Description { get; private set; }
+        public string DescriptionEng { get; private set; }
+        public decimal Price { get; private set; }
+    }
+
+    public class AddOnDocument
+    {
+        public AddOnDocument(string name, string nameEng, string description, string descriptionEng, decimal price)
         {
             Name = name;
             NameEng = nameEng;

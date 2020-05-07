@@ -10,11 +10,13 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
         public long RestaurantId { get; private set; }
         public string Name { get; private set; }
         public string NameEng { get; private set; }
-        public AddMenuCommand(string nameEng, string name, long restaurantId)
+        public string ImageUrl { get; private set; }
+        public AddMenuCommand(string nameEng, string name, long restaurantId, string imageUrl)
         {
             NameEng = nameEng;
             Name = name;
             RestaurantId = restaurantId;
+            ImageUrl = imageUrl;
         }
     }
 

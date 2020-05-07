@@ -4,6 +4,7 @@ using CrossCutting.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
+using MultiVendorRestaurantManagement.Application.Restaurant.AddFoodToMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdateCategory;
@@ -33,7 +34,7 @@ namespace MultiVendorRestaurantManagement.Controllers
         [HttpPost("{restaurant}/menus")]
         public async Task<IActionResult> AddMenu(long restaurant, [FromForm] AddMenuRequest request)
         {
-            var command = new AddMenuCommand(request.NameEng, request.Name, restaurant);
+            var command = new AddMenuCommand(request.NameEng, request.Name, restaurant, request.ImageUrl);
             return await HandleActionResultFor(command);
         }
 
@@ -66,6 +67,14 @@ namespace MultiVendorRestaurantManagement.Controllers
             [FromForm] UpdateRestaurantCategoryRequest request)
         {
             var command = new UpdateRestaurantCategoryCommand(restaurant, request.CategoryId);
+            return await HandleActionResultFor(command);
+        }
+
+        [HttpPut("{restaurant}/menus/{menu}/foods")]
+        public async Task<IActionResult> AddFoodToMenu(long restaurant, long menu,
+            [FromForm] AddFoodToMenuRequest request)
+        {
+            var command = new AddFoodToMenuCommand(restaurant, menu, request.FoodId);
             return await HandleActionResultFor(command);
         }
     }

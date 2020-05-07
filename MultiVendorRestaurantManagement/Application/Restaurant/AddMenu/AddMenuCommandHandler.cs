@@ -30,7 +30,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
                 cancellationToken: cancellationToken);
             if (restaurant.HasNoValue()) return Result.Failure("invalid restaurant");
 
-            restaurant.AddMenu(new Menu(request.Name, request.NameEng));
+            restaurant.AddMenu(new Menu(request.Name, request.NameEng,request.ImageUrl));
 
             var result = await _unitOfWork.CommitAsync(cancellationToken);
             return result > 0

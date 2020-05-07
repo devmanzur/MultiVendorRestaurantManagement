@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Common.Utils;
 using MediatR;
 using MultiVendorRestaurantManagement.Domain.Foods;
+using MultiVendorRestaurantManagement.Domain.ValueObjects;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;

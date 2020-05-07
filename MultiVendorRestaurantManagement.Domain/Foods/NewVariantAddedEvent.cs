@@ -1,8 +1,9 @@
 ﻿using MultiVendorRestaurantManagement.Domain.Base;
+using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Domain.Foods
 {
-    public class NewVariantAddedEvent  : DomainEventBase
+    public class NewVariantAddedEvent : DomainEventBase
     {
         public long RestaurantId { get; }
         public long FoodId { get; }
@@ -10,9 +11,10 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public string VariantNameEng { get; }
         public string VariantDescription { get; }
         public string VariantDescriptionEng { get; }
-        public decimal Price { get; }
+        public MoneyValue Price { get; }
 
-        public NewVariantAddedEvent(long restaurantId, long foodId, string variantName, string variantNameEng,  decimal price, string varianDescription, string variantDescriptionEng)
+        public NewVariantAddedEvent(long restaurantId, long foodId, string variantName, string variantNameEng,
+            MoneyValue price, string varianDescription, string variantDescriptionEng)
         {
             RestaurantId = restaurantId;
             FoodId = foodId;
@@ -22,7 +24,5 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             VariantDescription = varianDescription;
             VariantDescriptionEng = variantDescriptionEng;
         }
-
-       
     }
 }

@@ -9,32 +9,29 @@ using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;
 
-namespace MultiVendorRestaurantManagement.Application.Food.AddVariation
+namespace MultiVendorRestaurantManagement.Application.Food.RemoveAddOn
 {
-    public class NewVariantAddedEventHandler : INotificationHandler<NewVariantAddedEvent>
+    public class AddOnRemovedEventHandler : INotificationHandler<AddOnRemovedEvent>
     {
         private readonly DocumentCollection _collection;
 
-        public NewVariantAddedEventHandler(DocumentCollection collection)
+        public AddOnRemovedEventHandler(DocumentCollection collection)
         {
             _collection = collection;
         }
-
-        public async Task Handle(NewVariantAddedEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(AddOnRemovedEvent notification, CancellationToken cancellationToken)
         {
             var food = await _collection.FoodCollection.Find(Filter(notification))
                 .FirstOrDefaultAsync(cancellationToken);
             if (food.HasValue())
             {
-                food.AddVariant(new VariantDocument(notification.VariantName, notification.VariantNameEng,
-                    notification.Price.Value, notification.VariantDescription, notification.VariantDescriptionEng));
-
+                food.RemoveAddOn(notification.AddOnName);
                 await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
                     cancellationToken: cancellationToken);
             }
         }
-
-        private static Expression<Func<FoodDocument, bool>> Filter(NewVariantAddedEvent notification)
+        
+        private static Expression<Func<FoodDocument, bool>> Filter(AddOnRemovedEvent notification)
         {
             return x => x.FoodId == notification.FoodId;
         }

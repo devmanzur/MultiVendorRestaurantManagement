@@ -122,7 +122,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                                                   MustNotContainMenuWIthSameName(menu),
                 "menu with same name already exists"));
             _menus.Add(menu);
-            AddDomainEvent(new MenuAddedEvent(Id, menu.Name, menu.NameEng));
+            AddDomainEvent(new MenuAddedEvent(Id, menu.Name, menu.NameEng,menu.ImageUrl));
         }
 
         private bool MustNotContainMenuWIthSameName(Menu menu)
@@ -178,7 +178,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public void AddNewVariantFor(Food food, Variant variant)
         {
             food.AddVariant(variant);
-            AddDomainEvent(new NewVariantAddedEvent(Id, food.Id, variant.Name, variant.NameEng, variant.Price.Value,
+            AddDomainEvent(new NewVariantAddedEvent(Id, food.Id, variant.Name, variant.NameEng, variant.Price,
                 variant.Description, variant.DescriptionEng));
         }
 
@@ -186,6 +186,27 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         {
             food.RemoveVariant(variant);
             AddDomainEvent(new VariantRemovedEvent(Id, food.Id, variant.Name));
+        }
+
+        public void CreateNewAddOnFor(Food food, AddOn addOn)
+        {
+            food.NewAddOn(addOn);
+            AddDomainEvent(new NewAddOnEvent(Id, food.Id, addOn.Name, addOn.NameEng, addOn.Description,
+                addOn.DescriptionEng, addOn.Price));
+        }
+
+        public void RemoveAddOnFor(Food food, AddOn addOn)
+        {
+            food.RemoveAddOn(addOn);
+            AddDomainEvent(new AddOnRemovedEvent(Id, food.Id, addOn.Name));
+        }
+
+        public void AddMenuToFood(Menu menu, Food food)
+        {
+            CheckRule(new ConditionMustBeTrueRule(food != null && menu != null, "invalid menu/food combination"));
+            CheckRule(new ConditionMustBeTrueRule(!menu.Items.Contains(food), "menu already has the food"));
+            menu.AddItem(food);
+            AddDomainEvent(new FoodUpdatedEvent(Id,food.Id,menu.Id));
         }
     }
 }

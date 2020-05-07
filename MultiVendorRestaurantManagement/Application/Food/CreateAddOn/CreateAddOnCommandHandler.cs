@@ -4,38 +4,36 @@ using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
-namespace MultiVendorRestaurantManagement.Application.Food.AddVariation
+namespace MultiVendorRestaurantManagement.Application.Food.CreateaAddOn
 {
-    public class AddVariantCommandHandler : ICommandHandler<AddVariantCommand>
+    public class CreateAddOnCommandHandler : ICommandHandler<CreateAddOnCommand>
     {
         private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AddVariantCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
+        public CreateAddOnCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
         {
             _context = context;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result> Handle(AddVariantCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(CreateAddOnCommand request, CancellationToken cancellationToken)
         {
-            var restaurant = await _context.Restaurants.Include(x => x.Foods).ThenInclude(x => x.Variants)
+            var restaurant = await _context.Restaurants.Include(x => x.Foods).ThenInclude(x => x.AddOns)
                 .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken: cancellationToken);
             if (restaurant.HasValue() && restaurant.Foods.HasValue())
             {
                 var food = restaurant.Foods.FirstOrDefault(x => x.Id == request.FoodId);
                 if (food.HasValue())
                 {
-                    restaurant.AddNewVariantFor(food,
-                        new Variant(request.Name, request.NameEng, request.Price, request.Description,
-                            request.DescriptionEng));
-
+                    restaurant.CreateNewAddOnFor(food,
+                        new AddOn(request.Name, request.NameEng, request.Description, request.DescriptionEng,
+                            request.Price));
                     var result = await _unitOfWork.CommitAsync(cancellationToken);
                     return result > 0 ? Result.Ok() : Result.Failure("failed to complete action");
                 }

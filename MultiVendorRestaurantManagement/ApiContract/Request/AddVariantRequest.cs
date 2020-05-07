@@ -1,4 +1,4 @@
-﻿namespace MultiVendorRestaurantManagement.ApiContract
+﻿namespace MultiVendorRestaurantManagement.ApiContract.Request
 {
     public class AddVariantRequest
     {
