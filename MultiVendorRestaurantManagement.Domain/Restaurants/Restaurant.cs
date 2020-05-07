@@ -20,7 +20,15 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public PhoneNumberValue PhoneNumber { get; protected set; }
         public Locality Locality { get; protected set; }
         public long ManagerId { get; private set; }
-        public RestaurantState State { get; protected set; }
+
+        public RestaurantState State
+        {
+            get => (DateTime.Now.Hour > ClosingHour || DateTime.Now.Hour < OpeningHour)
+                ? RestaurantState.Closed
+                : State;
+            protected set { }
+        }
+
         public int OpeningHour { get; protected set; }
         public int ClosingHour { get; protected set; }
         public SubscriptionType SubscriptionType { get; protected set; }
@@ -122,7 +130,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                                                   MustNotContainMenuWIthSameName(menu),
                 "menu with same name already exists"));
             _menus.Add(menu);
-            AddDomainEvent(new MenuAddedEvent(Id, menu.Name, menu.NameEng,menu.ImageUrl));
+            AddDomainEvent(new MenuAddedEvent(Id, menu.Name, menu.NameEng, menu.ImageUrl));
         }
 
         private bool MustNotContainMenuWIthSameName(Menu menu)
@@ -206,7 +214,18 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             CheckRule(new ConditionMustBeTrueRule(food != null && menu != null, "invalid menu/food combination"));
             CheckRule(new ConditionMustBeTrueRule(!menu.Items.Contains(food), "menu already has the food"));
             menu.AddItem(food);
-            AddDomainEvent(new FoodUpdatedEvent(Id,food.Id,menu.Id));
+            AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, menu.Id));
+        }
+
+        public Result UpdateVariantPriceFor(Food food, List<VariantPriceUpdateModel> variantPriceUpdates)
+        {
+            foreach (var process in variantPriceUpdates.Select(model => food.UpdateVariantPrice(model))
+                .Where(process => process.IsFailure))
+            {
+                return Result.Failure(process.Error);
+            }
+            AddDomainEvent(new FoodVariantPriceUpdatedEvent(food.Id, variantPriceUpdates));
+            return Result.Ok();
         }
     }
 }

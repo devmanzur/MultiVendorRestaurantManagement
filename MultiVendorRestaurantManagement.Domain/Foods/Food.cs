@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Invariants;
 using Common.Utils;
+using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Common;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
@@ -13,6 +14,9 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 {
     public class Food : Entity
     {
+        private const string DefaultVariant = "Normale";
+        private const string DefaultVariantEng = "Regular";
+
         public Restaurant Restaurant { get; protected set; }
         public string Name { get; protected set; }
         public MoneyValue UnitPrice { get; protected set; }
@@ -71,6 +75,13 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             Status = FoodStatus.Available;
             Rating = 0;
             TotalRatingsCount = 0;
+            SetDefaultVariant(unitPrice);
+        }
+
+        [Obsolete("Do not call this method from other than the constructor itself")]
+        private void SetDefaultVariant(MoneyValue unitPrice)
+        {
+            AddVariant(new Variant(DefaultVariant, nameEng: DefaultVariantEng, price: unitPrice, "", ""));
         }
 
         public void AddRating(int remark)
@@ -127,6 +138,29 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         {
             CheckRule(new ConditionMustBeTrueRule(_addOns.Contains(addOn), "add-on not found"));
             _addOns.Remove(addOn);
+        }
+
+        public Result UpdateVariantPrice(VariantPriceUpdateModel model)
+        {
+            var variant = _variants.FirstOrDefault(x => x.Name == model.VariantName);
+            if (variant.HasValue())
+            {
+                if (model.VariantName.Equals(DefaultVariant))
+                {
+                    UpdateBasePrice(model.NewPrice);
+                }
+
+                variant.UpdatePrice(MoneyValue.Of(model.NewPrice));
+                return Result.Ok();
+            }
+
+            return Result.Failure("failed to update");
+        }
+
+        private void UpdateBasePrice(decimal price)
+        {
+            OldUnitPrice = UnitPrice;
+            UnitPrice = MoneyValue.Of(price);
         }
     }
 }

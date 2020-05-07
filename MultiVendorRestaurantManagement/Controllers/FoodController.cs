@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract;
@@ -8,6 +9,8 @@ using MultiVendorRestaurantManagement.Application.Food.CreateaAddOn;
 using MultiVendorRestaurantManagement.Application.Food.RegisterFood;
 using MultiVendorRestaurantManagement.Application.Food.RemoveAddOn;
 using MultiVendorRestaurantManagement.Application.Food.RemoveVariant;
+using MultiVendorRestaurantManagement.Application.Food.UpdatePrice;
+using MultiVendorRestaurantManagement.Domain.Foods;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {
@@ -31,32 +34,45 @@ namespace MultiVendorRestaurantManagement.Controllers
         [HttpPut("{restaurant}/foods/{food}/variants")]
         public async Task<IActionResult> AddVariant(long restaurant, long food, [FromForm] AddVariantRequest request)
         {
-            var command = new AddVariantCommand(restaurant,food,request.Name,request.NameEng,request.Price, request.Description,request.DescriptionEng);
+            var command = new AddVariantCommand(restaurant, food, request.Name, request.NameEng, request.Price,
+                request.Description, request.DescriptionEng);
             return await HandleActionResultFor(command);
         }
-        
-        [HttpDelete("{restaurant}/foods/{food}/variants")]
-        public async Task<IActionResult> RemoveVariant(long restaurant, long food, [FromForm] RemoveVariantRequest request)
+
+
+        [HttpPut("{restaurant}/foods/{food}/variants/price")]
+        public async Task<IActionResult> UpdateVariantPrice(long restaurant, long food, UpdateFoodPriceRequest request)
         {
-            var command = new RemoveVariantCommand(restaurant,food,request.VariantName);
+            var updates = new List<VariantPriceUpdateModel>();
+            request.VariantPrices.ForEach(x => updates.Add(new VariantPriceUpdateModel(x.VariantName, x.NewPrice)));
+            if (updates.Count <= 0) return BadRequest();
+            
+            var command = new UpdateFoodPriceCommand(restaurant, food, updates);
+            return await HandleActionResultFor(command);
+
+        }
+
+        [HttpDelete("{restaurant}/foods/{food}/variants")]
+        public async Task<IActionResult> RemoveVariant(long restaurant, long food,
+            [FromForm] RemoveVariantRequest request)
+        {
+            var command = new RemoveVariantCommand(restaurant, food, request.VariantName);
             return await HandleActionResultFor(command);
         }
-        
+
         [HttpPut("{restaurant}/foods/{food}/add-ons")]
         public async Task<IActionResult> CreateAddOns(long restaurant, long food, [FromForm] CreateAddOnRequest request)
         {
-            var command = new CreateAddOnCommand(restaurant,food,request.Name,request.NameEng, request.Description,request.DescriptionEng,request.Price);
+            var command = new CreateAddOnCommand(restaurant, food, request.Name, request.NameEng, request.Description,
+                request.DescriptionEng, request.Price);
             return await HandleActionResultFor(command);
         }
-        
+
         [HttpDelete("{restaurant}/foods/{food}/add-ons")]
         public async Task<IActionResult> RemoveAddOns(long restaurant, long food, [FromForm] RemoveAddOnRequest request)
         {
-            var command = new RemoveAddOnCommand(restaurant,food,request.AddOnName);
+            var command = new RemoveAddOnCommand(restaurant, food, request.AddOnName);
             return await HandleActionResultFor(command);
         }
-        
-        
-        
     }
 }

@@ -70,6 +70,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                 builder.Property(x => x.Price)
                     .IsRequired()
                     .HasConversion(p => p.Value, p => MoneyValue.Of(p));
+                builder.Property(x => x.OldPrice)
+                    .IsRequired()
+                    .HasConversion(p => p.Value, p => MoneyValue.Of(p));
                 builder.Property(x => x.Name)
                     .IsRequired();
                 builder.Property(x => x.NameEng)

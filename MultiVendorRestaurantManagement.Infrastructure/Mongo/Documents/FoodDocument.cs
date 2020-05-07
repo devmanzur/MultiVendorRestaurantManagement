@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Common.Utils;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MultiVendorRestaurantManagement.Domain.Foods;
@@ -8,6 +10,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 {
     public class FoodDocument : BaseDocument
     {
+        private const string DefaultVariant = "Normale";
+        private const string DefaultVariantEng = "Regular";
+
         public FoodDocument(long restaurantId, long foodId, string imageUrl, string name, decimal unitPrice,
             decimal oldUnitPrice, string type, long categoryId, string status, bool isGlutenFree, bool isVeg,
             bool isNonVeg)
@@ -25,6 +30,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             IsVeg = isVeg;
             IsNonVeg = isNonVeg;
             GenerateTags();
+            AddDefaultVariant();
+        }
+
+        private void AddDefaultVariant()
+        {
+            AddVariant(new VariantDocument(DefaultVariant, nameEng: DefaultVariantEng, price: UnitPrice, "", ""));
         }
 
         private void GenerateTags()
@@ -102,6 +113,26 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         {
             MenuId = menuId;
         }
+
+        public void UpdateVariantPrice(VariantPriceUpdateModel model)
+        {
+            var variant = Variants.FirstOrDefault(x => x.Name == model.VariantName);
+            if (variant.HasValue())
+            {
+                if (model.VariantName.Equals(DefaultVariant))
+                {
+                    UpdateBasePrice(model.NewPrice);
+                }
+
+                variant.UpdatePrice(model.NewPrice);
+            }
+        }
+
+        private void UpdateBasePrice(decimal price)
+        {
+            OldUnitPrice = UnitPrice;
+            UnitPrice = price;
+        }
     }
 
     public class VariantDocument
@@ -111,6 +142,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             Name = name;
             NameEng = nameEng;
             Price = price;
+            OldPrice = price;
             Description = description;
             DescriptionEng = descriptionEng;
         }
@@ -120,6 +152,13 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public string Description { get; private set; }
         public string DescriptionEng { get; private set; }
         public decimal Price { get; private set; }
+        public decimal OldPrice { get; private set; }
+
+        public void UpdatePrice(decimal price)
+        {
+            OldPrice = Price;
+            Price = price;
+        }
     }
 
     public class AddOnDocument
