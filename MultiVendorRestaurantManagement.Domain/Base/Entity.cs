@@ -4,9 +4,8 @@ namespace MultiVendorRestaurantManagement.Domain.Base
 {
     public abstract class Entity
     {
-        [DefaultOrderBy]
-        public long Id { get; protected set; }
-        
+        [DefaultOrderBy] public long Id { get; protected set; }
+
         protected static void CheckRule(IBusinessRule rule)
         {
             if (rule.IsBroken())
@@ -14,7 +13,7 @@ namespace MultiVendorRestaurantManagement.Domain.Base
                 throw new BusinessRuleValidationException(rule);
             }
         }
-        
+
         public override bool Equals(object obj)
         {
             if (!(obj is Entity other))

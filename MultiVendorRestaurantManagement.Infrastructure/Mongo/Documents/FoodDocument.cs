@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Common.Invariants;
 using Common.Utils;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -132,6 +133,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         {
             OldUnitPrice = UnitPrice;
             UnitPrice = price;
+        }
+
+        public void UpdateStatus(FoodStatus status)
+        {
+            Status = status.ToString();
         }
     }
 

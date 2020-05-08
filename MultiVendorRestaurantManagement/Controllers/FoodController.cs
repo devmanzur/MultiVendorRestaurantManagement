@@ -10,6 +10,7 @@ using MultiVendorRestaurantManagement.Application.Food.RegisterFood;
 using MultiVendorRestaurantManagement.Application.Food.RemoveAddOn;
 using MultiVendorRestaurantManagement.Application.Food.RemoveVariant;
 using MultiVendorRestaurantManagement.Application.Food.UpdatePrice;
+using MultiVendorRestaurantManagement.Application.Food.UpdateStatus;
 using MultiVendorRestaurantManagement.Domain.Foods;
 
 namespace MultiVendorRestaurantManagement.Controllers
@@ -65,6 +66,29 @@ namespace MultiVendorRestaurantManagement.Controllers
         {
             var command = new CreateAddOnCommand(restaurant, food, request.Name, request.NameEng, request.Description,
                 request.DescriptionEng, request.Price);
+            return await HandleActionResultFor(command);
+        }
+        
+        
+        [HttpPut("{restaurant}/foods/{food}/available")]
+        public async Task<IActionResult> MakeFoodAvailable(long restaurant, long food)
+        {
+            var command = UpdateFoodStatusCommand.Available(restaurant,food);
+            return await HandleActionResultFor(command);
+        }
+        
+        
+        [HttpPut("{restaurant}/foods/{food}/unavailable")]
+        public async Task<IActionResult> MakeFoodUnavailable(long restaurant, long food)
+        {
+            var command = UpdateFoodStatusCommand.Unavailable(restaurant,food);
+            return await HandleActionResultFor(command);
+        }
+        
+        [HttpPut("{restaurant}/foods/{food}/out-of-stock")]
+        public async Task<IActionResult> FoodOutOfStock(long restaurant, long food)
+        {
+            var command = UpdateFoodStatusCommand.OutOfStock(restaurant,food);
             return await HandleActionResultFor(command);
         }
 

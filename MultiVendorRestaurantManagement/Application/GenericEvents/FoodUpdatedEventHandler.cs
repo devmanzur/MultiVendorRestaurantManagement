@@ -26,16 +26,21 @@ namespace MultiVendorRestaurantManagement.Application.GenericEvents
                 .FirstOrDefaultAsync(cancellationToken);
             if (food.HasValue())
             {
-                if (notification.MenuUpdated())
+                if (notification.MenuWasUpdated())
                 {
                     food.UpdateMenu(notification.MenuId);
                 }
 
-                if (notification.PriceUpdated())
+                if (notification.PriceWasUpdated())
                 {
                     notification.VariantPriceUpdates.ForEach(x => food.UpdateVariantPrice(x));
                     await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
                         cancellationToken: cancellationToken);
+                }
+
+                if (notification.StatusWasUpdated())
+                {
+                    food.UpdateStatus(notification.Status);
                 }
 
                 await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,

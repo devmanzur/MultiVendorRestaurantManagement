@@ -162,5 +162,10 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             OldUnitPrice = UnitPrice;
             UnitPrice = MoneyValue.Of(price);
         }
+
+        public void SetStatus(FoodStatus status)
+        {
+            Status = status;
+        }
     }
 }

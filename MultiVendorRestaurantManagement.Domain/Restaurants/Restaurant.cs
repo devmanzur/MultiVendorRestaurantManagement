@@ -228,5 +228,11 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, variantPriceUpdates));
             return Result.Ok();
         }
+
+        public void UpdateStatusFor(Food food, FoodStatus status)
+        {
+            food.SetStatus(status);
+            AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, status));
+        }
     }
 }
