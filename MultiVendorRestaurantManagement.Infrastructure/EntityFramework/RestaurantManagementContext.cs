@@ -2,8 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Domain.Common;
+using MultiVendorRestaurantManagement.Domain.Deals;
 using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.Orders;
+using MultiVendorRestaurantManagement.Domain.Promotions;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
@@ -230,14 +232,87 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .IsRequired();
                 builder.Property(x => x.Description)
                     .IsRequired();
+                builder.Property(x => x.Name)
+                    .IsRequired();
                 builder.Property(x => x.ImageUrl)
                     .IsRequired();
                 builder.Property(x => x.EndDate)
                     .IsRequired();
-                builder.HasMany(x => x.Items)
-                    .WithOne(x => x.Promotion)
-                    .OnDelete(DeleteBehavior.NoAction)
+
+                builder.Property(x=>x.FixedDiscountAmount)
+                    .HasColumnType("decimal(18,4)");
+                builder.Property(x=>x.MinimumBillAmount)
+                    .HasColumnType("decimal(18,4)");
+                builder.Property(x=>x.MaximumDiscountAmount)
+                    .HasColumnType("decimal(18,4)");
+                builder.Property(x=>x.DiscountPercentage)
+                    .HasColumnType("decimal(18,4)");
+                
+                builder.HasIndex(x => x.Name)
+                    .IsUnique();
+                builder.HasIndex(x => x.EndDate);
+                builder.Property("_items").HasColumnName("Items");
+                builder.HasMany(x => x.CouponCodes)
+                    .WithOne()
+                    .OnDelete(DeleteBehavior.Cascade)
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+            });
+
+            modelBuilder.Entity<Deal>(builder =>
+            {
+                builder.Property(x => x.StartDate)
+                    .IsRequired();
+                builder.Property(x => x.Description)
+                    .IsRequired();
+                builder.Property(x => x.Name)
+                    .IsRequired();
+                builder.Property(x => x.ImageUrl)
+                    .IsRequired();
+                builder.Property(x => x.EndDate)
+                    .IsRequired();
+                builder.Property(x => x.MinimumBillAmount)
+                    .IsRequired();
+                builder.Property(x => x.MinimumItemQuantity)
+                    .IsRequired();
+                builder.Property(x => x.IsFixedDiscount)
+                    .IsRequired();
+                builder.Property(x => x.IsPackageDeal)
+                    .IsRequired();
+
+                builder.Property(x=>x.FixedDiscountAmount)
+                    .HasColumnType("decimal(18,4)");
+                builder.Property(x=>x.MinimumBillAmount)
+                    .HasColumnType("decimal(18,4)");
+                builder.Property(x=>x.MaximumBillAmount)
+                    .HasColumnType("decimal(18,4)");
+                builder.Property(x=>x.MaximumDiscountAmount)
+                    .HasColumnType("decimal(18,4)");
+                builder.Property(x=>x.DiscountPercentage)
+                    .HasColumnType("decimal(18,4)");
+                
+                builder.HasIndex(x => x.Name)
+                    .IsUnique();
+                builder.HasIndex(x => x.EndDate);
+                builder.HasIndex(x => x.StartDate);
+
+                builder.HasMany(x => x.Items)
+                    .WithOne(x => x.Deal)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+
+
+            });
+            
+            modelBuilder.Entity<CouponCode>(builder =>
+            {
+                builder.HasIndex(x => x.Code);
+                builder.HasIndex(x => x.Username);
+                builder.Property(x => x.GeneratedAt)
+                    .IsRequired();
+                builder.Property(x => x.Code)
+                    .IsRequired();
+                builder.Property(x => x.CreatedBy)
+                    .IsRequired();
             });
 
             modelBuilder.Entity<Review>(builder =>
@@ -329,12 +404,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 
                 builder.HasMany(x => x.Foods)
                     .WithOne(x => x.Category)
-                    .OnDelete(DeleteBehavior.NoAction)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
 
                 builder.HasMany(x => x.Restaurants)
                     .WithOne(x => x.Category)
-                    .OnDelete(DeleteBehavior.NoAction)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
             });
 

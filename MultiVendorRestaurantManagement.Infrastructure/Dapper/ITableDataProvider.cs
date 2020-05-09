@@ -6,11 +6,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
 {
     public interface ITableDataProvider
     {
-        Task<LocalityTableData> GetLocalityAsync(long notificationCityId, string notificationLocalityName);
+        Task<LocalityTableData> GetLocalityAsync(long cityId, string localityName);
         Task<CityTableData> GetCityAsync(string name);
         Task<CategoryTableData> GetCategoryAsync(string name);
         Task<RestaurantTableData> GetRestaurantAsync(string phone);
         Task<MenuTableData2> GetMenuAsync(string menuName);
-        Task<FoodTableData> GetFoodAsync(long notificationRestaurantId, string notificationFoodName);
+        Task<FoodTableData> GetFoodAsync(long restaurantId, string foodName);
     }
 }

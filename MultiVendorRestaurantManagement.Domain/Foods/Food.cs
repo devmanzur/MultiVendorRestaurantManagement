@@ -6,6 +6,7 @@ using Common.Utils;
 using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Common;
+using MultiVendorRestaurantManagement.Domain.Deals;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
 using MultiVendorRestaurantManagement.Domain.Rules;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
@@ -44,16 +45,13 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         private List<AddOn> _addOns = new List<AddOn>();
         public List<AddOn> AddOns => _addOns.ToList();
         public Category Category { get; private set; }
-        public bool IsOnPromotion { get; protected set; }
-        public Promotion Promotion { get; protected set; }
-
-        public string Discount { get; private set; }
-
+        public Deal Deal { get; private set; }
         public string ImageUrl { get; private set; }
 
         public double Rating { get; private set; }
 
         public int TotalRatingsCount { get; private set; }
+        public int TotalOrderCount { get; private set; }
 
 
         protected Food()
@@ -75,13 +73,13 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             Status = FoodStatus.Available;
             Rating = 0;
             TotalRatingsCount = 0;
-            SetDefaultVariant(unitPrice);
-        }
+            TotalOrderCount = 0;
+            SetDefaultVariant();
 
-        [Obsolete("Do not call this method from other than the constructor itself")]
-        private void SetDefaultVariant(MoneyValue unitPrice)
-        {
-            AddVariant(new Variant(DefaultVariant, nameEng: DefaultVariantEng, price: unitPrice, "", ""));
+            void SetDefaultVariant()
+            {
+                AddVariant(new Variant(DefaultVariant, nameEng: DefaultVariantEng, price: unitPrice, "", ""));
+            }
         }
 
         public void AddRating(int remark)
@@ -91,15 +89,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             temp += remark;
             Rating = temp / TotalRatingsCount;
         }
-
-        public void AddToPromotion(Promotion promotion, decimal promotionPrice, string discount)
-        {
-            Promotion = promotion;
-            IsOnPromotion = true;
-            UnitPrice = MoneyValue.Of(promotionPrice);
-            Discount = discount;
-        }
-
+        
         public void AddVariant(Variant variant)
         {
             CheckRule(new ConditionMustBeTrueRule(variant.HasValue() && MustNotContainVariantWithSameName(variant),
@@ -140,7 +130,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             _addOns.Remove(addOn);
         }
 
-        public Result UpdateVariantPrice(VariantPriceUpdateModel model)
+        public Result<bool> UpdateVariantPrice(VariantPriceUpdateModel model)
         {
             var variant = _variants.FirstOrDefault(x => x.Name == model.VariantName);
             if (variant.HasValue())
@@ -151,10 +141,10 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
                 }
 
                 variant.UpdatePrice(MoneyValue.Of(model.NewPrice));
-                return Result.Ok();
+                return Result.Ok(variant.IsPriceReduced());
             }
 
-            return Result.Failure("failed to update");
+            return Result.Failure<bool>("failed to update");
         }
 
         private void UpdateBasePrice(decimal price)
@@ -166,6 +156,11 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public void SetStatus(FoodStatus status)
         {
             Status = status;
+        }
+
+        public void SetOffer(Deal deal)
+        {
+            Deal = deal;
         }
     }
 }

@@ -26,12 +26,13 @@ namespace MultiVendorRestaurantManagement.Application.Food.UpdatePrice
             var restaurant = await _context.Restaurants.Include(x => x.Foods).ThenInclude(x => x.Variants)
                 .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken: cancellationToken);
 
-            if (restaurant.HasValue() || restaurant.Foods.HasValue())
+            if (restaurant.HasValue())
             {
                 var food = restaurant.Foods.FirstOrDefault(x => x.Id == request.FoodId);
                 if (food.HasValue())
                 {
-                    restaurant.UpdateVariantPriceFor(food, request.VariantPriceUpdates);
+                    var task = restaurant.UpdateVariantPriceFor(food, request.VariantPriceUpdates);
+                    if (task.IsFailure) return Result.Failure("failed to complete action");
                 }
 
                 var result = await _unitOfWork.CommitAsync(cancellationToken);

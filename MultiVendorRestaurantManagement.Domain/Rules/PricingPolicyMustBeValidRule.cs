@@ -28,6 +28,6 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
             return false;
         }
 
-        public string Message { get; } = "Invalid pricing policy";
+        public string ErrorMessage { get; } = "Invalid pricing policy";
     }
 }

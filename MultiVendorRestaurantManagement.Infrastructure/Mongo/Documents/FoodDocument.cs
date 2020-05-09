@@ -14,11 +14,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         private const string DefaultVariant = "Normale";
         private const string DefaultVariantEng = "Regular";
 
-        public FoodDocument(long restaurantId, long foodId, string imageUrl, string name, decimal unitPrice,
+        public FoodDocument(long restaurantId, string restaurantName ,long foodId, string imageUrl, string name, decimal unitPrice,
             decimal oldUnitPrice, string type, long categoryId, string status, bool isGlutenFree, bool isVeg,
             bool isNonVeg)
         {
             RestaurantId = restaurantId;
+            RestaurantName = restaurantName;
             FoodId = foodId;
             ImageUrl = imageUrl;
             Name = name;
@@ -58,10 +59,13 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         }
 
         public long RestaurantId { get; private set; }
+        public string RestaurantName { get; private set; }
         public long FoodId { get; private set; }
         public string ImageUrl { get; private set; }
         public string Name { get; private set; }
 
+        public bool IsDiscounted { get; private set; }
+        
         [BsonRepresentation(BsonType.Decimal128)]
         public decimal UnitPrice { get; private set; }
 
@@ -78,15 +82,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
         public List<AddOnDocument> AddOns { get; protected set; } = new List<AddOnDocument>();
         public int OrderCount { get; private set; }
-        public string PriceTag => MoneyValue.Of(UnitPrice).PriceTag;
-
-        public long PromotionId { get; private set; }
         public long MenuId { get; private set; }
-        public bool IsOnPromotion { get; private set; }
-        public string Discount { get; private set; }
+        public string MenuName { get; private set; }
 
         public double Rating { get; private set; } = 0;
         public int TotalRatingCount { get; private set; } = 0;
+        public int TotalOrderCount { get; private set; } = 0;
 
         public void AddVariant(VariantDocument variant)
         {
@@ -110,9 +111,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             AddOns.Remove(addOn);
         }
 
-        public void UpdateMenu(in long menuId)
+        public void UpdateMenu(long menuId, string name)
         {
             MenuId = menuId;
+            MenuName = name;
         }
 
         public void UpdateVariantPrice(VariantPriceUpdateModel model)
@@ -138,6 +140,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public void UpdateStatus(FoodStatus status)
         {
             Status = status.ToString();
+        }
+
+        public void SetOnDiscount()
+        {
+            IsDiscounted = true;
         }
     }
 
@@ -196,4 +203,5 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public string Name { get; set; }
         public string NameEng { get; set; }
     }
+    
 }

@@ -117,38 +117,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.Promotion", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DescriptionEng")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsExclusive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Promotions");
-                });
-
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Common.Review", b =>
                 {
                     b.Property<long>("Id")
@@ -172,6 +140,79 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reviews");
+                });
+
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Deals.Deal", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEng")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DiscountPercentage")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("FixedDiscountAmount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("FreeItemQuantityInPackage")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFixedDiscount")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPackageDeal")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("MaximumBillAmount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<decimal>("MaximumDiscountAmount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("MaximumItemQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MinimumBillAmount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("MinimumItemQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("PackageSize")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EndDate");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("StartDate");
+
+                    b.ToTable("Deal");
                 });
 
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Foods.AddOn", b =>
@@ -218,8 +259,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.Property<long?>("CategoryId")
                         .HasColumnType("bigint");
 
-                    b.Property<string>("Discount")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long?>("DealId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -229,9 +270,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsNonVeg")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsOnPromotion")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsVeg")
@@ -247,9 +285,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.Property<decimal>("OldUnitPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long?>("PromotionId")
-                        .HasColumnType("bigint");
-
                     b.Property<double>("Rating")
                         .HasColumnType("float");
 
@@ -259,6 +294,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalOrderCount")
+                        .HasColumnType("int");
 
                     b.Property<int>("TotalRatingsCount")
                         .HasColumnType("int");
@@ -274,11 +312,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("DealId");
+
                     b.HasIndex("MenuId");
 
                     b.HasIndex("Name");
-
-                    b.HasIndex("PromotionId");
 
                     b.HasIndex("RestaurantId");
 
@@ -469,6 +507,113 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.ToTable("OrderItem");
                 });
 
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Promotions.CouponCode", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("GeneratedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDelivered")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<long?>("PromotionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UsedBy")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code");
+
+                    b.HasIndex("PromotionId");
+
+                    b.HasIndex("Username");
+
+                    b.ToTable("CouponCode");
+                });
+
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Promotions.Promotion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DescriptionEng")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DiscountPercentage")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("FixedDiscountAmount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsFixedDiscount")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("MaximumDiscountAmount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("MaximumItemQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MinimumBillAmount")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("MinimumItemQuantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("_items")
+                        .HasColumnName("Items")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EndDate");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Promotions");
+                });
+
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Restaurants.Menu", b =>
                 {
                     b.Property<long>("Id")
@@ -625,16 +770,16 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Common.Category", "Category")
                         .WithMany("Foods")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("MultiVendorRestaurantManagement.Domain.Deals.Deal", "Deal")
+                        .WithMany("Items")
+                        .HasForeignKey("DealId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Restaurants.Menu", null)
                         .WithMany("Items")
                         .HasForeignKey("MenuId");
-
-                    b.HasOne("MultiVendorRestaurantManagement.Domain.Common.Promotion", "Promotion")
-                        .WithMany("Items")
-                        .HasForeignKey("PromotionId")
-                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Restaurants.Restaurant", "Restaurant")
                         .WithMany("Foods")
@@ -685,6 +830,14 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Promotions.CouponCode", b =>
+                {
+                    b.HasOne("MultiVendorRestaurantManagement.Domain.Promotions.Promotion", null)
+                        .WithMany("CouponCodes")
+                        .HasForeignKey("PromotionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Restaurants.Menu", b =>
                 {
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Restaurants.Restaurant", "Restaurant")
@@ -698,7 +851,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Common.Category", "Category")
                         .WithMany("Restaurants")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Cities.Locality", "Locality")
                         .WithMany()

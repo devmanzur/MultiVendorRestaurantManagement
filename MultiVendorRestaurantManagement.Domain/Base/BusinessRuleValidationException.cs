@@ -8,15 +8,15 @@ namespace MultiVendorRestaurantManagement.Domain.Base
 
         public string Details { get; }
 
-        public BusinessRuleValidationException(IBusinessRule brokenRule) : base(brokenRule.Message)
+        public BusinessRuleValidationException(IBusinessRule brokenRule) : base(brokenRule.ErrorMessage)
         {
             BrokenRule = brokenRule;
-            this.Details = brokenRule.Message;
+            this.Details = brokenRule.ErrorMessage;
         }
 
         public override string ToString()
         {
-            return $"{BrokenRule.GetType().FullName}: {BrokenRule.Message}";
+            return $"{BrokenRule.GetType().FullName}: {BrokenRule.ErrorMessage}";
         }
     }
 }

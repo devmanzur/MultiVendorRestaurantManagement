@@ -103,7 +103,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             CheckRule(new ConditionMustBeTrueRule(food.HasValue() && MustNotContainFoodWithSameName(food),
                 "food with same name already exists"));
             _foods.Add(food);
-            AddDomainEvent(new FoodRegisteredEvent(Id, food.Name));
+            AddDomainEvent(new FoodRegisteredEvent(Id,Name, food.Name));
         }
 
         public void AddRating(int remark)
@@ -214,18 +214,28 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             CheckRule(new ConditionMustBeTrueRule(food != null && menu != null, "invalid menu/food combination"));
             CheckRule(new ConditionMustBeTrueRule(!menu.Items.Contains(food), "menu already has the food"));
             menu.AddItem(food);
-            AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, menu.Id));
+            AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, menu.Id, menu.Name));
         }
 
         public Result UpdateVariantPriceFor(Food food, List<VariantPriceUpdateModel> variantPriceUpdates)
         {
-            foreach (var process in variantPriceUpdates.Select(model => food.UpdateVariantPrice(model))
+            var isDiscounted = false;
+
+            foreach (var process in variantPriceUpdates.Select(x =>
+                {
+                    var task = food.UpdateVariantPrice(x);
+                    if (!isDiscounted)
+                    {
+                        isDiscounted = task.Value;
+                    }
+
+                    return task;
+                })
                 .Where(process => process.IsFailure))
             {
                 return Result.Failure(process.Error);
             }
-
-            AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, variantPriceUpdates));
+            AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, variantPriceUpdates, isDiscounted));
             return Result.Ok();
         }
 

@@ -13,6 +13,6 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
 
         public bool IsBroken() => string.IsNullOrEmpty(_currency);
 
-        public string Message => "Money value must have currency";
+        public string ErrorMessage => "Money value must have currency";
     }
 }

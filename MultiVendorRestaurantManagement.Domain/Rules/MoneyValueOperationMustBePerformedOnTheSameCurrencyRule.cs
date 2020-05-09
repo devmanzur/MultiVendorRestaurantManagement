@@ -17,6 +17,6 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
 
         public bool IsBroken() => _left.Currency != _right.Currency;
 
-        public string Message => "Money value currencies must be the same";
+        public string ErrorMessage => "Money value currencies must be the same";
     }
 }

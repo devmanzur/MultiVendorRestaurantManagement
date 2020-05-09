@@ -31,6 +31,6 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
             }
         }
 
-        public string Message  => "Location must be valid combination of latitude & longitude values";
+        public string ErrorMessage  => "Location must be valid combination of latitude & longitude values";
     }
 }

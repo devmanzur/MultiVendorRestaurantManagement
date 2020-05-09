@@ -6,5 +6,7 @@ namespace Common.Invariants
     {
         [Description("€")]
         Euro,
+        [Description("¢")]
+        Cent
     }
 }

@@ -12,21 +12,26 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public long FoodId { get; }
         public FoodStatus Status { get; }
         public long MenuId { get; }
+        public string MenuName { get; }
 
         public List<VariantPriceUpdateModel> VariantPriceUpdates { get; }
+        public bool IsDiscounted { get; } 
 
-        public FoodUpdatedEvent(long restaurantId, long foodId, List<VariantPriceUpdateModel> variantPriceUpdates)
+        public FoodUpdatedEvent(long restaurantId, long foodId, List<VariantPriceUpdateModel> variantPriceUpdates,
+            bool isDiscounted)
         {
             RestaurantId = restaurantId;
             FoodId = foodId;
             VariantPriceUpdates = variantPriceUpdates;
+            IsDiscounted = isDiscounted;
         }
 
-        public FoodUpdatedEvent(long restaurantId, long foodId, long menuId)
+        public FoodUpdatedEvent(long restaurantId, long foodId, long menuId, string menuName)
         {
             RestaurantId = restaurantId;
             FoodId = foodId;
             MenuId = menuId;
+            MenuName = menuName;
         }
 
         public FoodUpdatedEvent(long restaurantId, long foodId, FoodStatus status = FoodStatus.Invalid)

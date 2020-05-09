@@ -33,5 +33,10 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             OldPrice = Price;
             Price = value;
         }
+
+        public bool IsPriceReduced()
+        {
+            return OldPrice.Value > Price.Value;
+        }
     }
 }

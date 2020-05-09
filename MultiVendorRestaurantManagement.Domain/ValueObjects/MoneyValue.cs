@@ -24,7 +24,15 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
 
         public static MoneyValue Of(decimal value)
         {
-            var currency = SupportedCurrency.Euro;
+            SupportedCurrency currency;
+            if (value >= 1)
+            {
+                currency = SupportedCurrency.Euro;
+            }
+            else
+            {
+                currency = SupportedCurrency.Cent;
+            }
             CheckRule(new MoneyValueMustHaveCurrencyRule(currency.ToDescriptionString()));
 
             return new MoneyValue(value, currency.ToDescriptionString());
@@ -56,6 +64,9 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
         {
             return new MoneyValue(number * moneyValueRight.Value, moneyValueRight.Currency);
         }
+        
+        
+        
     }
 
     public static class SumExtensions

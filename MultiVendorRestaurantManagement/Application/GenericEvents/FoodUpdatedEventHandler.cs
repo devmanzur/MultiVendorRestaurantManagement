@@ -28,7 +28,7 @@ namespace MultiVendorRestaurantManagement.Application.GenericEvents
             {
                 if (notification.MenuWasUpdated())
                 {
-                    food.UpdateMenu(notification.MenuId);
+                    food.UpdateMenu(notification.MenuId, notification.MenuName);
                 }
 
                 if (notification.PriceWasUpdated())
@@ -36,6 +36,11 @@ namespace MultiVendorRestaurantManagement.Application.GenericEvents
                     notification.VariantPriceUpdates.ForEach(x => food.UpdateVariantPrice(x));
                     await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
                         cancellationToken: cancellationToken);
+                }
+
+                if (notification.IsDiscounted)
+                {
+                    food.SetOnDiscount();
                 }
 
                 if (notification.StatusWasUpdated())

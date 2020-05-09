@@ -19,6 +19,6 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
                    _openingHour > _closingHour;
         }
 
-        public string Message => "opening and closing hours must be valid";
+        public string ErrorMessage => "opening and closing hours must be valid";
     }
 }

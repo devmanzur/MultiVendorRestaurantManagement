@@ -27,6 +27,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
             if (item.HasValue())
             {
                 var food = new FoodDocument(item.RestaurantId,
+                    notification.RestaurantName,
                     item.Id,
                     item.ImageUrl,
                     item.Name,
