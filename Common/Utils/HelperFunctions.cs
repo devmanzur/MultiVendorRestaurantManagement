@@ -30,11 +30,11 @@ namespace Common.Utils
             return count >= 0;
         }
 
-        public static bool ContainOneValidItem<T>(this IEnumerable<T> items)
-        {
-            var enumerable = items as T[] ?? items.ToArray();
-            return items.HasValue() && enumerable.Count() > 1 && enumerable.Any() == false &&
-                   enumerable.FirstOrDefault() != null;
-        }
+        // public static bool ContainOneValidItem<T>(this IEnumerable<T> items)
+        // {
+        //     var enumerable = items as T[] ?? items.ToArray();
+        //     return items.HasValue() && enumerable.Count() > 1 && enumerable.Any() &&
+        //            enumerable.FirstOrDefault() != null;
+        // }
     }
 }

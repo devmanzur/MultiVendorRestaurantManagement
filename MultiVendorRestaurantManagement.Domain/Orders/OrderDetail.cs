@@ -5,9 +5,9 @@ namespace MultiVendorRestaurantManagement.Domain.Orders
 {
     
     public class OrderDetail : Entity{
-        public OrderDetail(LocationValue deliveryLocation, string address, string flat, string houseNo, string contactNumber, string customerName)
+        public OrderDetail(LocationCustomValue deliveryLocationCustom, string address, string flat, string houseNo, string contactNumber, string customerName)
         {
-            DeliveryLocation = deliveryLocation;
+            DeliveryLocationCustom = deliveryLocationCustom;
             Address = address;
             Flat = flat;
             HouseNo = houseNo;
@@ -18,7 +18,7 @@ namespace MultiVendorRestaurantManagement.Domain.Orders
         public string Address { get; protected set; }
         public string Flat { get; protected set; }
         public string HouseNo { get; protected set; }
-        public LocationValue DeliveryLocation { get; protected set; }  
+        public LocationCustomValue DeliveryLocationCustom { get; protected set; }  
         public string ContactNumber { get; protected set; }
         public string CustomerName { get; protected set; }
     }

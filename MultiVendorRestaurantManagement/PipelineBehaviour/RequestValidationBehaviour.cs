@@ -9,7 +9,6 @@ namespace MultiVendorRestaurantManagement.PipelineBehaviour
 {
     
     public class RequestValidationBehaviour<TRequest, TResult> : IPipelineBehavior<TRequest, TResult>
-        where TRequest : IRequest<TResult>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {
-    
     public class BaseController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -212,7 +212,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
 
                     b.HasIndex("StartDate");
 
-                    b.ToTable("Deal");
+                    b.ToTable("Deals");
                 });
 
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Foods.AddOn", b =>
@@ -832,7 +832,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Promotions.CouponCode", b =>
                 {
-                    b.HasOne("MultiVendorRestaurantManagement.Domain.Promotions.Promotion", null)
+                    b.HasOne("MultiVendorRestaurantManagement.Domain.Promotions.Promotion", "Promotion")
                         .WithMany("CouponCodes")
                         .HasForeignKey("PromotionId")
                         .OnDelete(DeleteBehavior.Cascade);

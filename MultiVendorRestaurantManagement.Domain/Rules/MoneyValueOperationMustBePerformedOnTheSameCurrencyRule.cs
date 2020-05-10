@@ -5,11 +5,11 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
 {
     public class MoneyValueOperationMustBePerformedOnTheSameCurrencyRule : IBusinessRule
     {
-        private readonly MoneyValue _left;
+        private readonly MoneyCustomValue _left;
 
-        private readonly MoneyValue _right;
+        private readonly MoneyCustomValue _right;
 
-        public MoneyValueOperationMustBePerformedOnTheSameCurrencyRule(MoneyValue left, MoneyValue right)
+        public MoneyValueOperationMustBePerformedOnTheSameCurrencyRule(MoneyCustomValue left, MoneyCustomValue right)
         {
             _left = left;
             _right = right;

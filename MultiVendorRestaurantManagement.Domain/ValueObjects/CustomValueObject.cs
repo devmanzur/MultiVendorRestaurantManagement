@@ -6,12 +6,12 @@ using MultiVendorRestaurantManagement.Domain.Base;
 
 namespace MultiVendorRestaurantManagement.Domain.ValueObjects
 {
-     public abstract class ValueObject : IEquatable<ValueObject>
+     public abstract class CustomValueObject : IEquatable<CustomValueObject>
     {
         private List<PropertyInfo> _properties;
         private List<FieldInfo> _fields;
 
-        public static bool operator ==(ValueObject obj1, ValueObject obj2)
+        public static bool operator ==(CustomValueObject obj1, CustomValueObject obj2)
         {
             if (object.Equals(obj1, null))
             {
@@ -24,12 +24,12 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
             return obj1.Equals(obj2);
         }
 
-        public static bool operator !=(ValueObject obj1, ValueObject obj2)
+        public static bool operator !=(CustomValueObject obj1, CustomValueObject obj2)
         {
             return !(obj1 == obj2);
         }
 
-        public bool Equals(ValueObject obj)
+        public bool Equals(CustomValueObject obj)
         {
             return Equals(obj as object);
         }

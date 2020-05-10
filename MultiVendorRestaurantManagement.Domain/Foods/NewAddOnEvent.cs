@@ -11,10 +11,10 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public string AddOnNameEng { get; }
         public string AddOnDescription { get; }
         public string AddOnDescriptionEng { get; }
-        public MoneyValue Price { get; }
+        public MoneyCustomValue Price { get; }
 
         public NewAddOnEvent(long restaurantId, long foodId, string addOnName, string addOnNameEng,
-            string addOnDescription, string addOnDescriptionEng, MoneyValue price)
+            string addOnDescription, string addOnDescriptionEng, MoneyCustomValue price)
         {
             RestaurantId = restaurantId;
             FoodId = foodId;

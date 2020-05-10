@@ -23,15 +23,13 @@ namespace MultiVendorRestaurantManagement.Controllers
                 new RegisterCategoryCommand(request.NameEng, request.Name, request.Categorize, request.ImageUrl);
             return await HandleActionResultFor(command);
         }
-        
+
         [HttpPut("{category}")]
         public async Task<IActionResult> UpdateCategory(long category, [FromForm] UpdateCategoryRequest request)
         {
             var command =
-                new UpdateCategoryCommand(request.Name, request.NameEng, category,request.ImageUrl);
+                new UpdateCategoryCommand(request.Name, request.NameEng, category, request.ImageUrl);
             return await HandleActionResultFor(command);
         }
-        
-        
     }
 }

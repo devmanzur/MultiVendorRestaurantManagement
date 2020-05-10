@@ -10,8 +10,8 @@ namespace MultiVendorRestaurantManagement.Domain.Orders
 {
     public class Order : Entity
     {
-        public Order(OrderType type, MoneyValue totalAmount,
-            MoneyValue payableAmount, SupportedPaymentType paymentType)
+        public Order(OrderType type, MoneyCustomValue totalAmount,
+            MoneyCustomValue payableAmount, SupportedPaymentType paymentType)
         {
             Type = type;
             TotalAmount = totalAmount;
@@ -29,8 +29,8 @@ namespace MultiVendorRestaurantManagement.Domain.Orders
 
         public OrderState State { get; protected set; } = OrderState.Pending;
         public OrderType Type { get; protected set; }
-        public MoneyValue TotalAmount { get; protected set; }
-        public MoneyValue PayableAmount { get; protected set; }
+        public MoneyCustomValue TotalAmount { get; protected set; }
+        public MoneyCustomValue PayableAmount { get; protected set; }
         public SupportedPaymentType PaymentType { get; protected set; }
     }
 }

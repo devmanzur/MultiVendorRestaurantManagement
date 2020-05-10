@@ -21,7 +21,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
         public bool IsVeg { get; }
         public bool IsGlutenFree { get; }
         public bool IsNonVeg { get; }
-        public MoneyValue UnitPrice { get; }
+        public MoneyCustomValue UnitPrice { get; }
 
         public RegisterFoodCommand(long restaurantId, string name, string type, long categoryId, string imageUrl,
             bool isVeg,
@@ -35,7 +35,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
             IsVeg = isVeg;
             IsGlutenFree = isGlutenFree;
             IsNonVeg = isNonVeg;
-            UnitPrice = MoneyValue.Of(unitPrice);
+            UnitPrice = MoneyCustomValue.Of(unitPrice);
         }
     }
 

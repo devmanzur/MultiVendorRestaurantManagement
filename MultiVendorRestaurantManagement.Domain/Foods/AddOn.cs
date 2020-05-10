@@ -6,7 +6,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 {
     public class AddOn : Entity
     {
-        public AddOn(string name, string nameEng, string description, string descriptionEng, MoneyValue price)
+        public AddOn(string name, string nameEng, string description, string descriptionEng, MoneyCustomValue price)
         {
             Name = name;
             NameEng = nameEng;
@@ -19,7 +19,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public string NameEng { get; protected set; }
         public string Description { get; protected set; }
         public string DescriptionEng { get; protected set; }
-        public MoneyValue Price { get; set; }
+        public MoneyCustomValue Price { get; set; }
         public virtual Food Food { get; private set; }
     }
 }

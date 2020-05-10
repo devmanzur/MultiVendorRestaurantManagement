@@ -35,5 +35,6 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
         public DateTime GeneratedAt { get; private set; }
         public string UsedBy { get; private set; }
         public string CreatedBy { get; private set; }
+        public Promotion Promotion { get; private set; }
     }
 }
