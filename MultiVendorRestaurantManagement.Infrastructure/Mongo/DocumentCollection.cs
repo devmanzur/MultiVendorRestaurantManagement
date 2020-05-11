@@ -9,9 +9,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
         Restaurants,
         Cities,
         Categories,
-        Foods
+        Foods,
+        Deals
     }
-    
+
     public class DocumentCollection
     {
         private readonly IMongoDatabase _documents;
@@ -22,14 +23,19 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo
             var client = new MongoClient(connectivity.ConnectionString);
             _documents = client.GetDatabase(connectivity.Database);
         }
-        
-        public IMongoCollection<RestaurantDocument> RestaurantsCollection 
+
+        public IMongoCollection<RestaurantDocument> RestaurantsCollection
             => _documents.GetCollection<RestaurantDocument>(Collections.Restaurants.ToString());
-        
-        public IMongoCollection<FoodDocument> FoodCollection 
+
+        public IMongoCollection<FoodDocument> FoodCollection
             => _documents.GetCollection<FoodDocument>(Collections.Foods.ToString());
-        public IMongoCollection<CityDocument> CitiesCollection 
+
+        public IMongoCollection<DealDocument> DealCollection
+            => _documents.GetCollection<DealDocument>(Collections.Deals.ToString());
+
+        public IMongoCollection<CityDocument> CitiesCollection
             => _documents.GetCollection<CityDocument>(Collections.Cities.ToString());
+
         public IMongoCollection<CategoryDocument> CategoriesCollection
             => _documents.GetCollection<CategoryDocument>(Collections.Categories.ToString());
     }

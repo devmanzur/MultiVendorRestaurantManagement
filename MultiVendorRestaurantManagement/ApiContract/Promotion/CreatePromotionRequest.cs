@@ -10,14 +10,14 @@ namespace MultiVendorRestaurantManagement.ApiContract.Promotion
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public decimal MinimumBillAmount { get; set; }
-        public decimal DiscountAmount { get; set; }
-        public int MinimumQuantity { get; set; }
+        public decimal MinimumBillAmount { get; set; } = 0;
+        public decimal DiscountAmount { get; set; } = 0;
+        public int MinimumQuantity { get; set; } = 1;
 
-        public bool IsFixedPriceDiscount { get; set; }
-        
-        public decimal DiscountPercentage { get; set; }
-        public decimal MaximumDiscount { get; set; }
+        public bool IsFixedPriceDiscount { get; set; } = false;
+
+        public decimal DiscountPercentage { get; set; } = 0;
+        public decimal MaximumDiscount { get; set; } = 0;
 
     }
 }

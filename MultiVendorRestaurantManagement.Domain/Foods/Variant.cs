@@ -9,7 +9,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         {
             
         }
-        public Variant(string name, string nameEng, MoneyCustomValue price, string description, string descriptionEng)
+        public Variant(string name, string nameEng, MoneyValue price, string description, string descriptionEng)
         {
             Name = name;
             NameEng = nameEng;
@@ -23,15 +23,15 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public string NameEng { get; private set; }
         public string Description { get; private set; }
         public string DescriptionEng { get; private set; }
-        public MoneyCustomValue Price { get; private set; }
-        public MoneyCustomValue OldPrice { get; private set; }
+        public MoneyValue Price { get; private set; }
+        public MoneyValue OldPrice { get; private set; }
         public Food Food { get; private set; }
 
 
-        public void UpdatePrice(MoneyCustomValue customValue)
+        public void UpdatePrice(MoneyValue value)
         {
             OldPrice = Price;
-            Price = customValue;
+            Price = value;
         }
 
         public bool IsPriceReduced()

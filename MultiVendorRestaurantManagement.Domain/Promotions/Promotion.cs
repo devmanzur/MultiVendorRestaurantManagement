@@ -7,7 +7,6 @@ using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.Orders;
 using MultiVendorRestaurantManagement.Domain.Rules;
-using MultiVendorRestaurantManagement.Domain.ValueObjects;
 using Newtonsoft.Json;
 
 namespace MultiVendorRestaurantManagement.Domain.Promotions
@@ -31,7 +30,7 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
 
         public static Promotion CreateFixedPriceDiscountPromotion(string name, string imageUrl, string description,
             string descriptionEng, DateTime startDate,
-            in DateTime endDate, FixedPromotionModel model)
+            in DateTime endDate, FixedDiscountModel model)
         {
             var promotion = new Promotion(name, imageUrl, descriptionEng, description, startDate, endDate);
             promotion.CreateFixedPriceDiscount(model);
@@ -40,14 +39,14 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
 
         public static Promotion CreatePercentageDiscountPromotion(string name, string imageUrl, string descriptionEng,
             string description,
-            DateTime startDate, DateTime endDate, PercentagePromotionModel model)
+            DateTime startDate, DateTime endDate, PercentageDiscountModel model)
         {
             var promotion = new Promotion(name, imageUrl, descriptionEng, description, startDate, endDate);
             promotion.CreatePercentageDiscount(model);
             return promotion;
         }
 
-        private void CreatePercentageDiscount(PercentagePromotionModel model)
+        private void CreatePercentageDiscount(PercentageDiscountModel model)
         {
             DiscountPercentage = model.DiscountPercentage;
             MinimumBillAmount = model.MinBillAmount;
@@ -59,7 +58,7 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             FixedDiscountAmount = 0;
         }
 
-        private void CreateFixedPriceDiscount(FixedPromotionModel model)
+        private void CreateFixedPriceDiscount(FixedDiscountModel model)
         {
             IsFixedDiscount = true;
             FixedDiscountAmount = model.DiscountAmount;
@@ -199,48 +198,5 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
 
             return false;
         }
-    }
-
-
-    public class FixedPromotionModel : CustomValueObject
-    {
-        public FixedPromotionModel(decimal discountAmount, decimal minBillAmount, int minQuantity)
-        {
-            CheckRule(new ConditionMustBeTrueRule(HelperFunctions.ValidAmount(DiscountAmount) &&
-                                                  HelperFunctions.ValidAmount(MinBillAmount) &&
-                                                  HelperFunctions.ValidCount(MinQuantity),
-                "invalid parameters for discount"));
-            DiscountAmount = discountAmount;
-            MinBillAmount = minBillAmount;
-            MinQuantity = minQuantity;
-        }
-
-        public int MaxQuantity = 1000;
-        public decimal DiscountAmount { get; private set; }
-        public int MinQuantity { get; private set; }
-        public decimal MinBillAmount { get; private set; }
-    }
-
-    public class PercentagePromotionModel : CustomValueObject
-    {
-        public PercentagePromotionModel(decimal discountPercentage, decimal maxDiscountAmount, decimal minBillAmount,
-            int minQuantity)
-        {
-            CheckRule(new ConditionMustBeTrueRule(HelperFunctions.ValidAmount(DiscountPercentage)
-                                                  && HelperFunctions.ValidAmount(maxDiscountAmount) &&
-                                                  HelperFunctions.ValidAmount(MinBillAmount) &&
-                                                  HelperFunctions.ValidCount(MinQuantity),
-                "invalid parameters for discount"));
-            DiscountPercentage = discountPercentage;
-            MaxDiscountAmount = maxDiscountAmount;
-            MinBillAmount = minBillAmount;
-            MinQuantity = minQuantity;
-        }
-
-        public int MaxQuantity = 1000;
-        public decimal DiscountPercentage { get; private set; }
-        public decimal MaxDiscountAmount { get; private set; }
-        public int MinQuantity { get; private set; }
-        public decimal MinBillAmount { get; private set; }
     }
 }

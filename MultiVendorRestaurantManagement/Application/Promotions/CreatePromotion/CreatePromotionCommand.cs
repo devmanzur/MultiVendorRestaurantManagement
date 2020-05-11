@@ -16,9 +16,9 @@ namespace MultiVendorRestaurantManagement.Application.Promotions.CreatePromotion
         public DateTime StartDate { get; }
         public DateTime EndDate { get; }
         
-        public PercentagePromotionModel PercentageModel { get;  }
+        public PercentageDiscountModel PercentageModel { get;  }
 
-        public FixedPromotionModel FixedPriceModel { get;  }
+        public FixedDiscountModel FixedPriceModel { get;  }
 
 
         public CreatePromotionCommand(string name, string imageUrl, string description, string descriptionEng,
@@ -35,11 +35,11 @@ namespace MultiVendorRestaurantManagement.Application.Promotions.CreatePromotion
             EndDate = endDate;
             if (isFixedPriceDiscount)
             {
-                FixedPriceModel = new FixedPromotionModel(discountAmount, minimumBillAmount, minimumQuantity);
+                FixedPriceModel = new FixedDiscountModel(discountAmount, minimumBillAmount, minimumQuantity);
             }
             else
             {
-                PercentageModel = new PercentagePromotionModel(discountPercentage, maximumDiscount, minimumBillAmount,
+                PercentageModel = new PercentageDiscountModel(discountPercentage, maximumDiscount, minimumBillAmount,
                     minimumQuantity);
             }
         }

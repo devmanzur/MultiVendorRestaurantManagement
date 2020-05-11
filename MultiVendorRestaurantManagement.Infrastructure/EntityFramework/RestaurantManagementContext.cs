@@ -40,10 +40,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 
                     builder.Property(p => p.UnitPrice)
                         .IsRequired()
-                        .HasConversion(p => p.Value, p => MoneyCustomValue.Of(p));
+                        .HasConversion(p => p.Value, p => MoneyValue.Of(p));
                     builder.Property(p => p.OldUnitPrice)
                         .IsRequired()
-                        .HasConversion(p => p.Value, p => MoneyCustomValue.Of(p));
+                        .HasConversion(p => p.Value, p => MoneyValue.Of(p));
                     builder.Property(x => x.Type)
                         .IsRequired()
                         .HasConversion<string>();
@@ -72,10 +72,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
             {
                 builder.Property(x => x.Price)
                     .IsRequired()
-                    .HasConversion(p => p.Value, p => MoneyCustomValue.Of(p));
+                    .HasConversion(p => p.Value, p => MoneyValue.Of(p));
                 builder.Property(x => x.OldPrice)
                     .IsRequired()
-                    .HasConversion(p => p.Value, p => MoneyCustomValue.Of(p));
+                    .HasConversion(p => p.Value, p => MoneyValue.Of(p));
                 builder.Property(x => x.Name)
                     .IsRequired();
                 builder.Property(x => x.NameEng)
@@ -104,10 +104,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .HasConversion<string>();
                 builder.Property(p => p.PayableAmount)
                     .IsRequired()
-                    .HasConversion(p => p.Value, p => MoneyCustomValue.Of(p));
+                    .HasConversion(p => p.Value, p => MoneyValue.Of(p));
                 builder.Property(p => p.TotalAmount)
                     .IsRequired()
-                    .HasConversion(p => p.Value, p => MoneyCustomValue.Of(p));
+                    .HasConversion(p => p.Value, p => MoneyValue.Of(p));
             });
 
             modelBuilder.Entity<OrderDetail>(builder =>
@@ -118,9 +118,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .IsRequired();
                 builder.Property(x => x.ContactNumber)
                     .IsRequired();
-                builder.Property(x => x.DeliveryLocationCustom)
+                builder.Property(x => x.DeliveryLocation)
                     .IsRequired()
-                    .HasConversion(x => $"{x.Latitude},{x.Longitude}", x => new LocationCustomValue(x));
+                    .HasConversion(x => $"{x.Latitude},{x.Longitude}", x => new LocationValue(x));
             });
 
             modelBuilder.Entity<City>(builder =>
@@ -168,14 +168,14 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                 {
                     builder.HasIndex(u => u.Name)
                         .IsUnique();
-                    builder.HasIndex(u => u.PhoneNumberCustom)
+                    builder.HasIndex(u => u.PhoneNumber)
                         .IsUnique();
                     builder.Property(x => x.Name)
                         .IsRequired();
-                    builder.Property(x => x.PhoneNumberCustom)
+                    builder.Property(x => x.PhoneNumber)
                         .IsRequired()
                         .HasConversion(x => x.GetCompletePhoneNumber(),
-                            p => PhoneNumberCustomValue.Of(SupportedCountryCode.Italy, p));
+                            p => PhoneNumberValue.Of(SupportedCountryCode.Italy, p));
                     builder.HasOne(x => x.Locality)
                         .WithMany()
                         .IsRequired();
@@ -320,13 +320,13 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                 {
                     builder.Property(x => x.StarRate)
                         .IsRequired();
-                    builder.Property(x => x.UserPhoneNumberCustom)
+                    builder.Property(x => x.UserPhoneNumber)
                         .IsRequired();
                     builder.Property(x => x.ItemId)
                         .IsRequired();
-                    builder.Property(x => x.UserPhoneNumberCustom)
+                    builder.Property(x => x.UserPhoneNumber)
                         .HasConversion(x => x.GetCompletePhoneNumber(),
-                            p => PhoneNumberCustomValue.Of(SupportedCountryCode.Italy, p));
+                            p => PhoneNumberValue.Of(SupportedCountryCode.Italy, p));
                 }
             );
             modelBuilder.Entity<AddOn>(builder =>
@@ -339,7 +339,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 
                 builder.Property(p => p.Price)
                     .IsRequired()
-                    .HasConversion(p => p.Value, p => MoneyCustomValue.Of(p));
+                    .HasConversion(p => p.Value, p => MoneyValue.Of(p));
             });
 
             modelBuilder.Entity<OrderItem>(builder =>

@@ -45,7 +45,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 request.ClosingHour,
                 request.SubscriptionType,
                 request.ContractStatus,
-                PhoneNumberCustomValue.Of(SupportedCountryCode.Italy, request.PhoneNumber),
+                PhoneNumberValue.Of(SupportedCountryCode.Italy, request.PhoneNumber),
                 request.ImageUrl,
                 category,
                 locality

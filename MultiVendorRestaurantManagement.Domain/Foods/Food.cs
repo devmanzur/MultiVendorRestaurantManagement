@@ -20,8 +20,8 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
         public Restaurant Restaurant { get; protected set; }
         public string Name { get; protected set; }
-        public MoneyCustomValue UnitPrice { get; protected set; }
-        public MoneyCustomValue OldUnitPrice { get; protected set; }
+        public MoneyValue UnitPrice { get; protected set; }
+        public MoneyValue OldUnitPrice { get; protected set; }
         public FoodItemType Type { get; protected set; }
 
         //adds an extra tag to the list of tags when set true
@@ -58,7 +58,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         {
         }
 
-        public Food(string name, MoneyCustomValue unitPrice, FoodItemType type,
+        public Food(string name, MoneyValue unitPrice, FoodItemType type,
             bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Category category)
         {
             ImageUrl = imageUrl;
@@ -140,7 +140,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
                     UpdateBasePrice(model.NewPrice);
                 }
 
-                variant.UpdatePrice(MoneyCustomValue.Of(model.NewPrice));
+                variant.UpdatePrice(MoneyValue.Of(model.NewPrice));
                 return Result.Ok(variant.IsPriceReduced());
             }
 
@@ -150,7 +150,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         private void UpdateBasePrice(decimal price)
         {
             OldUnitPrice = UnitPrice;
-            UnitPrice = MoneyCustomValue.Of(price);
+            UnitPrice = MoneyValue.Of(price);
         }
 
         public void SetStatus(FoodStatus status)
@@ -159,6 +159,11 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         }
 
         public void SetOffer(Deal deal)
+        {
+            Deal = deal;
+        }
+
+        public void AddToDeal(Deal deal)
         {
             Deal = deal;
         }

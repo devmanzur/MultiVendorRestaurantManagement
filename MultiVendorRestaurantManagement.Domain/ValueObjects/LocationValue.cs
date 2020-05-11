@@ -4,9 +4,9 @@ using MultiVendorRestaurantManagement.Domain.Rules;
 
 namespace MultiVendorRestaurantManagement.Domain.ValueObjects
 {
-    public class LocationCustomValue : CustomValueObject
+    public class LocationValue : CustomValueObject
     {
-        public LocationCustomValue(string latLng)
+        public LocationValue(string latLng)
         {
             CheckRule(new LocationStringMustBeValidRule(latLng));
             var items = latLng.Split(",");

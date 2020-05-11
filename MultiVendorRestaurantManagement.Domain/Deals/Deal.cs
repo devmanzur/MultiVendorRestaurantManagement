@@ -5,6 +5,7 @@ using Common.Utils;
 using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Foods;
+using MultiVendorRestaurantManagement.Domain.Promotions;
 using MultiVendorRestaurantManagement.Domain.Rules;
 
 namespace MultiVendorRestaurantManagement.Domain.Deals
@@ -45,65 +46,65 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
 
         public static Deal CreatePercentageDiscountDeal(string name, string description, string descriptionEng,
             string imageUrl,
-            decimal discountPercent, int minCount, int maxCount, decimal minAmount, decimal maxDiscount,
             DateTime startDate,
-            DateTime endDate)
+            DateTime endDate,
+            PercentageDiscountModel model)
         {
             var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate);
-            deal.SetPercentage(discountPercent, minAmount, minCount, maxCount, maxDiscount);
+            deal.SetPercentage(model);
             return deal;
         }
 
         public static Deal CreateFixedDiscountDeal(string name, string description, string descriptionEng,
             string imageUrl,
-            decimal discount, int minCount, int maxCount, decimal minBill, DateTime startDate, DateTime endDate)
+            DateTime startDate, DateTime endDate, FixedDiscountModel model)
         {
             var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate);
-            deal.SetFixedDeal(minCount, maxCount, minBill, discount);
+            deal.SetFixedDeal(model);
             return deal;
         }
 
-        //buy 2 get 1 deals
+        //buy 2 free 1 deals
         public static Deal CreateBuyXGetYDeal(string name, string description, string descriptionEng, string imageUrl,
-            int packageSize, int freeItemCount, DateTime startDate, DateTime endDate)
+            DateTime startDate, DateTime endDate,
+            PackageDiscountModel model)
         {
             var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate);
-            deal.SetPackageDeal(packageSize, freeItemCount);
+            deal.SetPackageDeal(model.PackageSize, model.FreeItemQuantityInPackage);
             return deal;
         }
 
-        private void SetPackageDeal(int packageSize, int freeItemCount)
+        private void SetPackageDeal(int buyCount, int freeCount)
         {
             IsPackageDeal = true;
-            FreeItemQuantityInPackage = freeItemCount;
-            PackageSize = packageSize;
+            FreeItemQuantityInPackage = freeCount;
+            PackageSize = buyCount;
             //nullify others
             IsFixedDiscount = false;
             FixedDiscountAmount = 0;
             DiscountPercentage = 0;
         }
 
-        private void SetFixedDeal(int minCount, int maxCount, decimal minAmount, decimal amount)
+        private void SetFixedDeal(FixedDiscountModel model)
         {
             IsFixedDiscount = true;
-            FixedDiscountAmount = amount;
-            MaximumDiscountAmount = amount;
-            MinimumBillAmount = minAmount;
-            MinimumItemQuantity = minCount;
-            MaximumItemQuantity = maxCount;
+            FixedDiscountAmount = model.DiscountAmount;
+            MaximumDiscountAmount = model.DiscountAmount;
+            MinimumBillAmount = model.MinBillAmount;
+            MinimumItemQuantity = model.MinQuantity;
+            MaximumItemQuantity = model.MaxQuantity;
             //nullifyOthers
             DiscountPercentage = 0;
             IsPackageDeal = false;
         }
 
-        private void SetPercentage(decimal discountPercent, decimal minAmount, int minCount, int maxCount,
-            decimal maxDiscount)
+        private void SetPercentage(PercentageDiscountModel model)
         {
-            DiscountPercentage = discountPercent;
-            MinimumBillAmount = minAmount;
-            MinimumItemQuantity = minCount;
-            MaximumItemQuantity = maxCount;
-            MaximumDiscountAmount = maxDiscount;
+            DiscountPercentage = model.DiscountPercentage;
+            MinimumBillAmount = model.MinBillAmount;
+            MinimumItemQuantity = model.MinQuantity;
+            MaximumItemQuantity = model.MaxQuantity;
+            MaximumDiscountAmount = model.MaxDiscountAmount;
             //nullify others
             IsFixedDiscount = false;
             FixedDiscountAmount = 0;

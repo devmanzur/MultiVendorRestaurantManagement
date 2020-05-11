@@ -75,5 +75,15 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
                 new {Name = foodName, RestaurantId = restaurantId});
             return item;
         }
+
+        public async Task<DealTableData> GetDealAsync(string dealName)
+        {
+            const string sql = "select * from Deals where Name = @Name";
+            await using var connection = new SqlConnection(_connectionString);
+            var item =
+                await connection.QueryFirstOrDefaultAsync<DealTableData>(sql,
+                    new {Name = dealName});
+            return item;
+        }
     }
 }

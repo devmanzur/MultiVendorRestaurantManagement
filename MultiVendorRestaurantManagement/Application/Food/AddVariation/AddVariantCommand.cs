@@ -15,7 +15,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.AddVariation
             NameEng = nameEng;
             Description = description;
             DescriptionEng = descriptionEng;
-            Price = MoneyCustomValue.Of(price);
+            Price = MoneyValue.Of(price);
         }
 
         public long RestaurantId { get; private set; }
@@ -24,7 +24,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.AddVariation
         public string Description { get; private set; }
         public string DescriptionEng { get; private set; }
         public string NameEng { get; private set; }
-        public MoneyCustomValue Price { get; private set; }
+        public MoneyValue Price { get; private set; }
     }
 
     public class AddVariationCommandValidator : AbstractValidator<AddVariantCommand>

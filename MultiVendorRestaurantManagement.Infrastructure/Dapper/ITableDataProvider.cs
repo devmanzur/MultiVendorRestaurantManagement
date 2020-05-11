@@ -12,5 +12,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
         Task<RestaurantTableData> GetRestaurantAsync(string phone);
         Task<MenuTableData2> GetMenuAsync(string menuName);
         Task<FoodTableData> GetFoodAsync(long restaurantId, string foodName);
+        Task<DealTableData> GetDealAsync(string notificationDealName);
     }
 }

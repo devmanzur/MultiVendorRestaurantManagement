@@ -4,9 +4,9 @@ using CrossCutting;
 
 namespace MultiVendorRestaurantManagement.Domain.ValueObjects
 {
-    public class PhoneNumberCustomValue : CustomValueObject
+    public class PhoneNumberValue : CustomValueObject
     {
-        protected PhoneNumberCustomValue(string countryCode, string number)
+        protected PhoneNumberValue(string countryCode, string number)
         {
             CountryCode = countryCode;
             Number = number;
@@ -20,9 +20,9 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
             return CountryCode + Number;
         }
         
-        public static PhoneNumberCustomValue Of(SupportedCountryCode countryCode,string phone )
+        public static PhoneNumberValue Of(SupportedCountryCode countryCode,string phone )
         {
-            return new PhoneNumberCustomValue(countryCode.ToDescriptionString(), phone);
+            return new PhoneNumberValue(countryCode.ToDescriptionString(), phone);
         }
     }
 }

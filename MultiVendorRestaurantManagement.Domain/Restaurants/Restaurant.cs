@@ -17,7 +17,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
     public class Restaurant : AggregateRoot
     {
         public string Name { get; protected set; }
-        public PhoneNumberCustomValue PhoneNumberCustom { get; protected set; }
+        public PhoneNumberValue PhoneNumber { get; protected set; }
         public Locality Locality { get; protected set; }
         public long ManagerId { get; private set; }
 
@@ -59,7 +59,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         }
 
         public Restaurant(string name, int openingHour, int closingHour,
-            SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberCustomValue phoneNumberCustom,
+            SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumber,
             string imageUrl, Category category, Locality locality)
         {
             CheckRule(new OpeningAndClosingHoursAreValid(openingHour, closingHour));
@@ -67,7 +67,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                 "subscription must be valid"));
             CheckRule(new ConditionMustBeTrueRule(contractStatus != ContractStatus.Invalid,
                 "contract must be valid"));
-            CheckRule(new ConditionMustBeTrueRule(phoneNumberCustom != null,
+            CheckRule(new ConditionMustBeTrueRule(phoneNumber != null,
                 "phone number be valid"));
 
             ImageUrl = imageUrl;
@@ -80,7 +80,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             ContractStatus = contractStatus;
             State = RestaurantState.Open;
             ExpirationDate = subscriptionType.GetExpirationTime();
-            PhoneNumberCustom = phoneNumberCustom;
+            PhoneNumber = phoneNumber;
         }
 
 
@@ -149,7 +149,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public override IDomainEvent GetAddedDomainEvent()
         {
-            return new RestaurantRegisteredEvent(PhoneNumberCustom.GetCompletePhoneNumber());
+            return new RestaurantRegisteredEvent(PhoneNumber.GetCompletePhoneNumber());
         }
 
         public override IDomainEvent GetRemovedDomainEvent()
