@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "DfOFbUnIVfEDaiTUxsuOnGyiSA3pULuINqyJ/pwiNkdCJKnjln330x3eYIP5cDTMcaOhcPKCQ9k7l5r2PpX7IA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\devma\\.nuget\\packages\\csharpfunctionalextensions\\2.7.1\\csharpfunctionalextensions.2.7.1.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\mediatr\\8.0.1\\mediatr.8.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

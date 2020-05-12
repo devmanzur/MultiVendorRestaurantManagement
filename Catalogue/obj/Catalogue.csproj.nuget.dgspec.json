@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj": {}
+    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj": {}
   },
   "projects": {
-    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\Common.csproj": {
+    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\Common.csproj",
-        "projectName": "Common",
-        "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj",
+        "projectName": "Catalogue.Common",
+        "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj",
         "packagesPath": "C:\\Users\\devma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\obj\\",
+        "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\devma\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -41,18 +41,6 @@
             "CSharpFunctionalExtensions": {
               "target": "Package",
               "version": "[2.7.1, )"
-            },
-            "FluentValidation.AspNetCore": {
-              "target": "Package",
-              "version": "[9.0.0-preview4, )"
-            },
-            "FluentValidation.DependencyInjectionExtensions": {
-              "target": "Package",
-              "version": "[9.0.0-preview4, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[12.0.3, )"
             }
           },
           "imports": [
@@ -66,9 +54,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -77,14 +62,14 @@
         }
       }
     },
-    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj": {
+    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj",
-        "projectName": "MultiVendorRestaurantManagement.Domain",
-        "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj",
+        "projectName": "Catalogue",
+        "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj",
         "packagesPath": "C:\\Users\\devma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\obj\\",
+        "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\devma\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -100,8 +85,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\Common.csproj": {
-                "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\Common.csproj"
+              "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj": {
+                "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj"
               }
             }
           }

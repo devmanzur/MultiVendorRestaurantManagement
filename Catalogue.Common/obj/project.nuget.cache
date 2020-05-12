@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "BhXDZfrChHp8VAm0GUz6HwQs4GUNmqtpo5gz/FiiMpyBiN1W8AdhBTYNAqsm1hJDTrNwwVKkX5R0u+ymZmRBIw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\devma\\.nuget\\packages\\csharpfunctionalextensions\\2.7.1\\csharpfunctionalextensions.2.7.1.nupkg.sha512"
+  ],
+  "logs": []
+}
