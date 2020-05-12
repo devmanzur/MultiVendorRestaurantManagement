@@ -271,6 +271,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Hangfire": {
+              "target": "Package",
+              "version": "[1.7.11, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[8.0.1, )"

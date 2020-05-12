@@ -83,3 +83,17 @@ C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaura
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\RestSharp.dll
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\System.Reactive.dll
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\System.Reactive.Linq.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Hangfire.AspNetCore.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Hangfire.Core.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\Hangfire.SqlServer.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\System.Data.SqlClient.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\es\Hangfire.Core.resources.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\fa\Hangfire.Core.resources.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\nl\Hangfire.Core.resources.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\pt-BR\Hangfire.Core.resources.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\pt-PT\Hangfire.Core.resources.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\pt\Hangfire.Core.resources.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\zh-TW\Hangfire.Core.resources.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\zh\Hangfire.Core.resources.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netstandard2.0\System.Data.SqlClient.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MultiVendorRestaurantManagement\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Data.SqlClient.dll

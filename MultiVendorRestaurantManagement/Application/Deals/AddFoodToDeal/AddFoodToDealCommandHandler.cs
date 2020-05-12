@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
+using Hangfire;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using MultiVendorRestaurantManagement.Base;
@@ -17,11 +18,14 @@ namespace MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal
     {
         private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAddFoodToDealBackgroundJob _backgroundJob;
 
-        public AddFoodToDealCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork)
+        public AddFoodToDealCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork,
+            IAddFoodToDealBackgroundJob backgroundJob)
         {
             _context = context;
             _unitOfWork = unitOfWork;
+            _backgroundJob = backgroundJob;
         }
 
         public async Task<Result> Handle(AddFoodToDealCommand request, CancellationToken cancellationToken)
@@ -35,25 +39,8 @@ namespace MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal
 
             if (!restaurantsIncluded.Any()) return Result.Failure("invalid request");
 
-            foreach (var restaurantEntry in restaurantsIncluded)
-            {
-                var restaurant = await _context.Restaurants.Include(x => x.Foods).FirstOrDefaultAsync(
-                    x => x.Id == restaurantEntry.Key,
-                    cancellationToken: cancellationToken);
-                if (restaurant.HasValue())
-                {
-                    var foodList = restaurant.Foods
-                        .Where(x => restaurantEntry.Value.Contains(x.Id)).ToList();
-
-                    if (foodList.HasValue())
-                    {
-                        foodList.ForEach(x => { deal.AddItem(x); });
-                    }
-                }
-            }
-
-            var result = await _unitOfWork.CommitAsync(cancellationToken);
-            return result > 0 ? Result.Ok() : Result.Failure("failed to complete action");
+            BackgroundJob.Enqueue(() => _backgroundJob.Run(deal.Id, restaurantsIncluded, cancellationToken));
+            return Result.Ok("items will be added to promotion, please wait a while");
         }
 
         private Dictionary<long, List<long>> GenerateDistinctRestaurantWithFoodIds(

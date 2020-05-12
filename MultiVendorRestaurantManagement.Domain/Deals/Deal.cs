@@ -115,6 +115,7 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
             CheckRule(new ConditionMustBeTrueRule(food.HasValue(), "food is not valid"));
             CheckRule(new ConditionMustBeTrueRule(!_items.Contains(food), "discount already contains the food"));
             _items.Add(food);
+            AddDomainEvent(new FoodAddedToDealEvent(Id, food.Id,Description,DescriptionEng,EndDate));
         }
 
         public override IDomainEvent GetAddedDomainEvent()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FluentValidation;
+using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal;
 using MultiVendorRestaurantManagement.Infrastructure;
 using MultiVendorRestaurantManagement.PipelineBehaviour;
 
@@ -25,7 +27,6 @@ namespace MultiVendorRestaurantManagement
 
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.SetupInfrastructure(Configuration.GetConnectionString("DefaultConnection"));
             SwaggerSetup(services);
             services.AddControllers();
@@ -33,17 +34,25 @@ namespace MultiVendorRestaurantManagement
             services.AddValidatorsFromAssembly(typeof(Startup).Assembly); //validators
             services.AddTransient(typeof(IPipelineBehavior<,>),
                 typeof(RequestValidationBehaviour<,>)); //converting validation errors to formatted response
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHangfireServer();
+            AddBackgroundJobs(services);
         }
-        
+
+        private void AddBackgroundJobs(IServiceCollection services)
+        {
+            services.AddScoped<IAddFoodToDealBackgroundJob, AddFoodToDealBackgroundJob>();
+        }
+
+
         private static void SwaggerSetup(IServiceCollection services)
         {
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    
+
                     Title = "Restaurant API",
                     Description = "Restaurant API",
                     TermsOfService = new Uri("https://example.com/terms"),
@@ -82,13 +91,10 @@ namespace MultiVendorRestaurantManagement
                             Scheme = "oauth2",
                             Name = "Bearer",
                             In = ParameterLocation.Header,
-
                         },
                         new List<string>()
-                        
                     }
                 });
-                
             });
         }
 
@@ -100,16 +106,13 @@ namespace MultiVendorRestaurantManagement
             }
 
             app.UseHttpsRedirection();
-
+            app.UseHangfireDashboard();
             app.UseRouting();
             app.UseMiddleware<RequestValidationExceptionHandlerMiddleware>();
 
             app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Restaurant API V1");
-            });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Restaurant API V1"); });
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

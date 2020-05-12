@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Common.Invariants;
 using Common.Utils;
@@ -14,7 +15,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         private const string DefaultVariant = "Normale";
         private const string DefaultVariantEng = "Regular";
 
-        public FoodDocument(long restaurantId, string restaurantName ,long foodId, string imageUrl, string name, decimal unitPrice,
+        public FoodDocument(long restaurantId, string restaurantName, long foodId, string imageUrl, string name,
+            decimal unitPrice,
             decimal oldUnitPrice, string type, long categoryId, string status, bool isGlutenFree, bool isVeg,
             bool isNonVeg)
         {
@@ -59,19 +61,23 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         }
 
         public long RestaurantId { get; private set; }
+        public long DealId { get; private set; }
+        public string DealDescription { get; private set; }
+        public string DealDescriptionEng { get; private set; }
         public string RestaurantName { get; private set; }
         public long FoodId { get; private set; }
         public string ImageUrl { get; private set; }
         public string Name { get; private set; }
 
         public bool IsDiscounted { get; private set; }
-        
+
         [BsonRepresentation(BsonType.Decimal128)]
         public decimal UnitPrice { get; private set; }
 
         [BsonRepresentation(BsonType.Decimal128)]
         public decimal OldUnitPrice { get; private set; }
 
+        public DateTime DealEndsOn { get; private set; }
         public string Type { get; private set; }
         public long CategoryId { get; private set; }
         public List<FoodTagDocument> FoodTags { get; private set; } = new List<FoodTagDocument>();
@@ -81,7 +87,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public bool IsNonVeg { get; private set; } //adds an extra tag to the list of tags when set true
         public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
         public List<AddOnDocument> AddOns { get; protected set; } = new List<AddOnDocument>();
-        public int OrderCount { get; private set; }
         public long MenuId { get; private set; }
         public string MenuName { get; private set; }
 
@@ -146,6 +151,14 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         {
             IsDiscounted = true;
         }
+
+        public void SetDeal(in long dealId, string description, string descriptionEng, DateTime endDate)
+        {
+            DealId = dealId;
+            DealDescription = description;
+            DealDescriptionEng = descriptionEng;
+            DealEndsOn = endDate;
+        }
     }
 
     public class VariantDocument
@@ -203,5 +216,4 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public string Name { get; set; }
         public string NameEng { get; set; }
     }
-    
 }
