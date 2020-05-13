@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Catalogue.Infrastracture.Mongo.Documents
 {
@@ -33,6 +35,16 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             var items = SimilarCategories.ToList();
             items.Add(categoryId);
             SimilarCategories = items;
+        }
+
+        public static Expression<Func<CategoryDocument, object>> GetOrderBy(string sort = "")
+        {
+            return sort.ToLowerInvariant() switch
+            {
+                "name" => x => x.Name,
+                "id" => x => x.CategoryId,
+                _ => x => x.Id
+            };
         }
     }
 }

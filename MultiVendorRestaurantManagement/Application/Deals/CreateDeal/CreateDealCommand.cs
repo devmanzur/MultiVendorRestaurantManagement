@@ -5,7 +5,7 @@ using MediatR;
 using MultiVendorRestaurantManagement.Domain.Deals;
 using MultiVendorRestaurantManagement.Domain.Promotions;
 
-namespace MultiVendorRestaurantManagement.Application.Deals
+namespace MultiVendorRestaurantManagement.Application.Deals.CreateDeal
 {
     public class CreateDealCommand : IRequest<Result>
     {

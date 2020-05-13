@@ -15,17 +15,17 @@ namespace Catalogue.Controllers
         }
 
         [HttpGet]
-        public Task<IActionResult> GetHomeData()
+        public async Task<IActionResult> GetHomeData()
         {
             var query = new GetHomeDataQuery();
-            return HandleQueryResultFor(query);
+            return await HandleQueryResultFor(query);
         }
 
         [HttpGet("foods/{food}")]
-        public Task<IActionResult> GetFoodDetail(long food)
+        public async Task<IActionResult> GetFoodDetail(long food)
         {
             var query = new GetFoodDetailQuery(food);
-            return HandleQueryResultFor(query);
+            return await HandleQueryResultFor(query);
         }
     }
 }

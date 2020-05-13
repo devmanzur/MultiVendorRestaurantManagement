@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Deal;
 using MultiVendorRestaurantManagement.Application.Deals;
 using MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal;
+using MultiVendorRestaurantManagement.Application.Deals.CreateDeal;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {

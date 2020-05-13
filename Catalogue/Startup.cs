@@ -27,6 +27,7 @@ namespace Catalogue
             SwaggerSetup(services);
             services.AddMediatR(typeof(Startup));
             services.AddControllers();
+            services.AddDistributedMemoryCache();
         }
 
 

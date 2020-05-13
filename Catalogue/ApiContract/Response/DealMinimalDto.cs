@@ -1,8 +1,8 @@
 ﻿namespace Catalogue.ApiContract.Response
 {
-    public class OfferMinimalDto
+    public class DealMinimalDto
     {
-        public OfferMinimalDto(long id, string name, string imageUrl, string description)
+        public DealMinimalDto(long id, string name, string imageUrl, string description)
         {
             Id = id;
             Name = name;

@@ -1,0 +1,24 @@
+﻿using System.Threading.Tasks;
+using Catalogue.ApiContract.Pagination;
+using Catalogue.Application.Deals;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Catalogue.Controllers
+{
+    [ApiController]
+    [Route("api/deals")]
+    public class DealsController : BaseController
+    {
+        public DealsController(IMediator mediator) : base(mediator)
+        {
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDeals([FromQuery] GeneralPaginationQuery paginationQuery)
+        {
+            var query = new GetDealsQuery(paginationQuery);
+            return await HandleQueryResultFor(query);
+        }
+    }
+}

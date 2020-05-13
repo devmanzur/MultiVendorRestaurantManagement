@@ -6,7 +6,7 @@ using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Domain.Deals;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
-namespace MultiVendorRestaurantManagement.Application.Deals
+namespace MultiVendorRestaurantManagement.Application.Deals.CreateDeal
 {
     public class CreateDealCommandHandler : ICommandHandler<CreateDealCommand>
     {
@@ -24,15 +24,15 @@ namespace MultiVendorRestaurantManagement.Application.Deals
             Deal deal;
             if (request.IsPackageDeal)
                 deal = Deal.CreateBuyXGetYDeal(request.Name,
-                    request.ImageUrl, request.Description, request.DescriptionEng, request.StartDate, request.EndDate,
+                    request.Description, request.DescriptionEng, request.ImageUrl, request.StartDate, request.EndDate,
                     request.PackageDiscountModel);
             else if (request.IsFixedPriceDiscount)
                 deal = Deal.CreateFixedDiscountDeal(request.Name,
-                    request.ImageUrl, request.Description, request.DescriptionEng, request.StartDate, request.EndDate,
+                    request.Description, request.DescriptionEng, request.ImageUrl, request.StartDate, request.EndDate,
                     request.FixedPriceModel);
             else
                 deal = Deal.CreatePercentageDiscountDeal(request.Name,
-                    request.ImageUrl, request.Description, request.DescriptionEng, request.StartDate, request.EndDate,
+                    request.Description, request.DescriptionEng, request.ImageUrl, request.StartDate, request.EndDate,
                     request.PercentageModel);
 
             await _context.Deals.AddAsync(deal, cancellationToken);

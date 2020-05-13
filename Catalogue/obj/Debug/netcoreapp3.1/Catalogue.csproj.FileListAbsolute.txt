@@ -46,3 +46,4 @@ C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue\bin\Debug
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue\obj\Debug\netcoreapp3.1\Catalogue.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue\bin\Debug\netcoreapp3.1\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll

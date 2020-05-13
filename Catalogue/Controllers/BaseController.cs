@@ -9,6 +9,7 @@ namespace Catalogue.Controllers
     public class BaseController : ControllerBase
     {
         private readonly IMediator _mediator;
+        protected const int DefaultPageSize = 20;
 
         public BaseController(IMediator mediator)
         {
