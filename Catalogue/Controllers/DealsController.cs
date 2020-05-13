@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Catalogue.ApiContract.Pagination;
 using Catalogue.Application.Deals;
+using Catalogue.Common.Cache;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +16,13 @@ namespace Catalogue.Controllers
         }
 
         [HttpGet]
+        [ResponseCache(Duration = CacheDuration.DurationInSeconds)]
         public async Task<IActionResult> GetDeals([FromQuery] GeneralPaginationQuery paginationQuery)
         {
             var query = new GetDealsQuery(paginationQuery);
             return await HandleQueryResultFor(query);
         }
+        
+        
     }
 }

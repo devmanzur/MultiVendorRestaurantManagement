@@ -17,12 +17,10 @@ namespace Catalogue.Application.Categories.GetCategories
 {
     public class GetCategoriesQueryHandler : IQueryHandler<GetCategoriesQuery, Result<IPagedList<CategoryMinimalDto>>>
     {
-        private readonly IDistributedCache _cache;
         private readonly DocumentCollection _collection;
 
-        public GetCategoriesQueryHandler(IDistributedCache cache, DocumentCollection collection)
+        public GetCategoriesQueryHandler(DocumentCollection collection)
         {
-            _cache = cache;
             _collection = collection;
         }
         

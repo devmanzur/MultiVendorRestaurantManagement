@@ -9,7 +9,6 @@ using Catalogue.Common.Invariants;
 using Catalogue.Common.Utils;
 using Catalogue.Infrastracture.Mongo;
 using Catalogue.Infrastracture.Mongo.Documents;
-using Catalogue.Infrastructure.ValueObject;
 using Catalogue.Utils;
 using CSharpFunctionalExtensions;
 using Microsoft.Extensions.Caching.Distributed;
@@ -20,7 +19,6 @@ namespace Catalogue.Application.Home
     public class GetHomeDataQueryHandler : IQueryHandler<GetHomeDataQuery, Result<HomeInformationDto>>
     {
         private const int StandardLimit = 5;
-        private const int HomePageFoodLimit = 20;
         private const int CacheDurationInMinutes = 30;
         private readonly DocumentCollection _collection;
         private readonly IDistributedCache _cache;
@@ -57,22 +55,17 @@ namespace Catalogue.Application.Home
         {
             var result = new HomeInformationDto
             {
-                Categories = await _collection.CategoriesCollection.Find(Filter())
+                Categories = await _collection.CategoriesCollection.Find(FoodCategories())
                     .SortByDescending(x => x.Name)
                     .Limit(StandardLimit)
                     .Project(Projections.MinimalCategoryProjection())
-                    .ToListAsync(cancellationToken),
-                Foods = await _collection.FoodCollection.Find(Filters.EmptyFilter<FoodDocument>())
-                    .SortByDescending(x => x.Name)
-                    .Limit(HomePageFoodLimit)
-                    .Project(Projections.MinimalFoodProjection())
                     .ToListAsync(cancellationToken),
                 Restaurants = await _collection.RestaurantsCollection.Find(Filters.EmptyFilter<RestaurantDocument>())
                     .SortByDescending(x => x.Id)
                     .Limit(StandardLimit)
                     .Project(Projections.MinimalRestaurantProjection())
                     .ToListAsync(cancellationToken),
-                Offers = await _collection.DealCollection.Find(Filters.EmptyFilter<DealDocument>())
+                Deals = await _collection.DealCollection.Find(Filters.EmptyFilter<DealDocument>())
                     .SortByDescending(x => x.EndDate)
                     .Limit(StandardLimit)
                     .Project(Projections.MinimalDealProjection())
@@ -81,7 +74,7 @@ namespace Catalogue.Application.Home
             return result;
         }
 
-        private static Expression<Func<CategoryDocument, bool>> Filter()
+        private static Expression<Func<CategoryDocument, bool>> FoodCategories()
         {
             return x => x.Categorize.Equals(Categorize.Food.ToString());
         }

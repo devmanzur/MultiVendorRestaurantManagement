@@ -17,7 +17,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public string Code { get; protected set; }
         public string Name { get; protected set; }
         public string NameEng { get; protected set; }
-        public List<LocalityRecord> Localities { get; set; }
+        public List<LocalityRecord> Localities { get; protected set;  }
     }
 
 

@@ -1,4 +1,6 @@
-﻿using Catalogue.Infrastracture.Mongo.Documents;
+﻿using System;
+using System.Linq.Expressions;
+using Catalogue.Infrastracture.Mongo.Documents;
 using MongoDB.Driver;
 
 namespace Catalogue.Utils

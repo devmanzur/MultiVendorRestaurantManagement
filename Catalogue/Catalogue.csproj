@@ -18,5 +18,9 @@
       <ProjectReference Include="..\Catalogue.Infrastructure\Catalogue.Infrastructure.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Application\Deals\GetFoods" />
+    </ItemGroup>
+
 
 </Project>

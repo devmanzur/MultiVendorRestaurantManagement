@@ -16,7 +16,7 @@ namespace Catalogue.Infrastructure.ValueObject
 
         public string Currency { get; }
 
-        public string PriceTag => Currency + " " + Value;
+        public string PriceTag => Currency + "" + Value;
 
         public static MoneyValue Of(decimal value)
         {

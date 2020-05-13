@@ -40,7 +40,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public string ImageUrl { get; protected set; }
         public double Rating { get; protected set; }
         public int TotalRatingsCount { get; protected set; }
-        public List<MenuRecord> Menus { get; }
+        public List<MenuRecord> Menus { get; protected set;}
         public long ManagerId { get; protected set; }
         public long PricingPolicyId { get; protected set; }
         public long CategoryId { get; private set; }
@@ -63,6 +63,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public void UpdateCategory(in long categoryId)
         {
             CategoryId = categoryId;
+        }
+
+        public void AddNewMenu(MenuRecord menu)
+        {
+            Menus.Add(menu);
         }
     }
 

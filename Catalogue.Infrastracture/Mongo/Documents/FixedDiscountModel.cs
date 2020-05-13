@@ -12,7 +12,7 @@
         }
 
         public decimal DiscountAmount { get; protected set; }
-        public int MinQuantity { get; }
-        public decimal MinBillAmount { get; }
+        public int MinQuantity { get; protected set; }
+        public decimal MinBillAmount { get; protected set; }
     }
 }

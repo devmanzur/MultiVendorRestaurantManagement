@@ -6,7 +6,7 @@ using Catalogue.Infrastructure.ValueObject;
 
 namespace Catalogue.Utils
 {
-    public  class Projections
+    public static class Projections
     {
         public static Expression<Func<CategoryDocument, CategoryMinimalDto>> MinimalCategoryProjection()
         {

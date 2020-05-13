@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using Catalogue.Common.Utils;
 using Catalogue.Infrastructure.Mongo.Documents;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -52,10 +54,10 @@ namespace Catalogue.Infrastracture.Mongo.Documents
         public DateTime DealEndsOn { get; private set; }
         public string Type { get; protected set; }
         public long CategoryId { get; protected set; }
-        public string CategoryName { get; set; }
+        public string CategoryName { get; protected set;  }
         public List<FoodTagDocument> FoodTags { get; protected set; } = new List<FoodTagDocument>();
         public string Status { get; protected set; }
-        public bool IsGlutenFree { get; protected set;} //adds an extra tag to the list of tags when set true
+        public bool IsGlutenFree { get; protected set; } //adds an extra tag to the list of tags when set true
         public bool IsVeg { get; protected set; } //adds an extra tag to the list of tags when set true
         public bool IsNonVeg { get; protected set; } //adds an extra tag to the list of tags when set true
         public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
@@ -74,6 +76,21 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             if (!IsVeg && IsNonVeg) FoodTags.Add(new FoodTagDocument("Cibo non vegano", "Non-Veg"));
 
             if (!IsNonVeg && IsVeg) FoodTags.Add(new FoodTagDocument("Cibo vegano", "Vegan"));
+        }
+
+        public static Expression<Func<FoodDocument, object>> GetOrderBy(string orderBy)
+        {
+            if (orderBy.HasNoValue()) return x => x.Id;
+
+            return orderBy.ToLowerInvariant() switch
+            {
+                "name" => x => x.Name,
+                "id" => x => x.FoodId,
+                "price" => x => x.UnitPrice,
+                "rating" => x => x.Rating,
+                "hot" => x => x.TotalOrderCount,
+                _ => x => x.Id
+            };
         }
     }
 

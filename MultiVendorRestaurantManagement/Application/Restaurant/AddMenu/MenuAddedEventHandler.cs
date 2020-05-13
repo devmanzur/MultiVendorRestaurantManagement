@@ -32,8 +32,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
                 var restaurant = await _collection.RestaurantsCollection.Find(Filter(notification))
                     .FirstOrDefaultAsync(cancellationToken);
                 if (restaurant.HasValue())
-                    restaurant.Menus.Add(
-                        new MenuRecord(menuData.Id, menuData.Name, menuData.NameEng, menuData.ImageUrl));
+                    restaurant.AddNewMenu(new MenuRecord(menuData.Id, menuData.Name, menuData.NameEng,
+                        menuData.ImageUrl));
 
                 await _collection.RestaurantsCollection.ReplaceOneAsync(Filter(notification), restaurant,
                     cancellationToken: cancellationToken);

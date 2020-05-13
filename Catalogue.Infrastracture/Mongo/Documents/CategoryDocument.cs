@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Catalogue.Common.Utils;
 
 namespace Catalogue.Infrastracture.Mongo.Documents
 {
@@ -37,8 +38,9 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             SimilarCategories = items;
         }
 
-        public static Expression<Func<CategoryDocument, object>> GetOrderBy(string sort = "")
+        public static Expression<Func<CategoryDocument, object>> GetOrderBy(string sort)
         {
+            if (sort.HasNoValue()) return x => x.Id;
             return sort.ToLowerInvariant() switch
             {
                 "name" => x => x.Name,

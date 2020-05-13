@@ -69,9 +69,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public long MenuId { get; private set; }
         public string MenuName { get; private set; }
 
-        public double Rating { get; } = 0;
-        public int TotalRatingCount { get; } = 0;
-        public int TotalOrderCount { get; } = 0;
+        public double Rating { get; private set; } = 0;
+        public int TotalRatingCount { get;private set; } = 0;
+        public int TotalOrderCount { get; private set;} = 0;
 
         private void AddDefaultVariant()
         {
