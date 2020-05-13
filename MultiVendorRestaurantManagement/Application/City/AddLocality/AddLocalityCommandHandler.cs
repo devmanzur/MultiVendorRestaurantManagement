@@ -25,7 +25,7 @@ namespace MultiVendorRestaurantManagement.Application.City.AddLocality
         {
             var city = await _context.Cities.Include(x => x.Localities).SingleOrDefaultAsync(
                 x => x.Id == request.CityId,
-                cancellationToken: cancellationToken);
+                cancellationToken);
             if (city.HasNoValue()) return Result.Failure("City with given id not found");
 
             city.AddLocality(new Locality(request.Name, request.Code, request.NameEng));

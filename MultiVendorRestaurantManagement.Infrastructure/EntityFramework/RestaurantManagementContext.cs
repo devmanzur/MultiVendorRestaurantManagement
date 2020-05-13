@@ -13,6 +13,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 {
     public class RestaurantManagementContext : DbContext
     {
+        public RestaurantManagementContext(DbContextOptions<RestaurantManagementContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -20,11 +25,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Deal> Deals { get; set; }
         public DbSet<Review> Reviews { get; set; }
-
-        public RestaurantManagementContext(DbContextOptions<RestaurantManagementContext> options)
-            : base(options)
-        {
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -240,21 +240,21 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                 builder.Property(x => x.EndDate)
                     .IsRequired();
 
-                builder.Property(x=>x.FixedDiscountAmount)
+                builder.Property(x => x.FixedDiscountAmount)
                     .HasColumnType("decimal(18,4)");
-                builder.Property(x=>x.MinimumBillAmount)
+                builder.Property(x => x.MinimumBillAmount)
                     .HasColumnType("decimal(18,4)");
-                builder.Property(x=>x.MaximumDiscountAmount)
+                builder.Property(x => x.MaximumDiscountAmount)
                     .HasColumnType("decimal(18,4)");
-                builder.Property(x=>x.DiscountPercentage)
+                builder.Property(x => x.DiscountPercentage)
                     .HasColumnType("decimal(18,4)");
-                
+
                 builder.HasIndex(x => x.Name)
                     .IsUnique();
                 builder.HasIndex(x => x.EndDate);
                 builder.Property("_items").HasColumnName("Items");
                 builder.HasMany(x => x.CouponCodes)
-                    .WithOne(x=>x.Promotion)
+                    .WithOne(x => x.Promotion)
                     .OnDelete(DeleteBehavior.Cascade)
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
             });
@@ -280,17 +280,17 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                 builder.Property(x => x.IsPackageDeal)
                     .IsRequired();
 
-                builder.Property(x=>x.FixedDiscountAmount)
+                builder.Property(x => x.FixedDiscountAmount)
                     .HasColumnType("decimal(18,4)");
-                builder.Property(x=>x.MinimumBillAmount)
+                builder.Property(x => x.MinimumBillAmount)
                     .HasColumnType("decimal(18,4)");
-                builder.Property(x=>x.MaximumBillAmount)
+                builder.Property(x => x.MaximumBillAmount)
                     .HasColumnType("decimal(18,4)");
-                builder.Property(x=>x.MaximumDiscountAmount)
+                builder.Property(x => x.MaximumDiscountAmount)
                     .HasColumnType("decimal(18,4)");
-                builder.Property(x=>x.DiscountPercentage)
+                builder.Property(x => x.DiscountPercentage)
                     .HasColumnType("decimal(18,4)");
-                
+
                 builder.HasIndex(x => x.Name)
                     .IsUnique();
                 builder.HasIndex(x => x.EndDate);
@@ -300,10 +300,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .WithOne(x => x.Deal)
                     .OnDelete(DeleteBehavior.SetNull)
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
-
-
             });
-            
+
             modelBuilder.Entity<CouponCode>(builder =>
             {
                 builder.HasIndex(x => x.Code);

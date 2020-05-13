@@ -5,7 +5,6 @@ using Hangfire;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,9 +33,14 @@ namespace MultiVendorRestaurantManagement
             services.AddValidatorsFromAssembly(typeof(Startup).Assembly); //validators
             services.AddTransient(typeof(IPipelineBehavior<,>),
                 typeof(RequestValidationBehaviour<,>)); //converting validation errors to formatted response
+            HangFireSetup(services);
+            AddBackgroundJobs(services);
+        }
+
+        private void HangFireSetup(IServiceCollection services)
+        {
             services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
             services.AddHangfireServer();
-            AddBackgroundJobs(services);
         }
 
         private void AddBackgroundJobs(IServiceCollection services)
@@ -60,12 +64,12 @@ namespace MultiVendorRestaurantManagement
                     {
                         Name = "Noushad Hasan",
                         Email = "levirgon@gmail.com",
-                        Url = new Uri("https://twitter.com/devmanzur"),
+                        Url = new Uri("https://twitter.com/devmanzur")
                     },
                     License = new OpenApiLicense
                     {
                         Name = "Use under LICX",
-                        Url = new Uri("https://example.com/license"),
+                        Url = new Uri("https://example.com/license")
                     }
                 });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -78,7 +82,7 @@ namespace MultiVendorRestaurantManagement
                     Type = SecuritySchemeType.ApiKey,
                     Scheme = "Bearer"
                 });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
@@ -90,7 +94,7 @@ namespace MultiVendorRestaurantManagement
                             },
                             Scheme = "oauth2",
                             Name = "Bearer",
-                            In = ParameterLocation.Header,
+                            In = ParameterLocation.Header
                         },
                         new List<string>()
                     }
@@ -100,10 +104,7 @@ namespace MultiVendorRestaurantManagement
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
             app.UseHangfireDashboard();

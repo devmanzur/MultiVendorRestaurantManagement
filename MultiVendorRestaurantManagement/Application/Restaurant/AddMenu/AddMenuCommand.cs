@@ -1,5 +1,4 @@
-﻿using System.Data;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using FluentValidation;
 using MediatR;
 
@@ -7,10 +6,6 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
 {
     public class AddMenuCommand : IRequest<Result>
     {
-        public long RestaurantId { get; private set; }
-        public string Name { get; private set; }
-        public string NameEng { get; private set; }
-        public string ImageUrl { get; private set; }
         public AddMenuCommand(string nameEng, string name, long restaurantId, string imageUrl)
         {
             NameEng = nameEng;
@@ -18,6 +13,11 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
             RestaurantId = restaurantId;
             ImageUrl = imageUrl;
         }
+
+        public long RestaurantId { get; }
+        public string Name { get; }
+        public string NameEng { get; }
+        public string ImageUrl { get; }
     }
 
     public class AddMenuCommandValidator : AbstractValidator<AddMenuCommand>

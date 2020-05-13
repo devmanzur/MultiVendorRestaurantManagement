@@ -28,7 +28,8 @@ namespace MultiVendorRestaurantManagement.Application.Food.CreateAddOn
             {
                 food.NewAddOn(new AddOnDocument(notification.AddOnName, notification.AddOnNameEng,
                     notification.AddOnDescription, notification.AddOnDescriptionEng, notification.Price.Value));
-                await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food, cancellationToken: cancellationToken);
+                await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
+                    cancellationToken: cancellationToken);
             }
         }
 

@@ -23,7 +23,7 @@ namespace MultiVendorRestaurantManagement.Application.Promotions.AddItems
         public async Task<Result> Handle(AddPromotionalItemsCommand request, CancellationToken cancellationToken)
         {
             var promotion = await _context.Promotions.FirstOrDefaultAsync(x => x.Id == request.PromotionId,
-                cancellationToken: cancellationToken);
+                cancellationToken);
             if (promotion.HasValue())
             {
                 request.FoodIds.ForEach(x => promotion.AddFood(x));

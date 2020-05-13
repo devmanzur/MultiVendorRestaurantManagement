@@ -19,6 +19,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RemoveAddOn
         {
             _collection = collection;
         }
+
         public async Task Handle(AddOnRemovedEvent notification, CancellationToken cancellationToken)
         {
             var food = await _collection.FoodCollection.Find(Filter(notification))
@@ -30,7 +31,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RemoveAddOn
                     cancellationToken: cancellationToken);
             }
         }
-        
+
         private static Expression<Func<FoodDocument, bool>> Filter(AddOnRemovedEvent notification)
         {
             return x => x.FoodId == notification.FoodId;

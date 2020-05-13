@@ -7,38 +7,38 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Food_Categories_CategoryId",
-                table: "Food");
+                "FK_Food_Categories_CategoryId",
+                "Food");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Food_Promotions_PromotionId",
-                table: "Food");
+                "FK_Food_Promotions_PromotionId",
+                "Food");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Restaurants_Categories_CategoryId",
-                table: "Restaurants");
+                "FK_Restaurants_Categories_CategoryId",
+                "Restaurants");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Food_Categories_CategoryId",
-                table: "Food",
-                column: "CategoryId",
-                principalTable: "Categories",
+                "FK_Food_Categories_CategoryId",
+                "Food",
+                "CategoryId",
+                "Categories",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Food_Promotions_PromotionId",
-                table: "Food",
-                column: "PromotionId",
-                principalTable: "Promotions",
+                "FK_Food_Promotions_PromotionId",
+                "Food",
+                "PromotionId",
+                "Promotions",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.SetNull);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Restaurants_Categories_CategoryId",
-                table: "Restaurants",
-                column: "CategoryId",
-                principalTable: "Categories",
+                "FK_Restaurants_Categories_CategoryId",
+                "Restaurants",
+                "CategoryId",
+                "Categories",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -46,36 +46,36 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Food_Categories_CategoryId",
-                table: "Food");
+                "FK_Food_Categories_CategoryId",
+                "Food");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Food_Promotions_PromotionId",
-                table: "Food");
+                "FK_Food_Promotions_PromotionId",
+                "Food");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Restaurants_Categories_CategoryId",
-                table: "Restaurants");
+                "FK_Restaurants_Categories_CategoryId",
+                "Restaurants");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Food_Categories_CategoryId",
-                table: "Food",
-                column: "CategoryId",
-                principalTable: "Categories",
+                "FK_Food_Categories_CategoryId",
+                "Food",
+                "CategoryId",
+                "Categories",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Food_Promotions_PromotionId",
-                table: "Food",
-                column: "PromotionId",
-                principalTable: "Promotions",
+                "FK_Food_Promotions_PromotionId",
+                "Food",
+                "PromotionId",
+                "Promotions",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Restaurants_Categories_CategoryId",
-                table: "Restaurants",
-                column: "CategoryId",
-                principalTable: "Categories",
+                "FK_Restaurants_Categories_CategoryId",
+                "Restaurants",
+                "CategoryId",
+                "Categories",
                 principalColumn: "Id");
         }
     }

@@ -7,8 +7,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<long>(
-                name: "PromotionId",
-                table: "Food",
+                "PromotionId",
+                "Food",
                 nullable: true,
                 oldClrType: typeof(long),
                 oldType: "bigint");
@@ -17,9 +17,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<long>(
-                name: "PromotionId",
-                table: "Food",
-                type: "bigint",
+                "PromotionId",
+                "Food",
+                "bigint",
                 nullable: false,
                 oldClrType: typeof(long),
                 oldNullable: true);

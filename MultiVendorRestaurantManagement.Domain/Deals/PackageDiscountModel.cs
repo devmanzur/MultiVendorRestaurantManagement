@@ -15,7 +15,7 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
             FreeItemQuantityInPackage = freeItemQuantityInPackage;
         }
 
-        public int PackageSize { get; private set; }
-        public int FreeItemQuantityInPackage { get; private set; }
+        public int PackageSize { get; }
+        public int FreeItemQuantityInPackage { get; }
     }
 }

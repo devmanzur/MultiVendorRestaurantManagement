@@ -14,17 +14,14 @@ namespace MultiVendorRestaurantManagement.Controllers
         {
             _mediator = mediator;
         }
-        private  IActionResult HandleActionResponse(Result result)
+
+        private IActionResult HandleActionResponse(Result result)
         {
-            
-            if (result.IsSuccess)
-            {
-                return Ok(Envelope.Ok());
-            }
+            if (result.IsSuccess) return Ok(Envelope.Ok());
 
             return BadRequest(Envelope.Error(result.Error));
         }
-        
+
         protected async Task<IActionResult> HandleActionResultFor(IRequest<Result> command)
         {
             var result = await _mediator.Send(command);

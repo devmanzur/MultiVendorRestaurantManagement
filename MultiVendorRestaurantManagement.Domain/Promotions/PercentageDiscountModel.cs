@@ -6,6 +6,8 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
 {
     public class PercentageDiscountModel : CustomValueObject
     {
+        public int MaxQuantity = 1000;
+
         public PercentageDiscountModel(decimal discountPercentage, decimal maxDiscountAmount, decimal minBillAmount,
             int minQuantity)
         {
@@ -20,10 +22,9 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             MinQuantity = minQuantity;
         }
 
-        public int MaxQuantity = 1000;
-        public decimal DiscountPercentage { get; private set; }
-        public decimal MaxDiscountAmount { get; private set; }
-        public int MinQuantity { get; private set; }
-        public decimal MinBillAmount { get; private set; }
+        public decimal DiscountPercentage { get; }
+        public decimal MaxDiscountAmount { get; }
+        public int MinQuantity { get; }
+        public decimal MinBillAmount { get; }
     }
 }

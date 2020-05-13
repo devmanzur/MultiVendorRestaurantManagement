@@ -8,21 +8,26 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 {
     public class Menu : Entity
     {
-        public virtual Restaurant Restaurant { get; protected set; }
-        public string Name { get; protected set; }
-        public string ImageUrl { get; private set; }
-        public string NameEng { get; protected set; }
-        private IList<Food> _items = new List<Food>();
-        public IReadOnlyList<Food> Items => _items.ToList();
+        private readonly IList<Food> _items = new List<Food>();
 
 
+        protected Menu()
+        {
+            
+        }
         public Menu(string name, string nameEng, string imageUrl)
         {
-            CheckRule(new ConditionMustBeTrueRule(!string.IsNullOrEmpty(name),"name must be valid"));
+            CheckRule(new ConditionMustBeTrueRule(!string.IsNullOrEmpty(name), "name must be valid"));
             Name = name;
             NameEng = nameEng;
             ImageUrl = imageUrl;
         }
+
+        public virtual Restaurant Restaurant { get; protected set; }
+        public string Name { get; protected set; }
+        public string ImageUrl { get; }
+        public string NameEng { get; protected set; }
+        public IReadOnlyList<Food> Items => _items.ToList();
 
         public void AddItem(Food food)
         {

@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Utils;
-using CSharpFunctionalExtensions;
-using DnsClient.Internal;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Domain.Base;
@@ -16,8 +14,8 @@ namespace MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal
 {
     public class AddFoodToDealBackgroundJob : IAddFoodToDealBackgroundJob
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly RestaurantManagementContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
         public AddFoodToDealBackgroundJob(IUnitOfWork unitOfWork, RestaurantManagementContext context)
         {
@@ -30,23 +28,20 @@ namespace MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal
         {
             var deal =
                 await _context.Deals.FirstOrDefaultAsync(x => x.Id == dealId,
-                    cancellationToken: cancellationToken);
+                    cancellationToken);
             if (deal.HasNoValue()) return;
 
             foreach (var restaurantEntry in restaurantsIncluded)
             {
                 var restaurant = await _context.Restaurants.Include(x => x.Foods).FirstOrDefaultAsync(
                     x => x.Id == restaurantEntry.Key,
-                    cancellationToken: cancellationToken);
+                    cancellationToken);
                 if (restaurant.HasValue())
                 {
                     var foodList = restaurant.Foods
                         .Where(x => restaurantEntry.Value.Contains(x.Id)).ToList();
 
-                    if (foodList.HasValue())
-                    {
-                        foodList.ForEach(x => { AddToDeal(deal, x); });
-                    }
+                    if (foodList.HasValue()) foodList.ForEach(x => { AddToDeal(deal, x); });
                 }
             }
 

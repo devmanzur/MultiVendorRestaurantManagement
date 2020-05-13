@@ -18,40 +18,12 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         private const string DefaultVariant = "Normale";
         private const string DefaultVariantEng = "Regular";
 
-        public Restaurant Restaurant { get; protected set; }
-        public string Name { get; protected set; }
-        public MoneyValue UnitPrice { get; protected set; }
-        public MoneyValue OldUnitPrice { get; protected set; }
-        public FoodItemType Type { get; protected set; }
+        private readonly List<AddOn> _addOns = new List<AddOn>();
 
-        //adds an extra tag to the list of tags when set true
-        public bool IsGlutenFree { get; protected set; }
-
-        //adds an extra tag to the list of tags when set true
-        public bool IsVeg { get; protected set; }
-
-        //adds an extra tag to the list of tags when set true
-        public bool IsNonVeg { get; protected set; }
-
-        public FoodStatus Status { get; protected set; }
+        private readonly List<FoodTag> _tags = new List<FoodTag>();
 
         //default, single, double, large, extra-large
-        private List<Variant> _variants = new List<Variant>();
-        public IReadOnlyList<Variant> Variants => _variants.ToList();
-
-        private List<FoodTag> _tags = new List<FoodTag>();
-        public List<FoodTag> Tags => _tags.ToList();
-
-        private List<AddOn> _addOns = new List<AddOn>();
-        public List<AddOn> AddOns => _addOns.ToList();
-        public Category Category { get; private set; }
-        public Deal Deal { get; private set; }
-        public string ImageUrl { get; private set; }
-
-        public double Rating { get; private set; }
-
-        public int TotalRatingsCount { get; private set; }
-        public int TotalOrderCount { get; private set; }
+        private readonly List<Variant> _variants = new List<Variant>();
 
 
         protected Food()
@@ -78,9 +50,37 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
             void SetDefaultVariant()
             {
-                AddVariant(new Variant(DefaultVariant, nameEng: DefaultVariantEng, price: unitPrice, "", ""));
+                AddVariant(new Variant(DefaultVariant, DefaultVariantEng, unitPrice, "", ""));
             }
         }
+
+        public Restaurant Restaurant { get; protected set; }
+        public string Name { get; protected set; }
+        public MoneyValue UnitPrice { get; protected set; }
+        public MoneyValue OldUnitPrice { get; protected set; }
+        public FoodItemType Type { get; protected set; }
+
+        //adds an extra tag to the list of tags when set true
+        public bool IsGlutenFree { get; protected set; }
+
+        //adds an extra tag to the list of tags when set true
+        public bool IsVeg { get; protected set; }
+
+        //adds an extra tag to the list of tags when set true
+        public bool IsNonVeg { get; protected set; }
+
+        public FoodStatus Status { get; protected set; }
+        public IReadOnlyList<Variant> Variants => _variants.ToList();
+        public List<FoodTag> Tags => _tags.ToList();
+        public List<AddOn> AddOns => _addOns.ToList();
+        public Category Category { get; private set; }
+        public Deal Deal { get; private set; }
+        public string ImageUrl { get; }
+
+        public double Rating { get; private set; }
+
+        public int TotalRatingsCount { get; private set; }
+        public int TotalOrderCount { get; }
 
         public void AddRating(int remark)
         {
@@ -89,7 +89,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             temp += remark;
             Rating = temp / TotalRatingsCount;
         }
-        
+
         public void AddVariant(Variant variant)
         {
             CheckRule(new ConditionMustBeTrueRule(variant.HasValue() && MustNotContainVariantWithSameName(variant),
@@ -135,10 +135,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             var variant = _variants.FirstOrDefault(x => x.Name == model.VariantName);
             if (variant.HasValue())
             {
-                if (model.VariantName.Equals(DefaultVariant))
-                {
-                    UpdateBasePrice(model.NewPrice);
-                }
+                if (model.VariantName.Equals(DefaultVariant)) UpdateBasePrice(model.NewPrice);
 
                 variant.UpdatePrice(MoneyValue.Of(model.NewPrice));
                 return Result.Ok(variant.IsPriceReduced());

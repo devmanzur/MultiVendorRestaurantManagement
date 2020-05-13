@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
@@ -11,8 +10,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.ImageManager
 {
     public class MinioImageUploadService : IImageService
     {
-        private MinioConfiguration _config;
         private const string ContentType = "image/jpeg";
+        private readonly MinioConfiguration _config;
 
 
         public MinioImageUploadService(IConfiguration configuration)
@@ -51,10 +50,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.ImageManager
         private static async Task SetupBucket(MinioClient client, string bucket)
         {
             var found = await client.BucketExistsAsync(bucket);
-            if (!found)
-            {
-                await client.MakeBucketAsync(bucket);
-            }
+            if (!found) await client.MakeBucketAsync(bucket);
         }
     }
 }

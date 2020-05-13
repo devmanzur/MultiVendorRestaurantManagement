@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
@@ -24,7 +23,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.UpdateHours
         public async Task<Result> Handle(UpdateRestaurantHoursCommand request, CancellationToken cancellationToken)
         {
             var restaurant = await _context.Restaurants.SingleOrDefaultAsync(x => x.Id == request.RestaurantId,
-                cancellationToken: cancellationToken);
+                cancellationToken);
             if (restaurant.HasValue())
             {
                 restaurant.UpdateHours(request.OpeningHour, request.ClosingHour);

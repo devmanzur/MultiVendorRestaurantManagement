@@ -7,36 +7,36 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Name",
-                table: "Promotions",
+                "Name",
+                "Promotions",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Promotions_EndDate",
-                table: "Promotions",
-                column: "EndDate");
+                "IX_Promotions_EndDate",
+                "Promotions",
+                "EndDate");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Promotions_Name",
-                table: "Promotions",
-                column: "Name",
+                "IX_Promotions_Name",
+                "Promotions",
+                "Name",
                 unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_Promotions_EndDate",
-                table: "Promotions");
+                "IX_Promotions_EndDate",
+                "Promotions");
 
             migrationBuilder.DropIndex(
-                name: "IX_Promotions_Name",
-                table: "Promotions");
+                "IX_Promotions_Name",
+                "Promotions");
 
             migrationBuilder.DropColumn(
-                name: "Name",
-                table: "Promotions");
+                "Name",
+                "Promotions");
         }
     }
 }

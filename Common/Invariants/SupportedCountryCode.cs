@@ -4,7 +4,6 @@ namespace Common.Invariants
 {
     public enum SupportedCountryCode
     {
-        [Description("+39")]
-        Italy
+        [Description("+39")] Italy
     }
 }

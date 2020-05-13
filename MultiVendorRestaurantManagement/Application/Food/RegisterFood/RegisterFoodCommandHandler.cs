@@ -5,8 +5,6 @@ using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
-using MultiVendorRestaurantManagement.Domain.Foods;
-using MultiVendorRestaurantManagement.Domain.ValueObjects;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
@@ -25,11 +23,11 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
         public async Task<Result> Handle(RegisterFoodCommand request, CancellationToken cancellationToken)
         {
             var restaurant = await _context.Restaurants.Include(x => x.Foods)
-                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken);
             if (restaurant.HasValue())
             {
                 var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == request.CategoryId,
-                    cancellationToken: cancellationToken);
+                    cancellationToken);
 
                 if (category.HasValue())
                 {

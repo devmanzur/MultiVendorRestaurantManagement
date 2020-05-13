@@ -7,8 +7,8 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
     {
         public Variant()
         {
-            
         }
+
         public Variant(string name, string nameEng, MoneyValue price, string description, string descriptionEng)
         {
             Name = name;
@@ -19,10 +19,10 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             DescriptionEng = descriptionEng;
         }
 
-        public string Name { get; private set; }
-        public string NameEng { get; private set; }
-        public string Description { get; private set; }
-        public string DescriptionEng { get; private set; }
+        public string Name { get; }
+        public string NameEng { get; }
+        public string Description { get; }
+        public string DescriptionEng { get; }
         public MoneyValue Price { get; private set; }
         public MoneyValue OldPrice { get; private set; }
         public Food Food { get; private set; }

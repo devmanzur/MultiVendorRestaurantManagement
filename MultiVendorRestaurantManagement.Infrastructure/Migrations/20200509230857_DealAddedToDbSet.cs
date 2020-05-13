@@ -7,42 +7,42 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Food_Deal_DealId",
-                table: "Food");
+                "FK_Food_Deal_DealId",
+                "Food");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Deal",
-                table: "Deal");
+                "PK_Deal",
+                "Deal");
 
             migrationBuilder.RenameTable(
-                name: "Deal",
+                "Deal",
                 newName: "Deals");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Deal_StartDate",
+                "IX_Deal_StartDate",
                 table: "Deals",
                 newName: "IX_Deals_StartDate");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Deal_Name",
+                "IX_Deal_Name",
                 table: "Deals",
                 newName: "IX_Deals_Name");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Deal_EndDate",
+                "IX_Deal_EndDate",
                 table: "Deals",
                 newName: "IX_Deals_EndDate");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Deals",
-                table: "Deals",
-                column: "Id");
+                "PK_Deals",
+                "Deals",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Food_Deals_DealId",
-                table: "Food",
-                column: "DealId",
-                principalTable: "Deals",
+                "FK_Food_Deals_DealId",
+                "Food",
+                "DealId",
+                "Deals",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.SetNull);
         }
@@ -50,42 +50,42 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Food_Deals_DealId",
-                table: "Food");
+                "FK_Food_Deals_DealId",
+                "Food");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Deals",
-                table: "Deals");
+                "PK_Deals",
+                "Deals");
 
             migrationBuilder.RenameTable(
-                name: "Deals",
+                "Deals",
                 newName: "Deal");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Deals_StartDate",
+                "IX_Deals_StartDate",
                 table: "Deal",
                 newName: "IX_Deal_StartDate");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Deals_Name",
+                "IX_Deals_Name",
                 table: "Deal",
                 newName: "IX_Deal_Name");
 
             migrationBuilder.RenameIndex(
-                name: "IX_Deals_EndDate",
+                "IX_Deals_EndDate",
                 table: "Deal",
                 newName: "IX_Deal_EndDate");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Deal",
-                table: "Deal",
-                column: "Id");
+                "PK_Deal",
+                "Deal",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Food_Deal_DealId",
-                table: "Food",
-                column: "DealId",
-                principalTable: "Deal",
+                "FK_Food_Deal_DealId",
+                "Food",
+                "DealId",
+                "Deal",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.SetNull);
         }

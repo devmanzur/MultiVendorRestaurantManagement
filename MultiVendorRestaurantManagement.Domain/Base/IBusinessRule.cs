@@ -2,8 +2,7 @@
 {
     public interface IBusinessRule
     {
-        bool IsBroken();
-
         string ErrorMessage { get; }
+        bool IsBroken();
     }
 }

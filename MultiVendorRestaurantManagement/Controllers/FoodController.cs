@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MultiVendorRestaurantManagement.ApiContract;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Food.AddVariation;
 using MultiVendorRestaurantManagement.Application.Food.CreateaAddOn;
@@ -47,10 +46,9 @@ namespace MultiVendorRestaurantManagement.Controllers
             var updates = new List<VariantPriceUpdateModel>();
             request.VariantPrices.ForEach(x => updates.Add(new VariantPriceUpdateModel(x.VariantName, x.NewPrice)));
             if (updates.Count <= 0) return BadRequest();
-            
+
             var command = new UpdateFoodPriceCommand(restaurant, food, updates);
             return await HandleActionResultFor(command);
-
         }
 
         [HttpDelete("{restaurant}/foods/{food}/variants")]
@@ -68,27 +66,27 @@ namespace MultiVendorRestaurantManagement.Controllers
                 request.DescriptionEng, request.Price);
             return await HandleActionResultFor(command);
         }
-        
-        
+
+
         [HttpPut("{restaurant}/foods/{food}/available")]
         public async Task<IActionResult> MakeFoodAvailable(long restaurant, long food)
         {
-            var command = UpdateFoodStatusCommand.Available(restaurant,food);
+            var command = UpdateFoodStatusCommand.Available(restaurant, food);
             return await HandleActionResultFor(command);
         }
-        
-        
+
+
         [HttpPut("{restaurant}/foods/{food}/unavailable")]
         public async Task<IActionResult> MakeFoodUnavailable(long restaurant, long food)
         {
-            var command = UpdateFoodStatusCommand.Unavailable(restaurant,food);
+            var command = UpdateFoodStatusCommand.Unavailable(restaurant, food);
             return await HandleActionResultFor(command);
         }
-        
+
         [HttpPut("{restaurant}/foods/{food}/out-of-stock")]
         public async Task<IActionResult> FoodOutOfStock(long restaurant, long food)
         {
-            var command = UpdateFoodStatusCommand.OutOfStock(restaurant,food);
+            var command = UpdateFoodStatusCommand.OutOfStock(restaurant, food);
             return await HandleActionResultFor(command);
         }
 

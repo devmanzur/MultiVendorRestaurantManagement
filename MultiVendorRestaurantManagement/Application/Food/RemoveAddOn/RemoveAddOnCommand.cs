@@ -13,9 +13,9 @@ namespace MultiVendorRestaurantManagement.Application.Food.RemoveAddOn
             AddOnName = addOnName;
         }
 
-        public long RestaurantId { get; private set; }
-        public long FoodId { get; private set; }
-        public string AddOnName { get; private set; }
+        public long RestaurantId { get; }
+        public long FoodId { get; }
+        public string AddOnName { get; }
     }
 
     public class RemoveAddOnCommandValidator : AbstractValidator<RemoveAddOnCommand>

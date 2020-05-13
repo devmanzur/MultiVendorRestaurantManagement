@@ -7,9 +7,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<decimal>(
-                name: "MaximumBillAmount",
-                table: "Deal",
-                type: "decimal(18,4)",
+                "MaximumBillAmount",
+                "Deal",
+                "decimal(18,4)",
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "decimal(18,2)");
@@ -18,9 +18,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<decimal>(
-                name: "MaximumBillAmount",
-                table: "Deal",
-                type: "decimal(18,2)",
+                "MaximumBillAmount",
+                "Deal",
+                "decimal(18,2)",
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "decimal(18,4)");

@@ -11,8 +11,8 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             VariantName = variantName;
         }
 
-        public long RestaurantId { get; private set; }
-        public long FoodId { get; private set; }
-        public string VariantName { get; private set; }
+        public long RestaurantId { get; }
+        public long FoodId { get; }
+        public string VariantName { get; }
     }
 }

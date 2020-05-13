@@ -10,6 +10,8 @@ namespace MultiVendorRestaurantManagement.Domain.Orders
 {
     public class Order : Entity
     {
+        private readonly List<OrderItem> _items = new List<OrderItem>();
+
         public Order(OrderType type, MoneyValue totalAmount,
             MoneyValue payableAmount, SupportedPaymentType paymentType)
         {
@@ -23,8 +25,6 @@ namespace MultiVendorRestaurantManagement.Domain.Orders
         public DateTime CreatedAt { get; protected set; }
         public Restaurant Restaurant { get; private set; }
         public virtual OrderDetail Detail { get; protected set; }
-
-        private List<OrderItem> _items = new List<OrderItem>();
         public IReadOnlyList<OrderItem> Items => _items.ToList();
 
         public OrderState State { get; protected set; } = OrderState.Pending;

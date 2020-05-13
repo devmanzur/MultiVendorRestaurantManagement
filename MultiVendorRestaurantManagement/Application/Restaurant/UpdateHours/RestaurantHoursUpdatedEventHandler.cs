@@ -6,7 +6,6 @@ using Common.Utils;
 using MediatR;
 using MongoDB.Driver;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
-using MultiVendorRestaurantManagement.Infrastructure.Dapper;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;
 

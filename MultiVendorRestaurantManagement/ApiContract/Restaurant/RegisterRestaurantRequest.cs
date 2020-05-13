@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MultiVendorRestaurantManagement.ApiContract.Request
+﻿namespace MultiVendorRestaurantManagement.ApiContract.Request
 {
     public class RegisterRestaurantRequest
     {
@@ -12,7 +10,7 @@ namespace MultiVendorRestaurantManagement.ApiContract.Request
         public int OpeningHour { get; set; }
         public int ClosingHour { get; set; }
         public string SubscriptionType { get; set; }
-        public string ContractStatus { get; set; } 
-        public string ImageUrl { get; set; } 
+        public string ContractStatus { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

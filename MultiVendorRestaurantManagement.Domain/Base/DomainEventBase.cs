@@ -6,7 +6,7 @@ namespace MultiVendorRestaurantManagement.Domain.Base
     {
         public DomainEventBase()
         {
-            this.OccurredOn = DateTime.Now;
+            OccurredOn = DateTime.Now;
         }
 
         public DateTime OccurredOn { get; }

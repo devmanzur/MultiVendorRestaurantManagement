@@ -4,11 +4,11 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
 {
     public class DealDeletedEvent : DomainEventBase
     {
-        public long DealId { get; }
-
-        public DealDeletedEvent( long id)
+        public DealDeletedEvent(long id)
         {
             DealId = id;
         }
+
+        public long DealId { get; }
     }
 }

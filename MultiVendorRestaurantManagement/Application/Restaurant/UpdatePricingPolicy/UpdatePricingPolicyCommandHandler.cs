@@ -25,7 +25,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.UpdatePricingPo
         {
             var restaurant = await _context.Restaurants.Include(x => x.PricingPolicy).SingleOrDefaultAsync(
                 x => x.Id == request.RestaurantId,
-                cancellationToken: cancellationToken);
+                cancellationToken);
             if (request.HasValue())
             {
                 restaurant.SetPricingPolicy(new PricingPolicy(request.MinimumCharge, request.MaximumCharge,

@@ -5,13 +5,13 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 {
     public class SubscriptionUpdatedEvent : DomainEventBase
     {
-        public long RestaurantId { get; }
-        public SubscriptionType SubscriptionType { get; }
-
-        public SubscriptionUpdatedEvent( long restaurantId, SubscriptionType subscriptionType)
+        public SubscriptionUpdatedEvent(long restaurantId, SubscriptionType subscriptionType)
         {
             RestaurantId = restaurantId;
             SubscriptionType = subscriptionType;
         }
+
+        public long RestaurantId { get; }
+        public SubscriptionType SubscriptionType { get; }
     }
 }

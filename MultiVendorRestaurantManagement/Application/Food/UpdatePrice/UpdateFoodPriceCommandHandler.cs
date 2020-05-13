@@ -24,7 +24,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.UpdatePrice
         public async Task<Result> Handle(UpdateFoodPriceCommand request, CancellationToken cancellationToken)
         {
             var restaurant = await _context.Restaurants.Include(x => x.Foods).ThenInclude(x => x.Variants)
-                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken);
 
             if (restaurant.HasValue())
             {

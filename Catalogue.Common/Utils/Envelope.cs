@@ -4,12 +4,6 @@ namespace Catalogue.Common.Utils
 {
     public class Envelope<T>
     {
-        public T Body { get; }
-        public string ErrorMessage { get; }
-        public DateTime TimeGenerated { get; }
-
-        public bool IsSuccess { get; }
-
         // ReSharper disable once MemberCanBeProtected.Global
         protected internal Envelope(T body, string errorMessage)
         {
@@ -18,6 +12,12 @@ namespace Catalogue.Common.Utils
             TimeGenerated = DateTime.UtcNow;
             IsSuccess = errorMessage.HasNoValue();
         }
+
+        public T Body { get; }
+        public string ErrorMessage { get; }
+        public DateTime TimeGenerated { get; }
+
+        public bool IsSuccess { get; }
     }
 
     public class Envelope : Envelope<string>

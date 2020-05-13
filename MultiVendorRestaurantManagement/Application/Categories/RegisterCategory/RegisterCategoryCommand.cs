@@ -7,11 +7,6 @@ namespace MultiVendorRestaurantManagement.Application.Categories.RegisterCategor
 {
     public class RegisterCategoryCommand : IRequest<Result>
     {
-        public string NameEng { get; }
-        public string Name { get; }
-        public string ImageUrl { get; }
-        public Categorize Categorize { get; private set; }
-
         public RegisterCategoryCommand(string nameEng, string name, string categorize, string imageUrl)
         {
             NameEng = nameEng;
@@ -19,6 +14,11 @@ namespace MultiVendorRestaurantManagement.Application.Categories.RegisterCategor
             ImageUrl = imageUrl;
             Categorize = CategorizeHelper.ConvertToCategorize(categorize);
         }
+
+        public string NameEng { get; }
+        public string Name { get; }
+        public string ImageUrl { get; }
+        public Categorize Categorize { get; }
     }
 
     public class RegisterCategoryCommandValidator : AbstractValidator<RegisterCategoryCommand>

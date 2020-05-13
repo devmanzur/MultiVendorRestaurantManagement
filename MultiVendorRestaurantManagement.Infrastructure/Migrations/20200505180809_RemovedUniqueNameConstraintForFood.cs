@@ -7,25 +7,25 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_Food_Name",
-                table: "Food");
+                "IX_Food_Name",
+                "Food");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_Name",
-                table: "Food",
-                column: "Name");
+                "IX_Food_Name",
+                "Food",
+                "Name");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_Food_Name",
-                table: "Food");
+                "IX_Food_Name",
+                "Food");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_Name",
-                table: "Food",
-                column: "Name",
+                "IX_Food_Name",
+                "Food",
+                "Name",
                 unique: true);
         }
     }

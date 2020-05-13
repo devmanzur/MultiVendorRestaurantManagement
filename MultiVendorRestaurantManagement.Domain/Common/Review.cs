@@ -1,10 +1,9 @@
 ﻿using MultiVendorRestaurantManagement.Domain.Base;
-using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Domain.Common
 {
-    public class Review : AggregateRoot 
+    public class Review : AggregateRoot
     {
         public Review(int starRate, string comment, PhoneNumberValue userPhoneNumber, long itemId)
         {
@@ -14,11 +13,11 @@ namespace MultiVendorRestaurantManagement.Domain.Common
             ItemId = itemId;
         }
 
-        public long ItemId { get; private set; }
-        public PhoneNumberValue UserPhoneNumber { get; private set; }
-        public int StarRate { get; private set; }
+        public long ItemId { get; }
+        public PhoneNumberValue UserPhoneNumber { get; }
+        public int StarRate { get; }
         public string Comment { get; set; }
-        
+
         public override IDomainEvent GetAddedDomainEvent()
         {
             return new ReviewAddedEvent();
@@ -26,7 +25,8 @@ namespace MultiVendorRestaurantManagement.Domain.Common
 
         public override IDomainEvent GetRemovedDomainEvent()
         {
-            return new ReviewDeletedEvent();;
+            return new ReviewDeletedEvent();
+            ;
         }
     }
 }

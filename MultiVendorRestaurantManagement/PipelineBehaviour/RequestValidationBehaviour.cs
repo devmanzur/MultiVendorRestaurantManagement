@@ -7,7 +7,6 @@ using MediatR;
 
 namespace MultiVendorRestaurantManagement.PipelineBehaviour
 {
-    
     public class RequestValidationBehaviour<TRequest, TResult> : IPipelineBehavior<TRequest, TResult>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;

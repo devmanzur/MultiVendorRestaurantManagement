@@ -6,7 +6,6 @@ using Common.Utils;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MultiVendorRestaurantManagement.Domain.Foods;
-using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 {
@@ -17,7 +16,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
         public FoodDocument(long restaurantId, string restaurantName, long foodId, string imageUrl, string name,
             decimal unitPrice,
-            decimal oldUnitPrice, string type, long categoryId, string status, bool isGlutenFree, bool isVeg,
+            decimal oldUnitPrice, string type, long categoryId, string categoryName, string status, bool isGlutenFree,
+            bool isVeg,
             bool isNonVeg)
         {
             RestaurantId = restaurantId;
@@ -33,41 +33,19 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             IsGlutenFree = isGlutenFree;
             IsVeg = isVeg;
             IsNonVeg = isNonVeg;
+            CategoryName = categoryName;
             GenerateTags();
             AddDefaultVariant();
         }
 
-        private void AddDefaultVariant()
-        {
-            AddVariant(new VariantDocument(DefaultVariant, nameEng: DefaultVariantEng, price: UnitPrice, "", ""));
-        }
-
-        private void GenerateTags()
-        {
-            if (IsGlutenFree)
-            {
-                FoodTags.Add(new FoodTagDocument("Senza glutine", "Gluten free"));
-            }
-
-            if (!IsVeg && IsNonVeg)
-            {
-                FoodTags.Add(new FoodTagDocument("Cibo non vegano", "Non-Veg"));
-            }
-
-            if (!IsNonVeg && IsVeg)
-            {
-                FoodTags.Add(new FoodTagDocument("Cibo vegano", "Vegan"));
-            }
-        }
-
-        public long RestaurantId { get; private set; }
+        public long RestaurantId { get; set; }
         public long DealId { get; private set; }
         public string DealDescription { get; private set; }
         public string DealDescriptionEng { get; private set; }
-        public string RestaurantName { get; private set; }
-        public long FoodId { get; private set; }
-        public string ImageUrl { get; private set; }
-        public string Name { get; private set; }
+        public string RestaurantName { get; set; }
+        public long FoodId { get; set; }
+        public string ImageUrl { get; set; }
+        public string Name { get; set; }
 
         public bool IsDiscounted { get; private set; }
 
@@ -78,21 +56,36 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public decimal OldUnitPrice { get; private set; }
 
         public DateTime DealEndsOn { get; private set; }
-        public string Type { get; private set; }
-        public long CategoryId { get; private set; }
-        public List<FoodTagDocument> FoodTags { get; private set; } = new List<FoodTagDocument>();
+        public string Type { get; set; }
+        public long CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public List<FoodTagDocument> FoodTags { get; set; } = new List<FoodTagDocument>();
         public string Status { get; private set; }
-        public bool IsGlutenFree { get; private set; } //adds an extra tag to the list of tags when set true
-        public bool IsVeg { get; private set; } //adds an extra tag to the list of tags when set true
-        public bool IsNonVeg { get; private set; } //adds an extra tag to the list of tags when set true
+        public bool IsGlutenFree { get; set; } //adds an extra tag to the list of tags when set true
+        public bool IsVeg { get; set; } //adds an extra tag to the list of tags when set true
+        public bool IsNonVeg { get; set; } //adds an extra tag to the list of tags when set true
         public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
         public List<AddOnDocument> AddOns { get; protected set; } = new List<AddOnDocument>();
         public long MenuId { get; private set; }
         public string MenuName { get; private set; }
 
-        public double Rating { get; private set; } = 0;
-        public int TotalRatingCount { get; private set; } = 0;
-        public int TotalOrderCount { get; private set; } = 0;
+        public double Rating { get; } = 0;
+        public int TotalRatingCount { get; } = 0;
+        public int TotalOrderCount { get; } = 0;
+
+        private void AddDefaultVariant()
+        {
+            AddVariant(new VariantDocument(DefaultVariant, DefaultVariantEng, UnitPrice, "", ""));
+        }
+
+        private void GenerateTags()
+        {
+            if (IsGlutenFree) FoodTags.Add(new FoodTagDocument("Senza glutine", "Gluten free"));
+
+            if (!IsVeg && IsNonVeg) FoodTags.Add(new FoodTagDocument("Cibo non vegano", "Non-Veg"));
+
+            if (!IsNonVeg && IsVeg) FoodTags.Add(new FoodTagDocument("Cibo vegano", "Vegan"));
+        }
 
         public void AddVariant(VariantDocument variant)
         {
@@ -127,10 +120,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             var variant = Variants.FirstOrDefault(x => x.Name == model.VariantName);
             if (variant.HasValue())
             {
-                if (model.VariantName.Equals(DefaultVariant))
-                {
-                    UpdateBasePrice(model.NewPrice);
-                }
+                if (model.VariantName.Equals(DefaultVariant)) UpdateBasePrice(model.NewPrice);
 
                 variant.UpdatePrice(model.NewPrice);
             }
@@ -173,10 +163,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             DescriptionEng = descriptionEng;
         }
 
-        public string Name { get; private set; }
-        public string NameEng { get; private set; }
-        public string Description { get; private set; }
-        public string DescriptionEng { get; private set; }
+        public string Name { get; set; }
+        public string NameEng { get; set; }
+        public string Description { get; set; }
+        public string DescriptionEng { get; set; }
         public decimal Price { get; private set; }
         public decimal OldPrice { get; private set; }
 
@@ -198,11 +188,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             DescriptionEng = descriptionEng;
         }
 
-        public string Name { get; private set; }
-        public string NameEng { get; private set; }
-        public string Description { get; private set; }
-        public string DescriptionEng { get; private set; }
-        public decimal Price { get; private set; }
+        public string Name { get; protected set; }
+        public string NameEng { get; protected set; }
+        public string Description { get; protected set; }
+        public string DescriptionEng { get; protected set; }
+        public decimal Price { get; protected set; }
     }
 
     public class FoodTagDocument
@@ -213,7 +203,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             NameEng = nameEng;
         }
 
-        public string Name { get; set; }
-        public string NameEng { get; set; }
+        public string Name { get; protected set; }
+        public string NameEng { get; protected set; }
     }
 }

@@ -11,10 +11,11 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
         {
             _locationString = locationString;
         }
+
         public bool IsBroken()
         {
             if (string.IsNullOrEmpty(_locationString)) return true;
-           
+
             try
             {
                 var latLng = _locationString.Split(",");
@@ -25,12 +26,12 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
                 if (latitude > 90 || latitude < -90) return true;
                 return longitude > 180 || longitude < -180;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 return true;
             }
         }
 
-        public string ErrorMessage  => "Location must be valid combination of latitude & longitude values";
+        public string ErrorMessage => "Location must be valid combination of latitude & longitude values";
     }
 }

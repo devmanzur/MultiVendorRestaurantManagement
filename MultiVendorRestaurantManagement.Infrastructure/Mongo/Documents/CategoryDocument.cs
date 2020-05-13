@@ -5,6 +5,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 {
     public class CategoryDocument : BaseDocument
     {
+        public IReadOnlyList<long> SimilarCategories;
+
         public CategoryDocument(long categoryId, string imageUrl, string name, string nameEng, string categorize)
         {
             CategoryId = categoryId;
@@ -15,13 +17,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             SimilarCategories = new List<long>();
         }
 
-        public long CategoryId { get; private set; }
+        public long CategoryId { get; protected set; }
         public string ImageUrl { get; set; }
         public string Name { get; set; }
         public string NameEng { get; set; }
-        public string Categorize { get; private set; }
-
-        public IReadOnlyList<long> SimilarCategories;
+        public string Categorize { get; protected set; }
 
         public bool HasSimilarCategories()
         {

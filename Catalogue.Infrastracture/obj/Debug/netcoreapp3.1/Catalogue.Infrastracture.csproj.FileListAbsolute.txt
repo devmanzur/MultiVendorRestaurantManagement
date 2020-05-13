@@ -1,0 +1,12 @@
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\bin\Debug\netcoreapp3.1\Catalogue.Infrastracture.deps.json
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\bin\Debug\netcoreapp3.1\Catalogue.Infrastracture.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\bin\Debug\netcoreapp3.1\Catalogue.Infrastracture.pdb
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\bin\Debug\netcoreapp3.1\Catalogue.Common.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\bin\Debug\netcoreapp3.1\Catalogue.Common.pdb
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\obj\Debug\netcoreapp3.1\Catalogue.Infrastracture.csprojAssemblyReference.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\obj\Debug\netcoreapp3.1\Catalogue.Infrastracture.csproj.CoreCompileInputs.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\obj\Debug\netcoreapp3.1\Catalogue.Infrastracture.AssemblyInfoInputs.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\obj\Debug\netcoreapp3.1\Catalogue.Infrastracture.AssemblyInfo.cs
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\obj\Debug\netcoreapp3.1\Catalogue.Infrastracture.csproj.CopyComplete
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\obj\Debug\netcoreapp3.1\Catalogue.Infrastracture.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Infrastracture\obj\Debug\netcoreapp3.1\Catalogue.Infrastracture.pdb

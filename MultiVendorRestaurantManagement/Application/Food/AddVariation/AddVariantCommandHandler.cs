@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Domain.Foods;
@@ -26,7 +25,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.AddVariation
         public async Task<Result> Handle(AddVariantCommand request, CancellationToken cancellationToken)
         {
             var restaurant = await _context.Restaurants.Include(x => x.Foods).ThenInclude(x => x.Variants)
-                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken);
             if (restaurant.HasValue() && restaurant.Foods.HasValue())
             {
                 var food = restaurant.Foods.FirstOrDefault(x => x.Id == request.FoodId);

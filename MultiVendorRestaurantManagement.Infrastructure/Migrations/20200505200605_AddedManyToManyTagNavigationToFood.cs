@@ -7,94 +7,94 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Tag_Food_FoodId",
-                table: "Tag");
+                "FK_Tag_Food_FoodId",
+                "Tag");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Tag",
-                table: "Tag");
+                "PK_Tag",
+                "Tag");
 
             migrationBuilder.DropIndex(
-                name: "IX_Tag_FoodId",
-                table: "Tag");
+                "IX_Tag_FoodId",
+                "Tag");
 
             migrationBuilder.DropColumn(
-                name: "FoodId",
-                table: "Tag");
+                "FoodId",
+                "Tag");
 
             migrationBuilder.RenameTable(
-                name: "Tag",
+                "Tag",
                 newName: "Tags");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Tags",
-                table: "Tags",
-                column: "Id");
+                "PK_Tags",
+                "Tags",
+                "Id");
 
             migrationBuilder.CreateTable(
-                name: "FoodTag",
-                columns: table => new
+                "FoodTag",
+                table => new
                 {
                     FoodId = table.Column<long>(nullable: false),
                     TagId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FoodTag", x => new { x.FoodId, x.TagId });
+                    table.PrimaryKey("PK_FoodTag", x => new {x.FoodId, x.TagId});
                     table.ForeignKey(
-                        name: "FK_FoodTag_Food_FoodId",
-                        column: x => x.FoodId,
-                        principalTable: "Food",
-                        principalColumn: "Id",
+                        "FK_FoodTag_Food_FoodId",
+                        x => x.FoodId,
+                        "Food",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_FoodTag_Tags_TagId",
-                        column: x => x.TagId,
-                        principalTable: "Tags",
-                        principalColumn: "Id",
+                        "FK_FoodTag_Tags_TagId",
+                        x => x.TagId,
+                        "Tags",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FoodTag_TagId",
-                table: "FoodTag",
-                column: "TagId");
+                "IX_FoodTag_TagId",
+                "FoodTag",
+                "TagId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FoodTag");
+                "FoodTag");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Tags",
-                table: "Tags");
+                "PK_Tags",
+                "Tags");
 
             migrationBuilder.RenameTable(
-                name: "Tags",
+                "Tags",
                 newName: "Tag");
 
             migrationBuilder.AddColumn<long>(
-                name: "FoodId",
-                table: "Tag",
-                type: "bigint",
+                "FoodId",
+                "Tag",
+                "bigint",
                 nullable: true);
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Tag",
-                table: "Tag",
-                column: "Id");
+                "PK_Tag",
+                "Tag",
+                "Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tag_FoodId",
-                table: "Tag",
-                column: "FoodId");
+                "IX_Tag_FoodId",
+                "Tag",
+                "FoodId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Tag_Food_FoodId",
-                table: "Tag",
-                column: "FoodId",
-                principalTable: "Food",
+                "FK_Tag_Food_FoodId",
+                "Tag",
+                "FoodId",
+                "Food",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }

@@ -8,8 +8,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
+                "Categories",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -18,14 +18,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     NameEng = table.Column<string>(nullable: false),
                     Categorize = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Categories", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Cities",
-                columns: table => new
+                "Cities",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -33,14 +30,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     NameEng = table.Column<string>(nullable: false),
                     Code = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cities", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Cities", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "OrderDetail",
-                columns: table => new
+                "OrderDetail",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -51,31 +45,25 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     ContactNumber = table.Column<string>(nullable: false),
                     CustomerName = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderDetail", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_OrderDetail", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "PricingPolicy",
-                columns: table => new
+                "PricingPolicy",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MinimumCharge = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    MaximumCharge = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    FixedCharge = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    MinimumCharge = table.Column<decimal>("decimal(18,4)", nullable: false),
+                    MaximumCharge = table.Column<decimal>("decimal(18,4)", nullable: false),
+                    FixedCharge = table.Column<decimal>("decimal(18,4)", nullable: false),
                     MaxItemCountInFixedPrice = table.Column<int>(nullable: false),
-                    AdditionalPrice = table.Column<decimal>(type: "decimal(18,4)", nullable: false)
+                    AdditionalPrice = table.Column<decimal>("decimal(18,4)", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PricingPolicy", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_PricingPolicy", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Promotions",
-                columns: table => new
+                "Promotions",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -86,14 +74,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     ImageUrl = table.Column<string>(nullable: false),
                     IsExclusive = table.Column<bool>(nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Promotions", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Promotions", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Reviews",
-                columns: table => new
+                "Reviews",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -102,14 +87,11 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     StarRate = table.Column<int>(nullable: false),
                     Comment = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reviews", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Reviews", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Locality",
-                columns: table => new
+                "Locality",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -122,16 +104,16 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Locality", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Locality_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
-                        principalColumn: "Id",
+                        "FK_Locality_Cities_CityId",
+                        x => x.CityId,
+                        "Cities",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Restaurants",
-                columns: table => new
+                "Restaurants",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -155,27 +137,27 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Restaurants", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Restaurants_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
+                        "FK_Restaurants_Categories_CategoryId",
+                        x => x.CategoryId,
+                        "Categories",
+                        "Id");
                     table.ForeignKey(
-                        name: "FK_Restaurants_Locality_LocalityId",
-                        column: x => x.LocalityId,
-                        principalTable: "Locality",
-                        principalColumn: "Id",
+                        "FK_Restaurants_Locality_LocalityId",
+                        x => x.LocalityId,
+                        "Locality",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Restaurants_PricingPolicy_PricingPolicyId",
-                        column: x => x.PricingPolicyId,
-                        principalTable: "PricingPolicy",
-                        principalColumn: "Id",
+                        "FK_Restaurants_PricingPolicy_PricingPolicyId",
+                        x => x.PricingPolicyId,
+                        "PricingPolicy",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Menu",
-                columns: table => new
+                "Menu",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -187,16 +169,16 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Menu", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Menu_Restaurants_RestaurantId",
-                        column: x => x.RestaurantId,
-                        principalTable: "Restaurants",
-                        principalColumn: "Id",
+                        "FK_Menu_Restaurants_RestaurantId",
+                        x => x.RestaurantId,
+                        "Restaurants",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
-                columns: table => new
+                "Order",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -213,22 +195,22 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Order", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_OrderDetail_DetailId",
-                        column: x => x.DetailId,
-                        principalTable: "OrderDetail",
-                        principalColumn: "Id",
+                        "FK_Order_OrderDetail_DetailId",
+                        x => x.DetailId,
+                        "OrderDetail",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Order_Restaurants_RestaurantId",
-                        column: x => x.RestaurantId,
-                        principalTable: "Restaurants",
-                        principalColumn: "Id",
+                        "FK_Order_Restaurants_RestaurantId",
+                        x => x.RestaurantId,
+                        "Restaurants",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Food",
-                columns: table => new
+                "Food",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -254,56 +236,56 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Food", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Food_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
+                        "FK_Food_Categories_CategoryId",
+                        x => x.CategoryId,
+                        "Categories",
+                        "Id");
                     table.ForeignKey(
-                        name: "FK_Food_Menu_MenuId",
-                        column: x => x.MenuId,
-                        principalTable: "Menu",
-                        principalColumn: "Id",
+                        "FK_Food_Menu_MenuId",
+                        x => x.MenuId,
+                        "Menu",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Food_Promotions_PromotionId",
-                        column: x => x.PromotionId,
-                        principalTable: "Promotions",
-                        principalColumn: "Id");
+                        "FK_Food_Promotions_PromotionId",
+                        x => x.PromotionId,
+                        "Promotions",
+                        "Id");
                     table.ForeignKey(
-                        name: "FK_Food_Restaurants_RestaurantId",
-                        column: x => x.RestaurantId,
-                        principalTable: "Restaurants",
-                        principalColumn: "Id",
+                        "FK_Food_Restaurants_RestaurantId",
+                        x => x.RestaurantId,
+                        "Restaurants",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "OrderItem",
-                columns: table => new
+                "OrderItem",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderId = table.Column<long>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
-                    Total = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    Total = table.Column<decimal>("decimal(18,4)", nullable: false),
                     FoodId = table.Column<long>(nullable: false),
                     FoodName = table.Column<string>(nullable: false),
-                    Discount = table.Column<decimal>(type: "decimal(18,4)", nullable: false)
+                    Discount = table.Column<decimal>("decimal(18,4)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderItem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_OrderItem_Order_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Order",
-                        principalColumn: "Id",
+                        "FK_OrderItem_Order_OrderId",
+                        x => x.OrderId,
+                        "Order",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AddOn",
-                columns: table => new
+                "AddOn",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -311,23 +293,23 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     NameEng = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: false),
                     DescriptionEng = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    Price = table.Column<decimal>("decimal(18,4)", nullable: false),
                     FoodId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AddOn", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AddOn_Food_FoodId",
-                        column: x => x.FoodId,
-                        principalTable: "Food",
-                        principalColumn: "Id",
+                        "FK_AddOn_Food_FoodId",
+                        x => x.FoodId,
+                        "Food",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tag",
-                columns: table => new
+                "Tag",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -339,16 +321,16 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Tag", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tag_Food_FoodId",
-                        column: x => x.FoodId,
-                        principalTable: "Food",
-                        principalColumn: "Id",
+                        "FK_Tag_Food_FoodId",
+                        x => x.FoodId,
+                        "Food",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Variant",
-                columns: table => new
+                "Variant",
+                table => new
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
@@ -361,189 +343,189 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Variant", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Variant_Food_FoodId",
-                        column: x => x.FoodId,
-                        principalTable: "Food",
-                        principalColumn: "Id",
+                        "FK_Variant_Food_FoodId",
+                        x => x.FoodId,
+                        "Food",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AddOn_FoodId",
-                table: "AddOn",
-                column: "FoodId");
+                "IX_AddOn_FoodId",
+                "AddOn",
+                "FoodId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_Code",
-                table: "Cities",
-                column: "Code",
+                "IX_Cities_Code",
+                "Cities",
+                "Code",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_Name",
-                table: "Cities",
-                column: "Name",
+                "IX_Cities_Name",
+                "Cities",
+                "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cities_NameEng",
-                table: "Cities",
-                column: "NameEng",
+                "IX_Cities_NameEng",
+                "Cities",
+                "NameEng",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_CategoryId",
-                table: "Food",
-                column: "CategoryId");
+                "IX_Food_CategoryId",
+                "Food",
+                "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_MenuId",
-                table: "Food",
-                column: "MenuId");
+                "IX_Food_MenuId",
+                "Food",
+                "MenuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_Name",
-                table: "Food",
-                column: "Name",
+                "IX_Food_Name",
+                "Food",
+                "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_PromotionId",
-                table: "Food",
-                column: "PromotionId");
+                "IX_Food_PromotionId",
+                "Food",
+                "PromotionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Food_RestaurantId",
-                table: "Food",
-                column: "RestaurantId");
+                "IX_Food_RestaurantId",
+                "Food",
+                "RestaurantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locality_CityId",
-                table: "Locality",
-                column: "CityId");
+                "IX_Locality_CityId",
+                "Locality",
+                "CityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locality_Code",
-                table: "Locality",
-                column: "Code",
+                "IX_Locality_Code",
+                "Locality",
+                "Code",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locality_Name",
-                table: "Locality",
-                column: "Name",
+                "IX_Locality_Name",
+                "Locality",
+                "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Locality_NameEng",
-                table: "Locality",
-                column: "NameEng",
+                "IX_Locality_NameEng",
+                "Locality",
+                "NameEng",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Menu_RestaurantId",
-                table: "Menu",
-                column: "RestaurantId");
+                "IX_Menu_RestaurantId",
+                "Menu",
+                "RestaurantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_DetailId",
-                table: "Order",
-                column: "DetailId");
+                "IX_Order_DetailId",
+                "Order",
+                "DetailId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_RestaurantId",
-                table: "Order",
-                column: "RestaurantId");
+                "IX_Order_RestaurantId",
+                "Order",
+                "RestaurantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderItem_OrderId",
-                table: "OrderItem",
-                column: "OrderId");
+                "IX_OrderItem_OrderId",
+                "OrderItem",
+                "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurants_CategoryId",
-                table: "Restaurants",
-                column: "CategoryId");
+                "IX_Restaurants_CategoryId",
+                "Restaurants",
+                "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurants_LocalityId",
-                table: "Restaurants",
-                column: "LocalityId");
+                "IX_Restaurants_LocalityId",
+                "Restaurants",
+                "LocalityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurants_Name",
-                table: "Restaurants",
-                column: "Name",
+                "IX_Restaurants_Name",
+                "Restaurants",
+                "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurants_PhoneNumber",
-                table: "Restaurants",
-                column: "PhoneNumber",
+                "IX_Restaurants_PhoneNumber",
+                "Restaurants",
+                "PhoneNumber",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Restaurants_PricingPolicyId",
-                table: "Restaurants",
-                column: "PricingPolicyId");
+                "IX_Restaurants_PricingPolicyId",
+                "Restaurants",
+                "PricingPolicyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tag_FoodId",
-                table: "Tag",
-                column: "FoodId");
+                "IX_Tag_FoodId",
+                "Tag",
+                "FoodId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Variant_FoodId",
-                table: "Variant",
-                column: "FoodId");
+                "IX_Variant_FoodId",
+                "Variant",
+                "FoodId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AddOn");
+                "AddOn");
 
             migrationBuilder.DropTable(
-                name: "OrderItem");
+                "OrderItem");
 
             migrationBuilder.DropTable(
-                name: "Reviews");
+                "Reviews");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                "Tag");
 
             migrationBuilder.DropTable(
-                name: "Variant");
+                "Variant");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                "Order");
 
             migrationBuilder.DropTable(
-                name: "Food");
+                "Food");
 
             migrationBuilder.DropTable(
-                name: "OrderDetail");
+                "OrderDetail");
 
             migrationBuilder.DropTable(
-                name: "Menu");
+                "Menu");
 
             migrationBuilder.DropTable(
-                name: "Promotions");
+                "Promotions");
 
             migrationBuilder.DropTable(
-                name: "Restaurants");
+                "Restaurants");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                "Categories");
 
             migrationBuilder.DropTable(
-                name: "Locality");
+                "Locality");
 
             migrationBuilder.DropTable(
-                name: "PricingPolicy");
+                "PricingPolicy");
 
             migrationBuilder.DropTable(
-                name: "Cities");
+                "Cities");
         }
     }
 }

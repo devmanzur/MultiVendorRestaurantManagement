@@ -23,9 +23,7 @@
                     return ContractStatus.Expired;
                 default:
                     return ContractStatus.Invalid;
-               
             }
-
         }
     }
 }

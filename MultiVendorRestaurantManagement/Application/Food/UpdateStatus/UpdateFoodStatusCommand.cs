@@ -14,9 +14,9 @@ namespace MultiVendorRestaurantManagement.Application.Food.UpdateStatus
             Status = status;
         }
 
-        public long RestaurantId { get; private set; }
-        public long FoodId { get; private set; }
-        public FoodStatus Status { get; private set; }
+        public long RestaurantId { get; }
+        public long FoodId { get; }
+        public FoodStatus Status { get; }
 
         public static UpdateFoodStatusCommand Unavailable(long restaurantId, long foodId)
         {

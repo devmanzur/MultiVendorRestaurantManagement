@@ -6,11 +6,6 @@ namespace MultiVendorRestaurantManagement.Application.City.AddLocality
 {
     public class AddLocalityCommand : IRequest<Result>
     {
-        public string Name { get; }
-        public string NameEng { get; }
-        public int Code { get; }
-        public long CityId { get; }
-
         public AddLocalityCommand(string name, string nameEng, int code, long cityId)
         {
             Name = name;
@@ -18,6 +13,11 @@ namespace MultiVendorRestaurantManagement.Application.City.AddLocality
             Code = code;
             CityId = cityId;
         }
+
+        public string Name { get; }
+        public string NameEng { get; }
+        public int Code { get; }
+        public long CityId { get; }
     }
 
     public class RegisterLocalityCommandValidator : AbstractValidator<AddLocalityCommand>

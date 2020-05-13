@@ -31,10 +31,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddFoodToMenu
                 if (menu.HasValue())
                 {
                     var food = restaurant.Foods.FirstOrDefault(x => x.Id == request.FoodId);
-                    if (food.HasValue())
-                    {
-                        restaurant.AddMenuToFood(menu, food);
-                    }
+                    if (food.HasValue()) restaurant.AddMenuToFood(menu, food);
 
                     var result = await _unitOfWork.CommitAsync(cancellationToken);
                     return result > 0 ? Result.Ok() : Result.Failure("failed to complete action");

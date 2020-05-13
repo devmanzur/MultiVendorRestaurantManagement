@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;

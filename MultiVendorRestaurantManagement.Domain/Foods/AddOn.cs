@@ -1,5 +1,4 @@
-﻿using Common.Invariants;
-using MultiVendorRestaurantManagement.Domain.Base;
+﻿using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Domain.Foods

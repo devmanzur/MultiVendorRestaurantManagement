@@ -9,23 +9,6 @@ namespace MultiVendorRestaurantManagement.Application.Deals
 {
     public class CreateDealCommand : IRequest<Result>
     {
-        public string Name { get; }
-        public string ImageUrl { get; }
-        public string Description { get; }
-        public string DescriptionEng { get; }
-        public bool IsFixedPriceDiscount { get; }
-        public DateTime StartDate { get; }
-        public DateTime EndDate { get; }
-
-        public PercentageDiscountModel PercentageModel { get; }
-
-        public FixedDiscountModel FixedPriceModel { get; }
-        public PackageDiscountModel PackageDiscountModel { get; }
-
-        public bool IsPackageDeal { get; }
-       
-        
-
         public CreateDealCommand(string name, string imageUrl, string description, string descriptionEng,
             int minimumQuantity, decimal minimumBillAmount, bool isFixedPriceDiscount,
             in decimal discountAmount, in decimal discountPercentage, in decimal maximumDiscount, DateTime startDate,
@@ -42,19 +25,28 @@ namespace MultiVendorRestaurantManagement.Application.Deals
             EndDate = endDate;
             IsPackageDeal = isPackageDeal;
             if (isFixedPriceDiscount)
-            {
                 FixedPriceModel = new FixedDiscountModel(discountAmount, minimumBillAmount, minimumQuantity);
-            }
             else if (IsPackageDeal)
-            {
-                PackageDiscountModel = new PackageDiscountModel(packageSize,freeItemQuantityInPackage);
-            }
+                PackageDiscountModel = new PackageDiscountModel(packageSize, freeItemQuantityInPackage);
             else
-            {
                 PercentageModel = new PercentageDiscountModel(discountPercentage, maximumDiscount, minimumBillAmount,
                     minimumQuantity);
-            }
         }
+
+        public string Name { get; }
+        public string ImageUrl { get; }
+        public string Description { get; }
+        public string DescriptionEng { get; }
+        public bool IsFixedPriceDiscount { get; }
+        public DateTime StartDate { get; }
+        public DateTime EndDate { get; }
+
+        public PercentageDiscountModel PercentageModel { get; }
+
+        public FixedDiscountModel FixedPriceModel { get; }
+        public PackageDiscountModel PackageDiscountModel { get; }
+
+        public bool IsPackageDeal { get; }
     }
 
     public class CreateDealCommandValidator : AbstractValidator<CreateDealCommand>

@@ -7,13 +7,6 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.UpdatePricingPo
 {
     public class UpdatePricingPolicyCommand : IRequest<Result>
     {
-        public long RestaurantId { get; }
-        public decimal MinimumCharge { get; }
-        public decimal MaximumCharge { get; }
-        public decimal FixedCharge { get; }
-        public int MaxItemCountInFixedPrice { get; }
-        public decimal AdditionalPricePerUnit { get; }
-
         public UpdatePricingPolicyCommand(long restaurantId, decimal minimumCharge, decimal maximumCharge,
             decimal fixedCharge, int maxItemCountInFixedPrice, decimal additionalPricePerUnit)
         {
@@ -24,6 +17,13 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.UpdatePricingPo
             MaxItemCountInFixedPrice = maxItemCountInFixedPrice;
             AdditionalPricePerUnit = additionalPricePerUnit;
         }
+
+        public long RestaurantId { get; }
+        public decimal MinimumCharge { get; }
+        public decimal MaximumCharge { get; }
+        public decimal FixedCharge { get; }
+        public int MaxItemCountInFixedPrice { get; }
+        public decimal AdditionalPricePerUnit { get; }
     }
 
     public class UpdatePricingPolicyCommandValidator : AbstractValidator<UpdatePricingPolicyCommand>

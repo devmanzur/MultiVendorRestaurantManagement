@@ -6,5 +6,4 @@
         public string NameEng { get; set; }
         public string ImageUrl { get; set; }
     }
-    
 }

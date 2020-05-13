@@ -7,15 +7,15 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.UpdateSubscript
 {
     public class UpdateSubscriptionCommand : IRequest<Result>
     {
-        public long RestaurantId { get; }
-
-        public SubscriptionType SubscriptionType { get; }
-
         public UpdateSubscriptionCommand(long restaurant, string subscription)
         {
             RestaurantId = restaurant;
             SubscriptionType = SubscriptionHelper.ConvertToSubscription(subscription);
         }
+
+        public long RestaurantId { get; }
+
+        public SubscriptionType SubscriptionType { get; }
     }
 
     public class UpdateSubscriptionCommandValidator : AbstractValidator<UpdateSubscriptionCommand>

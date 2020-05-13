@@ -7,8 +7,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<decimal>(
-                name: "OldPrice",
-                table: "Variant",
+                "OldPrice",
+                "Variant",
                 nullable: false,
                 defaultValue: 0m);
         }
@@ -16,8 +16,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "OldPrice",
-                table: "Variant");
+                "OldPrice",
+                "Variant");
         }
     }
 }

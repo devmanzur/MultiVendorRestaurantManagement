@@ -26,7 +26,8 @@ namespace MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal
                 .FirstOrDefaultAsync(cancellationToken);
             if (food.HasValue())
             {
-                food.SetDeal(notification.DealId, notification.Description, notification.DescriptionEng,notification.EndDate);
+                food.SetDeal(notification.DealId, notification.Description, notification.DescriptionEng,
+                    notification.EndDate);
                 await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
                     cancellationToken: cancellationToken);
             }

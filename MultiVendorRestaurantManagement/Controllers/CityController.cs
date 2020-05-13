@@ -1,16 +1,11 @@
 ﻿using System.Threading.Tasks;
-using Common.Utils;
-using CrossCutting.Utils;
-using CSharpFunctionalExtensions;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.City.AddLocality;
 using MultiVendorRestaurantManagement.Application.City.RegisterCity;
 using MultiVendorRestaurantManagement.Application.City.RemoveCity;
 using MultiVendorRestaurantManagement.Application.City.RemoveLocality;
-using MultiVendorRestaurantManagement.Infrastructure.ImageManager;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {

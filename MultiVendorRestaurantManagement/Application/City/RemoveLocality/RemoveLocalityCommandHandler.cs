@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
@@ -37,6 +36,7 @@ namespace MultiVendorRestaurantManagement.Application.City.RemoveLocality
                         : Result.Failure("Failed to remove locality");
                 }
             }
+
             return Result.Failure("Failed to remove locality");
         }
     }

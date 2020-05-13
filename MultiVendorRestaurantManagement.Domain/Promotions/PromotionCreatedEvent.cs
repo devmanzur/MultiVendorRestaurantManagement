@@ -1,9 +1,8 @@
-﻿﻿using MultiVendorRestaurantManagement.Domain.Base;
+﻿using MultiVendorRestaurantManagement.Domain.Base;
 
 namespace MultiVendorRestaurantManagement.Domain.Promotions
 {
-    public class PromotionCreatedEvent: DomainEventBase
+    public class PromotionCreatedEvent : DomainEventBase
     {
-        
     }
 }

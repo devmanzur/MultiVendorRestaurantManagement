@@ -26,10 +26,7 @@ namespace MultiVendorRestaurantManagement.Application.GenericEvents
                 .FirstOrDefaultAsync(cancellationToken);
             if (food.HasValue())
             {
-                if (notification.MenuWasUpdated())
-                {
-                    food.UpdateMenu(notification.MenuId, notification.MenuName);
-                }
+                if (notification.MenuWasUpdated()) food.UpdateMenu(notification.MenuId, notification.MenuName);
 
                 if (notification.PriceWasUpdated())
                 {
@@ -38,15 +35,9 @@ namespace MultiVendorRestaurantManagement.Application.GenericEvents
                         cancellationToken: cancellationToken);
                 }
 
-                if (notification.IsDiscounted)
-                {
-                    food.SetOnDiscount();
-                }
+                if (notification.IsDiscounted) food.SetOnDiscount();
 
-                if (notification.StatusWasUpdated())
-                {
-                    food.UpdateStatus(notification.Status);
-                }
+                if (notification.StatusWasUpdated()) food.UpdateStatus(notification.Status);
 
                 await _collection.FoodCollection.ReplaceOneAsync(Filter(notification), food,
                     cancellationToken: cancellationToken);

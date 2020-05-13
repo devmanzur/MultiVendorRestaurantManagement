@@ -1,28 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Common.Invariants;
-using Common.Utils;
+﻿using Common.Invariants;
 using CSharpFunctionalExtensions;
 using FluentValidation;
 using MediatR;
-using MultiVendorRestaurantManagement.ApiContract.Request;
-using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
 {
     public class RegisterFoodCommand : IRequest<Result>
     {
-        public long RestaurantId { get; }
-        public long CategoryId { get; }
-        public string Name { get; }
-        public FoodItemType Type { get; }
-        public string ImageUrl { get; }
-        public bool IsVeg { get; }
-        public bool IsGlutenFree { get; }
-        public bool IsNonVeg { get; }
-        public MoneyValue UnitPrice { get; }
-
         public RegisterFoodCommand(long restaurantId, string name, string type, long categoryId, string imageUrl,
             bool isVeg,
             bool isGlutenFree, bool isNonVeg, decimal unitPrice)
@@ -37,6 +22,16 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
             IsNonVeg = isNonVeg;
             UnitPrice = MoneyValue.Of(unitPrice);
         }
+
+        public long RestaurantId { get; }
+        public long CategoryId { get; }
+        public string Name { get; }
+        public FoodItemType Type { get; }
+        public string ImageUrl { get; }
+        public bool IsVeg { get; }
+        public bool IsGlutenFree { get; }
+        public bool IsNonVeg { get; }
+        public MoneyValue UnitPrice { get; }
     }
 
     public class RegisterFoodCommandValidator : AbstractValidator<RegisterFoodCommand>
@@ -52,6 +47,5 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
             RuleFor(x => x.UnitPrice).NotNull();
             RuleFor(x => x.Type).NotNull().NotEqual(FoodItemType.Invalid);
         }
-        
     }
 }

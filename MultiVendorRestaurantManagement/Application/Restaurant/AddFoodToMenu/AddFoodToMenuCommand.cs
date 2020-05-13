@@ -6,16 +6,16 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddFoodToMenu
 {
     public class AddFoodToMenuCommand : IRequest<Result>
     {
-        public AddFoodToMenuCommand(long restaurantId,  long menuId,long foodId)
+        public AddFoodToMenuCommand(long restaurantId, long menuId, long foodId)
         {
             RestaurantId = restaurantId;
             FoodId = foodId;
             MenuId = menuId;
         }
 
-        public long RestaurantId { get; private set; }
-        public long FoodId { get; private set; }
-        public long MenuId { get; private set; }
+        public long RestaurantId { get; }
+        public long FoodId { get; }
+        public long MenuId { get; }
     }
 
     public class AddFoodToMenuCommandValidator : AbstractValidator<AddFoodToMenuCommand>

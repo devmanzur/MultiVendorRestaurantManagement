@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
@@ -27,10 +25,10 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
         {
             var restaurant = await _context.Restaurants.Include(x => x.Menus).SingleOrDefaultAsync(
                 x => x.Id == request.RestaurantId,
-                cancellationToken: cancellationToken);
+                cancellationToken);
             if (restaurant.HasNoValue()) return Result.Failure("invalid restaurant");
 
-            restaurant.AddMenu(new Menu(request.Name, request.NameEng,request.ImageUrl));
+            restaurant.AddMenu(new Menu(request.Name, request.NameEng, request.ImageUrl));
 
             var result = await _unitOfWork.CommitAsync(cancellationToken);
             return result > 0

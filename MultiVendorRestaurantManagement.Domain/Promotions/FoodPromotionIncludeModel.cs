@@ -8,12 +8,13 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
     {
         public FoodPromotionIncludeModel(long foodId, long restaurantId)
         {
-            CheckRule(new ConditionMustBeTrueRule(foodId.HasValue() && restaurantId.HasValue(),"food and restaurant value for promotional models are invalid"));
+            CheckRule(new ConditionMustBeTrueRule(foodId.HasValue() && restaurantId.HasValue(),
+                "food and restaurant value for promotional models are invalid"));
             FoodId = foodId;
             RestaurantId = restaurantId;
         }
 
-        public long FoodId { get; private set; }
-        public long RestaurantId { get; private set; }
+        public long FoodId { get; }
+        public long RestaurantId { get; }
     }
 }

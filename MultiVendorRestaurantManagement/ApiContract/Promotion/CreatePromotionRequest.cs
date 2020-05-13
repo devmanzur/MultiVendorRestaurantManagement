@@ -18,6 +18,5 @@ namespace MultiVendorRestaurantManagement.ApiContract.Promotion
 
         public decimal DiscountPercentage { get; set; } = 0;
         public decimal MaximumDiscount { get; set; } = 0;
-
     }
 }

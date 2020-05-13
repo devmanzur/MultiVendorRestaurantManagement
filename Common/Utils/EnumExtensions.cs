@@ -12,7 +12,5 @@ namespace Common.Utils
             // ?? is equivalent to ?: of kotlin 
             return attributes[0]?.Description ?? e.ToString();
         }
-
-       
     }
 }

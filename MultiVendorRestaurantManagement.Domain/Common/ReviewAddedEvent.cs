@@ -2,8 +2,7 @@
 
 namespace MultiVendorRestaurantManagement.Domain.Common
 {
-    public class ReviewAddedEvent: DomainEventBase
+    public class ReviewAddedEvent : DomainEventBase
     {
-        
     }
 }

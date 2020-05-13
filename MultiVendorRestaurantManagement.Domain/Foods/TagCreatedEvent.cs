@@ -2,13 +2,13 @@
 
 namespace MultiVendorRestaurantManagement.Domain.Foods
 {
-    public class TagCreatedEvent  : DomainEventBase
+    public class TagCreatedEvent : DomainEventBase
     {
-        public string Name { get; }
-
         public TagCreatedEvent(string name)
         {
             Name = name;
         }
+
+        public string Name { get; }
     }
 }

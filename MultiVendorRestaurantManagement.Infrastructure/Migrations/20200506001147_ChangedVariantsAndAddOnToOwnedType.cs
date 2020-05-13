@@ -7,151 +7,151 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Variant",
-                table: "Variant");
+                "PK_Variant",
+                "Variant");
 
             migrationBuilder.DropIndex(
-                name: "IX_Variant_FoodId",
-                table: "Variant");
+                "IX_Variant_FoodId",
+                "Variant");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_AddOn",
-                table: "AddOn");
+                "PK_AddOn",
+                "AddOn");
 
             migrationBuilder.DropIndex(
-                name: "IX_AddOn_FoodId",
-                table: "AddOn");
+                "IX_AddOn_FoodId",
+                "AddOn");
 
             migrationBuilder.AlterColumn<string>(
-                name: "NameEng",
-                table: "Variant",
+                "NameEng",
+                "Variant",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Variant",
+                "Name",
+                "Variant",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
             migrationBuilder.AlterColumn<long>(
-                name: "FoodId",
-                table: "Variant",
+                "FoodId",
+                "Variant",
                 nullable: false,
                 oldClrType: typeof(long),
                 oldType: "bigint",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "AddOn",
+                "Name",
+                "AddOn",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
             migrationBuilder.AlterColumn<long>(
-                name: "FoodId",
-                table: "AddOn",
+                "FoodId",
+                "AddOn",
                 nullable: false,
                 oldClrType: typeof(long),
                 oldType: "bigint",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                table: "AddOn",
+                "Description",
+                "AddOn",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Variant",
-                table: "Variant",
-                columns: new[] { "FoodId", "Id" });
+                "PK_Variant",
+                "Variant",
+                new[] {"FoodId", "Id"});
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_AddOn",
-                table: "AddOn",
-                columns: new[] { "FoodId", "Id" });
+                "PK_AddOn",
+                "AddOn",
+                new[] {"FoodId", "Id"});
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Variant",
-                table: "Variant");
+                "PK_Variant",
+                "Variant");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_AddOn",
-                table: "AddOn");
+                "PK_AddOn",
+                "AddOn");
 
             migrationBuilder.AlterColumn<string>(
-                name: "NameEng",
-                table: "Variant",
-                type: "nvarchar(max)",
+                "NameEng",
+                "Variant",
+                "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Variant",
-                type: "nvarchar(max)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<long>(
-                name: "FoodId",
-                table: "Variant",
-                type: "bigint",
-                nullable: true,
-                oldClrType: typeof(long));
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "AddOn",
-                type: "nvarchar(max)",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                table: "AddOn",
-                type: "nvarchar(max)",
+                "Name",
+                "Variant",
+                "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<long>(
-                name: "FoodId",
-                table: "AddOn",
-                type: "bigint",
+                "FoodId",
+                "Variant",
+                "bigint",
+                nullable: true,
+                oldClrType: typeof(long));
+
+            migrationBuilder.AlterColumn<string>(
+                "Name",
+                "AddOn",
+                "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<string>(
+                "Description",
+                "AddOn",
+                "nvarchar(max)",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldNullable: true);
+
+            migrationBuilder.AlterColumn<long>(
+                "FoodId",
+                "AddOn",
+                "bigint",
                 nullable: true,
                 oldClrType: typeof(long));
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Variant",
-                table: "Variant",
-                column: "Id");
+                "PK_Variant",
+                "Variant",
+                "Id");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_AddOn",
-                table: "AddOn",
-                column: "Id");
+                "PK_AddOn",
+                "AddOn",
+                "Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Variant_FoodId",
-                table: "Variant",
-                column: "FoodId");
+                "IX_Variant_FoodId",
+                "Variant",
+                "FoodId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AddOn_FoodId",
-                table: "AddOn",
-                column: "FoodId");
+                "IX_AddOn_FoodId",
+                "AddOn",
+                "FoodId");
         }
     }
 }

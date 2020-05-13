@@ -1,11 +1,10 @@
 ﻿using CSharpFunctionalExtensions;
 using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Identity;
 
 namespace MultiVendorRestaurantManagement.Application.Categories.UpdateCategory
 {
-    public class UpdateCategoryCommand  : IRequest<Result>
+    public class UpdateCategoryCommand : IRequest<Result>
     {
         public UpdateCategoryCommand(string name, string nameEng, long id, string imageUrl)
         {
@@ -15,7 +14,7 @@ namespace MultiVendorRestaurantManagement.Application.Categories.UpdateCategory
             ImageUrl = imageUrl;
         }
 
-        public string Name { get;}
+        public string Name { get; }
         public string NameEng { get; }
         public long Id { get; }
         public string ImageUrl { get; }
@@ -28,8 +27,6 @@ namespace MultiVendorRestaurantManagement.Application.Categories.UpdateCategory
             RuleFor(x => x.Name).NotNull().NotEmpty();
             RuleFor(x => x.NameEng).NotNull().NotEmpty();
             RuleFor(x => x.Id).NotNull().NotEmpty();
-            
         }
     }
-    
 }

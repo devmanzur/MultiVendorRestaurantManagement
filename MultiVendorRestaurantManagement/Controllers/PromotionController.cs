@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Promotion;
-using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Promotions.AddItems;
 using MultiVendorRestaurantManagement.Application.Promotions.CreatePromotion;
 

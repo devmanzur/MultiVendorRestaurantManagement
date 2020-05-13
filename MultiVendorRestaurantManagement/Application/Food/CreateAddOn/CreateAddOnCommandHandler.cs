@@ -25,7 +25,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.CreateaAddOn
         public async Task<Result> Handle(CreateAddOnCommand request, CancellationToken cancellationToken)
         {
             var restaurant = await _context.Restaurants.Include(x => x.Foods).ThenInclude(x => x.AddOns)
-                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken);
             if (restaurant.HasValue() && restaurant.Foods.HasValue())
             {
                 var food = restaurant.Foods.FirstOrDefault(x => x.Id == request.FoodId);

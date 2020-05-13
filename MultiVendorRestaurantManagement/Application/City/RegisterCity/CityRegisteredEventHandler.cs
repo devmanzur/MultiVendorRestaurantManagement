@@ -2,11 +2,8 @@
 using System.Threading.Tasks;
 using Common.Utils;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using MongoDB.Driver;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper;
-using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;
 
@@ -29,11 +26,9 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
 
 
             if (city.HasValue())
-            {
                 await _collection.CitiesCollection.InsertOneAsync(
                     new CityDocument(city.Id, city.Code, city.Name, city.NameEng),
                     cancellationToken);
-            }
         }
     }
 }

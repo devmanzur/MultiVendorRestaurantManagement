@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Common.Invariants;
+﻿using Common.Invariants;
 using Common.Utils;
 using CSharpFunctionalExtensions;
 using FluentValidation;
@@ -9,18 +8,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
 {
     public class RegisterRestaurantCommand : IRequest<Result>
     {
-        public string Name { get; }
-        public string PhoneNumber { get; }
-        public long LocalityId { get; }
-        public long CityId { get; }
-        public string ImageUrl { get; }
-        public int OpeningHour { get; }
-        public int ClosingHour { get; }
-        public SubscriptionType SubscriptionType { get; }
-        public ContractStatus ContractStatus { get; }
-        public long CategoryId { get; private set; }
-
-        public RegisterRestaurantCommand(string name, string phoneNumber, long localityId, int openingHour, int closingHour,
+        public RegisterRestaurantCommand(string name, string phoneNumber, long localityId, int openingHour,
+            int closingHour,
             string subscriptionType, string contractStatus, string imageUrl, long cityId, long categoryId)
         {
             Name = name;
@@ -34,6 +23,17 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             SubscriptionType = SubscriptionHelper.ConvertToSubscription(subscriptionType);
             ContractStatus = ContractStatusHelper.ConvertToContractStatus(contractStatus);
         }
+
+        public string Name { get; }
+        public string PhoneNumber { get; }
+        public long LocalityId { get; }
+        public long CityId { get; }
+        public string ImageUrl { get; }
+        public int OpeningHour { get; }
+        public int ClosingHour { get; }
+        public SubscriptionType SubscriptionType { get; }
+        public ContractStatus ContractStatus { get; }
+        public long CategoryId { get; }
     }
 
     public class RegisterRestaurantCommandValidator : AbstractValidator<RegisterRestaurantCommand>
@@ -54,7 +54,5 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             RuleFor(x => x.ContractStatus)
                 .NotEqual(ContractStatus.Invalid);
         }
-
-        
     }
 }

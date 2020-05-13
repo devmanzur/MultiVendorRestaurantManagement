@@ -9,30 +9,27 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
 {
     public class MoneyValue : CustomValueObject
     {
+        private MoneyValue(decimal amount, string currency)
+        {
+            CheckRule(new ConditionMustBeTrueRule(amount.HasValue() && HelperFunctions.ValidAmount(amount),
+                "invalid "));
+            Value = amount;
+            Currency = currency;
+        }
+
         public decimal Value { get; }
 
         public string Currency { get; }
 
         public string PriceTag => Currency + " " + Value;
 
-        private MoneyValue(decimal amount, string currency)
-        {
-            CheckRule(new ConditionMustBeTrueRule(amount.HasValue() && HelperFunctions.ValidAmount(amount),"invalid "));
-            this.Value = amount;
-            this.Currency = currency;
-        }
-
         public static MoneyValue Of(decimal value)
         {
             SupportedCurrency currency;
             if (value >= 1)
-            {
                 currency = SupportedCurrency.Euro;
-            }
             else
-            {
                 currency = SupportedCurrency.Cent;
-            }
             CheckRule(new MoneyValueMustHaveCurrencyRule(currency.ToDescriptionString()));
 
             return new MoneyValue(value, currency.ToDescriptionString());
@@ -47,10 +44,7 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
         {
             CheckRule(new MoneyValueOperationMustBePerformedOnTheSameCurrencyRule(moneyValueLeft, moneyValueRight));
 
-            if (moneyValueLeft.Currency != moneyValueRight.Currency)
-            {
-                throw new ArgumentException();
-            }
+            if (moneyValueLeft.Currency != moneyValueRight.Currency) throw new ArgumentException();
 
             return new MoneyValue(moneyValueLeft.Value + moneyValueRight.Value, moneyValueLeft.Currency);
         }
@@ -64,9 +58,6 @@ namespace MultiVendorRestaurantManagement.Domain.ValueObjects
         {
             return new MoneyValue(number * moneyValueRight.Value, moneyValueRight.Currency);
         }
-        
-        
-        
     }
 
     public static class SumExtensions

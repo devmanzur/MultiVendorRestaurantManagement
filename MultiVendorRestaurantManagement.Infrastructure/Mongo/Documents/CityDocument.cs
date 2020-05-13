@@ -12,16 +12,16 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             NameEng = nameEng;
             Localities = new List<LocalityRecord>();
         }
-        
-        public long CityId { get; private set; }
+
+        public long CityId { get; protected set; }
         public string Code { get; protected set; }
         public string Name { get; protected set; }
         public string NameEng { get; protected set; }
         public List<LocalityRecord> Localities { get; set; }
     }
-    
-    
-    public class LocalityRecord 
+
+
+    public class LocalityRecord
     {
         public LocalityRecord(long localityId, int code, string name, string nameEng)
         {
@@ -31,7 +31,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             NameEng = nameEng;
         }
 
-        public long LocalityId { get; private set; }
+        public long LocalityId { get; protected set; }
         public int Code { get; protected set; }
         public string Name { get; protected set; }
         public string NameEng { get; protected set; }

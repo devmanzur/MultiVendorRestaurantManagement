@@ -16,7 +16,7 @@ namespace Common.Invariants
         public static SubscriptionType ConvertToSubscription(string item)
         {
             if (string.IsNullOrEmpty(item)) return SubscriptionType.Invalid;
-            
+
             return item.ToLowerInvariant() switch
             {
                 "monthly" => SubscriptionType.Monthly,
@@ -29,7 +29,6 @@ namespace Common.Invariants
 
         public static DateTime GetExpirationTime(this SubscriptionType type)
         {
-           
             return type switch
             {
                 SubscriptionType.Monthly => DateTime.Now.AddMonths(1),
@@ -37,7 +36,6 @@ namespace Common.Invariants
                 SubscriptionType.BiYearly => DateTime.Now.AddMonths(6),
                 _ => DateTime.Now
             };
-            
         }
     }
 }

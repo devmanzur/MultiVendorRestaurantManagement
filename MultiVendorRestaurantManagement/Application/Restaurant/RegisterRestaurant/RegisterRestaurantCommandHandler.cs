@@ -1,11 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Invariants;
 using Common.Utils;
 using CSharpFunctionalExtensions;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
@@ -36,7 +34,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             if (locality.HasNoValue()) return Result.Failure("invalid locality");
 
             var category = await _context.Categories.AsNoTracking()
-                .SingleOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken: cancellationToken);
+                .SingleOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken);
             if (category.HasNoValue()) return Result.Failure("invalid category");
 
             var restaurant = new Domain.Restaurants.Restaurant(

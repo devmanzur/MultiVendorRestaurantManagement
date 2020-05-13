@@ -1,6 +1,4 @@
 ﻿using MultiVendorRestaurantManagement.Domain.Base;
-using MultiVendorRestaurantManagement.Domain.Foods;
-using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
 namespace MultiVendorRestaurantManagement.Domain.Orders
 {
@@ -16,12 +14,11 @@ namespace MultiVendorRestaurantManagement.Domain.Orders
         }
 
         public virtual Order Order { get; private set; }
-        public int Quantity { get; private set; }
-        public decimal Total { get; private set; }
-        public long FoodId { get; private set; }
-        public string FoodName { get; private set; }
+        public int Quantity { get; }
+        public decimal Total { get; }
+        public long FoodId { get; }
+        public string FoodName { get; }
 
-        public decimal Discount { get; private set; }
-        
+        public decimal Discount { get; }
     }
 }

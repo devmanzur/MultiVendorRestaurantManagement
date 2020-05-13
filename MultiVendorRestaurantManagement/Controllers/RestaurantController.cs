@@ -1,6 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Common.Utils;
-using CrossCutting.Utils;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;

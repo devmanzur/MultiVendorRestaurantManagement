@@ -7,7 +7,8 @@ namespace MultiVendorRestaurantManagement.Application.Food.CreateaAddOn
 {
     public class CreateAddOnCommand : IRequest<Result>
     {
-        public CreateAddOnCommand(long restaurantId, long foodId, string name, string nameEng, string description, string descriptionEng, decimal price)
+        public CreateAddOnCommand(long restaurantId, long foodId, string name, string nameEng, string description,
+            string descriptionEng, decimal price)
         {
             RestaurantId = restaurantId;
             FoodId = foodId;
@@ -18,13 +19,13 @@ namespace MultiVendorRestaurantManagement.Application.Food.CreateaAddOn
             Price = MoneyValue.Of(price);
         }
 
-        public long RestaurantId { get; private set; }
-        public long FoodId { get; private set; }
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string DescriptionEng { get; private set; }
-        public string NameEng { get; private set; }
-        public MoneyValue Price { get; private set; }
+        public long RestaurantId { get; }
+        public long FoodId { get; }
+        public string Name { get; }
+        public string Description { get; }
+        public string DescriptionEng { get; }
+        public string NameEng { get; }
+        public MoneyValue Price { get; }
     }
 
     public class CreateAddOnCommandValidator : AbstractValidator<CreateAddOnCommand>

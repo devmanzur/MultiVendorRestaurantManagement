@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using MultiVendorRestaurantManagement.Domain.Base;
 
 namespace MultiVendorRestaurantManagement.Domain.Promotions
@@ -10,7 +9,7 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
         {
         }
 
-        public CouponCode( string code,string username, string createdBy)
+        public CouponCode(string code, string username, string createdBy)
         {
             GeneratedAt = DateTime.Now;
             CreatedBy = createdBy;
@@ -21,20 +20,20 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             IsDelivered = false;
         }
 
+        public string Code { get; }
+        public string Username { get; }
+        public bool IsUsed { get; private set; }
+        public bool IsDelivered { get; }
+        public DateTime GeneratedAt { get; }
+        public string UsedBy { get; private set; }
+        public string CreatedBy { get; }
+        public Promotion Promotion { get; private set; }
+
 
         public void Use(string phoneNumber)
         {
             UsedBy = phoneNumber;
             IsUsed = true;
         }
-
-        public string Code { get; private set; }
-        public string Username { get; private set; }
-        public bool IsUsed { get; private set; }
-        public bool IsDelivered { get; private set; }
-        public DateTime GeneratedAt { get; private set; }
-        public string UsedBy { get; private set; }
-        public string CreatedBy { get; private set; }
-        public Promotion Promotion { get; private set; }
     }
 }

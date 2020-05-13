@@ -34,7 +34,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RemoveAddOn
                     var addOn = food.AddOns.FirstOrDefault(x => x.Name == request.AddOnName);
                     if (addOn.HasValue())
                     {
-                        restaurant.RemoveAddOnFor(food,addOn);
+                        restaurant.RemoveAddOnFor(food, addOn);
                         var result = await _unitOfWork.CommitAsync(cancellationToken);
                         return result > 0 ? Result.Ok() : Result.Failure("failed to complete action");
                     }

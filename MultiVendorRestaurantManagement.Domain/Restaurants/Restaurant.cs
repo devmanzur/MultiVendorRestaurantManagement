@@ -16,42 +16,11 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 {
     public class Restaurant : AggregateRoot
     {
-        public string Name { get; protected set; }
-        public PhoneNumberValue PhoneNumber { get; protected set; }
-        public Locality Locality { get; protected set; }
-        public long ManagerId { get; private set; }
+        private readonly List<Food> _foods = new List<Food>();
 
-        public RestaurantState State
-        {
-            get => (DateTime.Now.Hour > ClosingHour || DateTime.Now.Hour < OpeningHour)
-                ? RestaurantState.Closed
-                : State;
-            protected set { }
-        }
-
-        public int OpeningHour { get; protected set; }
-        public int ClosingHour { get; protected set; }
-        public SubscriptionType SubscriptionType { get; protected set; }
-        public ContractStatus ContractStatus { get; protected set; }
-        public PricingPolicy PricingPolicy { get; protected set; }
-        public DateTime ExpirationDate { get; protected set; }
-
-        private List<Food> _foods = new List<Food>();
-        public IReadOnlyList<Food> Foods => _foods.ToList();
-
-        private List<Menu> _menus = new List<Menu>();
-        public IReadOnlyList<Menu> Menus => _menus.ToList();
+        private readonly List<Menu> _menus = new List<Menu>();
 
         private List<Order> _orders = new List<Order>();
-        public IReadOnlyList<Order> Orders { get; protected set; }
-
-        public Category Category { get; private set; }
-
-        public string ImageUrl { get; private set; }
-
-        public double Rating { get; private set; }
-
-        public int TotalRatingsCount { get; private set; }
 
 
         protected Restaurant()
@@ -83,19 +52,46 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             PhoneNumber = phoneNumber;
         }
 
+        public string Name { get; protected set; }
+        public PhoneNumberValue PhoneNumber { get; protected set; }
+        public Locality Locality { get; protected set; }
+        public long ManagerId { get; private set; }
+
+        public RestaurantState State
+        {
+            get => DateTime.Now.Hour > ClosingHour || DateTime.Now.Hour < OpeningHour
+                ? RestaurantState.Closed
+                : State;
+            protected set { }
+        }
+
+        public int OpeningHour { get; protected set; }
+        public int ClosingHour { get; protected set; }
+        public SubscriptionType SubscriptionType { get; protected set; }
+        public ContractStatus ContractStatus { get; protected set; }
+        public PricingPolicy PricingPolicy { get; protected set; }
+        public DateTime ExpirationDate { get; protected set; }
+        public IReadOnlyList<Food> Foods => _foods.ToList();
+        public IReadOnlyList<Menu> Menus => _menus.ToList();
+        public IReadOnlyList<Order> Orders { get; protected set; }
+
+        public Category Category { get; private set; }
+
+        public string ImageUrl { get; }
+
+        public double Rating { get; private set; }
+
+        public int TotalRatingsCount { get; private set; }
+
 
         public void SetPricingPolicy(PricingPolicy policy)
         {
             CheckRule(new PricingPolicyMustBeValidRule(policy));
 
             if (PricingPolicy == null)
-            {
                 PricingPolicy = policy;
-            }
             else
-            {
                 PricingPolicy.UpdateBy(policy);
-            }
         }
 
         public void AddFood(Food food)
@@ -103,7 +99,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             CheckRule(new ConditionMustBeTrueRule(food.HasValue() && MustNotContainFoodWithSameName(food),
                 "food with same name already exists"));
             _foods.Add(food);
-            AddDomainEvent(new FoodRegisteredEvent(Id,Name, food.Name));
+            AddDomainEvent(new FoodRegisteredEvent(Id, Name, food.Name, food.Category.Name));
         }
 
         public void AddRating(int remark)
@@ -224,17 +220,12 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             foreach (var process in variantPriceUpdates.Select(x =>
                 {
                     var task = food.UpdateVariantPrice(x);
-                    if (!isDiscounted)
-                    {
-                        isDiscounted = task.Value;
-                    }
+                    if (!isDiscounted) isDiscounted = task.Value;
 
                     return task;
                 })
                 .Where(process => process.IsFailure))
-            {
                 return Result.Failure(process.Error);
-            }
             AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, variantPriceUpdates, isDiscounted));
             return Result.Ok();
         }

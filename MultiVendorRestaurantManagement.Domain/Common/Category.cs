@@ -22,7 +22,7 @@ namespace MultiVendorRestaurantManagement.Domain.Common
         public string Name { get; private set; }
         public string NameEng { get; private set; }
 
-        public Categorize Categorize { get; private set; }
+        public Categorize Categorize { get; }
         public List<Food> Foods { get; private set; }
         public List<Restaurant> Restaurants { get; private set; }
 

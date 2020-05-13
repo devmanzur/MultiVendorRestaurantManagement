@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Common.Utils;
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +21,7 @@ namespace MultiVendorRestaurantManagement.Controllers
         public async Task<IActionResult> UploadImage(IFormFile image)
         {
             var (isSuccess, _, value, error) = await _imageService.UploadImageAsync(image);
-            if (isSuccess)
-            {
-                return Ok(value);
-            }
+            if (isSuccess) return Ok(value);
 
             return BadRequest(error);
         }

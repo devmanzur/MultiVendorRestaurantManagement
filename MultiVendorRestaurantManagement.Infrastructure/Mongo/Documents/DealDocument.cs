@@ -20,31 +20,32 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             IsPackageDeal = isPackageDeal;
         }
 
-        public long DealId { get; private set; }
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string DescriptionEng { get; private set; }
-        public string ImageUrl { get; private set; }
-        public DateTime StartDate { get; private set; }
-        public DateTime EndDate { get; private set; }
+        public long DealId { get; protected set; }
+        public string Name { get; protected set; }
+        public string Description { get; protected set; }
+        public string DescriptionEng { get; protected set; }
+        public string ImageUrl { get; protected set; }
+        public DateTime StartDate { get; protected set; }
+        public DateTime EndDate { get; protected set; }
         public bool IsFixedDiscount { get; private set; }
         public bool IsPackageDeal { get; private set; }
-       
+
         public PackageDiscountModel PackageDetail { get; private set; }
         public PercentageDiscountModel PercentageDetail { get; private set; }
         public FixedDiscountModel FixedDetail { get; private set; }
+
         public void CreatePackageDiscount(int size, int freeCount)
         {
             IsPackageDeal = true;
             PackageDetail = new PackageDiscountModel(size, freeCount);
         }
-        
+
         public void CreateFixedDiscount(decimal discountAmount, decimal minBillAmount, int minQuantity)
         {
             IsFixedDiscount = true;
             FixedDetail = new FixedDiscountModel(discountAmount, minBillAmount, minQuantity);
         }
-        
+
         public void CreatePercentageDeal(decimal percentage, decimal maxDiscountAmount, decimal minBillAmount,
             int minQuantity)
         {

@@ -4,6 +4,5 @@ namespace MultiVendorRestaurantManagement.Domain.Common
 {
     public class CategoryRemovedEvent : DomainEventBase
     {
-        
     }
 }

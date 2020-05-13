@@ -31,9 +31,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Domain
                 .Where(x =>
                     HasDomainEvents(x) || HasBeenAddedOrRemoved(x)
                 ).ToList();
-            
+
             AddEventsForAddedOrRemovedEntities(changes);
-            
+
             var changesMade = await _context.SaveChangesAsync(cancellationToken);
             if (changesMade > 0) await _domainEventsDispatcher.DispatchEventsFor(changes);
             return changesMade;
@@ -44,7 +44,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Domain
             var addedOrRemovedEntities = changes.Where(HasBeenAddedOrRemoved).ToList();
 
             foreach (var change in addedOrRemovedEntities)
-            {
                 switch (change.State)
                 {
                     case EntityState.Added:
@@ -54,7 +53,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Domain
                         change.Entity.AddDomainEvent(change.Entity.GetRemovedDomainEvent());
                         break;
                 }
-            }
         }
 
 

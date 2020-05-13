@@ -1,9 +1,6 @@
-﻿using MultiVendorRestaurantManagement.Domain.Rules;
-using MultiVendorRestaurantManagement.Domain.ValueObjects;
-
-namespace MultiVendorRestaurantManagement.Domain.Foods
+﻿namespace MultiVendorRestaurantManagement.Domain.Foods
 {
-    public class VariantPriceUpdateModel 
+    public class VariantPriceUpdateModel
     {
         public VariantPriceUpdateModel(string variantName, decimal price)
         {

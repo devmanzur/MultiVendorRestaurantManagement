@@ -6,14 +6,14 @@ namespace MultiVendorRestaurantManagement.Application.City.RemoveLocality
 {
     public class RemoveLocalityCommand : IRequest<Result>
     {
-        public long CityId { get; }
-        public long LocalityId { get; }
-
         public RemoveLocalityCommand(long cityId, long localityId)
         {
             CityId = cityId;
             LocalityId = localityId;
         }
+
+        public long CityId { get; }
+        public long LocalityId { get; }
     }
 
     public class RemoveLocalityCommandValidator : AbstractValidator<RemoveLocalityCommand>

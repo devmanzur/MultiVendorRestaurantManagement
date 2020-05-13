@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Catalogue.Common.Utility;
 using Catalogue.Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
@@ -24,10 +23,7 @@ namespace Catalogue.Controllers
 
         private IActionResult HandleQueryResponse<T>(Result<T> result)
         {
-            if (result.IsSuccess)
-            {
-                return Ok(Envelope.Ok(result.Value));
-            }
+            if (result.IsSuccess) return Ok(Envelope.Ok(result.Value));
 
             return BadRequest(Envelope.Error(result.Error));
         }

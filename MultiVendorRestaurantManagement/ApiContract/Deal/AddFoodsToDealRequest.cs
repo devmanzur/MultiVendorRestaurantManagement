@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MultiVendorRestaurantManagement.Domain.Promotions;
 
 namespace MultiVendorRestaurantManagement.ApiContract.Deal
 {

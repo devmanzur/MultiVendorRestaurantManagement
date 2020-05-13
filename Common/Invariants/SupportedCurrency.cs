@@ -4,9 +4,7 @@ namespace Common.Invariants
 {
     public enum SupportedCurrency
     {
-        [Description("€")]
-        Euro,
-        [Description("¢")]
-        Cent
+        [Description("€")] Euro,
+        [Description("¢")] Cent
     }
 }

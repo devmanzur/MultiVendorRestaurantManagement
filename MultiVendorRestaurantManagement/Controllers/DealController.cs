@@ -2,10 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Deal;
-using MultiVendorRestaurantManagement.ApiContract.Promotion;
 using MultiVendorRestaurantManagement.Application.Deals;
 using MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal;
-using MultiVendorRestaurantManagement.Application.Promotions.CreatePromotion;
 
 namespace MultiVendorRestaurantManagement.Controllers
 {

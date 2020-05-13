@@ -6,7 +6,6 @@ using Common.Utils;
 using CSharpFunctionalExtensions;
 using Hangfire;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
 using MultiVendorRestaurantManagement.Domain.Promotions;
@@ -16,9 +15,9 @@ namespace MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal
 {
     public class AddFoodToDealCommandHandler : ICommandHandler<AddFoodToDealCommand>
     {
+        private readonly IAddFoodToDealBackgroundJob _backgroundJob;
         private readonly RestaurantManagementContext _context;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IAddFoodToDealBackgroundJob _backgroundJob;
 
         public AddFoodToDealCommandHandler(RestaurantManagementContext context, IUnitOfWork unitOfWork,
             IAddFoodToDealBackgroundJob backgroundJob)
@@ -32,7 +31,7 @@ namespace MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal
         {
             var deal =
                 await _context.Deals.FirstOrDefaultAsync(x => x.Id == request.DealId,
-                    cancellationToken: cancellationToken);
+                    cancellationToken);
             if (deal.HasNoValue()) return Result.Failure("promotion not found");
 
             var restaurantsIncluded = GenerateDistinctRestaurantWithFoodIds(request.Models);

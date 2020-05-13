@@ -2,19 +2,21 @@
 
 namespace MultiVendorRestaurantManagement.Domain.Rules
 {
-    public class ConditionMustBeTrueRule  : IBusinessRule
+    public class ConditionMustBeTrueRule : IBusinessRule
     {
         private readonly bool _conditionToBeValid;
-        private readonly string _errorErrorMessage;
 
         public ConditionMustBeTrueRule(bool conditionToBeValid, string errorErrorMessage)
         {
             _conditionToBeValid = conditionToBeValid;
-            _errorErrorMessage = errorErrorMessage;
+            ErrorMessage = errorErrorMessage;
         }
 
-        public bool IsBroken() => !_conditionToBeValid;
+        public bool IsBroken()
+        {
+            return !_conditionToBeValid;
+        }
 
-        public string ErrorMessage => _errorErrorMessage;
+        public string ErrorMessage { get; }
     }
 }

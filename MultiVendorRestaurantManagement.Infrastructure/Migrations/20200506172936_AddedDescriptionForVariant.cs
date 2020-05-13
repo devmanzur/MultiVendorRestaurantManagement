@@ -7,14 +7,14 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Description",
-                table: "Variant",
+                "Description",
+                "Variant",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
-                name: "DescriptionEng",
-                table: "Variant",
+                "DescriptionEng",
+                "Variant",
                 nullable: false,
                 defaultValue: "");
         }
@@ -22,12 +22,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Description",
-                table: "Variant");
+                "Description",
+                "Variant");
 
             migrationBuilder.DropColumn(
-                name: "DescriptionEng",
-                table: "Variant");
+                "DescriptionEng",
+                "Variant");
         }
     }
 }

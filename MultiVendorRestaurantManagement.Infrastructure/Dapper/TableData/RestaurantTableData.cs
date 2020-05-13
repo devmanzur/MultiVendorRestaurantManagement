@@ -18,7 +18,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper.TableData
         public int OpeningHour { get; set; }
         public int ClosingHour { get; set; }
         public DateTime ExpirationDate { get; set; }
-        public double Rating { get;  set; }
-        public int TotalRatingsCount { get;  set; }
+        public double Rating { get; set; }
+        public int TotalRatingsCount { get; set; }
     }
 }

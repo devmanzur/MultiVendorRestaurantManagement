@@ -23,7 +23,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure
             services.AddScoped<IImageService, MinioImageUploadService>();
             services.AddScoped<ITableDataProvider, TableDataProvider>();
             services.AddScoped<DocumentCollection>();
-
         }
     }
 }

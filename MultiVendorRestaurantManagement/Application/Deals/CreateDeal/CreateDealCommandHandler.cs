@@ -10,8 +10,8 @@ namespace MultiVendorRestaurantManagement.Application.Deals
 {
     public class CreateDealCommandHandler : ICommandHandler<CreateDealCommand>
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly RestaurantManagementContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
         public CreateDealCommandHandler(IUnitOfWork unitOfWork, RestaurantManagementContext context)
         {
@@ -23,24 +23,18 @@ namespace MultiVendorRestaurantManagement.Application.Deals
         {
             Deal deal;
             if (request.IsPackageDeal)
-            {
                 deal = Deal.CreateBuyXGetYDeal(request.Name,
                     request.ImageUrl, request.Description, request.DescriptionEng, request.StartDate, request.EndDate,
                     request.PackageDiscountModel);
-                
-            }else if (request.IsFixedPriceDiscount)
-            {
+            else if (request.IsFixedPriceDiscount)
                 deal = Deal.CreateFixedDiscountDeal(request.Name,
                     request.ImageUrl, request.Description, request.DescriptionEng, request.StartDate, request.EndDate,
                     request.FixedPriceModel);
-            }
             else
-            {
                 deal = Deal.CreatePercentageDiscountDeal(request.Name,
                     request.ImageUrl, request.Description, request.DescriptionEng, request.StartDate, request.EndDate,
                     request.PercentageModel);
-            }
-            
+
             await _context.Deals.AddAsync(deal, cancellationToken);
             var result = await _unitOfWork.CommitAsync(cancellationToken);
             return result > 0

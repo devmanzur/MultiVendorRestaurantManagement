@@ -2,7 +2,7 @@
 
 namespace MultiVendorRestaurantManagement.Domain.Cities
 {
-    public class Locality: Entity
+    public class Locality : Entity
     {
         public Locality(string name, int code, string nameEng)
         {

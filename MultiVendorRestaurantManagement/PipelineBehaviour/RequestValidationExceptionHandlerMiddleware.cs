@@ -1,27 +1,28 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Common.Invariants;
 using Common.Utils;
-using CrossCutting;
-using CrossCutting.Utils;
 using FluentValidation;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Hosting;
 using MultiVendorRestaurantManagement.Domain.Base;
 using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace MultiVendorRestaurantManagement.PipelineBehaviour
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     public class RequestValidationExceptionHandlerMiddleware
     {
-        private readonly RequestDelegate _next;
         private readonly IWebHostEnvironment _env;
+        private readonly RequestDelegate _next;
+
+        public RequestValidationExceptionHandlerMiddleware(RequestDelegate next, IWebHostEnvironment env)
+        {
+            _next = next;
+            _env = env;
+        }
 
         public async Task InvokeAsync(HttpContext httpContext)
         {
@@ -51,7 +52,8 @@ namespace MultiVendorRestaurantManagement.PipelineBehaviour
                             x.PropertyName,
                             x.ErrorMessage
                         });
-                    error = Envelope.Error(errors, ApiLocalizedResponseKey.InvalidParameterValue + " multiple errors occurred");
+                    error = Envelope.Error(errors,
+                        ApiLocalizedResponseKey.InvalidParameterValue + " multiple errors occurred");
                     break;
                 case BusinessRuleValidationException e:
                     code = HttpStatusCode.UnprocessableEntity;
@@ -66,12 +68,6 @@ namespace MultiVendorRestaurantManagement.PipelineBehaviour
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int) code;
             return context.Response.WriteAsync(result);
-        }
-
-        public RequestValidationExceptionHandlerMiddleware(RequestDelegate next, IWebHostEnvironment env)
-        {
-            _next = next;
-            _env = env;
         }
     }
 }

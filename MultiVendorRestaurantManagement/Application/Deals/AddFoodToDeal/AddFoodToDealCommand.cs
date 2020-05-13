@@ -15,13 +15,13 @@ namespace MultiVendorRestaurantManagement.Application.Deals.AddFoodToDeal
             ConvertToModel(models);
         }
 
+        public long DealId { get; }
+        public List<FoodPromotionIncludeModel> Models { get; } = new List<FoodPromotionIncludeModel>();
+
         private void ConvertToModel(List<FoodPromotionDto> dtos)
         {
             dtos.ForEach(x => { Models.Add(new FoodPromotionIncludeModel(x.FoodId, x.RestaurantId)); });
         }
-
-        public long DealId { get; }
-        public List<FoodPromotionIncludeModel> Models { get; } = new List<FoodPromotionIncludeModel>();
     }
 
     public class AddFoodToDealCommandValidator : AbstractValidator<AddFoodToDealCommand>

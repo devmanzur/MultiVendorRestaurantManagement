@@ -2,7 +2,6 @@
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper.DbView;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper.TableData;
 
@@ -10,7 +9,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
 {
     public class TableDataProvider : ITableDataProvider
     {
-        private string _connectionString;
+        private readonly string _connectionString;
 
         public TableDataProvider(IConfiguration configuration)
         {

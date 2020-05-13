@@ -7,8 +7,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<decimal>(
-                name: "Price",
-                table: "AddOn",
+                "Price",
+                "AddOn",
                 nullable: false,
                 oldClrType: typeof(decimal),
                 oldType: "decimal(18,4)");
@@ -17,9 +17,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<decimal>(
-                name: "Price",
-                table: "AddOn",
-                type: "decimal(18,4)",
+                "Price",
+                "AddOn",
+                "decimal(18,4)",
                 nullable: false,
                 oldClrType: typeof(decimal));
         }

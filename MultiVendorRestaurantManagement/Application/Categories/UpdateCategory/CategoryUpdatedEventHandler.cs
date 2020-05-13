@@ -25,10 +25,9 @@ namespace MultiVendorRestaurantManagement.Application.Categories.UpdateCategory
             {
                 category.Name = notification.Name;
                 category.NameEng = notification.NameEng;
-                if (notification.ImageUrl.HasValue())
-                {
-                    category.ImageUrl = notification.ImageUrl;
-                }
+                if (notification.ImageUrl.HasValue()) category.ImageUrl = notification.ImageUrl;
+                
+                
 
                 await _collection.CategoriesCollection.ReplaceOneAsync(x => x.Id == category.Id, category,
                     cancellationToken: cancellationToken);

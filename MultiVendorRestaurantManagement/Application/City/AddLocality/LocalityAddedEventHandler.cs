@@ -12,8 +12,8 @@ namespace MultiVendorRestaurantManagement.Application.City.AddLocality
 {
     public class LocalityAddedEventHandler : INotificationHandler<LocalityAddedEvent>
     {
-        private readonly ITableDataProvider _tableDataProvider;
         private readonly DocumentCollection _collection;
+        private readonly ITableDataProvider _tableDataProvider;
 
         public LocalityAddedEventHandler(ITableDataProvider tableDataProvider, DocumentCollection collection)
         {
@@ -37,7 +37,5 @@ namespace MultiVendorRestaurantManagement.Application.City.AddLocality
                     cancellationToken: cancellationToken);
             }
         }
-
-       
     }
 }

@@ -30,6 +30,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.UpdateSubscript
                 var result = await _unitOfWork.CommitAsync(cancellationToken);
                 return result > 0 ? Result.Ok() : Result.Failure("Failed to update subscription");
             }
+
             return Result.Failure("invalid restaurant");
         }
     }

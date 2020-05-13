@@ -1,9 +1,8 @@
-﻿﻿using MediatR;
+﻿using MediatR;
 
- namespace Catalogue.Base
+namespace Catalogue.Base
 {
     public interface IQuery<out TResult> : IRequest<TResult>
     {
-
     }
 }

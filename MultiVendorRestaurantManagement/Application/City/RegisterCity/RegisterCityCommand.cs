@@ -4,7 +4,7 @@ using MediatR;
 
 namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
 {
-    public class RegisterCityCommand :  IRequest<Result>
+    public class RegisterCityCommand : IRequest<Result>
     {
         public RegisterCityCommand(string code, string nameEng, string name)
         {
@@ -13,9 +13,9 @@ namespace MultiVendorRestaurantManagement.Application.City.RegisterCity
             Name = name;
         }
 
-        public string Name { get;  private set; }
-        public string NameEng { get;  private set; }
-        public string Code { get;  private set; }
+        public string Name { get; }
+        public string NameEng { get; }
+        public string Code { get; }
     }
 
     public class RegisterCityCommandValidator : AbstractValidator<RegisterCityCommand>

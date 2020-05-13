@@ -1,0 +1,9 @@
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\bin\Debug\netcoreapp3.1\Catalogue.Common.deps.json
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\bin\Debug\netcoreapp3.1\Catalogue.Common.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\bin\Debug\netcoreapp3.1\Catalogue.Common.pdb
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\obj\Debug\netcoreapp3.1\Catalogue.Common.csprojAssemblyReference.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\obj\Debug\netcoreapp3.1\Catalogue.Common.csproj.CoreCompileInputs.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\obj\Debug\netcoreapp3.1\Catalogue.Common.AssemblyInfoInputs.cache
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\obj\Debug\netcoreapp3.1\Catalogue.Common.AssemblyInfo.cs
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\obj\Debug\netcoreapp3.1\Catalogue.Common.dll
+C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\Catalogue.Common\obj\Debug\netcoreapp3.1\Catalogue.Common.pdb

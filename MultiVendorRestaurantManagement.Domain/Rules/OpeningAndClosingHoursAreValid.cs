@@ -4,8 +4,8 @@ namespace MultiVendorRestaurantManagement.Domain.Rules
 {
     public class OpeningAndClosingHoursAreValid : IBusinessRule
     {
-        private readonly int _openingHour;
         private readonly int _closingHour;
+        private readonly int _openingHour;
 
         public OpeningAndClosingHoursAreValid(int openingHour, int closingHour)
         {

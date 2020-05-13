@@ -4,7 +4,6 @@ using System.Linq;
 using Common.Utils;
 using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Domain.Base;
-using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.Orders;
 using MultiVendorRestaurantManagement.Domain.Rules;
 using Newtonsoft.Json;
@@ -13,6 +12,10 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
 {
     public class Promotion : AggregateRoot
     {
+        private readonly List<CouponCode> _couponCodes = new List<CouponCode>();
+
+        private string _items;
+
         protected Promotion()
         {
         }
@@ -27,6 +30,40 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             Name = name;
             StartDate = startDate;
         }
+
+        public DateTime StartDate { get; }
+        public DateTime EndDate { get; }
+
+        public IReadOnlyList<long> FoodIds
+        {
+            get
+            {
+                try
+                {
+                    return JsonConvert.DeserializeObject<List<long>>(_items);
+                }
+                catch (Exception)
+                {
+                    return new List<long>();
+                }
+            }
+        }
+
+        public string Description { get; protected set; }
+        public string Name { get; protected set; }
+        public string DescriptionEng { get; protected set; }
+        public string ImageUrl { get; protected set; }
+        public IReadOnlyList<CouponCode> CouponCodes => _couponCodes.ToList();
+
+        public decimal FixedDiscountAmount { get; private set; }
+        public bool IsFixedDiscount { get; private set; }
+
+        public decimal MinimumBillAmount { get; private set; }
+        public int MinimumItemQuantity { get; private set; }
+        public int MaximumItemQuantity { get; private set; }
+
+        public decimal DiscountPercentage { get; private set; }
+        public decimal MaximumDiscountAmount { get; private set; }
 
         public static Promotion CreateFixedPriceDiscountPromotion(string name, string imageUrl, string description,
             string descriptionEng, DateTime startDate,
@@ -70,44 +107,6 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             MaximumDiscountAmount = model.DiscountAmount;
         }
 
-        public DateTime StartDate { get; private set; }
-        public DateTime EndDate { get; private set; }
-
-        private string _items;
-
-        public IReadOnlyList<long> FoodIds
-        {
-            get
-            {
-                try
-                {
-                    return JsonConvert.DeserializeObject<List<long>>(_items);
-                }
-                catch (Exception)
-                {
-                    return new List<long>();
-                }
-            }
-        }
-
-        public string Description { get; protected set; }
-        public string Name { get; protected set; }
-        public string DescriptionEng { get; protected set; }
-        public string ImageUrl { get; protected set; }
-
-        private List<CouponCode> _couponCodes = new List<CouponCode>();
-        public IReadOnlyList<CouponCode> CouponCodes => _couponCodes.ToList();
-
-        public decimal FixedDiscountAmount { get; private set; }
-        public bool IsFixedDiscount { get; private set; }
-
-        public decimal MinimumBillAmount { get; private set; }
-        public int MinimumItemQuantity { get; private set; }
-        public int MaximumItemQuantity { get; private set; }
-
-        public decimal DiscountPercentage { get; private set; }
-        public decimal MaximumDiscountAmount { get; private set; }
-
         public override IDomainEvent GetAddedDomainEvent()
         {
             return new PromotionCreatedEvent();
@@ -121,9 +120,7 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
         public void GenerateCouponCodes(string authority, List<string> phoneNumbers, List<string> codes)
         {
             for (var i = 0; i < phoneNumbers.Count; i++)
-            {
                 _couponCodes.Add(new CouponCode(codes[i], phoneNumbers[i], authority));
-            }
         }
 
         public void AddFood(long foodId)
@@ -141,7 +138,7 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             if (couponValidation.IsSuccess)
             {
                 var discount = CalculateDiscountFor(items);
-                return Result.Ok<decimal>(discount);
+                return Result.Ok(discount);
             }
 
             return Result.Failure<decimal>(couponValidation.Error);
@@ -173,10 +170,7 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             var coupon = CouponCodes.FirstOrDefault(x => x.Code == couponCode);
             if (coupon.HasValue())
             {
-                if (coupon.Username == phone)
-                {
-                    return Result.Ok();
-                }
+                if (coupon.Username == phone) return Result.Ok();
 
                 return Result.Failure("you cannot use this coupon");
             }
@@ -189,12 +183,8 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             if (count == 0) return false;
 
             if (count >= MinimumItemQuantity && count <= MaximumItemQuantity)
-            {
                 if (totalAmountSpent >= MinimumBillAmount)
-                {
                     return true;
-                }
-            }
 
             return false;
         }

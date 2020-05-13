@@ -29,19 +29,13 @@ namespace MultiVendorRestaurantManagement.Application.Deals
                     data.StartDate, data.EndDate, data.IsFixedDiscount, data.IsPackageDeal);
 
                 if (data.IsFixedDiscount)
-                {
                     deal.CreateFixedDiscount(data.FixedDiscountAmount, data.MinimumBillAmount,
                         data.MinimumItemQuantity);
-                }
                 else if (data.IsPackageDeal)
-                {
                     deal.CreatePackageDiscount(data.PackageSize, data.FreeItemQuantityInPackage);
-                }
                 else
-                {
                     deal.CreatePercentageDeal(data.DiscountPercentage, data.MaximumDiscountAmount,
                         data.MinimumBillAmount, data.MinimumItemQuantity);
-                }
 
                 await _collection.DealCollection.InsertOneAsync(deal, cancellationToken: cancellationToken);
             }

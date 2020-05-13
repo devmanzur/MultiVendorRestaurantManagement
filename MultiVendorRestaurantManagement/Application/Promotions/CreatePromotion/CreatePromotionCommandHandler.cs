@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
+using MultiVendorRestaurantManagement.Domain.Promotions;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Application.Promotions.CreatePromotion
@@ -20,19 +21,15 @@ namespace MultiVendorRestaurantManagement.Application.Promotions.CreatePromotion
 
         public async Task<Result> Handle(CreatePromotionCommand request, CancellationToken cancellationToken)
         {
-            Domain.Promotions.Promotion promotion;
+            Promotion promotion;
             if (request.IsFixedPriceDiscount)
-            {
-                promotion = Domain.Promotions.Promotion.CreateFixedPriceDiscountPromotion(request.Name,
+                promotion = Promotion.CreateFixedPriceDiscountPromotion(request.Name,
                     request.ImageUrl, request.Description, request.DescriptionEng, request.StartDate, request.EndDate,
                     request.FixedPriceModel);
-            }
             else
-            {
-                promotion = Domain.Promotions.Promotion.CreatePercentageDiscountPromotion(request.Name,
+                promotion = Promotion.CreatePercentageDiscountPromotion(request.Name,
                     request.ImageUrl, request.Description, request.DescriptionEng, request.StartDate, request.EndDate,
                     request.PercentageModel);
-            }
 
             await _context.Promotions.AddAsync(promotion, cancellationToken);
             var result = await _unitOfWork.CommitAsync(cancellationToken);

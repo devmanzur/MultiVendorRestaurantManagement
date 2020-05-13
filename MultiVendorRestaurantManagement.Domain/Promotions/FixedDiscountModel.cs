@@ -6,6 +6,8 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
 {
     public class FixedDiscountModel : CustomValueObject
     {
+        public int MaxQuantity = 1000;
+
         public FixedDiscountModel(decimal discountAmount, decimal minBillAmount, int minQuantity)
         {
             CheckRule(new ConditionMustBeTrueRule(HelperFunctions.ValidAmount(DiscountAmount) &&
@@ -17,9 +19,8 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             MinQuantity = minQuantity;
         }
 
-        public int MaxQuantity = 1000;
-        public decimal DiscountAmount { get; private set; }
-        public int MinQuantity { get; private set; }
-        public decimal MinBillAmount { get; private set; }
+        public decimal DiscountAmount { get; }
+        public int MinQuantity { get; }
+        public decimal MinBillAmount { get; }
     }
 }

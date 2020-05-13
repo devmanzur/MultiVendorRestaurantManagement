@@ -7,30 +7,30 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                name: "NameEng",
-                table: "Menu",
+                "NameEng",
+                "Menu",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Menu",
+                "Name",
+                "Menu",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Menu_Name",
-                table: "Menu",
-                column: "Name",
+                "IX_Menu_Name",
+                "Menu",
+                "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Menu_NameEng",
-                table: "Menu",
-                column: "NameEng",
+                "IX_Menu_NameEng",
+                "Menu",
+                "NameEng",
                 unique: true,
                 filter: "[NameEng] IS NOT NULL");
         }
@@ -38,25 +38,25 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
-                name: "IX_Menu_Name",
-                table: "Menu");
+                "IX_Menu_Name",
+                "Menu");
 
             migrationBuilder.DropIndex(
-                name: "IX_Menu_NameEng",
-                table: "Menu");
+                "IX_Menu_NameEng",
+                "Menu");
 
             migrationBuilder.AlterColumn<string>(
-                name: "NameEng",
-                table: "Menu",
-                type: "nvarchar(max)",
+                "NameEng",
+                "Menu",
+                "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                name: "Name",
-                table: "Menu",
-                type: "nvarchar(max)",
+                "Name",
+                "Menu",
+                "nvarchar(max)",
                 nullable: false,
                 oldClrType: typeof(string));
         }

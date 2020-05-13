@@ -2,8 +2,7 @@
 
 namespace MultiVendorRestaurantManagement.Domain.Restaurants
 {
-    public class RestaurantRemovedEvent  : DomainEventBase
+    public class RestaurantRemovedEvent : DomainEventBase
     {
-        
     }
 }

@@ -25,7 +25,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.UpdateStatus
         {
             var restaurant = await _context.Restaurants
                 .Include(x => x.Foods)
-                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken: cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken);
 
             if (restaurant.HasValue() && restaurant.Foods.Any())
             {

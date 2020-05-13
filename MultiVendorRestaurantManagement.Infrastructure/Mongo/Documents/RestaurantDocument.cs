@@ -28,21 +28,21 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             Menus = new List<MenuRecord>();
         }
 
-        public long RestaurantId { get; private set; }
-        public string Name { get; private set; }
-        public string PhoneNumber { get; private set; }
-        public long LocalityId { get; private set; }
+        public long RestaurantId { get; protected set; }
+        public string Name { get; protected set; }
+        public string PhoneNumber { get; protected set; }
+        public long LocalityId { get; protected set; }
         public string State { get; protected set; }
         public int OpeningHour { get; protected set; }
         public int ClosingHour { get; protected set; }
         public string SubscriptionType { get; protected set; }
         public string ContractStatus { get; protected set; }
-        public string ImageUrl { get; private set; }
-        public double Rating { get; private set; }
-        public int TotalRatingsCount { get; private set; }
-        public List<MenuRecord> Menus { get; private set; }
-        public long ManagerId { get; set; }
-        public long PricingPolicyId { get; set; }
+        public string ImageUrl { get; protected set; }
+        public double Rating { get; protected set; }
+        public int TotalRatingsCount { get; protected set; }
+        public List<MenuRecord> Menus { get; }
+        public long ManagerId { get; protected set; }
+        public long PricingPolicyId { get; protected set; }
         public long CategoryId { get; private set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
@@ -76,8 +76,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             ImageUrl = imageUrl;
         }
 
-        public long MenuId { get; private set; }
-        public string Name { get; private set; }
+        public long MenuId { get; protected set; }
+        public string Name { get; protected set; }
         public string NameEng { get; protected set; }
         public string ImageUrl { get; protected set; }
     }
