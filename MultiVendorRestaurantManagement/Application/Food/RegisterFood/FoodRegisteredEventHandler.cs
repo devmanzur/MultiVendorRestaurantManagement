@@ -35,6 +35,8 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                     item.OldUnitPrice,
                     item.Type,
                     item.CategoryId,
+                    item.MenuId,
+                    notification.MenuName,
                     notification.CategoryName,
                     item.Status,
                     item.IsGlutenFree,

@@ -16,7 +16,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
         public FoodDocument(long restaurantId, string restaurantName, long foodId, string imageUrl, string name,
             decimal unitPrice,
-            decimal oldUnitPrice, string type, long categoryId, string categoryName, string status, bool isGlutenFree,
+            decimal oldUnitPrice, string type, long categoryId,long menuId,string menuName, string categoryName, string status, bool isGlutenFree,
             bool isVeg,
             bool isNonVeg, string description, string descriptionEng)
         {
@@ -36,6 +36,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             Description = description;
             DescriptionEng = descriptionEng;
             CategoryName = categoryName;
+            MenuId = menuId;
+            MenuName = menuName;
             GenerateTags();
             AddDefaultVariant();
         }
@@ -121,7 +123,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
         public void UpdateVariantPrice(VariantPriceUpdateModel model)
         {
-            var variant = Variants.FirstOrDefault(x => x.Name == model.VariantName);
+            var variant = Variants.FirstOrDefault(x => x.Name.ToLowerInvariant() == model.VariantName.ToLowerInvariant());
             if (variant.HasValue())
             {
                 if (model.VariantName.Equals(DefaultVariant)) UpdateBasePrice(model.NewPrice);

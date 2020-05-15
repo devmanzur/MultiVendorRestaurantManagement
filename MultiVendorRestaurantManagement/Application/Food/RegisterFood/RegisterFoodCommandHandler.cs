@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Common.Utils;
 using CSharpFunctionalExtensions;
@@ -22,14 +23,16 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
 
         public async Task<Result> Handle(RegisterFoodCommand request, CancellationToken cancellationToken)
         {
-            var restaurant = await _context.Restaurants.Include(x => x.Foods)
+            var restaurant = await _context.Restaurants.Include(x => x.Foods).Include(x => x.Menus)
                 .FirstOrDefaultAsync(x => x.Id == request.RestaurantId, cancellationToken);
             if (restaurant.HasValue())
             {
                 var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == request.CategoryId,
                     cancellationToken);
 
-                if (category.HasValue())
+                var menu = restaurant.Menus.FirstOrDefault(x => x.Id == request.MenuId);
+
+                if (category.HasValue() && menu.HasValue())
                 {
                     var food = new Domain.Foods.Food(
                         type: request.Type,
@@ -40,16 +43,18 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                         isNonVeg: request.IsNonVeg,
                         imageUrl: request.ImageUrl,
                         category: category,
-                        description:request.Description,
-                        descriptionEng:request.DescriptionEng
+                        description: request.Description,
+                        descriptionEng: request.DescriptionEng,
+                        menu: menu
                     );
 
                     restaurant.AddFood(food);
+
                     var result = await _unitOfWork.CommitAsync(cancellationToken);
                     return result > 0 ? Result.Ok() : Result.Failure("failed to add food");
                 }
 
-                return Result.Failure("invalid category");
+                return Result.Failure("invalid menu or category");
             }
 
             return Result.Failure("restaurant not found");

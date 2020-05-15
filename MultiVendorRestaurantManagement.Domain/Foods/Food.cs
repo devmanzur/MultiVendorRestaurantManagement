@@ -28,12 +28,14 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
         protected Food()
         {
-            
         }
 
         public Food(string name, MoneyValue unitPrice, FoodItemType type,
-            bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Category category, string description, string descriptionEng)
+            bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Category category, string description,
+            string descriptionEng, Menu menu)
         {
+            CheckRule(new ConditionMustBeTrueRule(category.Categorize == Categorize.Food,"invalid category"));
+
             ImageUrl = imageUrl;
             Category = category;
             Description = description;
@@ -50,6 +52,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             TotalRatingsCount = 0;
             TotalOrderCount = 0;
             SetDefaultVariant();
+            Menu = menu;
 
             void SetDefaultVariant()
             {
@@ -57,6 +60,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             }
         }
 
+        public Menu Menu { get; protected set; }
         public Restaurant Restaurant { get; protected set; }
         public string Name { get; protected set; }
         public MoneyValue UnitPrice { get; protected set; }
@@ -78,14 +82,14 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public List<AddOn> AddOns => _addOns.ToList();
         public Category Category { get; private set; }
         public Deal Deal { get; private set; }
-        public string ImageUrl { get; protected set;}
+        public string ImageUrl { get; protected set; }
         public string Description { get; private set; }
         public string DescriptionEng { get; private set; }
 
         public double Rating { get; private set; }
 
         public int TotalRatingsCount { get; private set; }
-        public int TotalOrderCount { get; protected set;}
+        public int TotalOrderCount { get; protected set; }
 
         public void AddRating(int remark)
         {
@@ -137,7 +141,8 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
         public Result<bool> UpdateVariantPrice(VariantPriceUpdateModel model)
         {
-            var variant = _variants.FirstOrDefault(x => x.Name == model.VariantName);
+            var variant =
+                _variants.FirstOrDefault(x => x.Name.ToLowerInvariant() == model.VariantName.ToLowerInvariant());
             if (variant.HasValue())
             {
                 if (model.VariantName.Equals(DefaultVariant)) UpdateBasePrice(model.NewPrice);

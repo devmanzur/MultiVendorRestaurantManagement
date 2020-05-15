@@ -24,7 +24,6 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         protected Restaurant()
         {
-            
         }
 
         public Restaurant(string name, int openingHour, int closingHour,
@@ -39,6 +38,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                 "contract must be valid"));
             CheckRule(new ConditionMustBeTrueRule(phoneNumber != null,
                 "phone number be valid"));
+            
+            CheckRule(new ConditionMustBeTrueRule(category.Categorize == Categorize.Restaurant,"invalid category"));
 
             ImageUrl = imageUrl;
             Category = category;
@@ -65,13 +66,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public string Description { get; private set; }
         public string DescriptionEng { get; private set; }
 
-        public RestaurantState State
-        {
-            get => DateTime.Now.Hour > ClosingHour || DateTime.Now.Hour < OpeningHour
-                ? RestaurantState.Closed
-                : State;
-            protected set { }
-        }
+        public RestaurantState State { get; private set; }
 
         public int OpeningHour { get; protected set; }
         public int ClosingHour { get; protected set; }
@@ -107,7 +102,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             CheckRule(new ConditionMustBeTrueRule(food.HasValue() && MustNotContainFoodWithSameName(food),
                 "food with same name already exists"));
             _foods.Add(food);
-            AddDomainEvent(new FoodRegisteredEvent(Id, Name, food.Name, food.Category.Name));
+            AddDomainEvent(new FoodRegisteredEvent(Id, Name, food.Name, food.Category.Name,food.Menu.Name));
         }
 
         public void AddRating(int remark)
@@ -153,7 +148,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public override IDomainEvent GetAddedDomainEvent()
         {
-            return new RestaurantRegisteredEvent(PhoneNumber.GetCompletePhoneNumber());
+            return new RestaurantRegisteredEvent(PhoneNumber.GetCompletePhoneNumber(), Category.Name);
         }
 
         public override IDomainEvent GetRemovedDomainEvent()
@@ -213,11 +208,12 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             AddDomainEvent(new AddOnRemovedEvent(Id, food.Id, addOn.Name));
         }
 
-        public void AddMenuToFood(Menu menu, Food food)
+        public void AddFoodToMenu(Menu menu, Food food)
         {
             CheckRule(new ConditionMustBeTrueRule(food != null && menu != null, "invalid menu/food combination"));
             CheckRule(new ConditionMustBeTrueRule(!menu.Items.Contains(food), "menu already has the food"));
             menu.AddItem(food);
+
             AddDomainEvent(new FoodUpdatedEvent(Id, food.Id, menu.Id, menu.Name));
         }
 

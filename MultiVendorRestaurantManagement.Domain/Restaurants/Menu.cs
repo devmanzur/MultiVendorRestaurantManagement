@@ -8,7 +8,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 {
     public class Menu : Entity
     {
-        private readonly IList<Food> _items = new List<Food>();
+        private readonly List<Food> _items = new List<Food>();
 
 
         protected Menu()

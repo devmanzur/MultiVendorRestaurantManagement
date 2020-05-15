@@ -12,10 +12,11 @@ namespace Catalogue.Common.Utils
      */
     public static class CacheExtensionsHandler
     {
-        public static async Task<T> GetObjectAsync<T>(this IDistributedCache cache, CacheKeys key) where T : class
+        public static async Task<T> GetObjectAsync<T>(this IDistributedCache cache, CacheKeys key,
+            long additionalKey = 0) where T : class
         {
             var json =
-                await cache.GetAsync(key.ToString());
+                await cache.GetAsync(MakeKey(key, additionalKey));
 
             if (json == null)
             {
@@ -30,11 +31,16 @@ namespace Catalogue.Common.Utils
         }
 
         public static async Task SaveObjectAsync<T>(this IDistributedCache cache, CacheKeys key, T item,
-            DistributedCacheEntryOptions options)
+            DistributedCacheEntryOptions options, long additionalKey = 0)
         {
             var data = DataCompressor.Compress(JsonConvert.SerializeObject(item, HelperFunctions.GetJsonSettings()));
-            await cache.SetStringAsync(key.ToString(),
+            await cache.SetStringAsync(MakeKey(key, additionalKey),
                 data, options);
+        }
+
+        private static string MakeKey(CacheKeys key, long additionalKey)
+        {
+            return key.ToString() + additionalKey;
         }
     }
 }

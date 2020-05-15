@@ -10,15 +10,15 @@ namespace Catalogue.Infrastracture.Mongo.Documents
     {
         public IReadOnlyList<long> SimilarCategories;
 
-        public CategoryDocument(long categoryId, string imageUrl, string name, string nameEng, string categorize)
-        {
-            CategoryId = categoryId;
-            ImageUrl = imageUrl;
-            Name = name;
-            NameEng = nameEng;
-            Categorize = categorize;
-            SimilarCategories = new List<long>();
-        }
+        // public CategoryDocument(long categoryId, string imageUrl, string name, string nameEng, string categorize)
+        // {
+        //     CategoryId = categoryId;
+        //     ImageUrl = imageUrl;
+        //     Name = name;
+        //     NameEng = nameEng;
+        //     Categorize = categorize;
+        //     SimilarCategories = new List<long>();
+        // }
 
         public long CategoryId { get; protected set; }
         public string ImageUrl { get; protected set; }

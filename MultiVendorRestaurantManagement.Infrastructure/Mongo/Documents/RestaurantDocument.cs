@@ -9,7 +9,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
     {
         public RestaurantDocument(long restaurantId, string name, string phoneNumber, long localityId, string state,
             int openingHour, int closingHour, string subscriptionType, string contractStatus, string imageUrl,
-            double rating, int totalRatingsCount, long categoryId, DateTime expirationDate, string description, string descriptionEng)
+            double rating, int totalRatingsCount, long categoryId, string categoryName, DateTime expirationDate, string description, string descriptionEng)
         {
             RestaurantId = restaurantId;
             Name = name;
@@ -24,6 +24,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             Rating = rating;
             TotalRatingsCount = totalRatingsCount;
             CategoryId = categoryId;
+            CategoryName = categoryName;
             ExpirationDate = expirationDate;
             Description = description;
             DescriptionEng = descriptionEng;
@@ -47,7 +48,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public long ManagerId { get; protected set; }
         public long PricingPolicyId { get; protected set; }
         public long CategoryId { get; private set; }
-
+        public string CategoryName { get; protected set;  }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime ExpirationDate { get; private set; }
 

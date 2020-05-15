@@ -1,15 +1,14 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using Catalogue.Application.Food.GetFoodDetail;
 using Catalogue.Base;
 using Catalogue.Common.Utils;
 using Catalogue.Infrastracture.Mongo;
 using Catalogue.Infrastracture.Mongo.Documents;
-using Catalogue.Infrastructure.Mongo;
-using Catalogue.Infrastructure.Mongo.Documents;
 using CSharpFunctionalExtensions;
 using MongoDB.Driver;
 
-namespace Catalogue.Application.Food.GetFoodDetail
+namespace Catalogue.Application.Foods.GetFoodDetail
 {
     public class GetFoodDetailQueryHandler : IQueryHandler<GetFoodDetailQuery, Result<FoodDocument>>
     {

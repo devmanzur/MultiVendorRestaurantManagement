@@ -8,14 +8,15 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
 {
     public class RegisterFoodCommand : IRequest<Result>
     {
-        public RegisterFoodCommand(long restaurantId, string name, string type, long categoryId, string imageUrl,
-            bool isVeg,
+        public RegisterFoodCommand(long restaurantId, string name, string type, long categoryId, long menuId,
+            string imageUrl, bool isVeg,
             bool isGlutenFree, bool isNonVeg, decimal unitPrice, string description, string descriptionEng)
         {
             RestaurantId = restaurantId;
             Name = name;
             Type = FoodItemTypeHelper.ConvertToFoodItemType(type);
             CategoryId = categoryId;
+            MenuId = menuId;
             ImageUrl = imageUrl;
             IsVeg = isVeg;
             IsGlutenFree = isGlutenFree;
@@ -29,6 +30,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
         public string DescriptionEng { get; }
         public long RestaurantId { get; }
         public long CategoryId { get; }
+        public long MenuId { get; }
         public string Name { get; }
         public FoodItemType Type { get; }
         public string ImageUrl { get; }
@@ -44,6 +46,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
         {
             RuleFor(x => x.RestaurantId).NotNull().NotEqual(0);
             RuleFor(x => x.CategoryId).NotNull().NotEqual(0);
+            RuleFor(x => x.MenuId).NotNull().NotEqual(0);
             RuleFor(x => x.Name).NotNull().NotEmpty();
             RuleFor(x => x.IsNonVeg).NotNull();
             RuleFor(x => x.IsVeg).NotNull();

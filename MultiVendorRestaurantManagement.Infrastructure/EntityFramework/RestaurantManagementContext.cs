@@ -232,6 +232,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .IsUnique();
                 builder.HasIndex(u => u.NameEng)
                     .IsUnique();
+                builder.HasMany(x=>x.Items)
+                    .WithOne(x=>x.Menu)
+                    .OnDelete(DeleteBehavior.NoAction)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
             });
             modelBuilder.Entity<Promotion>(builder =>
             {

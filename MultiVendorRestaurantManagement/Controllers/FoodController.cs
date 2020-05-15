@@ -26,7 +26,7 @@ namespace MultiVendorRestaurantManagement.Controllers
         public async Task<IActionResult> RegisterFood(long restaurant, [FromForm] RegisterFoodRequest request)
         {
             var command = new RegisterFoodCommand(restaurant, request.Name, request.Type,
-                request.CategoryId, request.ImageUrl, request.IsVeg,
+                request.CategoryId,request.MenuId, request.ImageUrl, request.IsVeg,
                 request.IsGlutenFree, request.IsNonVeg, request.UnitPrice,request.Description, request.DescriptionEng);
             return await HandleActionResultFor(command);
         }

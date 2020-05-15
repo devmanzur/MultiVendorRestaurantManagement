@@ -38,6 +38,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 restaurant.Rating,
                 restaurant.TotalRatingsCount,
                 restaurant.CategoryId,
+                notification.CategoryName,
                 restaurant.ExpirationDate,
                 restaurant.Description,
                 restaurant.DescriptionEng

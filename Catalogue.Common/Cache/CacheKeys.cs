@@ -4,5 +4,6 @@
     {
         HomeData,
         Categories,
+        RestaurantDetail
     }
 }

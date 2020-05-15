@@ -5,19 +5,19 @@ namespace Catalogue.Infrastracture.Mongo.Documents
 {
     public class DealDocument : BaseDocument
     {
-        public DealDocument(long dealId, string name, string description, string descriptionEng, string imageUrl,
-            DateTime startDate, DateTime endDate, bool isFixedDiscount, bool isPackageDeal)
-        {
-            DealId = dealId;
-            Name = name;
-            Description = description;
-            DescriptionEng = descriptionEng;
-            ImageUrl = imageUrl;
-            StartDate = startDate;
-            EndDate = endDate;
-            IsFixedDiscount = isFixedDiscount;
-            IsPackageDeal = isPackageDeal;
-        }
+        // public DealDocument(long dealId, string name, string description, string descriptionEng, string imageUrl,
+        //     DateTime startDate, DateTime endDate, bool isFixedDiscount, bool isPackageDeal)
+        // {
+        //     DealId = dealId;
+        //     Name = name;
+        //     Description = description;
+        //     DescriptionEng = descriptionEng;
+        //     ImageUrl = imageUrl;
+        //     StartDate = startDate;
+        //     EndDate = endDate;
+        //     IsFixedDiscount = isFixedDiscount;
+        //     IsPackageDeal = isPackageDeal;
+        // }
         public string Type { get; protected set; }
         public long DealId { get; protected set; }
         public string Name { get; protected set; }
