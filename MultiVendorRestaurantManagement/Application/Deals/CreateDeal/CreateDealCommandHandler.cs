@@ -23,7 +23,7 @@ namespace MultiVendorRestaurantManagement.Application.Deals.CreateDeal
         {
             Deal deal;
             if (request.IsPackageDeal)
-                deal = Deal.CreateBuyXGetYDeal(request.Name,
+                deal = Deal.CreatePackageDiscountDeal(request.Name,
                     request.Description, request.DescriptionEng, request.ImageUrl, request.StartDate, request.EndDate,
                     request.PackageDiscountModel);
             else if (request.IsFixedPriceDiscount)

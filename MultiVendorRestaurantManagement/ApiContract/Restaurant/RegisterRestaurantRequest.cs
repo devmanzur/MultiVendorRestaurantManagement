@@ -1,4 +1,4 @@
-﻿namespace MultiVendorRestaurantManagement.ApiContract.Request
+﻿namespace MultiVendorRestaurantManagement.ApiContract.Restaurant
 {
     public class RegisterRestaurantRequest
     {
@@ -12,5 +12,11 @@
         public string SubscriptionType { get; set; }
         public string ContractStatus { get; set; }
         public string ImageUrl { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public string Address { get; set; }
+        public string Description { get; set; }
+        public string DescriptionEng { get; set; }
+        
     }
 }

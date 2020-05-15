@@ -39,7 +39,9 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                         isVeg: request.IsVeg,
                         isNonVeg: request.IsNonVeg,
                         imageUrl: request.ImageUrl,
-                        category: category
+                        category: category,
+                        description:request.Description,
+                        descriptionEng:request.DescriptionEng
                     );
 
                     restaurant.AddFood(food);

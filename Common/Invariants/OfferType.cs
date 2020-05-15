@@ -2,6 +2,8 @@
 {
     public enum OfferType
     {
-        
+        PercentageDiscount,
+        FixedDiscount,
+        PackageDiscount
     }
 }

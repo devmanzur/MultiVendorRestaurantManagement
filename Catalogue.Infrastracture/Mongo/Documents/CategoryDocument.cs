@@ -38,10 +38,10 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             SimilarCategories = items;
         }
 
-        public static Expression<Func<CategoryDocument, object>> GetOrderBy(string sort)
+        public static Expression<Func<CategoryDocument, object>> GetOrderBy(string orderBy)
         {
-            if (sort.HasNoValue()) return x => x.Id;
-            return sort.ToLowerInvariant() switch
+            if (orderBy.HasNoValue()) return x => x.Id;
+            return orderBy.ToLowerInvariant() switch
             {
                 "name" => x => x.Name,
                 "id" => x => x.CategoryId,

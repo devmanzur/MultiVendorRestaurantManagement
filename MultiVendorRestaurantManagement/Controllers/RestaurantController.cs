@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
+using MultiVendorRestaurantManagement.ApiContract.Restaurant;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddFoodToMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant;
@@ -25,7 +26,8 @@ namespace MultiVendorRestaurantManagement.Controllers
         {
             var command = new RegisterRestaurantCommand(request.Name, request.PhoneNumber, request.LocalityId,
                 request.OpeningHour, request.ClosingHour, request.SubscriptionType, request.ContractStatus,
-                request.ImageUrl, request.CityId, request.CategoryId);
+                request.ImageUrl, request.CityId, request.CategoryId, request.Address, request.Latitude,
+                request.Longitude, request.Description, request.DescriptionEng);
             return await HandleActionResultFor(command);
         }
 

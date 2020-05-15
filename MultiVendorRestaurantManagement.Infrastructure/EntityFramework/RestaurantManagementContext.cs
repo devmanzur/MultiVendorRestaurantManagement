@@ -179,6 +179,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     builder.HasOne(x => x.Locality)
                         .WithMany()
                         .IsRequired();
+
+                    builder.HasOne(x => x.GeographicLocation)
+                        .WithOne(x => x.Restaurant)
+                        .HasForeignKey<GeographicLocation>(b => b.RestaurantId)
+                        .IsRequired();
+
                     builder.Property(x => x.OpeningHour)
                         .IsRequired();
                     builder.Property(x => x.ClosingHour)

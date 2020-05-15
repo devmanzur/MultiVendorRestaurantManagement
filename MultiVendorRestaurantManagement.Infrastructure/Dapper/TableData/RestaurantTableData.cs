@@ -8,6 +8,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper.TableData
         public long LocalityId { get; set; }
         public long ManagerId { get; set; }
         public long PricingPolicyId { get; set; }
+        
+        public string Description { get; set; }
+        public string DescriptionEng { get; set; }
         public long CategoryId { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }

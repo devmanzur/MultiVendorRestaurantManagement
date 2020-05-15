@@ -9,7 +9,7 @@ using Catalogue.Utils;
 using CSharpFunctionalExtensions;
 using MongoDB.Driver;
 
-namespace Catalogue.Application.Foods.FilterFoods
+namespace Catalogue.Application.Foods.FilterFoods.ByMenu
 {
     public class FilterFoodsByMenuQueryHandler : IQueryHandler<FilterFoodsByMenuQuery, Result<IPagedList<FoodMinimalDto>>>
     {

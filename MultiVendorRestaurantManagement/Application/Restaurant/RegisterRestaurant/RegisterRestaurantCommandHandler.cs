@@ -7,6 +7,7 @@ using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
+using MultiVendorRestaurantManagement.Domain.Restaurants;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
@@ -46,7 +47,10 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 PhoneNumberValue.Of(SupportedCountryCode.Italy, request.PhoneNumber),
                 request.ImageUrl,
                 category,
-                locality
+                locality,
+                new GeographicLocation(request.Address, request.Lat, request.Lon),
+                description:request.Description,
+                descriptionEng:request.DescriptionEng
             );
 
             _context.Restaurants.Attach(restaurant);

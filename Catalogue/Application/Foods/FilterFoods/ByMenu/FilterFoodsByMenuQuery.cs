@@ -3,7 +3,7 @@ using Catalogue.ApiContract.Response;
 using Catalogue.Base;
 using CSharpFunctionalExtensions;
 
-namespace Catalogue.Application.Foods.FilterFoods
+namespace Catalogue.Application.Foods.FilterFoods.ByMenu
 {
     public class FilterFoodsByMenuQuery : IQuery<Result<IPagedList<FoodMinimalDto>>>
     {

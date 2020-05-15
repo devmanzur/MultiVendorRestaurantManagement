@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 
 namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(RestaurantManagementContext))]
-    partial class RestaurantManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20200515104023_AddedLocationToRestaurantAndDescriptionToFood")]
+    partial class AddedLocationToRestaurantAndDescriptionToFood
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -639,13 +641,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("RestaurantId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("RestaurantId")
-                        .IsUnique();
 
                     b.ToTable("GeographicLocation");
                 });
@@ -743,6 +739,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.Property<long>("LocalityId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("LocationId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("ManagerId")
                         .HasColumnType("bigint");
 
@@ -779,6 +778,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("LocalityId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -880,15 +881,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Restaurants.GeographicLocation", b =>
-                {
-                    b.HasOne("MultiVendorRestaurantManagement.Domain.Restaurants.Restaurant", "Restaurant")
-                        .WithOne("GeographicLocation")
-                        .HasForeignKey("MultiVendorRestaurantManagement.Domain.Restaurants.GeographicLocation", "RestaurantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MultiVendorRestaurantManagement.Domain.Restaurants.Menu", b =>
                 {
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Restaurants.Restaurant", "Restaurant")
@@ -907,6 +899,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Migrations
                     b.HasOne("MultiVendorRestaurantManagement.Domain.Cities.Locality", "Locality")
                         .WithMany()
                         .HasForeignKey("LocalityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MultiVendorRestaurantManagement.Domain.Restaurants.GeographicLocation", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

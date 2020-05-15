@@ -18,7 +18,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             decimal unitPrice,
             decimal oldUnitPrice, string type, long categoryId, string categoryName, string status, bool isGlutenFree,
             bool isVeg,
-            bool isNonVeg)
+            bool isNonVeg, string description, string descriptionEng)
         {
             RestaurantId = restaurantId;
             RestaurantName = restaurantName;
@@ -33,6 +33,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             IsGlutenFree = isGlutenFree;
             IsVeg = isVeg;
             IsNonVeg = isNonVeg;
+            Description = description;
+            DescriptionEng = descriptionEng;
             CategoryName = categoryName;
             GenerateTags();
             AddDefaultVariant();
@@ -64,6 +66,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public bool IsGlutenFree { get; set; } //adds an extra tag to the list of tags when set true
         public bool IsVeg { get; set; } //adds an extra tag to the list of tags when set true
         public bool IsNonVeg { get; set; } //adds an extra tag to the list of tags when set true
+        public string Description { get;protected set; }
+        public string DescriptionEng { get;protected set; }
         public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
         public List<AddOnDocument> AddOns { get; protected set; } = new List<AddOnDocument>();
         public long MenuId { get; private set; }

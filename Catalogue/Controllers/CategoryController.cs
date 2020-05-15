@@ -24,7 +24,14 @@ namespace Catalogue.Controllers
             return await HandleQueryResultFor(query);
         }
 
-        
+        [HttpGet("{category}/foods")]
+        public async Task<IActionResult> GetFoodsByCategory(long category,
+            [FromQuery] GeneralPaginationQuery paginationQuery)
+        {
+            var query = new FilterFoodsQuery(paginationQuery, category, "category");
+            return await HandleQueryResultFor(query);
+        }
+
         
     }
 }

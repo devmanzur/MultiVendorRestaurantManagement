@@ -9,8 +9,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
     public class RegisterRestaurantCommand : IRequest<Result>
     {
         public RegisterRestaurantCommand(string name, string phoneNumber, long localityId, int openingHour,
-            int closingHour,
-            string subscriptionType, string contractStatus, string imageUrl, long cityId, long categoryId)
+            int closingHour, string subscriptionType, string contractStatus, string imageUrl, long cityId,
+            long categoryId, string address, double lat, double lon, string description, string descriptionEng)
         {
             Name = name;
             PhoneNumber = phoneNumber;
@@ -20,10 +20,17 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             ImageUrl = imageUrl;
             CityId = cityId;
             CategoryId = categoryId;
+            Address = address;
+            Lat = lat;
+            Lon = lon;
+            Description = description;
+            DescriptionEng = descriptionEng;
             SubscriptionType = SubscriptionHelper.ConvertToSubscription(subscriptionType);
             ContractStatus = ContractStatusHelper.ConvertToContractStatus(contractStatus);
         }
 
+        public string Description { get; }
+        public string DescriptionEng { get; }
         public string Name { get; }
         public string PhoneNumber { get; }
         public long LocalityId { get; }
@@ -34,6 +41,9 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
         public SubscriptionType SubscriptionType { get; }
         public ContractStatus ContractStatus { get; }
         public long CategoryId { get; }
+        public string Address { get; }
+        public double Lat { get; }
+        public double Lon { get; }
     }
 
     public class RegisterRestaurantCommandValidator : AbstractValidator<RegisterRestaurantCommand>
@@ -46,6 +56,9 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             RuleFor(x => x.CityId).NotNull().NotEmpty();
             RuleFor(x => x.CategoryId).NotNull().NotEmpty();
             RuleFor(x => x.ImageUrl).NotNull().NotEmpty();
+            RuleFor(x => x.Address).NotNull().NotEmpty();
+            RuleFor(x => x.Lat).NotNull().NotEqual(0);
+            RuleFor(x => x.Lon).NotNull().NotEqual(0);
             RuleFor(x => x.OpeningHour).NotNull().NotEmpty().Must(HelperFunctions.Valid24HourFormat);
             RuleFor(x => x.ClosingHour).NotNull().NotEmpty().Must(HelperFunctions.Valid24HourFormat)
                 .NotEqual(x => x.OpeningHour);

@@ -18,7 +18,7 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             IsFixedDiscount = isFixedDiscount;
             IsPackageDeal = isPackageDeal;
         }
-
+        public string Type { get; protected set; }
         public long DealId { get; protected set; }
         public string Name { get; protected set; }
         public string Description { get; protected set; }

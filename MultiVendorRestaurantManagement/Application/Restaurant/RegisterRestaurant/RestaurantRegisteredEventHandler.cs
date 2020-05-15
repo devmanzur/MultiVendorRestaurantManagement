@@ -38,7 +38,9 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 restaurant.Rating,
                 restaurant.TotalRatingsCount,
                 restaurant.CategoryId,
-                restaurant.ExpirationDate
+                restaurant.ExpirationDate,
+                restaurant.Description,
+                restaurant.DescriptionEng
             );
 
             await _documentCollection.RestaurantsCollection.InsertOneAsync(document, cancellationToken);

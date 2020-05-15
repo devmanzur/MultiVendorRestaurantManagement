@@ -10,7 +10,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
     {
         public RegisterFoodCommand(long restaurantId, string name, string type, long categoryId, string imageUrl,
             bool isVeg,
-            bool isGlutenFree, bool isNonVeg, decimal unitPrice)
+            bool isGlutenFree, bool isNonVeg, decimal unitPrice, string description, string descriptionEng)
         {
             RestaurantId = restaurantId;
             Name = name;
@@ -20,9 +20,13 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
             IsVeg = isVeg;
             IsGlutenFree = isGlutenFree;
             IsNonVeg = isNonVeg;
+            Description = description;
+            DescriptionEng = descriptionEng;
             UnitPrice = MoneyValue.Of(unitPrice);
         }
 
+        public string Description { get; }
+        public string DescriptionEng { get; }
         public long RestaurantId { get; }
         public long CategoryId { get; }
         public string Name { get; }

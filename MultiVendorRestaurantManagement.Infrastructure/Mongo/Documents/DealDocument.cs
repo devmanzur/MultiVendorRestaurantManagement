@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Invariants;
 using MultiVendorRestaurantManagement.Domain.Deals;
 using MultiVendorRestaurantManagement.Domain.Promotions;
 
@@ -29,6 +30,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public DateTime EndDate { get; protected set; }
         public bool IsFixedDiscount { get; private set; }
         public bool IsPackageDeal { get; private set; }
+        public string Type { get; protected set; }
+
 
         public PackageDiscountModel PackageDetail { get; private set; }
         public PercentageDiscountModel PercentageDetail { get; private set; }
@@ -36,12 +39,14 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
         public void CreatePackageDiscount(int size, int freeCount)
         {
+            Type = OfferType.PackageDiscount.ToString();
             IsPackageDeal = true;
             PackageDetail = new PackageDiscountModel(size, freeCount);
         }
 
         public void CreateFixedDiscount(decimal discountAmount, decimal minBillAmount, int minQuantity)
         {
+            Type = OfferType.FixedDiscount.ToString();
             IsFixedDiscount = true;
             FixedDetail = new FixedDiscountModel(discountAmount, minBillAmount, minQuantity);
         }
@@ -49,6 +54,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public void CreatePercentageDeal(decimal percentage, decimal maxDiscountAmount, decimal minBillAmount,
             int minQuantity)
         {
+            Type = OfferType.PercentageDiscount.ToString();
             PercentageDetail = new PercentageDiscountModel(percentage, maxDiscountAmount, minBillAmount, minQuantity);
         }
     }

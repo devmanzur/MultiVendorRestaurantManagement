@@ -34,6 +34,8 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             GenerateTags();
         }
 
+        public string Description { get;protected set; }
+        public string DescriptionEng { get;protected set; }
         public long RestaurantId { get; protected set; }
         public long DealId { get; private set; }
         public string DealDescription { get; private set; }

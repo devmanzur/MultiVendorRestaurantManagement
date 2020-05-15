@@ -39,7 +39,9 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                     item.Status,
                     item.IsGlutenFree,
                     item.IsVeg,
-                    item.IsNonVeg
+                    item.IsNonVeg,
+                    item.Description,
+                    item.DescriptionEng
                 );
 
                 await _documentCollection.FoodCollection.InsertOneAsync(food, cancellationToken);

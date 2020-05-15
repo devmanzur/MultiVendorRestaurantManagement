@@ -9,7 +9,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
     {
         public RestaurantDocument(long restaurantId, string name, string phoneNumber, long localityId, string state,
             int openingHour, int closingHour, string subscriptionType, string contractStatus, string imageUrl,
-            double rating, int totalRatingsCount, long categoryId, DateTime expirationDate)
+            double rating, int totalRatingsCount, long categoryId, DateTime expirationDate, string description, string descriptionEng)
         {
             RestaurantId = restaurantId;
             Name = name;
@@ -25,9 +25,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             TotalRatingsCount = totalRatingsCount;
             CategoryId = categoryId;
             ExpirationDate = expirationDate;
+            Description = description;
+            DescriptionEng = descriptionEng;
             Menus = new List<MenuRecord>();
         }
-
+        public string Description { get;protected set; }
+        public string DescriptionEng { get;protected set; }
         public long RestaurantId { get; protected set; }
         public string Name { get; protected set; }
         public string PhoneNumber { get; protected set; }

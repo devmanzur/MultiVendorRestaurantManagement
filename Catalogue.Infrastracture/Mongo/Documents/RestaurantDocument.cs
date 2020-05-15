@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Catalogue.Common.Invariants;
+using Catalogue.Common.Utils;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Catalogue.Infrastracture.Mongo.Documents
@@ -28,6 +30,8 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             Menus = new List<MenuRecord>();
         }
 
+        public string Description { get;protected set; }
+        public string DescriptionEng { get;protected set; }
         public long RestaurantId { get; protected set; }
         public string Name { get; protected set; }
         public string PhoneNumber { get; protected set; }
@@ -57,6 +61,21 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             }
 
             return State;
+        }
+
+        public static Expression<Func<RestaurantDocument, object>> GetOrderBy(string orderBy)
+        {
+            if (orderBy.HasNoValue()) return x => x.Id;
+            return orderBy.ToLowerInvariant() switch
+            {
+                "name" => x => x.Name,
+                "id" => x => x.RestaurantId,
+                "category" => x => x.CategoryId,
+                "locality" => x => x.LocalityId,
+                "state" => x => x.State,
+                "subscription" => x => x.SubscriptionType,
+                _ => x => x.Id
+            };
         }
     }
 

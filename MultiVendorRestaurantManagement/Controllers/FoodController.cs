@@ -27,7 +27,7 @@ namespace MultiVendorRestaurantManagement.Controllers
         {
             var command = new RegisterFoodCommand(restaurant, request.Name, request.Type,
                 request.CategoryId, request.ImageUrl, request.IsVeg,
-                request.IsGlutenFree, request.IsNonVeg, request.UnitPrice);
+                request.IsGlutenFree, request.IsNonVeg, request.UnitPrice,request.Description, request.DescriptionEng);
             return await HandleActionResultFor(command);
         }
 

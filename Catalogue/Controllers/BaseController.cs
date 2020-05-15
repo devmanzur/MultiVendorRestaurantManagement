@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Catalogue.Base;
 using Catalogue.Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
@@ -16,7 +17,7 @@ namespace Catalogue.Controllers
             _mediator = mediator;
         }
 
-        protected async Task<IActionResult> HandleQueryResultFor<T>(IRequest<Result<T>> command)
+        protected async Task<IActionResult> HandleQueryResultFor<T>(IQuery<Result<T>> command)
         {
             var result = await _mediator.Send(command);
             return HandleQueryResponse(result);
