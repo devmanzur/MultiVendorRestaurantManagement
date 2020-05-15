@@ -21,18 +21,20 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
         }
 
         protected Promotion(string name, string imageUrl, string descriptionEng, string description,
-            DateTime startDate, DateTime endDate)
+            DateTime startDate, DateTime endDate, string type)
         {
             ImageUrl = imageUrl;
             DescriptionEng = descriptionEng;
             Description = description;
             EndDate = endDate;
+            Type = type;
             Name = name;
             StartDate = startDate;
         }
 
         public DateTime StartDate { get; }
         public DateTime EndDate { get; }
+        public string Type { get; }
 
         public IReadOnlyList<long> FoodIds
         {
@@ -69,7 +71,8 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             string descriptionEng, DateTime startDate,
             in DateTime endDate, FixedDiscountModel model)
         {
-            var promotion = new Promotion(name, imageUrl, descriptionEng, description, startDate, endDate);
+            var promotion = new Promotion(name, imageUrl, descriptionEng, description, startDate, endDate,
+                model.Type.ToString());
             promotion.CreateFixedPriceDiscount(model);
             return promotion;
         }
@@ -78,7 +81,8 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             string description,
             DateTime startDate, DateTime endDate, PercentageDiscountModel model)
         {
-            var promotion = new Promotion(name, imageUrl, descriptionEng, description, startDate, endDate);
+            var promotion = new Promotion(name, imageUrl, descriptionEng, description, startDate, endDate,
+                model.Type.ToString());
             promotion.CreatePercentageDiscount(model);
             return promotion;
         }

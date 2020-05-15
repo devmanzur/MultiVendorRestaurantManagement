@@ -28,13 +28,16 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
         protected Food()
         {
+            
         }
 
         public Food(string name, MoneyValue unitPrice, FoodItemType type,
-            bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Category category)
+            bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Category category, string description, string descriptionEng)
         {
             ImageUrl = imageUrl;
             Category = category;
+            Description = description;
+            DescriptionEng = descriptionEng;
             Name = name;
             UnitPrice = unitPrice;
             Type = type;
@@ -75,12 +78,14 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public List<AddOn> AddOns => _addOns.ToList();
         public Category Category { get; private set; }
         public Deal Deal { get; private set; }
-        public string ImageUrl { get; }
+        public string ImageUrl { get; protected set;}
+        public string Description { get; private set; }
+        public string DescriptionEng { get; private set; }
 
         public double Rating { get; private set; }
 
         public int TotalRatingsCount { get; private set; }
-        public int TotalOrderCount { get; }
+        public int TotalOrderCount { get; protected set;}
 
         public void AddRating(int remark)
         {

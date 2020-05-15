@@ -20,13 +20,13 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             IsDelivered = false;
         }
 
-        public string Code { get; }
-        public string Username { get; }
+        public string Code { get; protected set;}
+        public string Username { get;protected set; }
         public bool IsUsed { get; private set; }
-        public bool IsDelivered { get; }
-        public DateTime GeneratedAt { get; }
+        public bool IsDelivered { get;protected set; }
+        public DateTime GeneratedAt { get; protected set;}
         public string UsedBy { get; private set; }
-        public string CreatedBy { get; }
+        public string CreatedBy { get;protected set; }
         public Promotion Promotion { get; private set; }
 
 

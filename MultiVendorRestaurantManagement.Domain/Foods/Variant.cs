@@ -19,10 +19,10 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             DescriptionEng = descriptionEng;
         }
 
-        public string Name { get; }
-        public string NameEng { get; }
-        public string Description { get; }
-        public string DescriptionEng { get; }
+        public string Name { get;protected set; }
+        public string NameEng { get;protected set; }
+        public string Description { get; protected set;}
+        public string DescriptionEng { get;protected set; }
         public MoneyValue Price { get; private set; }
         public MoneyValue OldPrice { get; private set; }
         public Food Food { get; private set; }

@@ -13,10 +13,10 @@ namespace MultiVendorRestaurantManagement.Domain.Common
             ItemId = itemId;
         }
 
-        public long ItemId { get; }
-        public PhoneNumberValue UserPhoneNumber { get; }
-        public int StarRate { get; }
-        public string Comment { get; set; }
+        public long ItemId { get;protected set; }
+        public PhoneNumberValue UserPhoneNumber { get;protected set; }
+        public int StarRate { get;protected set; }
+        public string Comment { get; protected set; }
 
         public override IDomainEvent GetAddedDomainEvent()
         {

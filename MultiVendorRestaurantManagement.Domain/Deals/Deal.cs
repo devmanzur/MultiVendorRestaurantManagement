@@ -15,11 +15,10 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
 
         protected Deal()
         {
-            
         }
-        
+
         protected Deal(string name, string description, string descriptionEng, string imageUrl, DateTime startDate,
-            DateTime endDate)
+            DateTime endDate, string type)
         {
             Name = name;
             Description = description;
@@ -29,14 +28,15 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
             EndDate = endDate;
         }
 
-        public string Name { get; }
-        public string Description { get; }
-        public string DescriptionEng { get; }
-        public string ImageUrl { get; }
+
+        public string Name { get; private set; }
+        public string Description { get; private set; }
+        public string DescriptionEng { get; private set; }
+        public string ImageUrl { get; private set; }
         public int MinimumItemQuantity { get; private set; }
         public int MaximumItemQuantity { get; private set; }
         public decimal MinimumBillAmount { get; private set; }
-        public decimal MaximumBillAmount { get; } = 99999999;
+        public decimal MaximumBillAmount { get; protected set;} = 99999999;
         public decimal DiscountPercentage { get; private set; }
         public decimal MaximumDiscountAmount { get; private set; }
         public decimal FixedDiscountAmount { get; private set; }
@@ -45,8 +45,9 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
         public int PackageSize { get; private set; }
         public int FreeItemQuantityInPackage { get; private set; }
         public IReadOnlyList<Food> Items => _items.ToList();
-        public DateTime StartDate { get; }
-        public DateTime EndDate { get; }
+        public DateTime StartDate { get; private set; }
+        public DateTime EndDate { get; private set; }
+        public string Type { get; protected set; }
 
         public static Deal CreatePercentageDiscountDeal(string name, string description, string descriptionEng,
             string imageUrl,
@@ -54,7 +55,7 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
             DateTime endDate,
             PercentageDiscountModel model)
         {
-            var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate);
+            var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate, model.Type.ToString());
             deal.SetPercentage(model);
             return deal;
         }
@@ -63,17 +64,18 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
             string imageUrl,
             DateTime startDate, DateTime endDate, FixedDiscountModel model)
         {
-            var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate);
+            var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate, model.Type.ToString());
             deal.SetFixedDeal(model);
             return deal;
         }
 
         //buy 2 free 1 deals
-        public static Deal CreateBuyXGetYDeal(string name, string description, string descriptionEng, string imageUrl,
+        public static Deal CreatePackageDiscountDeal(string name, string description, string descriptionEng,
+            string imageUrl,
             DateTime startDate, DateTime endDate,
             PackageDiscountModel model)
         {
-            var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate);
+            var deal = new Deal(name, description, descriptionEng, imageUrl, startDate, endDate, model.Type.ToString());
             deal.SetPackageDeal(model.PackageSize, model.FreeItemQuantityInPackage);
             return deal;
         }

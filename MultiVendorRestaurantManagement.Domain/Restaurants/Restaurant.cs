@@ -22,14 +22,15 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         private List<Order> _orders = new List<Order>();
 
-
         protected Restaurant()
         {
+            
         }
 
         public Restaurant(string name, int openingHour, int closingHour,
             SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumber,
-            string imageUrl, Category category, Locality locality)
+            string imageUrl, Category category, Locality locality, GeographicLocation location, string description,
+            string descriptionEng)
         {
             CheckRule(new OpeningAndClosingHoursAreValid(openingHour, closingHour));
             CheckRule(new ConditionMustBeTrueRule(subscriptionType != SubscriptionType.Invalid,
@@ -42,6 +43,9 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             ImageUrl = imageUrl;
             Category = category;
             Locality = locality;
+            GeographicLocation = location;
+            Description = description;
+            DescriptionEng = descriptionEng;
             Name = name;
             OpeningHour = openingHour;
             ClosingHour = closingHour;
@@ -52,10 +56,14 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             PhoneNumber = phoneNumber;
         }
 
+        public GeographicLocation GeographicLocation { get; private set; }
         public string Name { get; protected set; }
         public PhoneNumberValue PhoneNumber { get; protected set; }
         public Locality Locality { get; protected set; }
         public long ManagerId { get; private set; }
+
+        public string Description { get; private set; }
+        public string DescriptionEng { get; private set; }
 
         public RestaurantState State
         {
@@ -77,7 +85,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public Category Category { get; private set; }
 
-        public string ImageUrl { get; }
+        public string ImageUrl { get; protected set; }
 
         public double Rating { get; private set; }
 

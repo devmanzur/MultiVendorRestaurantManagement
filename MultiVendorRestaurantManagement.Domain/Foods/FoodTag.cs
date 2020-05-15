@@ -2,9 +2,9 @@
 {
     public class FoodTag
     {
-        public long FoodId { get; set; }
-        public Food Food { get; set; }
+        public long FoodId { get; protected set; }
+        public Food Food { get; protected set;}
         public long TagId { get; private set; }
-        public Tag Tag { get; set; }
+        public Tag Tag { get;protected set; }
     }
 }

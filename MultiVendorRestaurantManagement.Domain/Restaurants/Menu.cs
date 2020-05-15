@@ -25,7 +25,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public virtual Restaurant Restaurant { get; protected set; }
         public string Name { get; protected set; }
-        public string ImageUrl { get; }
+        public string ImageUrl { get;protected set; }
         public string NameEng { get; protected set; }
         public IReadOnlyList<Food> Items => _items.ToList();
 

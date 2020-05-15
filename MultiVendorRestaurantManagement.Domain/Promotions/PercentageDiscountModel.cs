@@ -1,4 +1,5 @@
-﻿using Common.Utils;
+﻿using Common.Invariants;
+using Common.Utils;
 using MultiVendorRestaurantManagement.Domain.Rules;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
@@ -20,7 +21,10 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             MaxDiscountAmount = maxDiscountAmount;
             MinBillAmount = minBillAmount;
             MinQuantity = minQuantity;
+            Type = OfferType.PackageDiscount;
         }
+
+        public OfferType Type { get; }
 
         public decimal DiscountPercentage { get; }
         public decimal MaxDiscountAmount { get; }

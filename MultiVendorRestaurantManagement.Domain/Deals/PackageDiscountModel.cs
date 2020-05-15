@@ -1,4 +1,5 @@
-﻿using Common.Utils;
+﻿using Common.Invariants;
+using Common.Utils;
 using MultiVendorRestaurantManagement.Domain.Rules;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
 
@@ -13,7 +14,10 @@ namespace MultiVendorRestaurantManagement.Domain.Deals
                 packageSize > freeItemQuantityInPackage, "invalid conditions for package deal"));
             PackageSize = packageSize;
             FreeItemQuantityInPackage = freeItemQuantityInPackage;
+            Type = OfferType.PackageDiscount;
         }
+
+        public OfferType Type { get;  }
 
         public int PackageSize { get; }
         public int FreeItemQuantityInPackage { get; }
