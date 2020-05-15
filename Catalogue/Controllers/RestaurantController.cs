@@ -2,6 +2,7 @@
 using Catalogue.ApiContract.Pagination;
 using Catalogue.Application.Foods.FilterFoods;
 using Catalogue.Application.Foods.FilterFoods.ByMenu;
+using Catalogue.Application.Restaurants.GetRestaurantDetail;
 using Catalogue.Application.Restaurants.GetRestaurants;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,16 @@ namespace Catalogue.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(GeneralPaginationQuery paginationQuery)
+        public async Task<IActionResult> Get([FromQuery] GeneralPaginationQuery paginationQuery)
         {
             var query = new GetRestaurantsQuery(paginationQuery);
+            return await HandleQueryResultFor(query);
+        }
+        
+        [HttpGet("{restaurant}")]
+        public async Task<IActionResult> Get(long restaurant)
+        {
+            var query = new GetRestaurantDetailQuery(restaurant);
             return await HandleQueryResultFor(query);
         }
         

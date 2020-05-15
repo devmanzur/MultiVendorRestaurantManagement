@@ -36,15 +36,12 @@ namespace Catalogue.Application.Restaurants.GetRestaurantDetail
             {
                 result = await LoadFromCollection(request.RestaurantId, cancellationToken);
 
-                if (result.HasValue())
-                {
-                    await CacheData(result);
-                }
+                if (result.HasNoValue()) return Result.Failure<RestaurantDetailDto>("not found");
 
-                return Result.Ok(result);
+                await CacheData(result);
             }
 
-            return Result.Failure<RestaurantDetailDto>("not found");
+            return Result.Ok(result);
         }
 
         private async Task CacheData(RestaurantDetailDto result)
@@ -52,7 +49,7 @@ namespace Catalogue.Application.Restaurants.GetRestaurantDetail
             var options = new DistributedCacheEntryOptions()
                 .SetAbsoluteExpiration(TimeSpan.FromMinutes(CacheDurationInMinutes));
 
-            await _cache.SaveObjectAsync(CacheKeys.RestaurantDetail, result, options);
+            await _cache.SaveObjectAsync(CacheKeys.RestaurantDetail, result, options, result.RestaurantId);
         }
 
         private async Task<RestaurantDetailDto> LoadFromCollection(long restaurantId,
@@ -90,7 +87,7 @@ namespace Catalogue.Application.Restaurants.GetRestaurantDetail
                         .SortByDescending(x => x.Name)
                         .Project(Projections.MinimalFoodProjection())
                         .ToListAsync(cancellationToken);
-                    menus.Add(new MenuDetailDto(menu, foods));
+                    menus.Add(new MenuDetailDto(menu.MenuId, menu.Name, menu.NameEng, menu.ImageUrl, foods));
                 });
 
                 dto.SetMenuDetail(menus);

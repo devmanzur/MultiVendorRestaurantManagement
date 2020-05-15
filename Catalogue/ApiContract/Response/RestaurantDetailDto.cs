@@ -27,22 +27,22 @@ namespace Catalogue.ApiContract.Response
             CategoryName = categoryName;
         }
 
-        public long RestaurantId { get; protected set; }
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
-        public string DescriptionEng { get; protected set; }
-        public string PhoneNumber { get; protected set; }
-        public long LocalityId { get; protected set; }
-        public string State { get; protected set; }
-        public int OpeningHour { get; protected set; }
-        public int ClosingHour { get; protected set; }
-        public string ImageUrl { get; protected set; }
-        public double Rating { get; protected set; }
-        public int TotalRatingsCount { get; protected set; }
-        public long CategoryId { get; protected set; }
+        public long RestaurantId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string DescriptionEng { get; set; }
+        public string PhoneNumber { get; set; }
+        public long LocalityId { get; set; }
+        public string State { get; set; }
+        public int OpeningHour { get; set; }
+        public int ClosingHour { get; set; }
+        public string ImageUrl { get; set; }
+        public double Rating { get; set; }
+        public int TotalRatingsCount { get; set; }
+        public long CategoryId { get; set; }
         public string CategoryName { get; set; }
 
-        public List<MenuDetailDto> Menus { get; protected set; }
+        public List<MenuDetailDto> Menus { get; set; }
 
 
         public void SetMenuDetail(List<MenuDetailDto> menus)
@@ -53,19 +53,20 @@ namespace Catalogue.ApiContract.Response
 
     public class MenuDetailDto
     {
-        public MenuDetailDto(MenuRecord menu, List<FoodMinimalDto> foods)
+        public MenuDetailDto(long menuId, string menuName, string menuNameEng, string imageUrl,
+            List<FoodMinimalDto> foods)
         {
-            MenuId = menu.MenuId;
-            Name = menu.Name;
-            NameEng = menu.NameEng;
-            ImageUrl = menu.ImageUrl;
+            MenuId = menuId;
+            Name = menuName;
+            NameEng = menuNameEng;
+            ImageUrl = imageUrl;
             Foods = foods;
         }
 
-        public long MenuId { get; protected set; }
-        public string Name { get; protected set; }
-        public string NameEng { get; protected set; }
-        public string ImageUrl { get; protected set; }
-        public List<FoodMinimalDto> Foods { get; private set; }
+        public long MenuId { get; set; }
+        public string Name { get; set; }
+        public string NameEng { get; set; }
+        public string ImageUrl { get; set; }
+        public List<FoodMinimalDto> Foods { get; set; }
     }
 }
