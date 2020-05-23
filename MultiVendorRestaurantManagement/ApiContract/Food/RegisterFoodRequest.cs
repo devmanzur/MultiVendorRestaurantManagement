@@ -1,4 +1,6 @@
-﻿namespace MultiVendorRestaurantManagement.ApiContract.Request
+﻿using System.Collections.Generic;
+
+namespace MultiVendorRestaurantManagement.ApiContract.Food
 {
     public class RegisterFoodRequest
     {
@@ -9,9 +11,12 @@
         public bool IsVeg { get; set; }
         public bool IsNonVeg { get; set; }
         public long CategoryId { get; set; }
+        public long CuisineId { get; set; }
         public long MenuId { get; set; }
         public string ImageUrl { get; set; }
         public string Description { get; set; }
         public string DescriptionEng { get; set; }
+
+        public List<string> Ingredients { get; set; }
     }
 }

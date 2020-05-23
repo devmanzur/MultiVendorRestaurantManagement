@@ -9,7 +9,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
     {
         public RestaurantDocument(long restaurantId, string name, string phoneNumber, long localityId, string state,
             int openingHour, int closingHour, string subscriptionType, string contractStatus, string imageUrl,
-            double rating, int totalRatingsCount, long categoryId, string categoryName, DateTime expirationDate, string description, string descriptionEng)
+            double rating, int totalRatingsCount, DateTime expirationDate, string description, string descriptionEng)
         {
             RestaurantId = restaurantId;
             Name = name;
@@ -23,12 +23,12 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             ImageUrl = imageUrl;
             Rating = rating;
             TotalRatingsCount = totalRatingsCount;
-            CategoryId = categoryId;
-            CategoryName = categoryName;
             ExpirationDate = expirationDate;
             Description = description;
             DescriptionEng = descriptionEng;
             Menus = new List<MenuRecord>();
+            Cuisines = new List<CuisineRecord>();
+            Categories = new List<CategoryRecord>();
         }
         public string Description { get;protected set; }
         public string DescriptionEng { get;protected set; }
@@ -45,10 +45,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public double Rating { get; protected set; }
         public int TotalRatingsCount { get; protected set; }
         public List<MenuRecord> Menus { get; protected set;}
+        public List<CategoryRecord> Categories { get; protected set;}
+        public List<CuisineRecord> Cuisines { get; protected set;}
         public long ManagerId { get; protected set; }
         public long PricingPolicyId { get; protected set; }
-        public long CategoryId { get; private set; }
-        public string CategoryName { get; protected set;  }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime ExpirationDate { get; private set; }
 
@@ -64,15 +64,41 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             ExpirationDate = subscription.GetExpirationTime();
         }
 
-        public void UpdateCategory(in long categoryId)
-        {
-            CategoryId = categoryId;
-        }
-
-        public void AddNewMenu(MenuRecord menu)
+        public void AddMenu(MenuRecord menu)
         {
             Menus.Add(menu);
         }
+
+        public void AddCategory(CategoryRecord category)
+        {
+            Categories.Add(category);
+        }
+        public void RemoveCategory(CategoryRecord category)
+        {
+            Categories.Remove(category);
+        } 
+        public void AddCuisine(CuisineRecord cuisine)
+        {
+            Cuisines.Add(cuisine);
+        }
+        public void RemoveCuisine(CuisineRecord cuisine)
+        {
+            Cuisines.Remove(cuisine);
+        }
+    }
+
+    public class CategoryRecord
+    {
+        public string Name { get; set; }
+        public string NameEng { get; set; }
+        public long Id { get; set; }
+    }
+
+    public class CuisineRecord
+    {
+        public string Name { get; set; }
+        public string NameEng { get; set; }
+        public long Id { get; set; }
     }
 
     public class MenuRecord

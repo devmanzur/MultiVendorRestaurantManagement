@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper;
+using MultiVendorRestaurantManagement.Infrastructure.Dapper.Converters;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents;
 
@@ -23,6 +24,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
         public async Task Handle(RestaurantRegisteredEvent notification, CancellationToken cancellationToken)
         {
             var restaurant = await _tableDataProvider.GetRestaurantAsync(notification.PhoneNumber);
+            var cuisines = await _tableDataProvider.GetCuisineListAsync(notification.CuisineIds);
+            var categories = await _tableDataProvider.GetCategoryListAsync(notification.CategoryIds);
 
             var document = new RestaurantDocument(
                 restaurant.Id,
@@ -37,12 +40,14 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 restaurant.ImageUrl,
                 restaurant.Rating,
                 restaurant.TotalRatingsCount,
-                restaurant.CategoryId,
-                notification.CategoryName,
                 restaurant.ExpirationDate,
                 restaurant.Description,
                 restaurant.DescriptionEng
             );
+            
+            cuisines.ForEach(x=>document.AddCuisine(x.ToRecord()));
+            categories.ForEach(x=>document.AddCategory(x.ToRecord()));
+            
 
             await _documentCollection.RestaurantsCollection.InsertOneAsync(document, cancellationToken);
         }

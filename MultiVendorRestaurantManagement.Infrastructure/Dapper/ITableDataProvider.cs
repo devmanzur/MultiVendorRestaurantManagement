@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper.DbView;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper.TableData;
 
@@ -13,5 +14,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
         Task<MenuTableData2> GetMenuAsync(string menuName);
         Task<FoodTableData> GetFoodAsync(long restaurantId, string foodName);
         Task<DealTableData> GetDealAsync(string notificationDealName);
+        Task<List<CuisineTableDataMinimal>> GetCuisineListAsync(IEnumerable<long> cuisineIds);
+        Task<List<CategoryTableDataMinimal>> GetCategoryListAsync(IEnumerable<long> categoryIds);
     }
 }

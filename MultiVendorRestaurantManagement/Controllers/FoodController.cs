@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using MultiVendorRestaurantManagement.ApiContract.Food;
 using MultiVendorRestaurantManagement.ApiContract.Request;
 using MultiVendorRestaurantManagement.Application.Food.AddVariation;
 using MultiVendorRestaurantManagement.Application.Food.CreateaAddOn;
@@ -23,11 +24,11 @@ namespace MultiVendorRestaurantManagement.Controllers
         }
 
         [HttpPost("{restaurant}/foods")]
-        public async Task<IActionResult> RegisterFood(long restaurant, [FromForm] RegisterFoodRequest request)
+        public async Task<IActionResult> RegisterFood(long restaurant, RegisterFoodRequest request)
         {
             var command = new RegisterFoodCommand(restaurant, request.Name, request.Type,
-                request.CategoryId,request.MenuId, request.ImageUrl, request.IsVeg,
-                request.IsGlutenFree, request.IsNonVeg, request.UnitPrice,request.Description, request.DescriptionEng);
+                request.CategoryId, request.CuisineId,request.MenuId, request.ImageUrl, request.IsVeg,
+                request.IsGlutenFree, request.IsNonVeg, request.UnitPrice,request.Description, request.DescriptionEng, request.Ingredients);
             return await HandleActionResultFor(command);
         }
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Common.Utils;
 using MediatR;
+using MultiVendorRestaurantManagement.Domain.Category;
 using MultiVendorRestaurantManagement.Domain.Common;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper;
 using MultiVendorRestaurantManagement.Infrastructure.Mongo;

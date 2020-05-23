@@ -9,7 +9,7 @@ namespace Catalogue.ApiContract.Response
     {
         public RestaurantDetailDto(long restaurantId, string name, string description, string descriptionEng,
             string phoneNumber, long localityId, string state, int openingHour, int closingHour, string imageUrl,
-            double rating, int totalRatingsCount, long categoryId, string categoryName)
+            double rating, int totalRatingsCount, List<string> categories, List<string> cuisines)
         {
             RestaurantId = restaurantId;
             Name = name;
@@ -23,8 +23,8 @@ namespace Catalogue.ApiContract.Response
             ImageUrl = imageUrl;
             Rating = rating;
             TotalRatingsCount = totalRatingsCount;
-            CategoryId = categoryId;
-            CategoryName = categoryName;
+            Categories = categories;
+            Cuisines = cuisines;
         }
 
         public long RestaurantId { get; set; }
@@ -39,8 +39,8 @@ namespace Catalogue.ApiContract.Response
         public string ImageUrl { get; set; }
         public double Rating { get; set; }
         public int TotalRatingsCount { get; set; }
-        public long CategoryId { get; set; }
-        public string CategoryName { get; set; }
+        public List<string> Categories { get; set; }
+        public List<string> Cuisines { get; set; }
 
         public List<MenuDetailDto> Menus { get; set; }
 

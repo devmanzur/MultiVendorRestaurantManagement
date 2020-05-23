@@ -34,9 +34,17 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             var locality = city.Localities.FirstOrDefault(x => x.Id == request.LocalityId);
             if (locality.HasNoValue()) return Result.Failure("invalid locality");
 
-            var category = await _context.Categories.AsNoTracking()
-                .SingleOrDefaultAsync(x => x.Id == request.CategoryId, cancellationToken);
-            if (category.HasNoValue()) return Result.Failure("invalid category");
+            var categories = await _context.Categories.AsNoTracking()
+                .AsQueryable().Where(x => request.CategoryIds.Contains(x.Id))
+                .ToListAsync(cancellationToken: cancellationToken);
+
+            if (categories.HasNoValue() || !categories.Any()) return Result.Failure("invalid category");
+
+            var cuisines = await _context.Cuisines.AsNoTracking()
+                .AsQueryable().Where(x => request.CuisineIds.Contains(x.Id))
+                .ToListAsync(cancellationToken: cancellationToken);
+
+            if (cuisines.HasNoValue() || !cuisines.Any()) return Result.Failure("invalid cuisine");
 
             var restaurant = new Domain.Restaurants.Restaurant(
                 request.Name,
@@ -46,12 +54,13 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 request.ContractStatus,
                 PhoneNumberValue.Of(SupportedCountryCode.Italy, request.PhoneNumber),
                 request.ImageUrl,
-                category,
                 locality,
                 new GeographicLocation(request.Address, request.Lat, request.Lon),
-                description:request.Description,
-                descriptionEng:request.DescriptionEng
+                description: request.Description,
+                descriptionEng: request.DescriptionEng
             );
+            categories.ForEach(x => restaurant.SupportNewCategory(x));
+            cuisines.ForEach(x => restaurant.SupportNewCuisine(x));
 
             _context.Restaurants.Attach(restaurant);
             var result = await _unitOfWork.CommitAsync(cancellationToken);

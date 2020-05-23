@@ -9,26 +9,7 @@ namespace Catalogue.Infrastracture.Mongo.Documents
 {
     public class RestaurantDocument : BaseDocument
     {
-        // public RestaurantDocument(long restaurantId, string name, string phoneNumber, long localityId, string state,
-        //     int openingHour, int closingHour, string subscriptionType, string contractStatus, string imageUrl,
-        //     double rating, int totalRatingsCount, long categoryId, DateTime expirationDate)
-        // {
-        //     RestaurantId = restaurantId;
-        //     Name = name;
-        //     PhoneNumber = phoneNumber;
-        //     LocalityId = localityId;
-        //     State = state;
-        //     OpeningHour = openingHour;
-        //     ClosingHour = closingHour;
-        //     SubscriptionType = subscriptionType;
-        //     ContractStatus = contractStatus;
-        //     ImageUrl = imageUrl;
-        //     Rating = rating;
-        //     TotalRatingsCount = totalRatingsCount;
-        //     CategoryId = categoryId;
-        //     ExpirationDate = expirationDate;
-        //     Menus = new List<MenuRecord>();
-        // }
+        
 
         public string Description { get;protected set; }
         public string DescriptionEng { get;protected set; }
@@ -44,13 +25,13 @@ namespace Catalogue.Infrastracture.Mongo.Documents
         public string ImageUrl { get; protected set; }
         public double Rating { get; protected set; }
         public int TotalRatingsCount { get; protected set; }
-        public List<MenuRecord> Menus { get; protected set; } = new List<MenuRecord>();
-        public long ManagerId { get; set; }
-        public long PricingPolicyId { get; set; }
-        public long CategoryId { get; protected set;}
-        public string CategoryName { get; protected set;  }
+        public List<MenuRecord> Menus { get; protected set;}
+        public List<string> Categories { get; protected set;}
+        public List<string> Cuisines { get; protected set;}
+        public long ManagerId { get; protected set; }
+        public long PricingPolicyId { get; protected set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
-        public DateTime ExpirationDate { get; protected set; }
+        public DateTime ExpirationDate { get; private set; }
 
         public string GetState()
         {
@@ -70,7 +51,6 @@ namespace Catalogue.Infrastracture.Mongo.Documents
             {
                 "name" => x => x.Name,
                 "id" => x => x.RestaurantId,
-                "category" => x => x.CategoryId,
                 "locality" => x => x.LocalityId,
                 "state" => x => x.State,
                 "subscription" => x => x.SubscriptionType,

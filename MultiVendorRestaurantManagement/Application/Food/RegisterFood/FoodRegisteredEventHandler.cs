@@ -36,14 +36,17 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                     item.Type,
                     item.CategoryId,
                     item.MenuId,
+                    item.CuisineId,
                     notification.MenuName,
                     notification.CategoryName,
+                    notification.CuisineName,
                     item.Status,
                     item.IsGlutenFree,
                     item.IsVeg,
                     item.IsNonVeg,
                     item.Description,
-                    item.DescriptionEng
+                    item.DescriptionEng,
+                    notification.Ingredients
                 );
 
                 await _documentCollection.FoodCollection.InsertOneAsync(food, cancellationToken);

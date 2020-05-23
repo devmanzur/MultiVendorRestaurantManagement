@@ -1,16 +1,20 @@
-﻿using MultiVendorRestaurantManagement.Domain.Base;
+﻿using System.Collections.Generic;
+using MultiVendorRestaurantManagement.Domain.Base;
 
 namespace MultiVendorRestaurantManagement.Domain.Restaurants
 {
     public class RestaurantRegisteredEvent : DomainEventBase
     {
-        public RestaurantRegisteredEvent(string phoneNumber, string categoryName)
+        public RestaurantRegisteredEvent(string phoneNumber, IEnumerable<long> categoryIds,
+            IEnumerable<long> cuisineIds)
         {
             PhoneNumber = phoneNumber;
-            CategoryName = categoryName;
+            CategoryIds = categoryIds;
+            CuisineIds = cuisineIds;
         }
 
         public string PhoneNumber { get; }
-        public string CategoryName { get; }
+        public IEnumerable<long> CategoryIds { get; }
+        public IEnumerable<long> CuisineIds { get; }
     }
 }

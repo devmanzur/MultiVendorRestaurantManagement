@@ -32,7 +32,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
                 var restaurant = await _collection.RestaurantsCollection.Find(Filter(notification))
                     .FirstOrDefaultAsync(cancellationToken);
                 if (restaurant.HasValue())
-                    restaurant.AddNewMenu(new MenuRecord(menuData.Id, menuData.Name, menuData.NameEng,
+                    restaurant.AddMenu(new MenuRecord(menuData.Id, menuData.Name, menuData.NameEng,
                         menuData.ImageUrl));
 
                 await _collection.RestaurantsCollection.ReplaceOneAsync(Filter(notification), restaurant,

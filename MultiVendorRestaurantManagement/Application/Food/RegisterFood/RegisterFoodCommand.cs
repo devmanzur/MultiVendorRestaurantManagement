@@ -1,4 +1,5 @@
-﻿using Common.Invariants;
+﻿using System.Collections.Generic;
+using Common.Invariants;
 using CSharpFunctionalExtensions;
 using FluentValidation;
 using MediatR;
@@ -8,14 +9,16 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
 {
     public class RegisterFoodCommand : IRequest<Result>
     {
-        public RegisterFoodCommand(long restaurantId, string name, string type, long categoryId, long menuId,
+        public RegisterFoodCommand(long restaurantId, string name, string type, long categoryId, long cuisineId,
+            long menuId,
             string imageUrl, bool isVeg,
-            bool isGlutenFree, bool isNonVeg, decimal unitPrice, string description, string descriptionEng)
+            bool isGlutenFree, bool isNonVeg, decimal unitPrice, string description, string descriptionEng, List<string> ingredients)
         {
             RestaurantId = restaurantId;
             Name = name;
             Type = FoodItemTypeHelper.ConvertToFoodItemType(type);
             CategoryId = categoryId;
+            CuisineId = cuisineId;
             MenuId = menuId;
             ImageUrl = imageUrl;
             IsVeg = isVeg;
@@ -23,13 +26,16 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
             IsNonVeg = isNonVeg;
             Description = description;
             DescriptionEng = descriptionEng;
+            Ingredients = ingredients;
             UnitPrice = MoneyValue.Of(unitPrice);
         }
 
         public string Description { get; }
         public string DescriptionEng { get; }
+        public List<string> Ingredients { get; }
         public long RestaurantId { get; }
         public long CategoryId { get; }
+        public long CuisineId { get; }
         public long MenuId { get; }
         public string Name { get; }
         public FoodItemType Type { get; }

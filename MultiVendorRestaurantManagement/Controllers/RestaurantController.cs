@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Common.Invariants;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MultiVendorRestaurantManagement.ApiContract.Request;
@@ -6,7 +7,6 @@ using MultiVendorRestaurantManagement.ApiContract.Restaurant;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddFoodToMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.AddMenu;
 using MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaurant;
-using MultiVendorRestaurantManagement.Application.Restaurant.UpdateCategory;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdateHours;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdatePricingPolicy;
 using MultiVendorRestaurantManagement.Application.Restaurant.UpdateSubscription;
@@ -22,12 +22,12 @@ namespace MultiVendorRestaurantManagement.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterRestaurant([FromForm] RegisterRestaurantRequest request)
+        public async Task<IActionResult> RegisterRestaurant(RegisterRestaurantRequest request)
         {
             var command = new RegisterRestaurantCommand(request.Name, request.PhoneNumber, request.LocalityId,
                 request.OpeningHour, request.ClosingHour, request.SubscriptionType, request.ContractStatus,
-                request.ImageUrl, request.CityId, request.CategoryId, request.Address, request.Latitude,
-                request.Longitude, request.Description, request.DescriptionEng);
+                request.ImageUrl, request.CityId,  request.Address, request.Latitude,
+                request.Longitude, request.Description, request.DescriptionEng, request.CategoryIds, request.CuisineIds);
             return await HandleActionResultFor(command);
         }
 
@@ -61,14 +61,7 @@ namespace MultiVendorRestaurantManagement.Controllers
                 request.FixedCharge, request.MaxItemCountInFixedPrice, request.AdditionalPricePerUnit);
             return await HandleActionResultFor(command);
         }
-
-        [HttpPut("{restaurant}/category")]
-        public async Task<IActionResult> UpdateCategory(long restaurant,
-            [FromForm] UpdateRestaurantCategoryRequest request)
-        {
-            var command = new UpdateRestaurantCategoryCommand(restaurant, request.CategoryId);
-            return await HandleActionResultFor(command);
-        }
+        
 
         [HttpPut("{restaurant}/menus/{menu}/foods")]
         public async Task<IActionResult> AddFoodToMenu(long restaurant, long menu,

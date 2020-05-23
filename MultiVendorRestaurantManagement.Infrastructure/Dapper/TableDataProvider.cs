@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
@@ -83,6 +85,22 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
                 await connection.QueryFirstOrDefaultAsync<DealTableData>(sql,
                     new {Name = dealName});
             return item;
+        }
+
+        public async Task<List<CuisineTableDataMinimal>> GetCuisineListAsync(IEnumerable<long> cuisineIds)
+        {
+            const string sql = "SELECT * FROM Cuisines WHERE Id IN @ids";
+            await using var connection = new SqlConnection(_connectionString);
+            var results = await connection.QueryAsync<CuisineTableDataMinimal>(sql, new {ids = cuisineIds});
+            return results.ToList();
+        }
+
+        public async Task<List<CategoryTableDataMinimal>> GetCategoryListAsync(IEnumerable<long> categoryIds)
+        {
+            const string sql = "SELECT * FROM Categories WHERE Id IN @ids";
+            await using var connection = new SqlConnection(_connectionString);
+            var results = await connection.QueryAsync<CategoryTableDataMinimal>(sql, new {ids = categoryIds});
+            return results.ToList();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Common.Invariants;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Common.Invariants;
 using Common.Utils;
 using CSharpFunctionalExtensions;
 using FluentValidation;
@@ -10,7 +12,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
     {
         public RegisterRestaurantCommand(string name, string phoneNumber, long localityId, int openingHour,
             int closingHour, string subscriptionType, string contractStatus, string imageUrl, long cityId,
-            long categoryId, string address, double lat, double lon, string description, string descriptionEng)
+            string address, double lat, double lon, string description, string descriptionEng, List<long> categoryIds,
+            List<long> cuisineIds)
         {
             Name = name;
             PhoneNumber = phoneNumber;
@@ -19,18 +22,21 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             ClosingHour = closingHour;
             ImageUrl = imageUrl;
             CityId = cityId;
-            CategoryId = categoryId;
             Address = address;
             Lat = lat;
             Lon = lon;
             Description = description;
             DescriptionEng = descriptionEng;
+            CategoryIds = categoryIds;
+            CuisineIds = cuisineIds;
             SubscriptionType = SubscriptionHelper.ConvertToSubscription(subscriptionType);
             ContractStatus = ContractStatusHelper.ConvertToContractStatus(contractStatus);
         }
 
         public string Description { get; }
         public string DescriptionEng { get; }
+        public List<long> CategoryIds { get; }
+        public List<long> CuisineIds { get; }
         public string Name { get; }
         public string PhoneNumber { get; }
         public long LocalityId { get; }
@@ -40,7 +46,6 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
         public int ClosingHour { get; }
         public SubscriptionType SubscriptionType { get; }
         public ContractStatus ContractStatus { get; }
-        public long CategoryId { get; }
         public string Address { get; }
         public double Lat { get; }
         public double Lon { get; }
@@ -54,7 +59,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
             RuleFor(x => x.PhoneNumber).NotNull().NotEmpty();
             RuleFor(x => x.LocalityId).NotNull().NotEmpty();
             RuleFor(x => x.CityId).NotNull().NotEmpty();
-            RuleFor(x => x.CategoryId).NotNull().NotEmpty();
+            RuleFor(x => x.CategoryIds).NotNull().NotEmpty().Must(HaveItems);
+            RuleFor(x => x.CuisineIds).NotNull().NotEmpty().Must(HaveItems);
             RuleFor(x => x.ImageUrl).NotNull().NotEmpty();
             RuleFor(x => x.Address).NotNull().NotEmpty();
             RuleFor(x => x.Lat).NotNull().NotEqual(0);
@@ -66,6 +72,11 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 .NotEqual(SubscriptionType.Invalid);
             RuleFor(x => x.ContractStatus)
                 .NotEqual(ContractStatus.Invalid);
+        }
+
+        private bool HaveItems(List<long> list)
+        {
+            return list.HasValue() && list.Any() && list.Count > 0;
         }
     }
 }

@@ -30,9 +30,12 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                 var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == request.CategoryId,
                     cancellationToken);
 
+                var cuisine = await _context.Cuisines.FirstOrDefaultAsync(x => x.Id == request.CuisineId,
+                    cancellationToken: cancellationToken);
+
                 var menu = restaurant.Menus.FirstOrDefault(x => x.Id == request.MenuId);
 
-                if (category.HasValue() && menu.HasValue())
+                if (category.HasValue() && menu.HasValue() && cuisine.HasValue())
                 {
                     var food = new Domain.Foods.Food(
                         type: request.Type,
@@ -45,7 +48,9 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
                         category: category,
                         description: request.Description,
                         descriptionEng: request.DescriptionEng,
-                        menu: menu
+                        cuisine: cuisine,
+                        menu: menu,
+                        ingredients: request.Ingredients
                     );
 
                     restaurant.AddFood(food);

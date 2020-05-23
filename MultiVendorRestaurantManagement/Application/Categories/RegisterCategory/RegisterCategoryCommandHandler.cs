@@ -5,6 +5,8 @@ using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
 using MultiVendorRestaurantManagement.Base;
 using MultiVendorRestaurantManagement.Domain;
+using MultiVendorRestaurantManagement.Domain.Categories;
+using MultiVendorRestaurantManagement.Domain.Category;
 using MultiVendorRestaurantManagement.Domain.Common;
 using MultiVendorRestaurantManagement.Infrastructure.EntityFramework;
 

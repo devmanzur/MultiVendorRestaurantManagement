@@ -13,27 +13,6 @@ namespace Catalogue.Infrastracture.Mongo.Documents
         private const string DefaultVariant = "Normale";
         private const string DefaultVariantEng = "Regular";
 
-        // public FoodDocument(long restaurantId, string restaurantName, long foodId, string imageUrl, string name,
-        //     decimal unitPrice,
-        //     decimal oldUnitPrice, string type, long categoryId, string status, bool isGlutenFree, bool isVeg,
-        //     bool isNonVeg)
-        // {
-        //     RestaurantId = restaurantId;
-        //     RestaurantName = restaurantName;
-        //     FoodId = foodId;
-        //     ImageUrl = imageUrl;
-        //     Name = name;
-        //     UnitPrice = unitPrice;
-        //     OldUnitPrice = oldUnitPrice;
-        //     Type = type;
-        //     CategoryId = categoryId;
-        //     Status = status;
-        //     IsGlutenFree = isGlutenFree;
-        //     IsVeg = isVeg;
-        //     IsNonVeg = isNonVeg;
-        //     GenerateTags();
-        // }
-
         public long RestaurantId { get; set; }
         public long DealId { get; private set; }
         public string DealDescription { get; private set; }
@@ -42,7 +21,6 @@ namespace Catalogue.Infrastracture.Mongo.Documents
         public long FoodId { get; set; }
         public string ImageUrl { get; set; }
         public string Name { get; set; }
-
         public bool IsDiscounted { get; private set; }
 
         [BsonRepresentation(BsonType.Decimal128)]
@@ -50,26 +28,28 @@ namespace Catalogue.Infrastracture.Mongo.Documents
 
         [BsonRepresentation(BsonType.Decimal128)]
         public decimal OldUnitPrice { get; private set; }
-
         public DateTime DealEndsOn { get; private set; }
         public string Type { get; set; }
         public long CategoryId { get; set; }
+        public long CuisineId { get; set; }
         public string CategoryName { get; set; }
+        public string CuisineName { get; set; }
         public List<FoodTagDocument> FoodTags { get; set; } = new List<FoodTagDocument>();
         public string Status { get; private set; }
         public bool IsGlutenFree { get; set; } //adds an extra tag to the list of tags when set true
         public bool IsVeg { get; set; } //adds an extra tag to the list of tags when set true
         public bool IsNonVeg { get; set; } //adds an extra tag to the list of tags when set true
-        public string Description { get;protected set; }
-        public string DescriptionEng { get;protected set; }
+        public string Description { get; protected set; }
+        public string DescriptionEng { get; protected set; }
+        public List<string> Ingredients { get; protected set; }
         public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
         public List<AddOnDocument> AddOns { get; protected set; } = new List<AddOnDocument>();
         public long MenuId { get; private set; }
         public string MenuName { get; private set; }
 
         public double Rating { get; private set; } = 0;
-        public int TotalRatingCount { get;private set; } = 0;
-        public int TotalOrderCount { get; private set;} = 0;
+        public int TotalRatingCount { get; private set; } = 0;
+        public int TotalOrderCount { get; private set; } = 0;
 
         private void GenerateTags()
         {

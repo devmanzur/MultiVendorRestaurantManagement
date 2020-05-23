@@ -1,7 +1,11 @@
-﻿using Common.Invariants;
+﻿using System.Collections.Generic;
+using Common.Invariants;
 using Microsoft.EntityFrameworkCore;
+using MultiVendorRestaurantManagement.Domain.Categories;
+using MultiVendorRestaurantManagement.Domain.Category;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Domain.Common;
+using MultiVendorRestaurantManagement.Domain.Cuisines;
 using MultiVendorRestaurantManagement.Domain.Deals;
 using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.Orders;
@@ -20,6 +24,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
 
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Cuisine> Cuisines { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
@@ -60,7 +65,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                         .WithOne(v => v.Food)
                         .OnDelete(DeleteBehavior.Cascade)
                         .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
-
 
                     builder.Metadata
                         .FindNavigation("Tags")
@@ -222,6 +226,16 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     builder.Metadata
                         .FindNavigation("Orders")
                         .SetPropertyAccessMode(PropertyAccessMode.Field);
+
+                    builder.HasMany(x => x.Categories)
+                        .WithOne()
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+
+                    builder.HasMany(x => x.Cuisines)
+                        .WithOne()
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
                 }
             );
 
@@ -232,8 +246,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .IsUnique();
                 builder.HasIndex(u => u.NameEng)
                     .IsUnique();
-                builder.HasMany(x=>x.Items)
-                    .WithOne(x=>x.Menu)
+                builder.HasMany(x => x.Items)
+                    .WithOne(x => x.Menu)
                     .OnDelete(DeleteBehavior.NoAction)
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
             });
@@ -411,14 +425,63 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     .IsRequired()
                     .HasConversion<string>();
 
-                builder.HasMany(x => x.Foods)
-                    .WithOne(x => x.Category)
-                    .OnDelete(DeleteBehavior.Restrict)
+                builder.HasIndex(x => x.Name).IsUnique();
+                builder.HasIndex(x => x.NameEng).IsUnique();
+                
+                builder.HasMany(x=>x.Foods)
+                    .WithOne(x=>x.Category)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+            });
+
+            modelBuilder.Entity<Cuisine>(builder =>
+            {
+                builder.Property(x => x.Name)
+                    .IsRequired();
+                builder.Property(x => x.NameEng)
+                    .IsRequired();
+                builder.Property(x => x.ImageUrl)
+                    .IsRequired();
+
+                builder.HasIndex(x => x.Name).IsUnique();
+                builder.HasIndex(x => x.NameEng).IsUnique();
+                
+                builder.HasMany(x=>x.Foods)
+                    .WithOne(x=>x.Cuisine)
+                    .OnDelete(DeleteBehavior.SetNull)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+            });
+
+            modelBuilder.Entity<RestaurantCategory>(builder =>
+            {
+                builder.HasKey(x => new {x.RestaurantId, x.CategoryId});
+                builder.HasOne(x => x.Category)
+                    .WithMany(x => x.Restaurants)
+                    .HasForeignKey(x => x.CategoryId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
 
-                builder.HasMany(x => x.Restaurants)
-                    .WithOne(x => x.Category)
-                    .OnDelete(DeleteBehavior.Restrict)
+                builder.HasOne(x => x.Restaurant)
+                    .WithMany(x => x.Categories)
+                    .HasForeignKey(x => x.RestaurantId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+            });
+
+            modelBuilder.Entity<RestaurantCuisine>(builder =>
+            {
+                builder.HasKey(x => new {x.RestaurantId, x.CuisineId});
+
+                builder.HasOne(x => x.Cuisine)
+                    .WithMany(x => x.Restaurants)
+                    .HasForeignKey(x => x.CuisineId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
+
+                builder.HasOne(x => x.Restaurant)
+                    .WithMany(x => x.Cuisines)
+                    .HasForeignKey(x => x.RestaurantId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .Metadata.PrincipalToDependent.SetPropertyAccessMode(PropertyAccessMode.Field);
             });
 

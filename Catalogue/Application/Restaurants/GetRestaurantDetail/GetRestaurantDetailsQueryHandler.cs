@@ -73,8 +73,8 @@ namespace Catalogue.Application.Restaurants.GetRestaurantDetail
                 restaurant.ImageUrl,
                 restaurant.Rating,
                 restaurant.TotalRatingsCount,
-                restaurant.CategoryId,
-                restaurant.CategoryName
+                restaurant.Categories,
+                restaurant.Cuisines
             );
 
             var menus = new List<MenuDetailDto>();

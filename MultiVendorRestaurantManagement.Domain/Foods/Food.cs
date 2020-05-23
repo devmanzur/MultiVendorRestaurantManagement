@@ -6,10 +6,12 @@ using Common.Utils;
 using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Common;
+using MultiVendorRestaurantManagement.Domain.Cuisines;
 using MultiVendorRestaurantManagement.Domain.Deals;
 using MultiVendorRestaurantManagement.Domain.Restaurants;
 using MultiVendorRestaurantManagement.Domain.Rules;
 using MultiVendorRestaurantManagement.Domain.ValueObjects;
+using Newtonsoft.Json;
 
 namespace MultiVendorRestaurantManagement.Domain.Foods
 {
@@ -31,13 +33,15 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         }
 
         public Food(string name, MoneyValue unitPrice, FoodItemType type,
-            bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Category category, string description,
-            string descriptionEng, Menu menu)
+            bool isGlutenFree, bool isVeg, bool isNonVeg, string imageUrl, Categories.Category category, Cuisine cuisine,
+            string description,
+            string descriptionEng, Menu menu, List<string> ingredients)
         {
-            CheckRule(new ConditionMustBeTrueRule(category.Categorize == Categorize.Food,"invalid category"));
+            CheckRule(new ConditionMustBeTrueRule(category.Categorize == Categorize.Food, "invalid category"));
 
             ImageUrl = imageUrl;
             Category = category;
+            Cuisine = cuisine;
             Description = description;
             DescriptionEng = descriptionEng;
             Name = name;
@@ -58,6 +62,19 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
             {
                 AddVariant(new Variant(DefaultVariant, DefaultVariantEng, unitPrice, "", ""));
             }
+
+            SetIngredients(ingredients);
+        }
+
+        private void SetIngredients(List<string> ingredients)
+        {
+            CheckRule(new ConditionMustBeTrueRule(ingredients.Any(), "ingredients must not be empty"));
+            IngredientsString = JsonConvert.SerializeObject(ingredients);
+        }
+
+        public List<string> GetIngredients()
+        {
+            return JsonConvert.DeserializeObject<List<string>>(IngredientsString);
         }
 
         public Menu Menu { get; protected set; }
@@ -80,7 +97,10 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
         public IReadOnlyList<Variant> Variants => _variants.ToList();
         public List<FoodTag> Tags => _tags.ToList();
         public List<AddOn> AddOns => _addOns.ToList();
-        public Category Category { get; private set; }
+
+        public string IngredientsString { get; protected set; }
+        public Categories.Category Category { get; private set; }
+        public Cuisine Cuisine { get; private set; }
         public Deal Deal { get; private set; }
         public string ImageUrl { get; protected set; }
         public string Description { get; private set; }
@@ -112,7 +132,7 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
                 string.Equals(x.Name, variant.Name, StringComparison.InvariantCultureIgnoreCase)) == null;
         }
 
-        public void UpdateCategory(Category category)
+        public void UpdateCategory(Categories.Category category)
         {
             CheckRule(new ConditionMustBeTrueRule(category != null && category.Categorize == Categorize.Food,
                 "invalid category"));

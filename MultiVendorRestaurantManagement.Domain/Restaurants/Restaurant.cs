@@ -7,6 +7,7 @@ using CSharpFunctionalExtensions;
 using MultiVendorRestaurantManagement.Domain.Base;
 using MultiVendorRestaurantManagement.Domain.Cities;
 using MultiVendorRestaurantManagement.Domain.Common;
+using MultiVendorRestaurantManagement.Domain.Cuisines;
 using MultiVendorRestaurantManagement.Domain.Foods;
 using MultiVendorRestaurantManagement.Domain.Orders;
 using MultiVendorRestaurantManagement.Domain.Rules;
@@ -19,6 +20,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         private readonly List<Food> _foods = new List<Food>();
 
         private readonly List<Menu> _menus = new List<Menu>();
+        private readonly List<RestaurantCategory> _categories = new List<RestaurantCategory>();
+        private readonly List<RestaurantCuisine> _cuisines = new List<RestaurantCuisine>();
 
         private List<Order> _orders = new List<Order>();
 
@@ -28,7 +31,7 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public Restaurant(string name, int openingHour, int closingHour,
             SubscriptionType subscriptionType, ContractStatus contractStatus, PhoneNumberValue phoneNumber,
-            string imageUrl, Category category, Locality locality, GeographicLocation location, string description,
+            string imageUrl, Locality locality, GeographicLocation location, string description,
             string descriptionEng)
         {
             CheckRule(new OpeningAndClosingHoursAreValid(openingHour, closingHour));
@@ -38,11 +41,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
                 "contract must be valid"));
             CheckRule(new ConditionMustBeTrueRule(phoneNumber != null,
                 "phone number be valid"));
-            
-            CheckRule(new ConditionMustBeTrueRule(category.Categorize == Categorize.Restaurant,"invalid category"));
 
             ImageUrl = imageUrl;
-            Category = category;
             Locality = locality;
             GeographicLocation = location;
             Description = description;
@@ -76,9 +76,9 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
         public DateTime ExpirationDate { get; protected set; }
         public IReadOnlyList<Food> Foods => _foods.ToList();
         public IReadOnlyList<Menu> Menus => _menus.ToList();
+        public IReadOnlyList<RestaurantCategory> Categories => _categories.ToList();
+        public IReadOnlyList<RestaurantCuisine> Cuisines => _cuisines.ToList();
         public IReadOnlyList<Order> Orders { get; protected set; }
-
-        public Category Category { get; private set; }
 
         public string ImageUrl { get; protected set; }
 
@@ -102,7 +102,8 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             CheckRule(new ConditionMustBeTrueRule(food.HasValue() && MustNotContainFoodWithSameName(food),
                 "food with same name already exists"));
             _foods.Add(food);
-            AddDomainEvent(new FoodRegisteredEvent(Id, Name, food.Name, food.Category.Name,food.Menu.Name));
+            AddDomainEvent(new FoodRegisteredEvent(Id, Name, food.Name, food.Category.Name, food.Menu.Name,
+                food.Cuisine.Name, food.GetIngredients()));
         }
 
         public void AddRating(int remark)
@@ -148,7 +149,9 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
 
         public override IDomainEvent GetAddedDomainEvent()
         {
-            return new RestaurantRegisteredEvent(PhoneNumber.GetCompletePhoneNumber(), Category.Name);
+            return new RestaurantRegisteredEvent(PhoneNumber.GetCompletePhoneNumber(),
+                _categories.Select(x => x.CategoryId),
+                _cuisines.Select(x => x.CuisineId));
         }
 
         public override IDomainEvent GetRemovedDomainEvent()
@@ -156,12 +159,24 @@ namespace MultiVendorRestaurantManagement.Domain.Restaurants
             return new RestaurantRemovedEvent();
         }
 
-        public void UpdateCategory(Category category)
+        public void SupportNewCategory(Categories.Category category)
         {
             CheckRule(new ConditionMustBeTrueRule(category.HasValue() && category.Categorize == Categorize.Restaurant,
                 "only a category of type restaurant must be assigned"));
-            if (Category.HasValue()) AddDomainEvent(new RestaurantCategoryUpdatedEvent(Id, category.Id));
-            Category = category;
+
+            CheckRule(new ConditionMustBeTrueRule(
+                _categories.FirstOrDefault(x => x.CategoryId == category.Id).HasNoValue(),
+                "category already exists"));
+            _categories.Add(new RestaurantCategory(this, category));
+        }
+
+        public void SupportNewCuisine(Cuisine cuisine)
+        {
+            CheckRule(new ConditionMustBeTrueRule(cuisine.HasValue(), "invalid cuisine"));
+
+            CheckRule(new ConditionMustBeTrueRule(_cuisines.FirstOrDefault(x => x.CuisineId == cuisine.Id).HasNoValue(),
+                "cuisine already exists"));
+            _cuisines.Add(new RestaurantCuisine(this, cuisine));
         }
 
         public void UpdateHours(int openingHour, int closingHour)

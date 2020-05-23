@@ -1,7 +1,7 @@
 ﻿using Common.Invariants;
 using MultiVendorRestaurantManagement.Domain.Base;
 
-namespace MultiVendorRestaurantManagement.Domain.Common
+namespace MultiVendorRestaurantManagement.Domain.Category
 {
     public class CategoryCreatedEvent : DomainEventBase
     {

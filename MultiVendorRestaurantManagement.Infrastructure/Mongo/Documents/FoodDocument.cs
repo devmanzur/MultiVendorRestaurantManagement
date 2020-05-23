@@ -16,9 +16,10 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
         public FoodDocument(long restaurantId, string restaurantName, long foodId, string imageUrl, string name,
             decimal unitPrice,
-            decimal oldUnitPrice, string type, long categoryId,long menuId,string menuName, string categoryName, string status, bool isGlutenFree,
+            decimal oldUnitPrice, string type, long categoryId, long menuId, long cuisineId, string menuName,
+            string categoryName, string cuisineName, string status, bool isGlutenFree,
             bool isVeg,
-            bool isNonVeg, string description, string descriptionEng)
+            bool isNonVeg, string description, string descriptionEng, List<string> ingredients)
         {
             RestaurantId = restaurantId;
             RestaurantName = restaurantName;
@@ -35,6 +36,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
             IsNonVeg = isNonVeg;
             Description = description;
             DescriptionEng = descriptionEng;
+            Ingredients = ingredients;
+            CuisineId = cuisineId;
+            CuisineName = cuisineName;
             CategoryName = categoryName;
             MenuId = menuId;
             MenuName = menuName;
@@ -50,7 +54,6 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
         public long FoodId { get; set; }
         public string ImageUrl { get; set; }
         public string Name { get; set; }
-
         public bool IsDiscounted { get; private set; }
 
         [BsonRepresentation(BsonType.Decimal128)]
@@ -58,26 +61,28 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
         [BsonRepresentation(BsonType.Decimal128)]
         public decimal OldUnitPrice { get; private set; }
-
         public DateTime DealEndsOn { get; private set; }
         public string Type { get; set; }
         public long CategoryId { get; set; }
+        public long CuisineId { get; set; }
         public string CategoryName { get; set; }
+        public string CuisineName { get; set; }
         public List<FoodTagDocument> FoodTags { get; set; } = new List<FoodTagDocument>();
         public string Status { get; private set; }
         public bool IsGlutenFree { get; set; } //adds an extra tag to the list of tags when set true
         public bool IsVeg { get; set; } //adds an extra tag to the list of tags when set true
         public bool IsNonVeg { get; set; } //adds an extra tag to the list of tags when set true
-        public string Description { get;protected set; }
-        public string DescriptionEng { get;protected set; }
+        public string Description { get; protected set; }
+        public string DescriptionEng { get; protected set; }
+        public List<string> Ingredients { get; protected set; }
         public List<VariantDocument> Variants { get; protected set; } = new List<VariantDocument>();
         public List<AddOnDocument> AddOns { get; protected set; } = new List<AddOnDocument>();
         public long MenuId { get; private set; }
         public string MenuName { get; private set; }
 
         public double Rating { get; private set; } = 0;
-        public int TotalRatingCount { get;private set; } = 0;
-        public int TotalOrderCount { get; private set;} = 0;
+        public int TotalRatingCount { get; private set; } = 0;
+        public int TotalOrderCount { get; private set; } = 0;
 
         private void AddDefaultVariant()
         {
@@ -123,7 +128,8 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Mongo.Documents
 
         public void UpdateVariantPrice(VariantPriceUpdateModel model)
         {
-            var variant = Variants.FirstOrDefault(x => x.Name.ToLowerInvariant() == model.VariantName.ToLowerInvariant());
+            var variant =
+                Variants.FirstOrDefault(x => x.Name.ToLowerInvariant() == model.VariantName.ToLowerInvariant());
             if (variant.HasValue())
             {
                 if (model.VariantName.Equals(DefaultVariant)) UpdateBasePrice(model.NewPrice);
