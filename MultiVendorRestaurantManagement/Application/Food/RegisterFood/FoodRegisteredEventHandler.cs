@@ -22,7 +22,7 @@ namespace MultiVendorRestaurantManagement.Application.Food.RegisterFood
 
         public async Task Handle(FoodRegisteredEvent notification, CancellationToken cancellationToken)
         {
-            var item = await _tableDataProvider.GetFoodAsync(notification.RestaurantId, notification.FoodName);
+            var item = await _tableDataProvider.GetFood(notification.RestaurantId, notification.FoodName);
 
             if (item.HasValue())
             {

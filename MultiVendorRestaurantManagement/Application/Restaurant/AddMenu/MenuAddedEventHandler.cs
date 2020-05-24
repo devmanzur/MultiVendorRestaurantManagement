@@ -25,7 +25,7 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
 
         public async Task Handle(MenuAddedEvent notification, CancellationToken cancellationToken)
         {
-            var menuData = await _tableDataProvider.GetMenuAsync(notification.MenuName);
+            var menuData = await _tableDataProvider.GetMenu(notification.MenuName);
 
             if (menuData.HasValue())
             {

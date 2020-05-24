@@ -7,14 +7,15 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
 {
     public interface ITableDataProvider
     {
-        Task<LocalityTableData> GetLocalityAsync(long cityId, string localityName);
-        Task<CityTableData> GetCityAsync(string name);
-        Task<CategoryTableData> GetCategoryAsync(string name);
-        Task<RestaurantTableData> GetRestaurantAsync(string phone);
-        Task<MenuTableData2> GetMenuAsync(string menuName);
-        Task<FoodTableData> GetFoodAsync(long restaurantId, string foodName);
-        Task<DealTableData> GetDealAsync(string notificationDealName);
-        Task<List<CuisineTableDataMinimal>> GetCuisineListAsync(IEnumerable<long> cuisineIds);
-        Task<List<CategoryTableDataMinimal>> GetCategoryListAsync(IEnumerable<long> categoryIds);
+        Task<LocalityTableData> GetLocality(long cityId, string localityName);
+        Task<CityTableData> GetCity(string name);
+        Task<CategoryTableData> GetCategory(string name);
+        Task<RestaurantTableData> GetRestaurant(string phone);
+        Task<MenuTableData2> GetMenu(string menuName);
+        Task<FoodTableData> GetFood(long restaurantId, string foodName);
+        Task<DealTableData> GetDeal(string notificationDealName);
+        Task<List<CuisineTableDataMinimal>> GetCuisineList(IEnumerable<long> cuisineIds);
+        Task<List<CategoryTableDataMinimal>> GetCategoryList(IEnumerable<long> categoryIds);
+        Task<GeographicLocationTableData> GetGeoGraphicLocation(long restaurantId);
     }
 }

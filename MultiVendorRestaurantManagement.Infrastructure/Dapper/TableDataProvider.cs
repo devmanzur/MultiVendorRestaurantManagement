@@ -18,7 +18,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
-        public async Task<LocalityTableData> GetLocalityAsync(long cityId, string localityName)
+        public async Task<LocalityTableData> GetLocality(long cityId, string localityName)
         {
             const string sql = "SELECT * FROM Locality WHERE (Name = @Name AND CityId = @CityId)";
             await using var connection = new SqlConnection(_connectionString);
@@ -28,7 +28,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             return locality;
         }
 
-        public async Task<CityTableData> GetCityAsync(string name)
+        public async Task<CityTableData> GetCity(string name)
         {
             const string sql = "SELECT * FROM Cities WHERE Name = @Name";
             await using var connection = new SqlConnection(_connectionString);
@@ -38,7 +38,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             return city;
         }
 
-        public async Task<CategoryTableData> GetCategoryAsync(string name)
+        public async Task<CategoryTableData> GetCategory(string name)
         {
             const string sql = "select * from Categories where Name = @Name";
             await using var connection = new SqlConnection(_connectionString);
@@ -48,7 +48,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             return item;
         }
 
-        public async Task<RestaurantTableData> GetRestaurantAsync(string phone)
+        public async Task<RestaurantTableData> GetRestaurant(string phone)
         {
             const string sql = "select * from Restaurants where PhoneNumber = @PhoneNumber";
             await using var connection = new SqlConnection(_connectionString);
@@ -58,7 +58,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             return item;
         }
 
-        public async Task<MenuTableData2> GetMenuAsync(string menuName)
+        public async Task<MenuTableData2> GetMenu(string menuName)
         {
             const string sql = "select * from Menu where Name = @Name";
             await using var connection = new SqlConnection(_connectionString);
@@ -68,7 +68,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             return item;
         }
 
-        public async Task<FoodTableData> GetFoodAsync(long restaurantId, string foodName)
+        public async Task<FoodTableData> GetFood(long restaurantId, string foodName)
         {
             const string sql = "SELECT * FROM Food WHERE (Name = @Name AND RestaurantId = @RestaurantId)";
             await using var connection = new SqlConnection(_connectionString);
@@ -77,7 +77,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             return item;
         }
 
-        public async Task<DealTableData> GetDealAsync(string dealName)
+        public async Task<DealTableData> GetDeal(string dealName)
         {
             const string sql = "select * from Deals where Name = @Name";
             await using var connection = new SqlConnection(_connectionString);
@@ -87,7 +87,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             return item;
         }
 
-        public async Task<List<CuisineTableDataMinimal>> GetCuisineListAsync(IEnumerable<long> cuisineIds)
+        public async Task<List<CuisineTableDataMinimal>> GetCuisineList(IEnumerable<long> cuisineIds)
         {
             const string sql = "SELECT * FROM Cuisines WHERE Id IN @ids";
             await using var connection = new SqlConnection(_connectionString);
@@ -95,12 +95,22 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
             return results.ToList();
         }
 
-        public async Task<List<CategoryTableDataMinimal>> GetCategoryListAsync(IEnumerable<long> categoryIds)
+        public async Task<List<CategoryTableDataMinimal>> GetCategoryList(IEnumerable<long> categoryIds)
         {
             const string sql = "SELECT * FROM Categories WHERE Id IN @ids";
             await using var connection = new SqlConnection(_connectionString);
             var results = await connection.QueryAsync<CategoryTableDataMinimal>(sql, new {ids = categoryIds});
             return results.ToList();
+        }
+
+        public async Task<GeographicLocationTableData> GetGeoGraphicLocation(long restaurantId)
+        {
+            const string sql = "select * from GeographicLocation where RestaurantId = @RestaurantId";
+            await using var connection = new SqlConnection(_connectionString);
+            var item =
+                await connection.QueryFirstOrDefaultAsync<GeographicLocationTableData>(sql,
+                    new {RestaurantId = restaurantId});
+            return item;
         }
     }
 }

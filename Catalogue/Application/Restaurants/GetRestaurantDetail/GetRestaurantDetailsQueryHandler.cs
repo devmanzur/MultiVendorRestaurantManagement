@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Catalogue.ApiContract.Response;
@@ -73,8 +74,8 @@ namespace Catalogue.Application.Restaurants.GetRestaurantDetail
                 restaurant.ImageUrl,
                 restaurant.Rating,
                 restaurant.TotalRatingsCount,
-                restaurant.Categories,
-                restaurant.Cuisines
+                restaurant.Categories.Select(x=>x.Name).ToList(),
+                restaurant.Cuisines.Select(x=>x.Name).ToList()
             );
 
             var menus = new List<MenuDetailDto>();

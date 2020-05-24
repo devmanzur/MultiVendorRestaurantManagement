@@ -23,7 +23,7 @@ namespace MultiVendorRestaurantManagement.Application.Categories.RegisterCategor
 
         public async Task Handle(CategoryCreatedEvent notification, CancellationToken cancellationToken)
         {
-            var category = await _tableDataProvider.GetCategoryAsync(notification.CategoryName);
+            var category = await _tableDataProvider.GetCategory(notification.CategoryName);
             if (category.HasValue())
                 await _collection.CategoriesCollection.InsertOneAsync(new CategoryDocument(category.Id,
                     category.ImageUrl, category.Name, category.NameEng, category.Categorize));

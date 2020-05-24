@@ -11,6 +11,9 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper.TableData
         
         public string Description { get; set; }
         public string DescriptionEng { get; set; }
+        public string Address { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string PhoneNumber { get; set; }

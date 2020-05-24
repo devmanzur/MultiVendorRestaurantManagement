@@ -23,7 +23,7 @@ namespace MultiVendorRestaurantManagement.Application.City.AddLocality
 
         public async Task Handle(LocalityAddedEvent notification, CancellationToken cancellationToken)
         {
-            var locality = await _tableDataProvider.GetLocalityAsync(notification.CityId, notification.LocalityName);
+            var locality = await _tableDataProvider.GetLocality(notification.CityId, notification.LocalityName);
 
             if (locality.HasValue())
             {

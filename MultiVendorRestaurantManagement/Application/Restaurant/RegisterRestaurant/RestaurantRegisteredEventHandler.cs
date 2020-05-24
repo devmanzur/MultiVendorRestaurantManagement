@@ -23,9 +23,10 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
 
         public async Task Handle(RestaurantRegisteredEvent notification, CancellationToken cancellationToken)
         {
-            var restaurant = await _tableDataProvider.GetRestaurantAsync(notification.PhoneNumber);
-            var cuisines = await _tableDataProvider.GetCuisineListAsync(notification.CuisineIds);
-            var categories = await _tableDataProvider.GetCategoryListAsync(notification.CategoryIds);
+            var restaurant = await _tableDataProvider.GetRestaurant(notification.PhoneNumber);
+            var geographicLocation = await _tableDataProvider.GetGeoGraphicLocation(restaurant.Id);
+            var cuisines = await _tableDataProvider.GetCuisineList(notification.CuisineIds);
+            var categories = await _tableDataProvider.GetCategoryList(notification.CategoryIds);
 
             var document = new RestaurantDocument(
                 restaurant.Id,
@@ -42,12 +43,15 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.RegisterRestaur
                 restaurant.TotalRatingsCount,
                 restaurant.ExpirationDate,
                 restaurant.Description,
-                restaurant.DescriptionEng
+                restaurant.DescriptionEng,
+                address: geographicLocation.Name,
+                latitude: geographicLocation.Latitude,
+                longitude: geographicLocation.Longitude
             );
-            
-            cuisines.ForEach(x=>document.AddCuisine(x.ToRecord()));
-            categories.ForEach(x=>document.AddCategory(x.ToRecord()));
-            
+
+            cuisines.ForEach(x => document.AddCuisine(x.ToRecord()));
+            categories.ForEach(x => document.AddCategory(x.ToRecord()));
+
 
             await _documentCollection.RestaurantsCollection.InsertOneAsync(document, cancellationToken);
         }

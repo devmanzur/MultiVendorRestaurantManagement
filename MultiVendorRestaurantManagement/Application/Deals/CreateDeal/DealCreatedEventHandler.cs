@@ -22,7 +22,7 @@ namespace MultiVendorRestaurantManagement.Application.Deals
 
         public async Task Handle(DealCreatedEvent notification, CancellationToken cancellationToken)
         {
-            var data = await _tableDataProvider.GetDealAsync(notification.DealName);
+            var data = await _tableDataProvider.GetDeal(notification.DealName);
             if (data.HasValue())
             {
                 var deal = new DealDocument(data.Id, data.Name, data.Description, data.DescriptionEng, data.ImageUrl,

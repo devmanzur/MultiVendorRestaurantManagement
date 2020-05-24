@@ -10,7 +10,6 @@ namespace Catalogue.Infrastracture.Mongo.Documents
     public class RestaurantDocument : BaseDocument
     {
         
-
         public string Description { get;protected set; }
         public string DescriptionEng { get;protected set; }
         public long RestaurantId { get; protected set; }
@@ -26,8 +25,11 @@ namespace Catalogue.Infrastracture.Mongo.Documents
         public double Rating { get; protected set; }
         public int TotalRatingsCount { get; protected set; }
         public List<MenuRecord> Menus { get; protected set;}
-        public List<string> Categories { get; protected set;}
-        public List<string> Cuisines { get; protected set;}
+        public double Latitude { get;protected set; }
+        public double Longitude { get;protected set; }
+        public string Address { get; private set; }
+        public List<CategoryRecord> Categories { get; protected set;}
+        public List<CuisineRecord> Cuisines { get; protected set;}
         public long ManagerId { get; protected set; }
         public long PricingPolicyId { get; protected set; }
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
@@ -73,5 +75,20 @@ namespace Catalogue.Infrastracture.Mongo.Documents
         public string Name { get; protected set; }
         public string NameEng { get; protected set; }
         public string ImageUrl { get; protected set; }
+    }
+    
+    
+    public class CategoryRecord
+    {
+        public string Name { get; set; }
+        public string NameEng { get; set; }
+        public long Id { get; set; }
+    }
+
+    public class CuisineRecord
+    {
+        public string Name { get; set; }
+        public string NameEng { get; set; }
+        public long Id { get; set; }
     }
 }
