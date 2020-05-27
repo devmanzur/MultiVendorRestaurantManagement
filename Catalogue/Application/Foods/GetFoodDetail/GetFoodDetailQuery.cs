@@ -1,4 +1,5 @@
-﻿using Catalogue.Base;
+﻿using Catalogue.Application.Base;
+using Catalogue.Base;
 using Catalogue.Infrastracture.Mongo.Documents;
 using Catalogue.Infrastructure.Mongo.Documents;
 using CSharpFunctionalExtensions;

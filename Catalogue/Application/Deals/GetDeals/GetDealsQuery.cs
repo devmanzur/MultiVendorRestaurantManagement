@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Catalogue.ApiContract.Pagination;
 using Catalogue.ApiContract.Response;
+using Catalogue.Application.Base;
 using Catalogue.Base;
 using CSharpFunctionalExtensions;
 

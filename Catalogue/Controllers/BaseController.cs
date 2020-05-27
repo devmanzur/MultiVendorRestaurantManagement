@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Catalogue.Application.Base;
 using Catalogue.Base;
 using Catalogue.Common.Utils;
 using CSharpFunctionalExtensions;

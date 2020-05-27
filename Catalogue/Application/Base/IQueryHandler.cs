@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Catalogue.Application.Base;
+using MediatR;
 
 namespace Catalogue.Base
 {

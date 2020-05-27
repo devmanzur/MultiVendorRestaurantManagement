@@ -24,14 +24,14 @@ namespace Catalogue.Application.Restaurants.GetRestaurants
         public async Task<Result<IPagedList<RestaurantMinimalDto>>> Handle(GetRestaurantsQuery request,
             CancellationToken cancellationToken)
         {
-            var categories = await _collection.RestaurantsCollection.Find(Filters.EmptyFilter<RestaurantDocument>())
+            var restaurants = await _collection.RestaurantsCollection.Find(Filters.EmptyFilter<RestaurantDocument>())
                 .SortByDescending(RestaurantDocument.GetOrderBy(request.OrderBy))
                 .Skip(PaginationHelper.Skip(request.PageNumber, request.PageSize))
                 .Limit(request.PageSize)
                 .Project(Projections.MinimalRestaurantProjection())
                 .ToListAsync(cancellationToken);
 
-            return Result.Ok(categories.ToPagedList(request.PageNumber, request.PageSize));
+            return Result.Ok(restaurants.ToPagedList(request.PageNumber, request.PageSize));
         }
     }
 }

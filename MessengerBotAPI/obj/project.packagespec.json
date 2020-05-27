@@ -15,7 +15,17 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
-        "projectReferences": {}
+        "projectReferences": {
+          "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj": {
+            "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj"
+          },
+          "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj": {
+            "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj"
+          },
+          "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MessengerBot.Common\\MessengerBot.Common.csproj": {
+            "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MessengerBot.Common\\MessengerBot.Common.csproj"
+          }
+        }
       }
     },
     "warningProperties": {
@@ -27,6 +37,10 @@
   "frameworks": {
     "netcoreapp3.1": {
       "dependencies": {
+        "CSharpFunctionalExtensions": {
+          "target": "Package",
+          "version": "[2.8.0, )"
+        },
         "Google.Cloud.Dialogflow.V2": {
           "target": "Package",
           "version": "[3.0.0-beta02, )"
