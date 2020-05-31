@@ -1,4 +1,4 @@
-﻿﻿namespace MessengerBotAPI.ApiContract.Pagination
+﻿﻿﻿namespace MessengerBotAPI.ApiContract.Pagination
 {
     public class GeneralPaginationQuery
     {

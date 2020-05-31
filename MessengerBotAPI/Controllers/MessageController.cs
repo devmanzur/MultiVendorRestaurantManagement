@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using Common.Utils;
 using Google.Cloud.Dialogflow.V2;
 using Google.Protobuf;
 using MediatR;
@@ -91,10 +92,10 @@ namespace MessengerBotAPI.Controllers
                     return await HandleQueryResultFor(new GetRestaurantListQuery(queryResult));
                 case UserIntents.GetRestaurantMenu:
                     return await HandleQueryResultFor(new GetRestaurantMenuQuery(queryResult));
-
-
+                
                 default:
-                    return BadRequest(queryResult.FulfillmentText);
+                    return Ok(Envelope.Ok(queryResult.FulfillmentText));
+                
             }
         }
         
