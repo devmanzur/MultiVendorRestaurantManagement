@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Catalogue.Infrastructure.ValueObject
+namespace Catalogue.Common.Invariants
 {
     public enum SupportedCurrency
     {

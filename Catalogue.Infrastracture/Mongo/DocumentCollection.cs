@@ -12,7 +12,8 @@ namespace Catalogue.Infrastracture.Mongo
         Cities,
         Categories,
         Foods,
-        Deals
+        Deals,
+        UserPreferences
     }
 
     public class DocumentCollection
@@ -37,6 +38,8 @@ namespace Catalogue.Infrastracture.Mongo
 
         public IMongoCollection<CityDocument> CitiesCollection
             => _documents.GetCollection<CityDocument>(Collections.Cities.ToString());
+        public IMongoCollection<PreferenceDocument> UserPreferences
+            => _documents.GetCollection<PreferenceDocument>(Collections.UserPreferences.ToString());
 
         public IMongoCollection<CategoryDocument> CategoriesCollection
             => _documents.GetCollection<CategoryDocument>(Collections.Categories.ToString());

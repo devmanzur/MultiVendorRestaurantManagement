@@ -2,6 +2,7 @@
 using Catalogue.Base;
 using CSharpFunctionalExtensions;
 using Google.Cloud.Dialogflow.V2;
+using MessengerBotAPI.ApiContract;
 using MessengerBotAPI.ApiContract.Pagination;
 
 namespace MessengerBotAPI.Application.Restaurant.GetRestaurantList
@@ -10,7 +11,7 @@ namespace MessengerBotAPI.Application.Restaurant.GetRestaurantList
     {
         public QueryResult QueryResult { get; }
 
-        public GetRestaurantListQuery(QueryResult queryResult)
+        public GetRestaurantListQuery(QueryResult queryResult, DetectTextIntentRequest requestSessionId)
         {
             QueryResult = queryResult;
         }

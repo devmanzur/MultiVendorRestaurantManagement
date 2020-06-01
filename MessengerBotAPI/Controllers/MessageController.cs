@@ -50,48 +50,48 @@ namespace MessengerBotAPI.Controllers
                 }
             );
 
-            return await HandleIntent(response.QueryResult);
+            return await HandleIntent(response.QueryResult, request);
         }
 
-        private async Task<IActionResult> HandleIntent(QueryResult queryResult)
+        private async Task<IActionResult> HandleIntent(QueryResult queryResult, DetectTextIntentRequest request)
         {
             switch (queryResult.Intent.DisplayName)
             {
                 //command
                 case UserIntents.RemoveBasketItem:
-                    return await HandleActionResultFor(new RemoveBasketItemCommand(queryResult));
+                    return await HandleActionResultFor(new RemoveBasketItemCommand(queryResult,request));
 
                 case UserIntents.OrderFood:
-                    return await HandleActionResultFor(new AddFoodToCartCommand(queryResult));
+                    return await HandleActionResultFor(new AddFoodToCartCommand(queryResult,request));
 
                 case UserIntents.PlaceOrder:
-                    return await HandleActionResultFor(new PlaceOrderCommand(queryResult));
+                    return await HandleActionResultFor(new PlaceOrderCommand(queryResult,request));
                 
                 case UserIntents.RepeatLastOrder:
-                    return await HandleActionResultFor(new RepeatLastOrderCommand(queryResult));
+                    return await HandleActionResultFor(new RepeatLastOrderCommand(queryResult,request));
                 
                 case UserIntents.ChangeLanguage:
-                    return await HandleActionResultFor(new ChangeLanguageCommand(queryResult));
+                    return await HandleActionResultFor(new ChangeLanguageCommand(queryResult,request));
 
 
                 //query
                 case UserIntents.CheckBasket:
-                    return await HandleQueryResultFor(new GetBasketInformationQuery(queryResult));
+                    return await HandleQueryResultFor(new GetBasketInformationQuery(queryResult,request));
 
                 case UserIntents.GetCategoryMenu:
-                    return await HandleQueryResultFor(new GetCategoryMenuQuery(queryResult));
+                    return await HandleQueryResultFor(new GetCategoryMenuQuery(queryResult,request));
 
                 case UserIntents.GetDeliveryStatus:
-                    return await HandleQueryResultFor(new GetDeliveryStatusQuery(queryResult));
+                    return await HandleQueryResultFor(new GetDeliveryStatusQuery(queryResult,request));
 
                 case UserIntents.GetFoodDetails:
-                    return await HandleQueryResultFor(new GetFoodDetailQuery(queryResult));
+                    return await HandleQueryResultFor(new GetFoodDetailQuery(queryResult,request));
 
                 case UserIntents.GetRestaurants:
                 case UserIntents.GetMoreRestaurants:
-                    return await HandleQueryResultFor(new GetRestaurantListQuery(queryResult));
+                    return await HandleQueryResultFor(new GetRestaurantListQuery(queryResult,request));
                 case UserIntents.GetRestaurantMenu:
-                    return await HandleQueryResultFor(new GetRestaurantMenuQuery(queryResult));
+                    return await HandleQueryResultFor(new GetRestaurantMenuQuery(queryResult,request));
                 
                 default:
                     return Ok(Envelope.Ok(queryResult.FulfillmentText));

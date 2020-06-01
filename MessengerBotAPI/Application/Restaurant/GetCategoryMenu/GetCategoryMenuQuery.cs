@@ -4,6 +4,7 @@ using Catalogue.Base;
 using Catalogue.Infrastracture.Mongo.Documents;
 using CSharpFunctionalExtensions;
 using Google.Cloud.Dialogflow.V2;
+using MessengerBotAPI.ApiContract;
 using MessengerBotAPI.ApiContract.Pagination;
 
 namespace MessengerBotAPI.Application.GetCategoryMenu
@@ -12,7 +13,7 @@ namespace MessengerBotAPI.Application.GetCategoryMenu
     {
         public QueryResult QueryResult { get; }
 
-        public GetCategoryMenuQuery(QueryResult queryResult)
+        public GetCategoryMenuQuery(QueryResult queryResult, DetectTextIntentRequest requestSessionId)
         {
             QueryResult = queryResult;
         }
