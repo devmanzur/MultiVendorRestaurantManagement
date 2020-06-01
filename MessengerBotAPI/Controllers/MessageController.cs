@@ -1,8 +1,6 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Common.Utils;
+﻿using System.Threading.Tasks;
+using Catalogue.Common.Utils;
 using Google.Cloud.Dialogflow.V2;
-using Google.Protobuf;
 using MediatR;
 using MessengerBotAPI.ApiContract;
 using MessengerBotAPI.Application.Basket.GetBasketInformation;
@@ -17,7 +15,6 @@ using MessengerBotAPI.Application.Order.PlaceOrder;
 using MessengerBotAPI.Application.Restaurant.GetMenu;
 using MessengerBotAPI.Application.Restaurant.GetRestaurantList;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace MessengerBotAPI.Controllers
 {

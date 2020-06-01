@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalogue.ApiContract.Response;
+using Catalogue.Common.Utils;
 using Catalogue.Infrastracture.Mongo;
 using Catalogue.Infrastracture.Mongo.Documents;
-using Catalogue.Utils;
 using CSharpFunctionalExtensions;
-using MessengerBot.Common.Utils;
-using MessengerBotAPI.ApiContract.Pagination;
 using MessengerBotAPI.Application.Base;
 using MongoDB.Driver;
 

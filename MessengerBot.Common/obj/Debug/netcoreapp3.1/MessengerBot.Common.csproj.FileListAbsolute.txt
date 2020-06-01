@@ -1,9 +1,0 @@
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\bin\Debug\netcoreapp3.1\MessengerBot.Common.deps.json
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\bin\Debug\netcoreapp3.1\MessengerBot.Common.dll
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\bin\Debug\netcoreapp3.1\MessengerBot.Common.pdb
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\obj\Debug\netcoreapp3.1\MessengerBot.Common.csprojAssemblyReference.cache
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\obj\Debug\netcoreapp3.1\MessengerBot.Common.csproj.CoreCompileInputs.cache
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\obj\Debug\netcoreapp3.1\MessengerBot.Common.AssemblyInfoInputs.cache
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\obj\Debug\netcoreapp3.1\MessengerBot.Common.AssemblyInfo.cs
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\obj\Debug\netcoreapp3.1\MessengerBot.Common.dll
-C:\Users\devma\RiderProjects\MultiVendorRestaurantManagement\MessengerBot.Common\obj\Debug\netcoreapp3.1\MessengerBot.Common.pdb

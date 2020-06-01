@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Catalogue.Base;
-using Common.Utils;
+using Catalogue.Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
