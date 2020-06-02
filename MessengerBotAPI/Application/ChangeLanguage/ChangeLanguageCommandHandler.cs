@@ -1,11 +1,14 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Catalogue.Common.Invariants;
 using Catalogue.Common.Utils;
 using Catalogue.Infrastracture.Mongo;
+using Catalogue.Infrastracture.Mongo.Documents;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
+using MongoDB.Driver;
 
 namespace MessengerBotAPI.Application.ChangeLanguage
 {
@@ -37,22 +40,35 @@ namespace MessengerBotAPI.Application.ChangeLanguage
             if (!SupportedLanguages.Contains(language))
                 return Result.Failure<string>("sorry we only support italian and english");
 
-            SetUserLocalizationPreference(request.Username, GetLanguageCode(language));
+            await SetUserLocalizationPreference(request.Username, GetLanguageCode(language), cancellationToken);
 
             return Result.Ok("");
         }
 
-        private void SetUserLocalizationPreference(string username, object languageCode)
+        private async Task<Result> SetUserLocalizationPreference(string username, SupportedLanguageCode languageCode,
+            CancellationToken cancellationToken)
         {
-           
+            var pref = await _collection.UserPreferences.Find(x => x.Username == username)
+                .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+            if (pref.HasValue())
+            {
+                pref.SetPreferredLanguage(languageCode);
+                await _collection.UserPreferences.ReplaceOneAsync(x => x.Username == username, pref,
+                    cancellationToken: cancellationToken);
+                return Result.Ok();
+            }
+
+            await _collection.UserPreferences.InsertOneAsync(new PreferenceDocument(username, languageCode),
+                cancellationToken: cancellationToken);
+            return Result.Ok();
         }
 
-        private object GetLanguageCode(string language)
+        private SupportedLanguageCode GetLanguageCode(string language)
         {
-            if (language == "english" || language == "inglese") return "en";
-            if (language == "italian" || language == "italiano") return "it";
+            if (language == "english" || language == "inglese") return SupportedLanguageCode.English;
+            if (language == "italian" || language == "italiano") return SupportedLanguageCode.Italian;
 
-            return "en";
+            return SupportedLanguageCode.English;
         }
     }
 }

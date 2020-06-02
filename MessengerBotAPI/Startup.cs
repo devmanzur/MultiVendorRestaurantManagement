@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Catalogue.Infrastracture;
 using MediatR;
+using MessengerBotAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace MessengerBotAPI
             services.SetupInfrastructure();
             services.AddDistributedMemoryCache();
             services.AddControllers();
+            services.AddScoped<IUserPreferenceService, UserPreferenceService>();
             services.AddMediatR(typeof(Startup));
         }
 
