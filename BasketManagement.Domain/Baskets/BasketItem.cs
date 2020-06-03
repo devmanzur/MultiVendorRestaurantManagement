@@ -31,10 +31,14 @@ namespace BasketManagement.Domain.Baskets
         public string ImageUrl { get; private set; }
 
 
-        public void Increase()
+        public void UpdateQuantity(int qty)
         {
-            Quantity++;
+            Quantity+= qty;
         }
-        
+
+        public bool IsDropped()
+        {
+            return Quantity <= 0;
+        }
     }
 }

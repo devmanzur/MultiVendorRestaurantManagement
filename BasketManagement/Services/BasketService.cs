@@ -43,7 +43,7 @@ namespace BasketManagement.Services
             return Result.Failure("basket not found");
         }
 
-        private async Task<Basket> GetBasket(string userId, string sessionId)
+        public async Task<Basket> GetBasket(string userId, string sessionId)
         {
             var basket = await _cache.GetObjectAsync<Basket>(KeyMaker.GetBasketKey(userId, sessionId));
 
@@ -53,6 +53,18 @@ namespace BasketManagement.Services
             }
 
             return basket;
+        }
+
+        public async Task<Result> RemoveFromBasket(string user, string session, long foodId, int quantity)
+        {
+            var basket = await GetBasket(user, session);
+            if (basket.HasValue())
+            {
+                var task = basket.Remove(foodId, quantity);
+                return task;
+            }
+
+            return Result.Failure("basket is empty");
         }
     }
 }

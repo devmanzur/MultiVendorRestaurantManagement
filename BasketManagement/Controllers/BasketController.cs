@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BasketManagement.Controllers
 {
     [ApiController]
-    [Route("api/basket")]
+    [Route("api/baskets")]
     public class BasketController : ControllerBase
     {
         private readonly IBasketService _basketService;
@@ -19,12 +19,12 @@ namespace BasketManagement.Controllers
             _basketService = basketService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddToBasket(AddBasketItemRequest request)
+        [HttpPost("{user}/{session}")]
+        public async Task<IActionResult> AddToBasket(string user, string session, AddBasketItemRequest request)
         {
             var task = await _basketService.AddToBasket(
-                request.UserId,
-                request.SessionId,
+                user,
+                session,
                 new BasketItem(request.FoodId, request.FoodName, request.ImageUrl,
                     request.UnitPrice, request.Quantity));
             return HandleTaskResult(task);
@@ -40,24 +40,27 @@ namespace BasketManagement.Controllers
             return BadRequest(Envelope.Error(task.Error));
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> ClearBasket(ClearBasketRequest request)
+        [HttpDelete("{user}/{session}")]
+        public async Task<IActionResult> ClearBasket(string user, string session)
         {
-            var task = await _basketService.ClearBasket(request.UserId,
-                request.SessionId);
+            var task = await _basketService.ClearBasket(user,
+                session);
             return HandleTaskResult(task);
         }
 
-        [HttpDelete("id")]
-        public async Task<IActionResult> RemoveBasketItem()
+        [HttpDelete("{user}/{session}")]
+        public async Task<IActionResult> RemoveBasketItem(string user, string session, RemoveBasketItemRequest request)
         {
-            return Ok("");
+            var task = await _basketService.RemoveFromBasket(user, session, request.FoodId, request.Quantity);
+            return HandleTaskResult(task);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ViewBasket()
+        [HttpGet("{user}/{session}")]
+        public async Task<IActionResult> ViewBasket(string user, string session)
         {
-            return Ok("");
+            var basket = await _basketService.GetBasket(user,
+                session);
+            return Ok(Envelope.Ok(basket));
         }
     }
 }

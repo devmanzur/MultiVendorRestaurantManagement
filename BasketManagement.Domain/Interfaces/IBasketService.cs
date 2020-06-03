@@ -8,5 +8,7 @@ namespace BasketManagement.Domain.Interfaces
     {
         Task<Result> AddToBasket(string userId, string sessionId, BasketItem item);
         Task<Result> ClearBasket(string userId, string sessionId);
+        Task<Basket> GetBasket(string userId, string sessionId);
+        Task<Result> RemoveFromBasket(string user, string session, long foodId, int quantity);
     }
 }

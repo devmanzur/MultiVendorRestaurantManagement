@@ -2,6 +2,7 @@
 using System.Linq;
 using BasketManagement.Common.Utils;
 using BasketManagement.Domain.Base;
+using CSharpFunctionalExtensions;
 
 namespace BasketManagement.Domain.Baskets
 {
@@ -19,7 +20,7 @@ namespace BasketManagement.Domain.Baskets
 
         public static Basket MakeNew(string userId, string userSessionId)
         {
-            return new Basket(userId,userSessionId);
+            return new Basket(userId, userSessionId);
         }
 
         public IReadOnlyList<BasketItem> Items => _items.Values.ToList();
@@ -29,13 +30,29 @@ namespace BasketManagement.Domain.Baskets
             var existing = _items[item.FoodId];
             if (existing.HasValue())
             {
-                existing.Increase();
+                existing.UpdateQuantity(item.Quantity);
                 _items[item.FoodId] = existing;
             }
             else
             {
                 _items[item.FoodId] = item;
             }
+        }
+
+        public Result Remove(long foodId, int quantity)
+        {
+            var item = _items[foodId];
+
+            if (item.HasNoValue()) return Result.Failure("item not found");
+            
+            item.UpdateQuantity(-quantity);
+
+            if (item.IsDropped())
+            {
+                _items.Remove(foodId);
+            }
+
+            return Result.Ok();
         }
     }
 }

@@ -4,9 +4,6 @@ namespace BasketManagement.ApiContract.Request
 {
     public class AddBasketItemRequest
     {
-
-        public string UserId { get; set; }
-        public string SessionId { get; set; }
         public long FoodId { get; set; }
         
         public string FoodName { get; set; }
