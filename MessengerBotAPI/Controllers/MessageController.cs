@@ -13,6 +13,7 @@ using MessengerBotAPI.Application.GetFoodDetails;
 using MessengerBotAPI.Application.Order.AddToCart;
 using MessengerBotAPI.Application.Order.LastOrderRepeat;
 using MessengerBotAPI.Application.Order.PlaceOrder;
+using MessengerBotAPI.Application.Restaurant.GetCategoryMenu;
 using MessengerBotAPI.Application.Restaurant.GetMenu;
 using MessengerBotAPI.Application.Restaurant.GetRestaurantList;
 using MessengerBotAPI.Services;

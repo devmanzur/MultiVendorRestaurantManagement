@@ -7,6 +7,7 @@ using Catalogue.Infrastracture.Mongo;
 using Catalogue.Infrastracture.Mongo.Documents;
 using CSharpFunctionalExtensions;
 using MessengerBotAPI.Application.Base;
+using MessengerBotAPI.Application.Restaurant.GetCategoryMenu;
 using MongoDB.Driver;
 
 namespace MessengerBotAPI.Application.GetCategoryMenu
