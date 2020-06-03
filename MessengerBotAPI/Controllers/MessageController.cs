@@ -3,6 +3,7 @@ using Catalogue.Common.Utils;
 using Google.Cloud.Dialogflow.V2;
 using MediatR;
 using MessengerBotAPI.ApiContract;
+using MessengerBotAPI.Application.Base;
 using MessengerBotAPI.Application.Basket.GetBasketInformation;
 using MessengerBotAPI.Application.Basket.RemoveBasketItem;
 using MessengerBotAPI.Application.ChangeLanguage;
@@ -16,6 +17,7 @@ using MessengerBotAPI.Application.Restaurant.GetMenu;
 using MessengerBotAPI.Application.Restaurant.GetRestaurantList;
 using MessengerBotAPI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace MessengerBotAPI.Controllers
 {
@@ -25,13 +27,14 @@ namespace MessengerBotAPI.Controllers
     {
         private readonly IUserPreferenceService _userPreferenceService;
         private readonly SessionsClient _client;
-        private const string ProjectId = "food-delivery-umawew";
+        private readonly string _projectId;
 
-
-        public MessageController(IMediator mediator, IUserPreferenceService userPreferenceService) : base(mediator)
+        public MessageController(IMediator mediator, IUserPreferenceService userPreferenceService, IConfiguration configuration) : base(mediator)
         {
             _userPreferenceService = userPreferenceService;
             _client = SessionsClient.Create();
+            _projectId = configuration.Get<DialogFlowCredentials>().ProjectId;
+
         }
 
         [HttpPost("detect-intent")]
@@ -40,7 +43,7 @@ namespace MessengerBotAPI.Controllers
             var pref = await _userPreferenceService.GetUserPreference(request.Username);
 
             var response = await _client.DetectIntentAsync(
-                session: SessionName.FromProjectSession(ProjectId, request.SessionId),
+                session: SessionName.FromProjectSession(_projectId, request.SessionId),
                 queryInput: new QueryInput()
                 {
                     Text = new TextInput()
