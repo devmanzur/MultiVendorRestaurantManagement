@@ -95,8 +95,8 @@ namespace MultiVendorRestaurantManagement.Domain.Foods
 
         public FoodStatus Status { get; protected set; }
         public IReadOnlyList<Variant> Variants => _variants.ToList();
-        public List<FoodTag> Tags => _tags.ToList();
-        public List<AddOn> AddOns => _addOns.ToList();
+        public IReadOnlyList<FoodTag> Tags => _tags.ToList();
+        public IReadOnlyList<AddOn> AddOns => _addOns.ToList();
 
         public string IngredientsString { get; protected set; }
         public Categories.Category Category { get; private set; }

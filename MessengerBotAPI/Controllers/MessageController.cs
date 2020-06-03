@@ -83,16 +83,13 @@ namespace MessengerBotAPI.Controllers
                 //query
                 case UserIntents.CheckBasket:
                     return await HandleQueryResultFor(new GetBasketInformationQuery(queryResult, request));
-
-                case UserIntents.GetCategoryMenu:
-                    return await HandleQueryResultFor(new GetCategoryMenuQuery(queryResult, request));
-
                 case UserIntents.GetDeliveryStatus:
                     return await HandleQueryResultFor(new GetDeliveryStatusQuery(queryResult, request));
 
+                case UserIntents.GetCategoryMenu:
+                    return await HandleQueryResultFor(new GetCategoryMenuQuery(queryResult, request));
                 case UserIntents.GetFoodDetails:
                     return await HandleQueryResultFor(new GetFoodDetailQuery(queryResult, request));
-
                 case UserIntents.GetRestaurants:
                 case UserIntents.GetMoreRestaurants:
                     return await HandleQueryResultFor(new GetRestaurantListQuery(queryResult, request));
