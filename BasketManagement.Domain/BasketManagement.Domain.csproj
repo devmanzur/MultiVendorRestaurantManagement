@@ -8,4 +8,8 @@
       <ProjectReference Include="..\BasketManagement.Common\BasketManagement.Common.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="CSharpFunctionalExtensions" Version="2.8.0" />
+    </ItemGroup>
+
 </Project>

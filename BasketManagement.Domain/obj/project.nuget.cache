@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "cpkq0jWwlJKmhJR+3f14V8ruoJwiQIBtBqCrs63HdeNtIDTDIhgEbkjKTmtnbEbkomxRiQY+/i2OGfu30RrHvQ==",
+  "dgSpecHash": "WpbjnIMxExtbD3VcVIhYyy+I4dt0ftLtHBtZ6HBVSi9MGKszu5vzAQKIW8mKRQYRJZhi80C5Fy6dn+ZCdDSLgw==",
   "success": true,
   "projectFilePath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\BasketManagement.Domain\\BasketManagement.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\devma\\.nuget\\packages\\csharpfunctionalextensions\\2.8.0\\csharpfunctionalextensions.2.8.0.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.3\\microsoft.extensions.caching.abstractions.3.1.3.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.3\\microsoft.extensions.primitives.3.1.3.nupkg.sha512",
+    "C:\\Users\\devma\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
