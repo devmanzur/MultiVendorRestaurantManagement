@@ -18,12 +18,6 @@
         "projectReferences": {
           "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj": {
             "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj"
-          },
-          "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj": {
-            "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj"
-          },
-          "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MessengerBot.Common\\MessengerBot.Common.csproj": {
-            "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MessengerBot.Common\\MessengerBot.Common.csproj"
           }
         }
       }
@@ -56,6 +50,18 @@
         "Newtonsoft.Json": {
           "target": "Package",
           "version": "[12.0.3, )"
+        },
+        "Swashbuckle.AspNetCore.Swagger": {
+          "target": "Package",
+          "version": "[5.4.1, )"
+        },
+        "Swashbuckle.AspNetCore.SwaggerGen": {
+          "target": "Package",
+          "version": "[5.4.1, )"
+        },
+        "Swashbuckle.AspNetCore.SwaggerUI": {
+          "target": "Package",
+          "version": "[5.4.1, )"
         }
       },
       "imports": [

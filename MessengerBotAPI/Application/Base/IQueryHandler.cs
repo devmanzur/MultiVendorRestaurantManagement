@@ -1,5 +1,4 @@
-﻿using Catalogue.Base;
-using MediatR;
+﻿using MediatR;
 
 namespace MessengerBotAPI.Application.Base
 {

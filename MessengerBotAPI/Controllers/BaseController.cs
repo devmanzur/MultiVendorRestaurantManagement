@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Catalogue.Base;
 using Catalogue.Common.Utils;
 using CSharpFunctionalExtensions;
 using MediatR;
+using MessengerBotAPI.Application.Base;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MessengerBotAPI.Controllers

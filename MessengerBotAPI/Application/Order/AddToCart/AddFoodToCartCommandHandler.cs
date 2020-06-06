@@ -7,10 +7,12 @@ namespace MessengerBotAPI.Application.Order.AddToCart
 {
     public class AddFoodToCartCommandHandler : IRequestHandler<AddFoodToCartCommand, Result<object>>
     {
+        private AddFoodToCartCommand _request;
+
         public async Task<Result<object>> Handle(AddFoodToCartCommand request, CancellationToken cancellationToken)
         {
-            return Result.Ok("add to cart failed");
-
+            _request = request;
+            return Result.Ok(request.QueryResult.FulfillmentText);
         }
     }
 }

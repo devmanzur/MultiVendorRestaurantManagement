@@ -15,7 +15,6 @@
     <ItemGroup>
       <ProjectReference Include="..\Catalogue.Common\Catalogue.Common.csproj" />
       <ProjectReference Include="..\Catalogue.Infrastracture\Catalogue.Infrastracture.csproj" />
-      <ProjectReference Include="..\Catalogue.Infrastructure\Catalogue.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>

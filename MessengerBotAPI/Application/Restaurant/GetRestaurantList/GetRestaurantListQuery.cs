@@ -1,9 +1,9 @@
-﻿using Catalogue.ApiContract.Response;
-using Catalogue.Base;
-using CSharpFunctionalExtensions;
+﻿using CSharpFunctionalExtensions;
 using Google.Cloud.Dialogflow.V2;
 using MessengerBotAPI.ApiContract;
 using MessengerBotAPI.ApiContract.Pagination;
+using MessengerBotAPI.ApiContract.Response;
+using MessengerBotAPI.Application.Base;
 
 namespace MessengerBotAPI.Application.Restaurant.GetRestaurantList
 {

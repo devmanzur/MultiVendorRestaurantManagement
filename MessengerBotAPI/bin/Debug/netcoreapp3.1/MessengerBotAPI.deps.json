@@ -25,13 +25,14 @@
       "MessengerBotAPI/1.0.0": {
         "dependencies": {
           "CSharpFunctionalExtensions": "2.8.0",
-          "Catalogue": "1.0.0",
           "Catalogue.Infrastracture": "1.0.0",
           "Google.Cloud.Dialogflow.V2": "3.0.0-beta02",
           "MediatR": "8.0.1",
           "MediatR.Extensions.Microsoft.DependencyInjection": "8.0.0",
-          "MessengerBot.Common": "1.0.0",
           "Newtonsoft.Json": "12.0.3",
+          "Swashbuckle.AspNetCore.Swagger": "5.4.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "5.4.1",
+          "Swashbuckle.AspNetCore.SwaggerUI": "5.4.1",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -1501,24 +1502,6 @@
           "System.Xml.ReaderWriter": "4.3.0"
         }
       },
-      "Catalogue/1.0.0": {
-        "dependencies": {
-          "Catalogue.Common": "1.0.0",
-          "Catalogue.Infrastracture": "1.0.0",
-          "Catalogue.Infrastructure": "1.0.0",
-          "MediatR": "8.0.1",
-          "MediatR.Extensions.Microsoft.DependencyInjection": "8.0.0",
-          "Swashbuckle.AspNetCore.Swagger": "5.4.1",
-          "Swashbuckle.AspNetCore.SwaggerGen": "5.4.1",
-          "Swashbuckle.AspNetCore.SwaggerUI": "5.4.1"
-        },
-        "runtime": {
-          "Catalogue.dll": {}
-        },
-        "compile": {
-          "Catalogue.dll": {}
-        }
-      },
       "Catalogue.Common/1.0.0": {
         "dependencies": {
           "CSharpFunctionalExtensions": "2.8.0",
@@ -1546,14 +1529,6 @@
         },
         "compile": {
           "Catalogue.Infrastracture.dll": {}
-        }
-      },
-      "MessengerBot.Common/1.0.0": {
-        "runtime": {
-          "MessengerBot.Common.dll": {}
-        },
-        "compile": {
-          "MessengerBot.Common.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -3211,15 +3186,6 @@
           "WindowsBase.dll": {}
         },
         "compileOnly": true
-      },
-      "Catalogue.Infrastructure/1.0.0": {
-        "dependencies": {
-          "Microsoft.Extensions.Configuration": "3.1.3",
-          "Microsoft.Extensions.Configuration.Abstractions": "3.1.3",
-          "Microsoft.Extensions.Configuration.Binder": "3.1.3",
-          "MongoDB.Driver": "2.11.0-beta1"
-        },
-        "compileOnly": true
       }
     }
   },
@@ -3999,22 +3965,12 @@
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
     },
-    "Catalogue/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "Catalogue.Common/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
     "Catalogue.Infrastracture/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "MessengerBot.Common/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -5396,11 +5352,6 @@
     },
     "WindowsBase/4.0.0.0": {
       "type": "referenceassembly",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "Catalogue.Infrastructure/1.0.0": {
-      "type": "project",
       "serviceable": false,
       "sha512": ""
     }

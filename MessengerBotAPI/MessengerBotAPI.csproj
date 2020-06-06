@@ -10,16 +10,13 @@
       <PackageReference Include="MediatR" Version="8.0.1" />
       <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
       <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+      <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.4.1" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.4.1" />
+      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.4.1" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Catalogue.Infrastracture\Catalogue.Infrastracture.csproj" />
-      <ProjectReference Include="..\Catalogue\Catalogue.csproj" />
-      <ProjectReference Include="..\MessengerBot.Common\MessengerBot.Common.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="ApiContract\Response" />
     </ItemGroup>
 
     <ItemGroup>

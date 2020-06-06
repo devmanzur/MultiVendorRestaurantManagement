@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Catalogue.ApiContract.Response;
 using Catalogue.Infrastracture.Mongo;
 using Catalogue.Infrastracture.Mongo.Documents;
-using Catalogue.Utils;
 using CSharpFunctionalExtensions;
 using MessengerBotAPI.ApiContract.Pagination;
+using MessengerBotAPI.ApiContract.Response;
 using MessengerBotAPI.Application.Base;
+using MessengerBotAPI.Utils;
 using MongoDB.Driver;
 
 namespace MessengerBotAPI.Application.Restaurant.GetRestaurantList
@@ -47,4 +46,5 @@ namespace MessengerBotAPI.Application.Restaurant.GetRestaurantList
                 c => c.Name == type);
         }
     }
+    
 }

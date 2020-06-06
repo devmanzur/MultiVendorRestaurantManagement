@@ -45,7 +45,10 @@ namespace MessengerBotAPI.Application.GetCategoryMenu
                 .Project(x => x.Menus.FirstOrDefault(m => m.Name == category))
                 .ToListAsync(cancellationToken);
 
-            return Result.Ok(menus);
+            if(menus.Any())
+                return Result.Ok(menus);
+            
+            return Result.Failure<List<MenuRecord>>("not found");
         }
 
         private static FilterDefinition<RestaurantDocument> ElemMatch(string category)
