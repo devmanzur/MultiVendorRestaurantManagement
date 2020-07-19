@@ -32,8 +32,8 @@ namespace MultiVendorRestaurantManagement.Application.Restaurant.AddMenu
 
             var result = await _unitOfWork.CommitAsync(cancellationToken);
             return result > 0
-                ? Result.Ok("Restaurant registered successfully")
-                : Result.Failure<string>("Failed to register restaurant");
+                ? Result.Ok("Menu registered successfully")
+                : Result.Failure<string>("Failed to register menu");
         }
     }
 }

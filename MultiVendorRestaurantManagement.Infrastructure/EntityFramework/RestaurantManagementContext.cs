@@ -217,12 +217,15 @@ namespace MultiVendorRestaurantManagement.Infrastructure.EntityFramework
                     builder.HasMany(x => x.Menus)
                         .WithOne(f => f.Restaurant)
                         .OnDelete(DeleteBehavior.Cascade);
+                    
                     builder.Metadata
                         .FindNavigation("Menus")
                         .SetPropertyAccessMode(PropertyAccessMode.Field);
+                    
                     builder.HasMany(x => x.Orders)
                         .WithOne(f => f.Restaurant)
                         .OnDelete(DeleteBehavior.Cascade);
+                    
                     builder.Metadata
                         .FindNavigation("Orders")
                         .SetPropertyAccessMode(PropertyAccessMode.Field);
