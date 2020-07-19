@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj": {}
+    "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/Catalogue.csproj": {}
   },
   "projects": {
-    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj": {
+    "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/Catalogue.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj",
+        "projectUniqueName": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/Catalogue.Common.csproj",
         "projectName": "Catalogue.Common",
-        "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj",
-        "packagesPath": "C:\\Users\\devma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\obj\\",
+        "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/Catalogue.Common.csproj",
+        "packagesPath": "/home/noushad/.nuget/packages/",
+        "outputPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\devma\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/noushad/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -66,35 +64,33 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj": {
+    "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/Catalogue.Infrastracture.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj",
+        "projectUniqueName": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/Catalogue.Infrastracture.csproj",
         "projectName": "Catalogue.Infrastracture",
-        "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj",
-        "packagesPath": "C:\\Users\\devma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\obj\\",
+        "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/Catalogue.Infrastracture.csproj",
+        "packagesPath": "/home/noushad/.nuget/packages/",
+        "outputPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\devma\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/noushad/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj": {
-                "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj"
+              "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/Catalogue.Common.csproj": {
+                "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/Catalogue.Common.csproj"
               }
             }
           }
@@ -144,38 +140,36 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj": {
+    "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/Catalogue.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj",
+        "projectUniqueName": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/Catalogue.csproj",
         "projectName": "Catalogue",
-        "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\Catalogue.csproj",
-        "packagesPath": "C:\\Users\\devma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue\\obj\\",
+        "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/Catalogue.csproj",
+        "packagesPath": "/home/noushad/.nuget/packages/",
+        "outputPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\devma\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/noushad/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj": {
-                "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj"
+              "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/Catalogue.Common.csproj": {
+                "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/Catalogue.Common.csproj"
               },
-              "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj": {
-                "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Infrastracture\\Catalogue.Infrastracture.csproj"
+              "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/Catalogue.Infrastracture.csproj": {
+                "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/Catalogue.Infrastracture.csproj"
               }
             }
           }
@@ -228,7 +222,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
         }
       }
     }

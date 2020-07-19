@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "yA14beFiNKXmejpgDuGtJepUkEzQMKUGguxUY8qAE8z2qMFugsi4mC2NBOzEIzJMp7fWdRcGGoYy+Lgyl3dhsQ==",
+  "dgSpecHash": "ODRJykcZuo6DcbDG/+i3JUapXjQPsT31aYkup4YINWP3jT8zjc3kqf3tUywVR5NHxy4OnYslImJ6LHmm9/gnOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\Common.csproj",
+  "projectFilePath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/Common.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\devma\\.nuget\\packages\\csharpfunctionalextensions\\2.7.1\\csharpfunctionalextensions.2.7.1.nupkg.sha512",
-    "C:\\Users\\devma\\.nuget\\packages\\fluentvalidation\\9.0.0-preview4\\fluentvalidation.9.0.0-preview4.nupkg.sha512",
-    "C:\\Users\\devma\\.nuget\\packages\\fluentvalidation.aspnetcore\\9.0.0-preview4\\fluentvalidation.aspnetcore.9.0.0-preview4.nupkg.sha512",
-    "C:\\Users\\devma\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\9.0.0-preview4\\fluentvalidation.dependencyinjectionextensions.9.0.0-preview4.nupkg.sha512",
-    "C:\\Users\\devma\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
-    "C:\\Users\\devma\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "/home/noushad/.nuget/packages/csharpfunctionalextensions/2.7.1/csharpfunctionalextensions.2.7.1.nupkg.sha512",
+    "/home/noushad/.nuget/packages/fluentvalidation/9.0.0-preview4/fluentvalidation.9.0.0-preview4.nupkg.sha512",
+    "/home/noushad/.nuget/packages/fluentvalidation.aspnetcore/9.0.0-preview4/fluentvalidation.aspnetcore.9.0.0-preview4.nupkg.sha512",
+    "/home/noushad/.nuget/packages/fluentvalidation.dependencyinjectionextensions/9.0.0-preview4/fluentvalidation.dependencyinjectionextensions.9.0.0-preview4.nupkg.sha512",
+    "/home/noushad/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/2.1.0/microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
+    "/home/noushad/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }

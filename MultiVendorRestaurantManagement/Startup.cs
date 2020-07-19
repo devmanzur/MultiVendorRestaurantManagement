@@ -26,7 +26,7 @@ namespace MultiVendorRestaurantManagement
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.SetupInfrastructure(Configuration.GetConnectionString("DefaultConnection"));
+            services.SetupInfrastructure(Configuration.GetConnectionString("SqlDatabase"));
             SwaggerSetup(services);
             services.AddControllers();
             services.AddMediatR(typeof(Startup)); //command query handlers
@@ -39,7 +39,7 @@ namespace MultiVendorRestaurantManagement
 
         private void HangFireSetup(IServiceCollection services)
         {
-            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("SqlDatabase")));
             services.AddHangfireServer();
         }
 
@@ -107,7 +107,10 @@ namespace MultiVendorRestaurantManagement
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
+            
+            app.UseHangfireServer();
             app.UseHangfireDashboard();
+            
             app.UseRouting();
             app.UseMiddleware<RequestValidationExceptionHandlerMiddleware>();
 

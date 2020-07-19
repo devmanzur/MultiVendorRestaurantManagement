@@ -1,0 +1,9 @@
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/bin/Debug/netcoreapp3.1/Common.deps.json
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/bin/Debug/netcoreapp3.1/Common.dll
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/bin/Debug/netcoreapp3.1/Common.pdb
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/obj/Debug/netcoreapp3.1/Common.csprojAssemblyReference.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/obj/Debug/netcoreapp3.1/Common.AssemblyInfoInputs.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/obj/Debug/netcoreapp3.1/Common.AssemblyInfo.cs
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/obj/Debug/netcoreapp3.1/Common.csproj.CoreCompileInputs.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/obj/Debug/netcoreapp3.1/Common.dll
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/obj/Debug/netcoreapp3.1/Common.pdb

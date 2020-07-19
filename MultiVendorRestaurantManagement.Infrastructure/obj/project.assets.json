@@ -761,6 +761,31 @@
           "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
         }
       },
+      "System.Data.SqlClient/4.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Win32.Registry": "4.4.0",
+          "System.Security.Principal.Windows": "4.4.0",
+          "System.Text.Encoding.CodePages": "4.4.0",
+          "runtime.native.System.Data.SqlClient.sni": "4.4.0"
+        },
+        "compile": {
+          "ref/netstandard2.0/System.Data.SqlClient.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Data.SqlClient.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/unix/lib/netstandard2.0/System.Data.SqlClient.dll": {
+            "assetType": "runtime",
+            "rid": "unix"
+          },
+          "runtimes/win/lib/netstandard2.0/System.Data.SqlClient.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Diagnostics.Debug/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3134,6 +3159,74 @@
         "ref/netstandard2.0/System.Configuration.ConfigurationManager.xml",
         "system.configuration.configurationmanager.4.5.0.nupkg.sha512",
         "system.configuration.configurationmanager.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Data.SqlClient/4.4.0": {
+      "sha512": "fxb9ghn1k1Ua7FFdlvtiBOD4/PsQvD/fk2KnhS+FK7VC6OggEx6P+lP1P0+KMb5V2dqS1+FbR7HCenoqzJMNIA==",
+      "type": "package",
+      "path": "system.data.sqlclient/4.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net451/System.Data.SqlClient.dll",
+        "lib/net46/System.Data.SqlClient.dll",
+        "lib/net461/System.Data.SqlClient.dll",
+        "lib/netstandard1.2/System.Data.SqlClient.dll",
+        "lib/netstandard1.3/System.Data.SqlClient.dll",
+        "lib/netstandard2.0/System.Data.SqlClient.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net451/System.Data.SqlClient.dll",
+        "ref/net46/System.Data.SqlClient.dll",
+        "ref/net461/System.Data.SqlClient.dll",
+        "ref/net461/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/System.Data.SqlClient.dll",
+        "ref/netstandard1.2/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/de/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/es/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/fr/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/it/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/ja/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/ko/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/ru/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/zh-hans/System.Data.SqlClient.xml",
+        "ref/netstandard1.2/zh-hant/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/System.Data.SqlClient.dll",
+        "ref/netstandard1.3/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/de/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/es/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/fr/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/it/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/ja/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/ko/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/ru/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/zh-hans/System.Data.SqlClient.xml",
+        "ref/netstandard1.3/zh-hant/System.Data.SqlClient.xml",
+        "ref/netstandard2.0/System.Data.SqlClient.dll",
+        "ref/netstandard2.0/System.Data.SqlClient.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/unix/lib/netstandard1.3/System.Data.SqlClient.dll",
+        "runtimes/unix/lib/netstandard2.0/System.Data.SqlClient.dll",
+        "runtimes/win/lib/net451/System.Data.SqlClient.dll",
+        "runtimes/win/lib/net46/System.Data.SqlClient.dll",
+        "runtimes/win/lib/net461/System.Data.SqlClient.dll",
+        "runtimes/win/lib/netstandard1.3/System.Data.SqlClient.dll",
+        "runtimes/win/lib/netstandard2.0/System.Data.SqlClient.dll",
+        "system.data.sqlclient.4.4.0.nupkg.sha512",
+        "system.data.sqlclient.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
@@ -5823,37 +5916,36 @@
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.3",
       "Minio >= 3.1.12",
       "MongoDB.Driver >= 2.11.0-beta1",
-      "MultiVendorRestaurantManagement.Domain >= 1.0.0"
+      "MultiVendorRestaurantManagement.Domain >= 1.0.0",
+      "System.Data.SqlClient >= 4.4.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\devma\\.nuget\\packages\\": {}
+    "/home/noushad/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Infrastructure\\MultiVendorRestaurantManagement.Infrastructure.csproj",
+      "projectUniqueName": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Infrastructure/MultiVendorRestaurantManagement.Infrastructure.csproj",
       "projectName": "MultiVendorRestaurantManagement.Infrastructure",
-      "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Infrastructure\\MultiVendorRestaurantManagement.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\devma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Infrastructure\\obj\\",
+      "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Infrastructure/MultiVendorRestaurantManagement.Infrastructure.csproj",
+      "packagesPath": "/home/noushad/.nuget/packages/",
+      "outputPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\devma\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/noushad/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj": {
-              "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj"
+            "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Domain/MultiVendorRestaurantManagement.Domain.csproj": {
+              "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Domain/MultiVendorRestaurantManagement.Domain.csproj"
             }
           }
         }
@@ -5894,6 +5986,10 @@
           "MongoDB.Driver": {
             "target": "Package",
             "version": "[2.11.0-beta1, )"
+          },
+          "System.Data.SqlClient": {
+            "target": "Package",
+            "version": "[4.4.0, )"
           }
         },
         "imports": [
@@ -5914,7 +6010,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
       }
     }
   }

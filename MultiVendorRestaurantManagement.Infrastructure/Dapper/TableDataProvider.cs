@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper.DbView;
 using MultiVendorRestaurantManagement.Infrastructure.Dapper.TableData;
@@ -15,7 +15,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
 
         public TableDataProvider(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = configuration.GetConnectionString("SqlDatabase");
         }
 
         public async Task<LocalityTableData> GetLocality(long cityId, string localityName)
@@ -40,7 +40,7 @@ namespace MultiVendorRestaurantManagement.Infrastructure.Dapper
 
         public async Task<CategoryTableData> GetCategory(string name)
         {
-            const string sql = "select * from Categories where Name = @Name";
+            const string sql = "SELECT * FROM Categories WHERE Name = @Name";
             await using var connection = new SqlConnection(_connectionString);
             var item =
                 await connection.QueryFirstOrDefaultAsync<CategoryTableData>(sql,

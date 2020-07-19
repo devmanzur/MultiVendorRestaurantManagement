@@ -25,13 +25,7 @@ namespace MultiVendorRestaurantManagement.Application.Categories.RegisterCategor
 
         public async Task<Result> Handle(RegisterCategoryCommand request, CancellationToken cancellationToken)
         {
-            var item = await _context.Categories.AsNoTracking()
-                .FirstOrDefaultAsync(x => x.Name == request.Name
-                                          && x.Categorize == request.Categorize,
-                    cancellationToken);
-            if (item.HasValue()) return Result.Failure("category already exists");
-
-            var category = new Category(request.Name, request.NameEng, request.ImageUrl, request.Categorize);
+           var category = new Category(request.Name, request.NameEng, request.ImageUrl, request.Categorize);
             await _context.Categories.AddAsync(category, cancellationToken);
 
             var result = await _unitOfWork.CommitAsync(cancellationToken);

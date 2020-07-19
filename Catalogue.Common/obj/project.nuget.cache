@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "KEUhYGVtXFZ+bDPZqmuRMXZYKaZfulkEnipUXYXTpQ63yskr7SwnVW9ZLOWV6vXPsCb/+F//gHV7U/+657RTKA==",
+  "dgSpecHash": "UyVL2qIY3ZjXUDaY3ntW9icYc2/EVf+QoQKpqwk586AtLTFMSE6D1+QoEjSFQ+nhtG5rluRi/VDmI/cpmdi8fA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Catalogue.Common\\Catalogue.Common.csproj",
+  "projectFilePath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/Catalogue.Common.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\devma\\.nuget\\packages\\csharpfunctionalextensions\\2.7.1\\csharpfunctionalextensions.2.7.1.nupkg.sha512",
-    "C:\\Users\\devma\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\3.1.3\\microsoft.extensions.caching.abstractions.3.1.3.nupkg.sha512",
-    "C:\\Users\\devma\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.3\\microsoft.extensions.primitives.3.1.3.nupkg.sha512",
-    "C:\\Users\\devma\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "/home/noushad/.nuget/packages/csharpfunctionalextensions/2.7.1/csharpfunctionalextensions.2.7.1.nupkg.sha512",
+    "/home/noushad/.nuget/packages/microsoft.extensions.caching.abstractions/3.1.3/microsoft.extensions.caching.abstractions.3.1.3.nupkg.sha512",
+    "/home/noushad/.nuget/packages/microsoft.extensions.primitives/3.1.3/microsoft.extensions.primitives.3.1.3.nupkg.sha512",
+    "/home/noushad/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
   ],
   "logs": []
 }

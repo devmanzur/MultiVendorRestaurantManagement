@@ -1745,7 +1745,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "3.1.3",
           "Minio": "3.1.12",
           "MongoDB.Driver": "2.11.0-beta1",
-          "MultiVendorRestaurantManagement.Domain": "1.0.0"
+          "MultiVendorRestaurantManagement.Domain": "1.0.0",
+          "System.Data.SqlClient": "4.4.0"
         },
         "compile": {
           "bin/placeholder/MultiVendorRestaurantManagement.Infrastructure.dll": {}
@@ -6282,39 +6283,37 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\devma\\.nuget\\packages\\": {}
+    "/home/noushad/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.csproj",
+      "projectUniqueName": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.csproj",
       "projectName": "MultiVendorRestaurantManagement",
-      "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.csproj",
-      "packagesPath": "C:\\Users\\devma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement\\obj\\",
+      "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.csproj",
+      "packagesPath": "/home/noushad/.nuget/packages/",
+      "outputPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\devma\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/noushad/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\Common.csproj": {
-              "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\Common\\Common.csproj"
+            "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/Common.csproj": {
+              "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Common/Common.csproj"
             },
-            "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj": {
-              "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Domain\\MultiVendorRestaurantManagement.Domain.csproj"
+            "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Domain/MultiVendorRestaurantManagement.Domain.csproj": {
+              "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Domain/MultiVendorRestaurantManagement.Domain.csproj"
             },
-            "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Infrastructure\\MultiVendorRestaurantManagement.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\devma\\RiderProjects\\MultiVendorRestaurantManagement\\MultiVendorRestaurantManagement.Infrastructure\\MultiVendorRestaurantManagement.Infrastructure.csproj"
+            "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Infrastructure/MultiVendorRestaurantManagement.Infrastructure.csproj": {
+              "projectPath": "/home/noushad/RiderProjects/MultiVendorRestaurantManagement/MultiVendorRestaurantManagement.Infrastructure/MultiVendorRestaurantManagement.Infrastructure.csproj"
             }
           }
         }
@@ -6371,7 +6370,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.302/RuntimeIdentifierGraph.json"
       }
     }
   }
