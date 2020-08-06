@@ -20,12 +20,5 @@ namespace Catalogue.Controllers
             var query = new GetHomeDataQuery();
             return await HandleQueryResultFor(query);
         }
-
-        [HttpGet("foods/{food}")]
-        public async Task<IActionResult> GetFoodDetail(long food)
-        {
-            var query = new GetFoodDetailQuery(food);
-            return await HandleQueryResultFor(query);
-        }
     }
 }

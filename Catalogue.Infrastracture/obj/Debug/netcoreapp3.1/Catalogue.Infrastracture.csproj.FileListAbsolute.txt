@@ -10,3 +10,15 @@ C:/Users/devma/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastra
 C:/Users/devma/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.csproj.CopyComplete
 C:/Users/devma/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.dll
 C:/Users/devma/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.pdb
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/bin/Debug/netcoreapp3.1/Catalogue.Infrastracture.deps.json
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/bin/Debug/netcoreapp3.1/Catalogue.Infrastracture.dll
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/bin/Debug/netcoreapp3.1/Catalogue.Infrastracture.pdb
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/bin/Debug/netcoreapp3.1/Catalogue.Common.dll
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/bin/Debug/netcoreapp3.1/Catalogue.Common.pdb
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.csprojAssemblyReference.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.AssemblyInfoInputs.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.AssemblyInfo.cs
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.csproj.CoreCompileInputs.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.csproj.CopyComplete
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.dll
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Infrastracture/obj/Debug/netcoreapp3.1/Catalogue.Infrastracture.pdb

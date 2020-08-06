@@ -24,11 +24,11 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             Type = OfferType.PackageDiscount;
         }
 
-        public OfferType Type { get; }
+        public OfferType Type { get; protected set; }
 
-        public decimal DiscountPercentage { get; }
-        public decimal MaxDiscountAmount { get; }
-        public int MinQuantity { get; }
-        public decimal MinBillAmount { get; }
+        public decimal DiscountPercentage { get; protected set; }
+        public decimal MaxDiscountAmount { get; protected set; }
+        public int MinQuantity { get; protected set; }
+        public decimal MinBillAmount { get; protected set; }
     }
 }

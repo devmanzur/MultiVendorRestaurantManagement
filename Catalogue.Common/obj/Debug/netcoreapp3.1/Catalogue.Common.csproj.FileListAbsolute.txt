@@ -7,3 +7,12 @@ C:/Users/devma/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/ob
 C:/Users/devma/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.AssemblyInfo.cs
 C:/Users/devma/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.dll
 C:/Users/devma/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.pdb
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/bin/Debug/netcoreapp3.1/Catalogue.Common.deps.json
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/bin/Debug/netcoreapp3.1/Catalogue.Common.dll
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/bin/Debug/netcoreapp3.1/Catalogue.Common.pdb
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.csprojAssemblyReference.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.AssemblyInfoInputs.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.AssemblyInfo.cs
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.csproj.CoreCompileInputs.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.dll
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue.Common/obj/Debug/netcoreapp3.1/Catalogue.Common.pdb

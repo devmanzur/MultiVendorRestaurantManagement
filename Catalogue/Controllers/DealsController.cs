@@ -16,8 +16,7 @@ namespace Catalogue.Controllers
         {
         }
 
-        [HttpGet]
-        [ResponseCache(Duration = CacheDuration.DurationInSeconds)]
+        [HttpGet] 
         public async Task<IActionResult> GetDeals([FromQuery] GeneralPaginationQuery paginationQuery)
         {
             var query = new GetDealsQuery(paginationQuery);

@@ -20,10 +20,10 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             MinQuantity = minQuantity;
             Type = OfferType.FixedDiscount;
         }
-        public OfferType Type { get;  }
+        public OfferType Type { get;  protected set; }
 
-        public decimal DiscountAmount { get; }
-        public int MinQuantity { get; }
-        public decimal MinBillAmount { get; }
+        public decimal DiscountAmount { get; protected set; }
+        public int MinQuantity { get; protected set; }
+        public decimal MinBillAmount { get; protected set; }
     }
 }

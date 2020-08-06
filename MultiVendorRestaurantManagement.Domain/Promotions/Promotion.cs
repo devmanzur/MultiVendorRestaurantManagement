@@ -10,6 +10,11 @@ using Newtonsoft.Json;
 
 namespace MultiVendorRestaurantManagement.Domain.Promotions
 {
+    /**
+     * Promotions are shared by private message
+     * They are only available to specific users with
+     * Coupon Codes.
+     */
     public class Promotion : AggregateRoot
     {
         private readonly List<CouponCode> _couponCodes = new List<CouponCode>();

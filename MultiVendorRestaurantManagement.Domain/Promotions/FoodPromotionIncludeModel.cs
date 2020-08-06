@@ -14,7 +14,7 @@ namespace MultiVendorRestaurantManagement.Domain.Promotions
             RestaurantId = restaurantId;
         }
 
-        public long FoodId { get; }
-        public long RestaurantId { get; }
+        public long FoodId { get; protected set; }
+        public long RestaurantId { get; protected set; }
     }
 }
