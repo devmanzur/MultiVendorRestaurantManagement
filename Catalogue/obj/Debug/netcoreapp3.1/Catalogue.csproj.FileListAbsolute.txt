@@ -47,3 +47,5 @@
 /home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/obj/Debug/netcoreapp3.1/Catalogue.dll
 /home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/obj/Debug/netcoreapp3.1/Catalogue.pdb
 /home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/obj/Debug/netcoreapp3.1/Catalogue.genruntimeconfig.cache
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/bin/Debug/netcoreapp3.1/Elasticsearch.Net.dll
+/home/noushad/RiderProjects/MultiVendorRestaurantManagement/Catalogue/bin/Debug/netcoreapp3.1/Nest.dll
